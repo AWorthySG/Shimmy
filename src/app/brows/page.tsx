@@ -1,14 +1,56 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
+import { HomeWithIntro } from "@/components/home-with-intro";
 import { useI18n } from "@/lib/i18n";
+import type { ReactNode } from "react";
 
 export default function Home() {
   const { t } = useI18n();
 
+  const featuredServices = [
+    {
+      title: t("services.embroidery.title"),
+      description: t("services.embroidery.desc"),
+    },
+    {
+      title: t("services.nano.title"),
+      description: t("services.nano.desc"),
+    },
+    {
+      title: t("services.ombre.title"),
+      description: t("services.ombre.desc"),
+    },
+  ];
+
+  const testimonials = [
+    {
+      name: t("testimonials.1.name"),
+      text: t("testimonials.1.text"),
+      service: t("testimonials.1.service"),
+      rating: 5,
+      portrait: "/images/testimonials/hui-ling-portrait.jpg",
+    },
+    {
+      name: t("testimonials.2.name"),
+      text: t("testimonials.2.text"),
+      service: t("testimonials.2.service"),
+      rating: 5,
+      portrait: "/images/testimonials/priya-portrait.jpg",
+    },
+    {
+      name: t("testimonials.3.name"),
+      text: t("testimonials.3.text"),
+      service: t("testimonials.3.service"),
+      rating: 5,
+      portrait: "/images/testimonials/nurul-portrait.jpg",
+    },
+  ];
+
   return (
+    <HomeWithIntro>
     <>
       {/* ─── Hero ─── */}
       <section className="relative flex min-h-[70vh] sm:min-h-[80vh] md:min-h-[85vh] flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-cream-dark via-cream to-soft-white rice-paper px-4 sm:px-6 text-center">
@@ -30,31 +72,31 @@ export default function Home() {
           <div className="mx-auto animate-expand-line h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-6" />
 
           <p className="animate-fade-in-up text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
-            {t("home.tag")}
+            {t("hero.tag")}
           </p>
 
           <h1 className="animate-fade-in-up animate-delay-100 mt-4 sm:mt-6 font-serif text-4xl leading-tight tracking-wide text-charcoal sm:text-5xl md:text-7xl md:leading-[1.15]">
-            {t("home.title.1")}
+            {t("hero.title.1")}
             <br />
-            <span className="animate-shimmer shimmer-text">{t("home.title.2")}</span>
+            <span className="animate-shimmer shimmer-text">{t("hero.title.2")}</span>
           </h1>
 
           <p className="animate-fade-in-up animate-delay-200 mx-auto mt-4 sm:mt-6 max-w-lg text-sm sm:text-base leading-relaxed text-charcoal-light md:text-lg">
-            {t("home.desc")}
+            {t("hero.desc")}
           </p>
 
           <div className="animate-fade-in-up animate-delay-300 mt-8 sm:mt-10 flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center">
             <Link
-              href="/brows"
+              href="/contact"
               className="btn-magnetic shine-on-hover glow-pulse w-full sm:w-auto inline-block bg-vermillion px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-soft-white text-center hover:bg-vermillion-dark touch-target"
             >
-              Explore Brows
+              {t("hero.cta.book")}
             </Link>
             <Link
-              href="/nails"
+              href="/brows/services"
               className="btn-magnetic shine-on-hover glow-pulse w-full sm:w-auto inline-block border border-charcoal/20 px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-charcoal text-center hover:border-vermillion hover:text-vermillion touch-target"
             >
-              Explore Nails
+              {t("hero.cta.services")}
             </Link>
           </div>
         </div>
@@ -69,85 +111,105 @@ export default function Home() {
       </section>
 
       {/* ─── Oriental divider ─── */}
-      <div className="flex items-center justify-center gap-3 my-8">
-        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-xs">✦</span>
-        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
+      <div className="flex items-center justify-center gap-3 my-8"><div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" /><span className="text-vermillion/40 text-xs">✦</span><div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" /></div>
 
-      {/* ─── Two Sub-Brands ─── */}
+      {/* ─── Featured Services ─── */}
       <section className="bg-soft-white py-16 sm:py-20 md:py-24 px-4 sm:px-6">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-8 sm:gap-10 md:grid-cols-2">
-            <Stagger staggerMs={200} animation="fade-up">
-              {/* Brows */}
-              <div className="group oriental-corner card-lift shine-on-hover border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40">
-                {/* Placeholder — TODO: replace with brow studio photo */}
-                <div className="relative w-full aspect-[3/2] bg-gradient-to-br from-cream-dark/50 via-cream to-vermillion/5 flex items-center justify-center">
-                  <div className="text-center px-4">
-                    <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
-                    <p className="text-[9px] uppercase tracking-[0.3em] text-warm-gray/40">
-                      Shimmybrows
+          <AnimateOnScroll animation="fade-up" className="text-center">
+            <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+              {t("services.tag")}
+            </p>
+            <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
+              {t("services.title")}
+            </h2>
+          </AnimateOnScroll>
+
+          <div className="mt-10 sm:mt-16 grid gap-6 sm:gap-8 md:grid-cols-3">
+            <Stagger staggerMs={150} animation="fade-up">
+              {featuredServices.map((service) => (
+                <div
+                  key={service.title}
+                  className="group oriental-corner card-lift shine-on-hover border border-vermillion/15 bg-cream/50 overflow-hidden text-center hover:border-vermillion/40"
+                >
+                  {/* Service photo placeholder — TODO: replace with your actual photos */}
+                  <div className="relative w-full aspect-[3/2] bg-gradient-to-br from-cream-dark/50 via-cream to-vermillion/5 flex items-center justify-center">
+                    <div className="text-center px-4">
+                      <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
+                      <p className="text-[9px] uppercase tracking-[0.3em] text-warm-gray/40">
+                        {service.title}
+                      </p>
+                      <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
+                    </div>
+                  </div>
+                  <div className="p-6 sm:p-8">
+                    <h3 className="font-serif text-lg sm:text-xl text-charcoal">
+                      {service.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-charcoal-light">
+                      {service.description}
                     </p>
-                    <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
+                    <div className="mx-auto mt-6 h-[1px] w-8 bg-vermillion/30 transition-all duration-500 group-hover:w-12 group-hover:bg-vermillion" />
                   </div>
                 </div>
-                <div className="p-6 sm:p-8 text-center">
-                  <h3 className="font-serif text-xl sm:text-2xl text-charcoal">
-                    {t("home.brows.title")}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-charcoal-light">
-                    {t("home.brows.desc")}
-                  </p>
-                  <Link
-                    href="/brows"
-                    className="underline-grow mt-6 inline-block text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
-                  >
-                    {t("home.brows.cta")}
-                  </Link>
-                  <div className="mx-auto mt-4 h-[1px] w-8 bg-vermillion/30 transition-all duration-500 group-hover:w-12 group-hover:bg-vermillion" />
-                </div>
-              </div>
-
-              {/* Nails */}
-              <div className="group oriental-corner card-lift shine-on-hover border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40">
-                {/* Product photo */}
-                <div className="relative w-full aspect-[3/2] overflow-hidden bg-cream-dark">
-                  <Image
-                    src="/images/nails/ingenue-1.jpg"
-                    alt="Shimmyhands press-on nails"
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="p-6 sm:p-8 text-center">
-                  <h3 className="font-serif text-xl sm:text-2xl text-charcoal">
-                    {t("home.nails.title")}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-charcoal-light">
-                    {t("home.nails.desc")}
-                  </p>
-                  <Link
-                    href="/nails"
-                    className="underline-grow mt-6 inline-block text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
-                  >
-                    {t("home.nails.cta")}
-                  </Link>
-                  <div className="mx-auto mt-4 h-[1px] w-8 bg-vermillion/30 transition-all duration-500 group-hover:w-12 group-hover:bg-vermillion" />
-                </div>
-              </div>
+              ))}
             </Stagger>
           </div>
+
+          <AnimateOnScroll animation="fade-up" delay={300} className="mt-10 sm:mt-12 text-center">
+            <Link
+              href="/brows/services"
+              className="underline-grow text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target inline-flex items-center py-2"
+            >
+              {t("services.viewall")}
+            </Link>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
+      {/* ─── About Snippet ─── */}
+      <section className="bg-cream py-16 sm:py-20 md:py-24 px-4 sm:px-6">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 sm:gap-12 md:grid-cols-2">
+          <AnimateOnScroll animation="fade-right">
+            <div className="aspect-[4/5] bg-gradient-to-br from-vermillion/10 via-cream-dark to-jade/5 flex items-center justify-center reveal-overlay">
+              <div className="text-center">
+                <span className="text-5xl sm:text-6xl text-gold/30">✦</span>
+                <p className="mt-4 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-warm-gray">
+                  Your Photo Here
+                </p>
+              </div>
+            </div>
+          </AnimateOnScroll>
+
+          <AnimateOnScroll animation="fade-left" delay={150}>
+            <div className="h-[2px] w-[60px] bg-gradient-to-r from-vermillion/60 to-transparent mb-4" />
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+              {t("about.tag")}
+            </p>
+            <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl sparkle">
+              {t("about.title.1")}
+              <br />
+              {t("about.title.2")}
+            </h2>
+            <p className="mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed text-charcoal-light">
+              {t("about.p1")}
+            </p>
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-charcoal-light">
+              {t("about.p2")}
+            </p>
+            <Link
+              href="/about"
+              className="underline-grow mt-6 sm:mt-8 inline-block text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
+            >
+              {t("about.link")}
+            </Link>
+          </AnimateOnScroll>
         </div>
       </section>
 
       {/* ─── Oriental divider ─── */}
-      <div className="flex items-center justify-center gap-3 my-8">
-        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-xs">✦</span>
-        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
+      <div className="flex items-center justify-center gap-3 my-8"><div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" /><span className="text-vermillion/40 text-xs">✦</span><div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" /></div>
 
       {/* ─── Testimonials ─── */}
       <section className="bg-cream py-16 sm:py-20 md:py-24 px-4 sm:px-6">
@@ -164,32 +226,27 @@ export default function Home() {
 
           <div className="mt-10 sm:mt-16 grid gap-6 sm:gap-8 md:grid-cols-3">
             <Stagger staggerMs={150} animation="fade-up">
-              {[
-                {
-                  name: t("testimonials.1.name"),
-                  text: t("testimonials.1.text"),
-                  service: t("testimonials.1.service"),
-                  rating: 5,
-                },
-                {
-                  name: t("testimonials.2.name"),
-                  text: t("testimonials.2.text"),
-                  service: t("testimonials.2.service"),
-                  rating: 5,
-                },
-                {
-                  name: t("testimonials.3.name"),
-                  text: t("testimonials.3.text"),
-                  service: t("testimonials.3.service"),
-                  rating: 5,
-                },
-              ].map((item) => (
+              {testimonials.map((item) => (
                 <div
                   key={item.name}
                   className="card-lift shine-on-hover border border-vermillion/15 overflow-hidden hover:border-vermillion/30"
                 >
+                  {/* Brow result placeholder — TODO: replace with your actual client brow photos */}
+                  <div className="relative w-full aspect-[16/9] bg-gradient-to-br from-[#3A3530] to-[#2A2520] flex items-center justify-center">
+                    <div className="text-center px-6">
+                      <div className="mx-auto w-12 h-[1px] bg-vermillion/20 mb-3" />
+                      <p className="text-[10px] uppercase tracking-[0.25em] text-vermillion/30">
+                        {item.service}
+                      </p>
+                      <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-cream-dark/20">
+                        Client result photo
+                      </p>
+                      <div className="mx-auto w-12 h-[1px] bg-vermillion/20 mt-3" />
+                    </div>
+                  </div>
+
                   <div className="p-6 sm:p-8">
-                    {/* Stars */}
+                    {/* Stars — keep gold for stars */}
                     <div className="flex gap-1 text-gold">
                       {Array.from({ length: item.rating }).map((_, i) => (
                         <span key={i} className="text-sm transition-transform duration-300 hover:scale-125">
@@ -203,14 +260,26 @@ export default function Home() {
                       &ldquo;{item.text}&rdquo;
                     </p>
 
-                    {/* Client info */}
-                    <div className="mt-5 sm:mt-6 border-t border-vermillion/15 pt-5">
-                      <p className="text-xs uppercase tracking-[0.15em] text-vermillion-dark font-medium">
-                        {item.name}
-                      </p>
-                      <p className="mt-0.5 text-[10px] uppercase tracking-[0.12em] text-warm-gray">
-                        {item.service}
-                      </p>
+                    {/* Client info with portrait */}
+                    <div className="mt-5 sm:mt-6 flex items-center gap-3 border-t border-vermillion/15 pt-5">
+                      {/* Client portrait */}
+                      <div className="relative h-11 w-11 shrink-0 rounded-full overflow-hidden ring-1 ring-vermillion/20">
+                        <Image
+                          src={item.portrait}
+                          alt={item.name}
+                          fill
+                          className="object-cover"
+                          sizes="44px"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.15em] text-vermillion-dark font-medium">
+                          {item.name}
+                        </p>
+                        <p className="mt-0.5 text-[10px] uppercase tracking-[0.12em] text-warm-gray">
+                          {item.service}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -229,11 +298,11 @@ export default function Home() {
 
         <AnimateOnScroll animation="zoom-in" className="relative z-10 mx-auto max-w-2xl">
           <h2 className="font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
-            {t("home.cta.title.1")}{" "}
-            <span className="animate-shimmer">{t("home.cta.title.2")}</span>?
+            {t("cta.title.1")}{" "}
+            <span className="animate-shimmer">{t("cta.title.2")}</span>?
           </h2>
           <p className="mt-3 sm:mt-4 text-sm sm:text-base text-charcoal-light">
-            {t("home.cta.desc")}
+            {t("cta.desc")}
           </p>
           <div className="mt-6 sm:mt-8 flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center">
             <a
@@ -262,5 +331,6 @@ export default function Home() {
         </AnimateOnScroll>
       </section>
     </>
+    </HomeWithIntro>
   );
 }

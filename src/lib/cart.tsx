@@ -57,15 +57,12 @@ function saveCart(items: CartItem[]) {
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [items, setItems] = useState<CartItem[]>(() => {
+    if (typeof window === "undefined") return [];
+    return loadCart();
+  });
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
-
-  // Hydrate from localStorage after mount
-  useEffect(() => {
-    setItems(loadCart());
-    setHydrated(true);
-  }, []);
+  const hydrated = typeof window !== "undefined";
 
   // Persist to localStorage on change (only after hydration)
   useEffect(() => {

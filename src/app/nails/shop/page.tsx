@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
+import { Stagger } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { collections, products, type Product } from "@/lib/products";

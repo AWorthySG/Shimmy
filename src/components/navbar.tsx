@@ -32,7 +32,9 @@ export function Navbar() {
   const browsRef = useRef<HTMLLIElement>(null);
   const nailsRef = useRef<HTMLLIElement>(null);
 
+  // Close menus on navigation — syncing UI with external router state
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing with router
     setMobileOpen(false);
     setBrowsOpen(false);
     setNailsOpen(false);

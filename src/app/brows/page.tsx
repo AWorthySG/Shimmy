@@ -5,7 +5,6 @@ import Link from "next/link";
 import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
 import { HomeWithIntro } from "@/components/home-with-intro";
 import { useI18n } from "@/lib/i18n";
-import type { ReactNode } from "react";
 
 export default function Home() {
   const { t } = useI18n();

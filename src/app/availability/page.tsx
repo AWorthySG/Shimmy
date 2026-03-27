@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 

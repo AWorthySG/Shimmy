@@ -133,8 +133,13 @@ export function NanoPlaceholder() {
           strokeWidth="1"
           opacity="0.25"
         />
-        {/* Tiny precision dots arranged in brow shape */}
+        {/* Tiny precision dots arranged in brow shape — seeded for purity */}
         {(() => {
+          // Deterministic pseudo-random using sine hash
+          const seeded = (n: number) => {
+            const x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
+            return x - Math.floor(x);
+          };
           const dots: { cx: number; cy: number; r: number; o: number }[] = [];
           for (let i = 0; i < 120; i++) {
             const t = i / 120;
@@ -142,13 +147,13 @@ export function NanoPlaceholder() {
             const browY =
               110 - 45 * Math.sin(t * Math.PI) * (1 - 0.3 * t);
             const spread = 8 + 10 * Math.sin(t * Math.PI);
-            const offsetY = (Math.random() - 0.5) * spread;
-            const offsetX = (Math.random() - 0.5) * 4;
+            const offsetY = (seeded(i) - 0.5) * spread;
+            const offsetX = (seeded(i + 200) - 0.5) * 4;
             dots.push({
               cx: x + offsetX,
               cy: browY + offsetY,
-              r: 0.8 + Math.random() * 0.6,
-              o: 0.2 + Math.random() * 0.4,
+              r: 0.8 + seeded(i + 400) * 0.6,
+              o: 0.2 + seeded(i + 600) * 0.4,
             });
           }
           return dots.map((d, i) => (

@@ -18,7 +18,7 @@ export function NailsWithIntro({ children }: { children: ReactNode }) {
     <>
       {showIntro && <NailIntro onComplete={handleComplete} />}
       <div
-        className={`transition-opacity duration-500 ${
+        className={`transition-opacity duration-300 ${
           showIntro ? "opacity-0" : "opacity-100"
         }`}
       >

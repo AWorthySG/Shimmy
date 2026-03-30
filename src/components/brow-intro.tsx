@@ -5,26 +5,29 @@ import { useState, useEffect } from "react";
 /**
  * Full-screen intro — Chinese floral beauty theme.
  *
- * Phases (4 seconds total):
- *   1. BLOOM     (0–1.2s)  — Peony & plum blossoms bloom open around the canvas
- *   2. STROKES   (0.6–2.4s) — Brow strokes draw in calligraphically, emerging among flowers
- *   3. PETALS    (0.4–3.2s) — Many petals drift and float across the scene
- *   4. BRANDING  (2.4–3.4s) — Brand name fades in
- *   5. FADING    (3.4–4.0s) — Scene fades to page
+ * Phases (2 seconds total):
+ *   1. BLOOM     (0–0.6s)  — Peony & plum blossoms bloom open around the canvas
+ *   2. STROKES   (0.3–1.2s) — Brow strokes draw in calligraphically, emerging among flowers
+ *   3. PETALS    (0.2–1.6s) — Many petals drift and float across the scene
+ *   4. BRANDING  (1.2–1.7s) — Brand name fades in
+ *   5. FADING    (1.7–2.0s) — Scene fades to page
  */
 export function BrowIntro({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState<"drawing" | "branding" | "fading">("drawing");
 
   useEffect(() => {
-    const brandTimer = setTimeout(() => setPhase("branding"), 2400);
-    const fadeTimer = setTimeout(() => setPhase("fading"), 3400);
-    const completeTimer = setTimeout(() => onComplete(), 4000);
+    const brandTimer = setTimeout(() => setPhase("branding"), 1200);
+    const fadeTimer = setTimeout(() => setPhase("fading"), 1700);
+    const completeTimer = setTimeout(() => onComplete(), 2000);
     return () => {
       clearTimeout(brandTimer);
       clearTimeout(fadeTimer);
       clearTimeout(completeTimer);
     };
   }, [onComplete]);
+
+  // Speed multiplier: 0.5 = 2x faster (2s total instead of 4s)
+  const S = 0.5;
 
   type Stroke = [string, number, number, number, string, number];
 
@@ -142,7 +145,7 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-opacity duration-600 ${
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-opacity duration-300 ${
         phase === "fading" ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
       style={{
@@ -187,14 +190,14 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
               style={{
                 strokeDasharray: 300,
                 strokeDashoffset: 300,
-                animation: `drawBranch ${b.dur}s ease-out ${b.delay}s forwards`,
+                animation: `drawBranch ${b.dur * S}s ease-out ${b.delay * S}s forwards`,
               }}
             />
           ))}
 
           {/* ── Peony blooms (牡丹) — layered petal circles ── */}
           {peonies.map((p, pi) => (
-            <g key={`peony-${pi}`} className="peony-bloom" style={{ animation: `bloomOpen 1.2s ease-out ${p.delay}s both` }}>
+            <g key={`peony-${pi}`} className="peony-bloom" style={{ animation: `bloomOpen ${1.2 * S}s ease-out ${p.delay * S}s both` }}>
               {Array.from({ length: p.petals }).map((_, i) => {
                 const angle = (360 / p.petals) * i;
                 const rad = (angle * Math.PI) / 180;
@@ -233,7 +236,7 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
 
           {/* ── Plum blossoms (梅花) — classic five-petal flowers ── */}
           {plumBlossoms.map((b, bi) => (
-            <g key={`plum-${bi}`} className="plum-bloom" style={{ animation: `bloomOpen 0.8s ease-out ${b.delay}s both` }}>
+            <g key={`plum-${bi}`} className="plum-bloom" style={{ animation: `bloomOpen ${0.8 * S}s ease-out ${b.delay * S}s both` }}>
               {Array.from({ length: 5 }).map((_, i) => {
                 const angle = (360 / 5) * i - 90;
                 const rad = (angle * Math.PI) / 180;
@@ -266,7 +269,7 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
                 fill="var(--vermillion)"
                 opacity="0"
                 style={{
-                  animation: `petalFall ${p.dur}s ease-in-out ${p.delay}s forwards`,
+                  animation: `petalFall ${p.dur * S}s ease-in-out ${p.delay * S}s forwards`,
                   transformOrigin: `${p.x}px ${p.y}px`,
                   ["--pDrift" as string]: `${p.drift}px`,
                   ["--pRot" as string]: `${p.rot}deg`,
@@ -282,7 +285,7 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
                 strokeWidth="0.3"
                 opacity="0"
                 style={{
-                  animation: `petalFall ${p.dur}s ease-in-out ${p.delay}s forwards`,
+                  animation: `petalFall ${p.dur * S}s ease-in-out ${p.delay * S}s forwards`,
                   transformOrigin: `${p.x}px ${p.y}px`,
                   ["--pDrift" as string]: `${p.drift}px`,
                   ["--pRot" as string]: `${p.rot}deg`,
@@ -305,7 +308,7 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
               style={{
                 strokeDasharray: 400,
                 strokeDashoffset: 400,
-                animation: `drawHair ${dur}s cubic-bezier(0.25, 0.1, 0.25, 1) ${delay}s forwards`,
+                animation: `drawHair ${dur * S}s cubic-bezier(0.25, 0.1, 0.25, 1) ${delay * S}s forwards`,
               }}
             />
           ))}
@@ -318,10 +321,10 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
           />
 
           {/* ── Scattered leaf accents ── */}
-          <path d="M 50 185 C 55 180, 65 178, 72 182 C 65 186, 55 188, 50 185" fill="var(--jade)" opacity="0" style={{ animation: "leafAppear 0.6s ease-out 1.0s forwards" }} />
-          <path d="M 470 190 C 475 184, 485 182, 492 186 C 485 190, 475 192, 470 190" fill="var(--jade)" opacity="0" style={{ animation: "leafAppear 0.6s ease-out 1.2s forwards" }} />
-          <path d="M 25 95 C 30 88, 40 86, 48 90 C 40 94, 30 96, 25 95" fill="var(--jade-light)" opacity="0" style={{ animation: "leafAppear 0.6s ease-out 0.8s forwards" }} />
-          <path d="M 500 160 C 505 154, 513 152, 518 156 C 513 160, 505 162, 500 160" fill="var(--jade-light)" opacity="0" style={{ animation: "leafAppear 0.6s ease-out 1.4s forwards" }} />
+          <path d="M 50 185 C 55 180, 65 178, 72 182 C 65 186, 55 188, 50 185" fill="var(--jade)" opacity="0" style={{ animation: `leafAppear ${0.6 * S}s ease-out ${1.0 * S}s forwards` }} />
+          <path d="M 470 190 C 475 184, 485 182, 492 186 C 485 190, 475 192, 470 190" fill="var(--jade)" opacity="0" style={{ animation: `leafAppear ${0.6 * S}s ease-out ${1.2 * S}s forwards` }} />
+          <path d="M 25 95 C 30 88, 40 86, 48 90 C 40 94, 30 96, 25 95" fill="var(--jade-light)" opacity="0" style={{ animation: `leafAppear ${0.6 * S}s ease-out ${0.8 * S}s forwards` }} />
+          <path d="M 500 160 C 505 154, 513 152, 518 156 C 513 160, 505 162, 500 160" fill="var(--jade-light)" opacity="0" style={{ animation: `leafAppear ${0.6 * S}s ease-out ${1.4 * S}s forwards` }} />
         </svg>
       </div>
 
@@ -406,7 +409,7 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
         }
 
         .brow-shadow {
-          animation: shadowAppear 0.5s ease-out 2.2s forwards;
+          animation: shadowAppear 0.25s ease-out 1.1s forwards;
         }
 
         @keyframes shadowAppear {

@@ -5,35 +5,28 @@ import { useState, useEffect } from "react";
 /**
  * Full-screen intro — Elaborate nail painting & application animation.
  *
- * Phases (4 seconds total):
- *   1. HAND       (0–0.6s)   — Elegant hand silhouette draws in
- *   2. BARE NAIL  (0.3–0.8s) — Almond-shaped bare nail appears on ring finger
- *   3. BASE COAT  (0.6–1.2s) — Translucent base coat shimmers on
- *   4. PAINTING   (0.8–2.0s) — Rich dusty rose polish paints down in 3 brush strokes
- *   5. GLOSS      (1.8–2.2s) — Glossy shine sweeps across
- *   6. NAIL ART   (2.0–2.6s) — Gold foil, gems, flower petals bloom on nail
- *   7. LIFT OFF   (2.3–2.8s) — Painted nail lifts with a gentle glow
- *   8. APPLY      (2.6–3.2s) — Nail floats down and settles onto fingertip
- *   9. SPARKLE    (3.0–3.4s) — Burst of sparkles around completed nail
- *  10. BRANDING   (3.0–3.5s) — "Nails by Shimmyhands" fades in elegantly
- *  11. FADE       (3.5–4.0s) — Scene dissolves
+ * Phases (2 seconds total):
+ *   All phases compressed to 2s total with 0.5x speed multiplier.
  */
 export function NailIntro({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState<"painting" | "applying" | "branding" | "fading">("painting");
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("applying"), 2300);
-    const t2 = setTimeout(() => setPhase("branding"), 3000);
-    const t3 = setTimeout(() => setPhase("fading"), 3500);
-    const t4 = setTimeout(() => onComplete(), 4000);
+    const t1 = setTimeout(() => setPhase("applying"), 1150);
+    const t2 = setTimeout(() => setPhase("branding"), 1500);
+    const t3 = setTimeout(() => setPhase("fading"), 1750);
+    const t4 = setTimeout(() => onComplete(), 2000);
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
   }, [onComplete]);
 
   const isBranding = phase === "branding" || phase === "fading";
 
+  // Speed multiplier: 0.5 = 2x faster (2s total instead of 4s)
+  const S = 0.5;
+
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-500 ${
+      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-250 ${
         phase === "fading" ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
       style={{ background: "radial-gradient(ellipse at 50% 40%, #FFFBF8 0%, #FAF0EB 35%, #F0E2DA 70%, #E8D5CC 100%)" }}
@@ -72,13 +65,13 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
         width: 420, height: 420, left: "50%", top: "50%",
         transform: "translate(-50%, -50%)",
         opacity: 0,
-        animation: "fadeIn 1s ease-out 0.5s forwards",
+        animation: "fadeIn 0.5s ease-out 0.25s forwards",
       }}>
         <svg viewBox="0 0 420 420" width="420" height="420">
           <circle cx="210" cy="210" r="195" fill="none" stroke="#D4A0A0" strokeWidth="0.3" opacity="0.2"
-            style={{ strokeDasharray: 1230, strokeDashoffset: 1230, animation: "drawRing 2s ease-out 0.5s forwards" }} />
+            style={{ strokeDasharray: 1230, strokeDashoffset: 1230, animation: "drawRing 1s ease-out 0.25s forwards" }} />
           <circle cx="210" cy="210" r="205" fill="none" stroke="#C4A882" strokeWidth="0.2" opacity="0.12"
-            style={{ strokeDasharray: 1290, strokeDashoffset: 1290, animation: "drawRing 2.5s ease-out 0.8s forwards" }} />
+            style={{ strokeDasharray: 1290, strokeDashoffset: 1290, animation: "drawRing 1.25s ease-out 0.4s forwards" }} />
         </svg>
       </div>
 
@@ -150,7 +143,7 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
         {/* ═══ PHASE 1: ELEGANT HAND SILHOUETTE ═══ */}
 
         {/* The hand (ring finger prominent) */}
-        <g style={{ opacity: 0, animation: "fadeIn 0.8s ease-out 0s forwards" }}>
+        <g style={{ opacity: 0, animation: "fadeIn 0.4s ease-out 0s forwards" }}>
           {/* Palm suggestion — very subtle */}
           <path
             d="M 200 400 C 195 380, 190 350, 195 320 C 198 300, 205 280, 210 265
@@ -179,7 +172,7 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
         <path
           d="M 210 115 C 210 88, 222 62, 250 55 C 278 62, 290 88, 290 115 L 290 215 Q 290 228, 280 232 L 220 232 Q 210 228, 210 215 Z"
           fill="#F5E2DA"
-          style={{ opacity: 0, animation: "fadeIn 0.5s ease-out 0.3s forwards" }}
+          style={{ opacity: 0, animation: "fadeIn 0.25s ease-out 0.15s forwards" }}
         />
 
         {/* Nail outline — draws in */}
@@ -190,31 +183,31 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
           strokeWidth="1.2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          style={{ strokeDasharray: 550, strokeDashoffset: 550, animation: "drawLine 0.8s ease-out 0.2s forwards" }}
+          style={{ strokeDasharray: 550, strokeDashoffset: 550, animation: "drawLine 0.4s ease-out 0.1s forwards" }}
         />
 
         {/* Lunula (moon at base) */}
         <path
           d="M 216 218 C 225 208, 240 204, 250 203 C 260 204, 275 208, 284 218"
           fill="none" stroke="#F0D8D0" strokeWidth="0.8" opacity="0"
-          style={{ animation: "fadeIn 0.4s ease-out 0.6s forwards" }}
+          style={{ animation: "fadeIn 0.2s ease-out 0.3s forwards" }}
         />
         <ellipse cx="250" cy="218" rx="28" ry="12" fill="#FFF0EC" opacity="0"
-          style={{ animation: "fadeIn 0.3s ease-out 0.6s forwards" }}
+          style={{ animation: "fadeIn 0.15s ease-out 0.3s forwards" }}
         />
 
         {/* Cuticle line */}
         <path
           d="M 214 222 C 228 230, 245 234, 250 234 C 255 234, 272 230, 286 222"
           fill="none" stroke="#D4B8B0" strokeWidth="0.8" strokeLinecap="round"
-          style={{ strokeDasharray: 100, strokeDashoffset: 100, animation: "drawLine 0.5s ease-out 0.5s forwards" }}
+          style={{ strokeDasharray: 100, strokeDashoffset: 100, animation: "drawLine 0.25s ease-out 0.25s forwards" }}
         />
 
         {/* ═══ PHASE 3: BASE COAT (translucent shimmer) ═══ */}
 
         <g clipPath="url(#ni-nailClip)">
           <rect x="205" y="50" width="90" height="190" fill="rgba(255,240,236,0.5)"
-            style={{ transform: "translateY(-200px)", animation: "slideDown 0.6s ease-out 0.6s forwards" }}
+            style={{ transform: "translateY(-200px)", animation: "slideDown 0.3s ease-out 0.3s forwards" }}
           />
         </g>
 
@@ -223,33 +216,33 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
         {/* Stroke 1 — center */}
         <g clipPath="url(#ni-nailClip)">
           <rect x="238" y="50" width="24" height="190" fill="url(#ni-polish)" rx="4"
-            style={{ transform: "translateY(-200px)", animation: "slideDown 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards" }}
+            style={{ transform: "translateY(-200px)", animation: "slideDown 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards" }}
           />
         </g>
 
         {/* Stroke 2 — left */}
         <g clipPath="url(#ni-nailClip)">
           <rect x="212" y="50" width="30" height="190" fill="url(#ni-polish)" rx="4"
-            style={{ transform: "translateY(-200px)", animation: "slideDown 0.7s cubic-bezier(0.4, 0, 0.2, 1) 1.0s forwards" }}
+            style={{ transform: "translateY(-200px)", animation: "slideDown 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards" }}
           />
         </g>
 
         {/* Stroke 3 — right */}
         <g clipPath="url(#ni-nailClip)">
           <rect x="258" y="50" width="30" height="190" fill="url(#ni-polish)" rx="4"
-            style={{ transform: "translateY(-200px)", animation: "slideDown 0.7s cubic-bezier(0.4, 0, 0.2, 1) 1.2s forwards" }}
+            style={{ transform: "translateY(-200px)", animation: "slideDown 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0.6s forwards" }}
           />
         </g>
 
         {/* Second coat — full coverage */}
         <g clipPath="url(#ni-nailClip)">
           <rect x="205" y="50" width="90" height="190" fill="url(#ni-polish2)" opacity="0.7"
-            style={{ transform: "translateY(-200px)", animation: "slideDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.4s forwards" }}
+            style={{ transform: "translateY(-200px)", animation: "slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.7s forwards" }}
           />
         </g>
 
         {/* Polish brush — moves with the strokes */}
-        <g style={{ opacity: 0, animation: "brushPaint 2.0s ease-in-out 0.7s forwards" }}>
+        <g style={{ opacity: 0, animation: "brushPaint 1s ease-in-out 0.35s forwards" }}>
           {/* Bottle neck */}
           <rect x="245" y="-30" width="10" height="20" rx="2" fill="#8E5E6E" />
           {/* Cap */}
@@ -267,16 +260,16 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
         <g clipPath="url(#ni-nailClip)">
           {/* Main highlight */}
           <ellipse cx="232" cy="120" rx="14" ry="55" fill="url(#ni-gloss)" opacity="0"
-            style={{ animation: "fadeIn 0.5s ease-out 1.8s forwards" }}
+            style={{ animation: "fadeIn 0.25s ease-out 0.9s forwards" }}
           />
           {/* Edge reflection */}
           <path d="M 215 80 Q 220 130, 218 200" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="2" opacity="0"
-            style={{ animation: "fadeIn 0.5s ease-out 1.9s forwards" }}
+            style={{ animation: "fadeIn 0.25s ease-out 0.95s forwards" }}
           />
           {/* Shine sweep */}
           <rect x="200" y="50" width="30" height="200" fill="rgba(255,255,255,0.25)" opacity="0"
             style={{
-              animation: "shineSweepNail 0.6s ease-out 2.0s forwards",
+              animation: "shineSweepNail 0.3s ease-out 1s forwards",
               transformOrigin: "center",
             }}
           />
@@ -287,20 +280,20 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
         <g clipPath="url(#ni-nailClip)">
           {/* Gold foil fragments */}
           <polygon points="260,78 268,72 272,80 264,84" fill="url(#ni-goldFoil)" opacity="0"
-            style={{ animation: "popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 2.0s forwards" }} />
+            style={{ animation: "popIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) 1s forwards" }} />
           <polygon points="255,88 260,82 265,88 258,92" fill="url(#ni-goldFoil)" opacity="0"
-            style={{ animation: "popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 2.1s forwards" }} />
+            style={{ animation: "popIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) 1.05s forwards" }} />
           <polygon points="268,92 274,88 276,95 270,97" fill="url(#ni-goldFoil)" opacity="0"
-            style={{ animation: "popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 2.15s forwards" }} />
+            style={{ animation: "popIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) 1.075s forwards" }} />
 
           {/* Fine gold lines — art deco style */}
           <line x1="222" y1="105" x2="278" y2="95" stroke="#C4A882" strokeWidth="0.6" strokeLinecap="round"
-            style={{ strokeDasharray: 60, strokeDashoffset: 60, animation: "drawLine 0.4s ease-out 2.0s forwards" }} />
+            style={{ strokeDasharray: 60, strokeDashoffset: 60, animation: "drawLine 0.2s ease-out 1s forwards" }} />
           <line x1="220" y1="112" x2="280" y2="102" stroke="#C4A882" strokeWidth="0.4" strokeLinecap="round"
-            style={{ strokeDasharray: 65, strokeDashoffset: 65, animation: "drawLine 0.4s ease-out 2.1s forwards" }} />
+            style={{ strokeDasharray: 65, strokeDashoffset: 65, animation: "drawLine 0.2s ease-out 1.05s forwards" }} />
 
           {/* Delicate flower — 5 petals */}
-          <g style={{ opacity: 0, animation: "bloomIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2.15s forwards" }}>
+          <g style={{ opacity: 0, animation: "bloomIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) 1.075s forwards" }}>
             <ellipse cx="262" cy="148" rx="5" ry="9" fill="#E8C0C0" opacity="0.6" transform="rotate(0 262 148)" />
             <ellipse cx="268" cy="142" rx="5" ry="8" fill="#ECCACA" opacity="0.5" transform="rotate(72 268 142)" />
             <ellipse cx="272" cy="150" rx="4.5" ry="8" fill="#E8C0C0" opacity="0.55" transform="rotate(144 272 150)" />
@@ -312,7 +305,7 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
           </g>
 
           {/* Second smaller flower */}
-          <g style={{ opacity: 0, animation: "bloomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 2.25s forwards" }}>
+          <g style={{ opacity: 0, animation: "bloomIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) 1.125s forwards" }}>
             <ellipse cx="232" cy="165" rx="3.5" ry="6" fill="#E8C0C0" opacity="0.5" transform="rotate(-15 232 165)" />
             <ellipse cx="237" cy="161" rx="3" ry="5.5" fill="#ECCACA" opacity="0.4" transform="rotate(60 237 161)" />
             <ellipse cx="239" cy="168" rx="3" ry="5.5" fill="#E8C0C0" opacity="0.45" transform="rotate(130 239 168)" />
@@ -328,7 +321,7 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
             { cx: 270, cy: 170, r: 1.8, d: 2.35 },
             { cx: 230, cy: 140, r: 1.5, d: 2.4 },
           ].map((g, i) => (
-            <g key={i} style={{ opacity: 0, animation: `popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) ${g.d}s forwards` }}>
+            <g key={i} style={{ opacity: 0, animation: `popIn 0.15s cubic-bezier(0.34, 1.56, 0.64, 1) ${g.d}s forwards` }}>
               <circle cx={g.cx} cy={g.cy} r={g.r} fill="#C4A882" />
               <circle cx={g.cx - g.r * 0.3} cy={g.cy - g.r * 0.3} r={g.r * 0.35} fill="rgba(255,255,255,0.6)" />
             </g>
@@ -336,23 +329,23 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
 
           {/* Tiny leaf accents */}
           <path d="M 240 155 Q 235 148, 228 145" fill="none" stroke="#A8B5A0" strokeWidth="0.6" opacity="0"
-            style={{ strokeDasharray: 20, strokeDashoffset: 20, animation: "drawLine 0.3s ease-out 2.3s forwards" }} />
+            style={{ strokeDasharray: 20, strokeDashoffset: 20, animation: "drawLine 0.15s ease-out 1.15s forwards" }} />
           <path d="M 270 160 Q 276 155, 280 148" fill="none" stroke="#A8B5A0" strokeWidth="0.5" opacity="0"
-            style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: "drawLine 0.3s ease-out 2.35s forwards" }} />
+            style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: "drawLine 0.15s ease-out 1.175s forwards" }} />
         </g>
 
         {/* ═══ PHASE 7-8: NAIL LIFTS + SETTLES ON FINGER ═══ */}
 
         {/* Glow behind nail during lift */}
         <circle cx="250" cy="160" r="50" fill="url(#ni-glow)" opacity="0"
-          style={{ animation: "glowPulseNail 0.8s ease-in-out 2.3s forwards" }}
+          style={{ animation: "glowPulseNail 0.4s ease-in-out 1.15s forwards" }}
         />
 
         {/* The entire nail group moves down to fingertip */}
         {/* This is handled by the nailToFinger keyframe on the main nail elements above */}
 
         {/* Fingertip — appears elegantly */}
-        <g style={{ opacity: 0, animation: "fadeIn 0.6s ease-out 2.3s forwards" }}>
+        <g style={{ opacity: 0, animation: "fadeIn 0.3s ease-out 1.15s forwards" }}>
           {/* Finger */}
           <path
             d="M 218 340 C 218 318, 220 298, 225 282 C 230 268, 238 258, 250 255
@@ -383,10 +376,10 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
             ].map((s, i) => (
               <g key={i}>
                 <circle cx={s.cx} cy={s.cy} r={s.r} fill="url(#ni-spark)"
-                  style={{ animation: `sparkBurst 0.8s ease-out ${s.d}s both` }} />
+                  style={{ animation: `sparkBurst 0.4s ease-out ${s.d}s both` }} />
                 {/* 4-point star */}
                 <text x={s.cx} y={s.cy + 3} textAnchor="middle" fill="#C4A882"
-                  style={{ fontSize: `${s.r * 2.5}px`, opacity: 0, animation: `sparkBurst 0.6s ease-out ${s.d + 0.1}s both` }}>
+                  style={{ fontSize: `${s.r * 2.5}px`, opacity: 0, animation: `sparkBurst 0.3s ease-out ${s.d + 0.1}s both` }}>
                   ✦
                 </text>
               </g>
@@ -399,14 +392,14 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
         {/* Decorative line above text */}
         <line x1="200" y1="460" x2="300" y2="460" stroke="#D4A0A0" strokeWidth="0.5" opacity="0"
           style={{ strokeDasharray: 100, strokeDashoffset: 100,
-            animation: isBranding ? "drawLine 0.5s ease-out 0s forwards" : "none" }}
+            animation: isBranding ? "drawLine 0.25s ease-out 0s forwards" : "none" }}
         />
 
         <text
           x="250" y="482" textAnchor="middle" className="font-serif"
           style={{
             fontSize: "24px", fill: "#3A2E2E", letterSpacing: "0.18em",
-            opacity: 0, animation: isBranding ? "fadeInUp 0.6s ease-out 0.1s forwards" : "none",
+            opacity: 0, animation: isBranding ? "fadeInUp 0.3s ease-out 0.05s forwards" : "none",
           }}
         >
           Nails by Shimmyhands
@@ -415,7 +408,7 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
           x="250" y="500" textAnchor="middle"
           style={{
             fontSize: "7.5px", fill: "#9B8E88", letterSpacing: "0.35em",
-            opacity: 0, animation: isBranding ? "fadeInUp 0.6s ease-out 0.2s forwards" : "none",
+            opacity: 0, animation: isBranding ? "fadeInUp 0.3s ease-out 0.1s forwards" : "none",
           }}
         >
           NAIL ARTISTRY
@@ -424,7 +417,7 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
         {/* Decorative line below text */}
         <line x1="220" y1="510" x2="280" y2="510" stroke="#C4A882" strokeWidth="0.3" opacity="0"
           style={{ strokeDasharray: 60, strokeDashoffset: 60,
-            animation: isBranding ? "drawLine 0.5s ease-out 0.15s forwards" : "none" }}
+            animation: isBranding ? "drawLine 0.25s ease-out 0.075s forwards" : "none" }}
         />
       </svg>
 

@@ -50,13 +50,13 @@ export default function Home() {
               href="/brows"
               className="btn-magnetic shine-on-hover glow-pulse w-full sm:w-auto inline-block bg-vermillion px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-soft-white text-center hover:bg-vermillion-dark touch-target"
             >
-              Explore Brows
+{t("home.explore.brows")}
             </Link>
             <Link
               href="/nails"
               className="btn-magnetic shine-on-hover glow-pulse w-full sm:w-auto inline-block border border-charcoal/20 px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-charcoal text-center hover:border-vermillion hover:text-vermillion touch-target"
             >
-              Explore Nails
+{t("home.explore.nails")}
             </Link>
           </div>
         </div>
@@ -270,8 +270,7 @@ export default function Home() {
 
         {/* Referral incentive (Task 9) */}
         <p className="relative z-10 text-sm text-center text-charcoal-light mt-6">
-          Love your brows? Refer a friend — you both receive $20 off your next visit.
-          Message us on WhatsApp to redeem.
+          {t("referral.text")}
         </p>
       </section>
 
@@ -279,7 +278,7 @@ export default function Home() {
       <section className="bg-cream py-12 sm:py-16 px-4 sm:px-6">
         <div className="mx-auto max-w-xl text-center">
           <h3 className="font-serif text-lg sm:text-xl text-charcoal">
-            Be first to know about new collections — get $10 off your first set.
+            {t("email.heading")}
           </h3>
           <div className="mt-6">
             <EmailCapture />

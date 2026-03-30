@@ -1,28 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import { useI18n } from '@/lib/i18n'
 
-const faqs = [
-  {
-    q: 'How long does eyebrow embroidery last in Singapore?',
-    a: 'Results typically last 12 to 18 months depending on skin type and aftercare. Oilier skin types may see earlier fading.',
-  },
-  {
-    q: 'What is the difference between nano brows and microblading?',
-    a: 'Microblading uses a manual blade. Nano brows use a digital nano-needle, producing finer strokes that suit all skin types, including oily skin where microblading may fade faster.',
-  },
-  {
-    q: 'Is the eyebrow embroidery procedure painful?',
-    a: 'Numbing cream is applied before the procedure. Most clients report minimal discomfort.',
-  },
-  {
-    q: 'How long do Nails by Shimmyhands press-on nails last?',
-    a: 'With proper application and care, most sets last 1 to 2 weeks.',
-  },
-  {
-    q: 'Can I book a consultation without committing to a service?',
-    a: 'Yes. We welcome a no-obligation consultation to discuss what suits you best.',
-  },
+const faqKeys = [
+  { q: 'faq.1.q', a: 'faq.1.a' },
+  { q: 'faq.2.q', a: 'faq.2.a' },
+  { q: 'faq.3.q', a: 'faq.3.a' },
+  { q: 'faq.4.q', a: 'faq.4.a' },
+  { q: 'faq.5.q', a: 'faq.5.a' },
 ]
 
 function FAQItem({ q, a }: { q: string; a: string }) {
@@ -51,13 +37,15 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 }
 
 export default function FAQ() {
+  const { t } = useI18n()
+
   return (
     <div>
-      {faqs.map((faq) => (
-        <FAQItem key={faq.q} q={faq.q} a={faq.a} />
+      {faqKeys.map((faq) => (
+        <FAQItem key={faq.q} q={t(faq.q)} a={t(faq.a)} />
       ))}
     </div>
   )
 }
 
-export { faqs }
+export { faqKeys }

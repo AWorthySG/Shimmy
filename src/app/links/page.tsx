@@ -1,8 +1,11 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useI18n } from '@/lib/i18n'
 
 export default function LinksPage() {
+  const { t } = useI18n()
+
   // Hide navbar and footer on this page (link-in-bio should be standalone)
   useEffect(() => {
     document.body.classList.add('links-page')
@@ -10,12 +13,11 @@ export default function LinksPage() {
   }, [])
 
   const links = [
-    { label: 'Book Brow Appointment', href: '/brows', colour: 'bg-vermillion hover:bg-vermillion-dark' },
-    { label: 'Shop Press-On Nails', href: '/nails/shop', colour: 'bg-vermillion hover:bg-vermillion-dark' },
-    { label: 'View All Services', href: '/brows/services', colour: 'bg-charcoal/80 hover:bg-charcoal' },
-    // TODO: Replace with real WhatsApp number
-    { label: 'WhatsApp Us', href: 'https://wa.me/6589308973', colour: 'bg-jade hover:bg-jade/90' },
-    { label: 'Follow on Instagram', href: 'https://instagram.com/shimmyhands.shop', colour: 'bg-vermillion-dark hover:bg-vermillion' },
+    { key: 'links.book', href: '/brows', colour: 'bg-vermillion hover:bg-vermillion-dark' },
+    { key: 'links.shop', href: '/nails/shop', colour: 'bg-vermillion hover:bg-vermillion-dark' },
+    { key: 'links.services', href: '/brows/services', colour: 'bg-charcoal/80 hover:bg-charcoal' },
+    { key: 'links.whatsapp', href: 'https://wa.me/6589308973', colour: 'bg-jade hover:bg-jade/90' },
+    { key: 'links.instagram', href: 'https://instagram.com/shimmyhands.shop', colour: 'bg-vermillion-dark hover:bg-vermillion' },
   ]
 
   return (
@@ -24,11 +26,11 @@ export default function LinksPage() {
       <h1 className="text-2xl font-serif text-charcoal mb-6 tracking-wide">Shimmy</h1>
       {links.map((l) => (
         <a
-          key={l.label}
+          key={l.key}
           href={l.href}
           className={`${l.colour} text-soft-white text-center w-full max-w-sm py-4 text-xs uppercase tracking-[0.2em] font-medium transition-colors touch-target`}
         >
-          {l.label}
+          {t(l.key)}
         </a>
       ))}
       <div className="mx-auto h-[2px] w-[40px] bg-gradient-to-r from-transparent via-vermillion/30 to-transparent mt-6" />

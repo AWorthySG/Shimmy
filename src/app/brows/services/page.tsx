@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
-import FAQ, { faqs } from "@/components/FAQ";
+import FAQ, { faqKeys } from "@/components/FAQ";
 
 /* ──────────────────────────────────────────────
    TODO: Update each service below with your
@@ -128,7 +128,7 @@ export default function ServicesPage() {
               {/* Most Popular badge (Task 5) */}
               {service.popular && (
                 <span className="absolute top-0 right-0 z-20 bg-gold text-soft-white text-[10px] uppercase tracking-[0.15em] font-bold px-3 py-1.5">
-                  Most Popular
+                  {t("badge.popular")}
                 </span>
               )}
               {/* Service photo placeholder — TODO: replace with your actual service photos */}
@@ -205,10 +205,9 @@ export default function ServicesPage() {
           </p>
           {/* Urgency messaging (Task 6) */}
           <p className="text-sm text-red-600 font-medium mt-2">
-            Limited slots available this month — book early to secure your preferred date.
+            {t("urgency.brows")}
           </p>
           <div className="mt-6 sm:mt-8 flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center">
-            {/* TODO: Replace with your WhatsApp number */}
             <a
               href="https://wa.me/6589308973"
               target="_blank"
@@ -221,7 +220,7 @@ export default function ServicesPage() {
               href="/contact"
               className="text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
             >
-              Contact Page →
+              {t("nav.contact")} →
             </Link>
           </div>
         </div>
@@ -233,10 +232,10 @@ export default function ServicesPage() {
           <div className="text-center mb-8 sm:mb-12">
             <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
             <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
-              Common Questions
+              {t("faq.tag")}
             </p>
             <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
-              Frequently Asked Questions
+              {t("faq.title")}
             </h2>
           </div>
           <FAQ />
@@ -248,10 +247,10 @@ export default function ServicesPage() {
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'FAQPage',
-              mainEntity: faqs.map((f) => ({
+              mainEntity: faqKeys.map((f) => ({
                 '@type': 'Question',
-                name: f.q,
-                acceptedAnswer: { '@type': 'Answer', text: f.a },
+                name: t(f.q),
+                acceptedAnswer: { '@type': 'Answer', text: t(f.a) },
               })),
             }),
           }}
@@ -262,21 +261,20 @@ export default function ServicesPage() {
       <section className="relative overflow-hidden bg-charcoal text-soft-white py-12 sm:py-16 px-4 sm:px-6 text-center">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--vermillion)_0%,_transparent_70%)] opacity-10" />
         <div className="relative z-10 mx-auto max-w-2xl">
-          <h2 className="font-serif text-2xl sm:text-3xl text-gold md:text-4xl">The Full Shimmy</h2>
+          <h2 className="font-serif text-2xl sm:text-3xl text-gold md:text-4xl">{t("bundle.title")}</h2>
           <p className="mt-3 text-sm sm:text-base text-soft-white/80">
-            Book any brow service and add a Nails by Shimmyhands set — save $15.
+            {t("bundle.desc")}
           </p>
           <p className="text-xs text-soft-white/50 mt-2 mb-6">
-            Mention this offer when you message us on WhatsApp.
+            {t("bundle.note")}
           </p>
-          {/* TODO: Replace with real WhatsApp number */}
           <a
             href="https://wa.me/6589308973?text=Hi%2C%20I'd%20like%20the%20Full%20Shimmy%20bundle"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-gold text-soft-white font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] hover:bg-gold/90 transition-colors touch-target"
           >
-            Claim This Bundle
+            {t("bundle.cta")}
           </a>
         </div>
       </section>

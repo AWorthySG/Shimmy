@@ -139,7 +139,7 @@ export default function NailsPage() {
                     {/* Hover overlay with collection name */}
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-end justify-center pb-4 z-10">
                       <span className="text-[10px] uppercase tracking-[0.25em] text-soft-white/90">
-                        View Collection →
+                        {t("nails.collection.view")}
                       </span>
                     </div>
                   </div>
@@ -220,10 +220,10 @@ export default function NailsPage() {
           <AnimateOnScroll animation="fade-up" className="text-center mb-6 sm:mb-8">
             <div className="mx-auto h-[2px] w-[50px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-3" />
             <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
-              Behind the Scenes
+              {t("nails.bts.tag")}
             </p>
             <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
-              See the Artistry
+              {t("nails.bts.title")}
             </h2>
           </AnimateOnScroll>
 

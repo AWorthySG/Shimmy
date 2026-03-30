@@ -326,6 +326,111 @@ const en: Record<string, string> = {
   "footer.contact": "Get In Touch",
   "footer.rights": "All rights reserved.",
   "footer.location": "Singapore",
+
+  // ─── Stats Bar ───
+  "stats.brows": "Brows Shaped",
+  "stats.rating": "Average Rating",
+  "stats.years": "Years in Singapore",
+
+  // ─── Email Capture ───
+  "email.placeholder": "Your email address",
+  "email.cta": "Get $10 Off",
+  "email.success": "Thank you — we will be in touch!",
+  "email.error": "Please enter a valid email address.",
+  "email.heading": "Be first to know about new collections — get $10 off your first set.",
+
+  // ─── Before/After ───
+  "results.tag": "Transformations",
+  "results.title": "Real Results",
+  "results.before": "Before",
+  "results.after": "After",
+
+  // ─── Booking Form ───
+  "book.step.service": "Select a Service",
+  "book.step.service.desc": "Choose the service you'd like to book.",
+  "book.step.date": "Pick a Date",
+  "book.step.date.note": "Sundays are closed. Greyed-out dates are unavailable.",
+  "book.step.time": "Choose a Time",
+  "book.step.time.loading": "Loading available times...",
+  "book.step.time.another": "Choose another date",
+  "book.step.time.closed": "Studio is closed on this day.",
+  "book.step.time.blocked": "This date is unavailable.",
+  "book.step.time.none": "No slots available on this date.",
+  "book.step.time.fail": "Failed to load available times. Please try again.",
+  "book.step.details": "Your Details",
+  "book.step.details.desc": "So we can confirm your appointment.",
+  "book.label.name": "Name",
+  "book.label.phone": "Phone",
+  "book.label.email": "Email",
+  "book.label.notes": "Notes",
+  "book.label.optional": "(optional)",
+  "book.placeholder.name": "Your full name",
+  "book.placeholder.phone": "+65 XXXX XXXX",
+  "book.placeholder.email": "your@email.com",
+  "book.placeholder.notes": "Any preferences or questions?",
+  "book.error.required": "Please fill in your name and phone number.",
+  "book.review": "Review Booking",
+  "book.confirm.title": "Confirm Your Booking",
+  "book.confirm.desc": "Please check the details below.",
+  "book.label.service": "Service",
+  "book.label.date": "Date",
+  "book.label.time": "Time",
+  "book.submitting": "Submitting...",
+  "book.confirm.btn": "Confirm Booking",
+  "book.done.title": "Booking Submitted!",
+  "book.done.ref": "Booking Reference",
+  "book.done.another": "Book Another Appointment",
+  "book.error.generic": "Something went wrong. Please try again.",
+  "book.error.network": "Network error. Please check your connection and try again.",
+  "book.online.tag": "Book Online",
+  "book.online.title": "Schedule Your Consultation",
+
+  // ─── Urgency / Availability ───
+  "urgency.brows": "Limited slots available this month — book early to secure your preferred date.",
+  "urgency.nails": "Limited sets remaining",
+
+  // ─── Referral ───
+  "referral.text": "Love your brows? Refer a friend — you both receive $20 off your next visit. Message us on WhatsApp to redeem.",
+  "referral.wa.prefix": "Prefer WhatsApp? Message us at",
+
+  // ─── Bundle Offer ───
+  "bundle.title": "The Full Shimmy",
+  "bundle.desc": "Book any brow service and add a Nails by Shimmyhands set — save $15.",
+  "bundle.note": "Mention this offer when you message us on WhatsApp.",
+  "bundle.cta": "Claim This Bundle",
+
+  // ─── FAQ ───
+  "faq.tag": "Common Questions",
+  "faq.title": "Frequently Asked Questions",
+  "faq.1.q": "How long does eyebrow embroidery last in Singapore?",
+  "faq.1.a": "Results typically last 12 to 18 months depending on skin type and aftercare. Oilier skin types may see earlier fading.",
+  "faq.2.q": "What is the difference between nano brows and microblading?",
+  "faq.2.a": "Microblading uses a manual blade. Nano brows use a digital nano-needle, producing finer strokes that suit all skin types, including oily skin where microblading may fade faster.",
+  "faq.3.q": "Is the eyebrow embroidery procedure painful?",
+  "faq.3.a": "Numbing cream is applied before the procedure. Most clients report minimal discomfort.",
+  "faq.4.q": "How long do Nails by Shimmyhands press-on nails last?",
+  "faq.4.a": "With proper application and care, most sets last 1 to 2 weeks.",
+  "faq.5.q": "Can I book a consultation without committing to a service?",
+  "faq.5.a": "Yes. We welcome a no-obligation consultation to discuss what suits you best.",
+
+  // ─── Most Popular Badge ───
+  "badge.popular": "Most Popular",
+
+  // ─── Links Page ───
+  "links.book": "Book Brow Appointment",
+  "links.shop": "Shop Press-On Nails",
+  "links.services": "View All Services",
+  "links.whatsapp": "WhatsApp Us",
+  "links.instagram": "Follow on Instagram",
+
+  // ─── Homepage Buttons ───
+  "home.explore.brows": "Explore Brows",
+  "home.explore.nails": "Explore Nails",
+
+  // ─── Nails Page Hardcoded ───
+  "nails.bts.tag": "Behind the Scenes",
+  "nails.bts.title": "See the Artistry",
+  "nails.collection.view": "View Collection →",
 };
 
 const zh: Record<string, string> = {
@@ -591,4 +696,109 @@ const zh: Record<string, string> = {
   "footer.contact": "联系方式",
   "footer.rights": "版权所有。",
   "footer.location": "新加坡",
+
+  // ─── Stats Bar ───
+  "stats.brows": "眉毛塑造",
+  "stats.rating": "平均评分",
+  "stats.years": "扎根新加坡",
+
+  // ─── Email Capture ───
+  "email.placeholder": "请输入邮箱地址",
+  "email.cta": "领取 $10 优惠",
+  "email.success": "谢谢——我们会尽快联系你！",
+  "email.error": "请输入有效的邮箱地址。",
+  "email.heading": "抢先了解新系列——首次购买立减 $10。",
+
+  // ─── Before/After ───
+  "results.tag": "蜕变效果",
+  "results.title": "真实效果",
+  "results.before": "之前",
+  "results.after": "之后",
+
+  // ─── Booking Form ───
+  "book.step.service": "选择服务",
+  "book.step.service.desc": "选择你想预约的服务。",
+  "book.step.date": "选择日期",
+  "book.step.date.note": "周日休息。灰色日期不可预约。",
+  "book.step.time": "选择时间",
+  "book.step.time.loading": "正在加载可用时段...",
+  "book.step.time.another": "选择其他日期",
+  "book.step.time.closed": "当日休息。",
+  "book.step.time.blocked": "该日期不可预约。",
+  "book.step.time.none": "该日期暂无可用时段。",
+  "book.step.time.fail": "加载失败，请重试。",
+  "book.step.details": "填写信息",
+  "book.step.details.desc": "方便我们确认你的预约。",
+  "book.label.name": "姓名",
+  "book.label.phone": "手机号",
+  "book.label.email": "邮箱",
+  "book.label.notes": "备注",
+  "book.label.optional": "（选填）",
+  "book.placeholder.name": "你的全名",
+  "book.placeholder.phone": "+65 XXXX XXXX",
+  "book.placeholder.email": "your@email.com",
+  "book.placeholder.notes": "有什么偏好或问题想提前说？",
+  "book.error.required": "请填写姓名和手机号。",
+  "book.review": "查看预约详情",
+  "book.confirm.title": "确认预约",
+  "book.confirm.desc": "请确认以下信息。",
+  "book.label.service": "服务",
+  "book.label.date": "日期",
+  "book.label.time": "时间",
+  "book.submitting": "提交中...",
+  "book.confirm.btn": "确认预约",
+  "book.done.title": "预约已提交！",
+  "book.done.ref": "预约编号",
+  "book.done.another": "再次预约",
+  "book.error.generic": "出错了，请重试。",
+  "book.error.network": "网络错误，请检查网络后重试。",
+  "book.online.tag": "在线预约",
+  "book.online.title": "预约你的咨询",
+
+  // ─── Urgency / Availability ───
+  "urgency.brows": "本月名额有限——尽早预约锁定你的时间。",
+  "urgency.nails": "库存有限",
+
+  // ─── Referral ───
+  "referral.text": "喜欢你的眉毛？推荐朋友——双方各享 $20 优惠。WhatsApp 联系我们领取。",
+  "referral.wa.prefix": "更喜欢 WhatsApp？联系我们",
+
+  // ─── Bundle Offer ───
+  "bundle.title": "全套 Shimmy",
+  "bundle.desc": "预约任意眉毛服务，加购 Nails by Shimmyhands 穿戴甲——立省 $15。",
+  "bundle.note": "WhatsApp 联系我们时请提及此优惠。",
+  "bundle.cta": "立即领取",
+
+  // ─── FAQ ───
+  "faq.tag": "常见问题",
+  "faq.title": "常见问答",
+  "faq.1.q": "在新加坡做绣眉能维持多久？",
+  "faq.1.a": "效果通常维持 12 至 18 个月，具体取决于肤质和术后护理。油性肤质可能会更早褪色。",
+  "faq.2.q": "纳米雾眉和微刀雕眉有什么区别？",
+  "faq.2.a": "微刀雕眉使用手工刀片。纳米雾眉使用数字纳米针，线条更细腻，适合所有肤质，包括容易让微刀技术褪色的油性皮肤。",
+  "faq.3.q": "绣眉过程会痛吗？",
+  "faq.3.a": "操作前会涂抹麻醉膏。大多数客人反映几乎没有不适感。",
+  "faq.4.q": "Nails by Shimmyhands 穿戴甲能戴多久？",
+  "faq.4.a": "正确佩戴和护理的情况下，大多数套装可以维持 1 到 2 周。",
+  "faq.5.q": "可以只做咨询不做服务吗？",
+  "faq.5.a": "当然可以。我们欢迎无压力的咨询，帮你了解什么最适合你。",
+
+  // ─── Most Popular Badge ───
+  "badge.popular": "最受欢迎",
+
+  // ─── Links Page ───
+  "links.book": "预约眉毛服务",
+  "links.shop": "选购穿戴甲",
+  "links.services": "查看全部服务",
+  "links.whatsapp": "WhatsApp 联系",
+  "links.instagram": "关注 Instagram",
+
+  // ─── Homepage Buttons ───
+  "home.explore.brows": "了解眉毛",
+  "home.explore.nails": "了解美甲",
+
+  // ─── Nails Page Hardcoded ───
+  "nails.bts.tag": "幕后花絮",
+  "nails.bts.title": "感受手工艺术",
+  "nails.collection.view": "查看系列 →",
 };

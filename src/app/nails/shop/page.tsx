@@ -70,7 +70,7 @@ function ProductCard({ product }: { product: Product }) {
         {/* Limited stock badge (Task 6) */}
         {limitedStockCollections[product.collectionHandle] && (
           <span className="inline-block text-[10px] text-red-500 font-medium mt-1">
-            Limited sets remaining
+            {t("urgency.nails")}
           </span>
         )}
 
@@ -192,7 +192,7 @@ export default function ShopPage() {
       <section className="bg-cream py-12 sm:py-16 px-4 sm:px-6">
         <div className="mx-auto max-w-xl text-center">
           <h3 className="font-serif text-lg sm:text-xl text-charcoal">
-            Be first to know about new collections — get $10 off your first set.
+            {t("email.heading")}
           </h3>
           <div className="mt-6">
             <EmailCapture />

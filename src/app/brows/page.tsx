@@ -221,10 +221,10 @@ export default function Home() {
           <AnimateOnScroll animation="fade-up" className="text-center">
             <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
             <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
-              Transformations
+              {t("results.tag")}
             </p>
             <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
-              Real Results
+              {t("results.title")}
             </h2>
           </AnimateOnScroll>
 
@@ -338,17 +338,17 @@ export default function Home() {
           <AnimateOnScroll animation="fade-up" className="text-center mb-8">
             <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
             <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
-              Book Online
+              {t("book.online.tag")}
             </p>
             <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
-              Schedule Your Consultation
+              {t("book.online.title")}
             </h2>
-            <p className="mt-2 text-sm text-charcoal-light">Limited slots available this month — book early to secure your preferred date.</p>
+            <p className="mt-2 text-sm text-charcoal-light">{t("urgency.brows")}</p>
           </AnimateOnScroll>
           <BookingForm />
           {/* TODO: Replace with your real WhatsApp number */}
           <p className="text-sm text-center text-charcoal-light mt-6">
-            Prefer WhatsApp? Message us at{" "}
+            {t("referral.wa.prefix")}{" "}
             <a href="https://wa.me/6589308973" target="_blank" rel="noopener noreferrer" className="text-vermillion hover:text-vermillion-dark transition-colors">
               +65 8930 8973
             </a>
@@ -396,8 +396,7 @@ export default function Home() {
           </div>
           {/* Referral incentive (Task 9) */}
           <p className="text-sm text-center text-charcoal-light mt-6">
-            Love your brows? Refer a friend — you both receive $20 off your next visit.
-            Message us on WhatsApp to redeem.
+            {t("referral.text")}
           </p>
         </AnimateOnScroll>
       </section>

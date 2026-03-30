@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { BOOKING_SERVICES, MAX_ADVANCE_DAYS, type BookingService } from '@/lib/booking'
+import { useI18n } from '@/lib/i18n'
 
 type Step = 'service' | 'date' | 'time' | 'details' | 'confirm' | 'done'
 
@@ -133,6 +134,7 @@ function Calendar({
 }
 
 export default function BookingForm() {
+  const { t } = useI18n()
   const [step, setStep] = useState<Step>('service')
   const [selectedService, setSelectedService] = useState<BookingService | null>(null)
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
@@ -160,11 +162,11 @@ export default function BookingForm() {
       )
       const data = await res.json()
       setSlots(data.slots || [])
-      if (data.closed) setSlotsMessage('Studio is closed on this day.')
-      else if (data.blocked) setSlotsMessage('This date is unavailable.')
-      else if ((data.slots || []).length === 0) setSlotsMessage('No slots available on this date.')
+      if (data.closed) setSlotsMessage(t('book.step.time.closed'))
+      else if (data.blocked) setSlotsMessage(t('book.step.time.blocked'))
+      else if ((data.slots || []).length === 0) setSlotsMessage(t('book.step.time.none'))
     } catch {
-      setSlotsMessage('Failed to load available times. Please try again.')
+      setSlotsMessage(t('book.step.time.fail'))
       setSlots([])
     }
     setSlotsLoading(false)
@@ -197,13 +199,13 @@ export default function BookingForm() {
       })
       const data = await res.json()
       if (!res.ok) {
-        setError(data.error || 'Something went wrong. Please try again.')
+        setError(data.error || t('book.error.generic'))
       } else {
         setBookingResult({ id: data.booking.id, message: data.message })
         setStep('done')
       }
     } catch {
-      setError('Network error. Please check your connection and try again.')
+      setError(t('book.error.network'))
     }
     setSubmitting(false)
   }
@@ -301,7 +303,7 @@ export default function BookingForm() {
             />
           </div>
           <p className="text-[10px] text-warm-gray text-center mt-3">
-            Sundays are closed. Greyed-out dates are unavailable.
+            {t("book.step.date.note")}
           </p>
         </div>
       )}
@@ -325,7 +327,7 @@ export default function BookingForm() {
           {slotsLoading ? (
             <div className="text-center py-12">
               <div className="inline-block w-6 h-6 border-2 border-vermillion/20 border-t-vermillion rounded-full animate-spin" />
-              <p className="mt-3 text-sm text-warm-gray">Loading available times...</p>
+              <p className="mt-3 text-sm text-warm-gray">{t("book.step.time.loading")}</p>
             </div>
           ) : slotsMessage ? (
             <div className="text-center py-12">
@@ -373,7 +375,7 @@ export default function BookingForm() {
             Your Details
           </h3>
           <p className="text-sm text-charcoal-light text-center mb-8">
-            So we can confirm your appointment.
+            {t("book.step.details.desc")}
           </p>
 
           <div className="space-y-4">
@@ -385,7 +387,7 @@ export default function BookingForm() {
                 type="text"
                 value={clientName}
                 onChange={(e) => setClientName(e.target.value)}
-                placeholder="Your full name"
+                placeholder={t("book.placeholder.name")}
                 className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors"
               />
             </div>
@@ -397,7 +399,7 @@ export default function BookingForm() {
                 type="tel"
                 value={clientPhone}
                 onChange={(e) => setClientPhone(e.target.value)}
-                placeholder="+65 XXXX XXXX"
+                placeholder={t("book.placeholder.phone")}
                 className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors"
               />
             </div>
@@ -409,7 +411,7 @@ export default function BookingForm() {
                 type="email"
                 value={clientEmail}
                 onChange={(e) => setClientEmail(e.target.value)}
-                placeholder="your@email.com"
+                placeholder={t("book.placeholder.email")}
                 className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors"
               />
             </div>
@@ -420,7 +422,7 @@ export default function BookingForm() {
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="Any preferences or questions?"
+                placeholder={t("book.placeholder.notes")}
                 rows={3}
                 className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors resize-none"
               />
@@ -430,7 +432,7 @@ export default function BookingForm() {
           <button
             onClick={() => {
               if (!clientName.trim() || !clientPhone.trim()) {
-                setError('Please fill in your name and phone number.')
+                setError(t('book.error.required'))
                 return
               }
               setError('')
@@ -457,24 +459,24 @@ export default function BookingForm() {
             Confirm Your Booking
           </h3>
           <p className="text-sm text-charcoal-light text-center mb-8">
-            Please check the details below.
+            {t("book.confirm.desc")}
           </p>
 
           <div className="border border-vermillion/15 bg-cream/30 p-5 sm:p-6 space-y-4">
             <div className="flex justify-between items-start">
-              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">Service</span>
+              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t("book.label.service")}</span>
               <span className="text-sm text-charcoal text-right">{selectedService?.name}</span>
             </div>
             <div className="h-[1px] bg-vermillion/10" />
             <div className="flex justify-between items-start">
-              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">Date</span>
+              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t("book.label.date")}</span>
               <span className="text-sm text-charcoal text-right">
                 {selectedDate && formatDisplayDate(selectedDate)}
               </span>
             </div>
             <div className="h-[1px] bg-vermillion/10" />
             <div className="flex justify-between items-start">
-              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">Time</span>
+              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t("book.label.time")}</span>
               <span className="text-sm text-charcoal text-right">
                 {selectedTime && formatTime(selectedTime)} ({selectedService?.duration} min)
               </span>
@@ -514,7 +516,7 @@ export default function BookingForm() {
             disabled={submitting}
             className="mt-6 w-full bg-vermillion text-soft-white py-3.5 text-xs uppercase tracking-[0.2em] hover:bg-vermillion-dark transition-colors touch-target disabled:opacity-50"
           >
-            {submitting ? 'Submitting...' : 'Confirm Booking'}
+            {submitting ? t('book.submitting') : t('book.confirm.btn')}
           </button>
           {error && <p className="text-xs text-red-500 mt-3 text-center">{error}</p>}
         </div>
@@ -534,7 +536,7 @@ export default function BookingForm() {
           </p>
           <div className="mt-6 border border-vermillion/15 bg-cream/30 p-4 inline-block">
             <p className="text-[10px] uppercase tracking-[0.15em] text-warm-gray mb-1">
-              Booking Reference
+              {t("book.done.ref")}
             </p>
             <p className="text-sm font-medium text-charcoal">{bookingResult.id.slice(0, 8).toUpperCase()}</p>
           </div>

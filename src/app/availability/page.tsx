@@ -145,7 +145,7 @@ export default function AvailabilityPage() {
               {t("cta.whatsapp")}
             </a>
             <a
-              href="https://instagram.com/shimmyhands"
+              href="https://instagram.com/shimmyhands.shop"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 border border-vermillion/30 bg-vermillion/5 px-6 py-3 text-xs uppercase tracking-[0.2em] text-vermillion-dark transition-all duration-300 hover:bg-vermillion/10 hover:border-vermillion btn-vermillion touch-target glow-pulse shine-on-hover"

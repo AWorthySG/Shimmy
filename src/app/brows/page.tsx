@@ -383,7 +383,7 @@ export default function Home() {
               {t("cta.whatsapp")}
             </a>
             <a
-              href="https://instagram.com/shimmyhands"
+              href="https://instagram.com/shimmyhands.shop"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-magnetic glow-pulse w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-charcoal/20 px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-charcoal hover:border-vermillion hover:text-vermillion touch-target"

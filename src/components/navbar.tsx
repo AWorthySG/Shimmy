@@ -358,8 +358,8 @@ export function Navbar() {
               <a href="https://wa.me/6512345678" target="_blank" rel="noopener noreferrer" className="block text-sm text-warm-gray">
                 WhatsApp: +65 1234 5678
               </a>
-              <a href="https://instagram.com/shimmyhands" target="_blank" rel="noopener noreferrer" className="block text-sm text-warm-gray">
-                @shimmyhands
+              <a href="https://instagram.com/shimmyhands.shop" target="_blank" rel="noopener noreferrer" className="block text-sm text-warm-gray">
+                @shimmyhands.shop
               </a>
             </div>
           </div>

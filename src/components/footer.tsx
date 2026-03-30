@@ -76,12 +76,12 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://instagram.com/shimmyhands"
+                  href="https://instagram.com/shimmyhands.shop"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="transition-colors hover:text-vermillion touch-target inline-flex items-center py-1"
                 >
-                  @shimmyhands
+                  @shimmyhands.shop
                 </a>
               </li>
               <li>{t("footer.location")}</li>
@@ -107,7 +107,7 @@ export function Footer() {
               </svg>
             </a>
             <a
-              href="https://instagram.com/shimmyhands"
+              href="https://instagram.com/shimmyhands.shop"
               target="_blank"
               rel="noopener noreferrer"
               className="text-warm-gray transition-colors hover:text-vermillion touch-target p-2"

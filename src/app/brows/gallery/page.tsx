@@ -142,7 +142,7 @@ export default function GalleryPage() {
           </p>
           <div className="mt-4 text-center">
             <a
-              href="https://instagram.com/shimmyhands"
+              href="https://instagram.com/shimmyhands.shop"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2 glow-pulse"

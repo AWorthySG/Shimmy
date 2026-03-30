@@ -122,6 +122,12 @@ export default function CollectionPage() {
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal tracking-wide">
             {collection.title}
           </h1>
+          {/* Collection price range (Task 2) */}
+          {collectionProducts.length > 0 && (
+            <p className="mt-2 text-sm font-medium text-gold">
+              From ${Math.min(...collectionProducts.map(p => p.price))}
+            </p>
+          )}
           <p className="mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed text-charcoal-light max-w-lg mx-auto">
             {collection.description}
           </p>

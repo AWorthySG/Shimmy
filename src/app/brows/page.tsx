@@ -5,6 +5,9 @@ import Link from "next/link";
 import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
 import { HomeWithIntro } from "@/components/home-with-intro";
 import { useI18n } from "@/lib/i18n";
+import StatsBar from "@/components/StatsBar";
+import BookingWidget from "@/components/BookingWidget";
+import BeforeAfterCard from "@/components/BeforeAfterCard";
 
 export default function Home() {
   const { t } = useI18n();
@@ -109,6 +112,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── Stats Bar (Task 4) ─── */}
+      <section className="bg-soft-white px-4 sm:px-6">
+        <StatsBar />
+      </section>
+
       {/* ─── Oriental divider ─── */}
       <div className="flex items-center justify-center gap-3 my-8"><div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" /><span className="text-vermillion/40 text-xs">✦</span><div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" /></div>
 
@@ -207,6 +215,42 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── Real Results — Before/After (Task 3) ─── */}
+      <section className="bg-soft-white py-16 sm:py-20 md:py-24 px-4 sm:px-6">
+        <div className="mx-auto max-w-6xl">
+          <AnimateOnScroll animation="fade-up" className="text-center">
+            <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+              Transformations
+            </p>
+            <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
+              Real Results
+            </h2>
+          </AnimateOnScroll>
+
+          <div className="mt-10 sm:mt-16 grid gap-6 sm:gap-8 md:grid-cols-3">
+            <Stagger staggerMs={150} animation="fade-up">
+              {/* TODO: Replace placeholder images with actual before/after photos in public/images/results/ */}
+              <BeforeAfterCard
+                before="/images/results/before-1.jpg"
+                after="/images/results/after-1.jpg"
+                label="Nano Brows"
+              />
+              <BeforeAfterCard
+                before="/images/results/before-2.jpg"
+                after="/images/results/after-2.jpg"
+                label="Ombre Powder Brows"
+              />
+              <BeforeAfterCard
+                before="/images/results/before-3.jpg"
+                after="/images/results/after-3.jpg"
+                label="Eyebrow Embroidery"
+              />
+            </Stagger>
+          </div>
+        </div>
+      </section>
+
       {/* ─── Oriental divider ─── */}
       <div className="flex items-center justify-center gap-3 my-8"><div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" /><span className="text-vermillion/40 text-xs">✦</span><div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" /></div>
 
@@ -288,10 +332,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── Booking Widget (Task 1) ─── */}
+      <section className="bg-soft-white py-16 sm:py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl">
+          <AnimateOnScroll animation="fade-up" className="text-center mb-8">
+            <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+              Book Online
+            </p>
+            <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
+              Schedule Your Consultation
+            </h2>
+            <p className="mt-2 text-sm text-charcoal-light">Limited slots available this month — book early to secure your preferred date.</p>
+          </AnimateOnScroll>
+          <BookingWidget />
+          {/* TODO: Replace with your real WhatsApp number */}
+          <p className="text-sm text-center text-charcoal-light mt-6">
+            Prefer WhatsApp? Message us at{" "}
+            <a href="https://wa.me/6512345678" target="_blank" rel="noopener noreferrer" className="text-vermillion hover:text-vermillion-dark transition-colors">
+              +65 1234 5678
+            </a>
+          </p>
+        </div>
+      </section>
+
       {/* ─── CTA Banner ─── */}
       <section className="relative overflow-hidden shine-sweep bg-gradient-to-r from-cream-dark via-cream to-cream-dark py-16 sm:py-20 px-4 sm:px-6 text-center">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--vermillion)_0%,_transparent_70%)] opacity-5" />
-        {/* Animated background stars */}
         <div className="pointer-events-none absolute top-8 left-[15%] text-vermillion/8 text-2xl animate-spin-slow animate-petal">✦</div>
         <div className="pointer-events-none absolute bottom-12 right-[20%] text-vermillion/8 text-3xl animate-spin-slow animate-petal-slow" style={{ animationDirection: "reverse" }}>✦</div>
 
@@ -327,6 +394,11 @@ export default function Home() {
               {t("cta.instagram")}
             </a>
           </div>
+          {/* Referral incentive (Task 9) */}
+          <p className="text-sm text-center text-charcoal-light mt-6">
+            Love your brows? Refer a friend — you both receive $20 off your next visit.
+            Message us on WhatsApp to redeem.
+          </p>
         </AnimateOnScroll>
       </section>
     </>

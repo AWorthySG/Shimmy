@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Stagger } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { collections, products, type Product } from "@/lib/products";
+import EmailCapture from "@/components/EmailCapture";
 
 function ProductCard({ product }: { product: Product }) {
   const { t } = useI18n();
@@ -66,6 +67,12 @@ function ProductCard({ product }: { product: Product }) {
             </span>
           )}
         </div>
+        {/* Limited stock badge (Task 6) */}
+        {limitedStockCollections[product.collectionHandle] && (
+          <span className="inline-block text-[10px] text-red-500 font-medium mt-1">
+            Limited sets remaining
+          </span>
+        )}
 
         <button
           onClick={handleAdd}
@@ -82,6 +89,15 @@ function ProductCard({ product }: { product: Product }) {
   );
 }
 
+// TODO: Set limitedStock to true for collections with low stock — studio owner controls this
+const limitedStockCollections: Record<string, boolean> = {
+  'yule-dreams': true,
+  'christmas-wishes': false,
+  'sweater-weather': false,
+  'lovers-heartbeat': false,
+  'ingenue': false,
+}
+
 export default function ShopPage() {
   const { t } = useI18n();
   const [activeFilter, setActiveFilter] = useState("all");
@@ -90,6 +106,17 @@ export default function ShopPage() {
     activeFilter === "all"
       ? products
       : products.filter((p) => p.collectionHandle === activeFilter);
+
+  // Compute min price per collection for "From $X" display (Task 2)
+  const collectionMinPrices = useMemo(() => {
+    const prices: Record<string, number> = {};
+    for (const p of products) {
+      if (!prices[p.collectionHandle] || p.price < prices[p.collectionHandle]) {
+        prices[p.collectionHandle] = p.price;
+      }
+    }
+    return prices;
+  }, []);
 
   return (
     <>
@@ -131,6 +158,11 @@ export default function ShopPage() {
                 }`}
               >
                 {c.title}
+                {collectionMinPrices[c.handle] && (
+                  <span className="ml-1.5 text-[9px] opacity-70">
+                    From ${collectionMinPrices[c.handle]}
+                  </span>
+                )}
               </button>
             ))}
           </div>
@@ -153,6 +185,18 @@ export default function ShopPage() {
               <p className="text-warm-gray text-sm">No products found.</p>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* ─── Email Capture (Task 7) ─── */}
+      <section className="bg-cream py-12 sm:py-16 px-4 sm:px-6">
+        <div className="mx-auto max-w-xl text-center">
+          <h3 className="font-serif text-lg sm:text-xl text-charcoal">
+            Be first to know about new collections — get $10 off your first set.
+          </h3>
+          <div className="mt-6">
+            <EmailCapture />
+          </div>
         </div>
       </section>
     </>

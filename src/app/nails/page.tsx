@@ -4,11 +4,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
-import { collections } from "@/lib/products";
+import { collections, products } from "@/lib/products";
 import { NailsWithIntro } from "@/components/nails-with-intro";
 
 export default function NailsPage() {
   const { t } = useI18n();
+
+  // Compute min price per collection for "From $X" display (Task 2)
+  const collectionMinPrices: Record<string, number> = {};
+  for (const p of products) {
+    if (!collectionMinPrices[p.collectionHandle] || p.price < collectionMinPrices[p.collectionHandle]) {
+      collectionMinPrices[p.collectionHandle] = p.price;
+    }
+  }
 
   return (
     <NailsWithIntro>
@@ -139,6 +147,12 @@ export default function NailsPage() {
                     <h3 className="font-serif text-base sm:text-lg text-charcoal">
                       {collection.title}
                     </h3>
+                    {/* Collection price range (Task 2) */}
+                    {collectionMinPrices[collection.handle] && (
+                      <p className="text-sm font-medium text-gold mt-1">
+                        From ${collectionMinPrices[collection.handle]}
+                      </p>
+                    )}
                     <p className="mt-2 text-sm leading-relaxed text-charcoal-light">
                       {collection.description}
                     </p>

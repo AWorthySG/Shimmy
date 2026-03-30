@@ -50,13 +50,13 @@ export default function Home() {
               href="/brows"
               className="btn-magnetic shine-on-hover glow-pulse w-full sm:w-auto inline-block bg-vermillion px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-soft-white text-center hover:bg-vermillion-dark touch-target"
             >
-{t("home.explore.brows")}
+              {t("home.explore.brows")}
             </Link>
             <Link
               href="/nails"
               className="btn-magnetic shine-on-hover glow-pulse w-full sm:w-auto inline-block border border-charcoal/20 px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-charcoal text-center hover:border-vermillion hover:text-vermillion touch-target"
             >
-{t("home.explore.nails")}
+              {t("home.explore.nails")}
             </Link>
           </div>
         </div>

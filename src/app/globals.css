@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Hide navbar and footer on /links page (link-in-bio standalone) */
-body.links-page nav,
+body.links-page header,
 body.links-page footer {
   display: none !important;
 }

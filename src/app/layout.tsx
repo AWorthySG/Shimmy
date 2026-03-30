@@ -30,23 +30,24 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Shimmy — Beauty, Redefined",
+    default: "Shimmy Beauty Studio Singapore | Brows & Press-On Nails",
     template: "%s | Shimmy",
   },
   description:
-    "Brow artistry and handcrafted press-on nails in Singapore. Two art forms, one philosophy — every detail shaped around you.",
-  /* TODO: Replace with your actual OG image */
+    "Eyebrow embroidery, nano brows, and handcrafted press-on nails in Singapore. Book your consultation or shop nail collections online.",
+  keywords: ['eyebrow embroidery Singapore', 'nano brows Singapore', 'press on nails Singapore', 'ombre powder brows Singapore'],
   openGraph: {
-    title: "Shimmy — Beauty, Redefined",
+    title: "Shimmy — Beauty Studio Singapore",
     description:
-      "Brow artistry and handcrafted press-on nails in Singapore. From brows that frame your face to nails that tell your story.",
+      "Brows shaped for your face. Nails made by hand.",
+    url: "https://shimmybrows.vercel.app",
     type: "website",
+    siteName: "Shimmy",
     locale: "en_SG",
     /* TODO: Add your OG image URL */
-    // images: [{ url: "https://shimmybrows.com/og-image.jpg", width: 1200, height: 630 }],
+    // images: [{ url: "https://shimmybrows.vercel.app/og-image.jpg", width: 1200, height: 630 }],
   },
-  /* TODO: Replace with your actual domain */
-  // metadataBase: new URL("https://shimmybrows.com"),
+  metadataBase: new URL("https://shimmybrows.vercel.app"),
   icons: {
     /* TODO: Add your favicon */
     // icon: "/favicon.ico",

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
+import FAQ, { faqs } from "@/components/FAQ";
 
 /* ──────────────────────────────────────────────
    TODO: Update each service below with your
@@ -20,6 +21,7 @@ export default function ServicesPage() {
       price: t("svc.embroidery.price"),       /* TODO: Your actual price */
       duration: t("svc.embroidery.duration"),  /* TODO: Your actual duration */
       description: t("svc.embroidery.desc"),
+      popular: false,
       includes: [
         t("svc.embroidery.inc.1"),
         t("svc.embroidery.inc.2"),
@@ -32,6 +34,7 @@ export default function ServicesPage() {
       price: t("svc.microblading.price"),
       duration: t("svc.microblading.duration"),
       description: t("svc.microblading.desc"),
+      popular: false,
       includes: [
         t("svc.microblading.inc.1"),
         t("svc.microblading.inc.2"),
@@ -44,6 +47,7 @@ export default function ServicesPage() {
       price: t("svc.nano.price"),
       duration: t("svc.nano.duration"),
       description: t("svc.nano.desc"),
+      popular: true,
       includes: [
         t("svc.nano.inc.1"),
         t("svc.nano.inc.2"),
@@ -56,6 +60,7 @@ export default function ServicesPage() {
       price: t("svc.ombre.price"),
       duration: t("svc.ombre.duration"),
       description: t("svc.ombre.desc"),
+      popular: false,
       includes: [
         t("svc.ombre.inc.1"),
         t("svc.ombre.inc.2"),
@@ -68,6 +73,7 @@ export default function ServicesPage() {
       price: t("svc.shaping.price"),
       duration: t("svc.shaping.duration"),
       description: t("svc.shaping.desc"),
+      popular: false,
       includes: [
         t("svc.shaping.inc.1"),
         t("svc.shaping.inc.2"),
@@ -80,6 +86,7 @@ export default function ServicesPage() {
       price: t("svc.lip.price"),
       duration: t("svc.lip.duration"),
       description: t("svc.lip.desc"),
+      popular: false,
       includes: [
         t("svc.lip.inc.1"),
         t("svc.lip.inc.2"),
@@ -116,8 +123,14 @@ export default function ServicesPage() {
           {services.map((service, i) => (
             <AnimateOnScroll key={service.title} animation="fade-up" delay={i * 80}>
             <div
-              className="group oriental-corner card-lift shine-on-hover border border-vermillion/15 bg-cream/30 overflow-hidden hover:border-vermillion/40"
+              className="relative group oriental-corner card-lift shine-on-hover border border-vermillion/15 bg-cream/30 overflow-hidden hover:border-vermillion/40"
             >
+              {/* Most Popular badge (Task 5) */}
+              {service.popular && (
+                <span className="absolute top-0 right-0 z-20 bg-gold text-soft-white text-[10px] uppercase tracking-[0.15em] font-bold px-3 py-1.5">
+                  Most Popular
+                </span>
+              )}
               {/* Service photo placeholder — TODO: replace with your actual service photos */}
               <div className="relative w-full aspect-[2/1] bg-gradient-to-br from-cream-dark/60 via-cream to-soft-white flex items-center justify-center">
                 <div className="text-center px-6">
@@ -190,6 +203,10 @@ export default function ServicesPage() {
           <p className="mt-3 text-sm text-charcoal-light">
             {t("svcpage.unsure.desc")}
           </p>
+          {/* Urgency messaging (Task 6) */}
+          <p className="text-sm text-red-600 font-medium mt-2">
+            Limited slots available this month — book early to secure your preferred date.
+          </p>
           <div className="mt-6 sm:mt-8 flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center">
             {/* TODO: Replace with your WhatsApp number */}
             <a
@@ -207,6 +224,60 @@ export default function ServicesPage() {
               Contact Page →
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ─── FAQ Section (Task 12) ─── */}
+      <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+              Common Questions
+            </p>
+            <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <FAQ />
+        </div>
+        {/* FAQ JSON-LD structured data for rich snippets */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: faqs.map((f) => ({
+                '@type': 'Question',
+                name: f.q,
+                acceptedAnswer: { '@type': 'Answer', text: f.a },
+              })),
+            }),
+          }}
+        />
+      </section>
+
+      {/* ─── Bundle Offer (Task 8) ─── */}
+      <section className="relative overflow-hidden bg-charcoal text-soft-white py-12 sm:py-16 px-4 sm:px-6 text-center">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--vermillion)_0%,_transparent_70%)] opacity-10" />
+        <div className="relative z-10 mx-auto max-w-2xl">
+          <h2 className="font-serif text-2xl sm:text-3xl text-gold md:text-4xl">The Full Shimmy</h2>
+          <p className="mt-3 text-sm sm:text-base text-soft-white/80">
+            Book any brow service and add a Shimmyhands nail set — save $15.
+          </p>
+          <p className="text-xs text-soft-white/50 mt-2 mb-6">
+            Mention this offer when you message us on WhatsApp.
+          </p>
+          {/* TODO: Replace with real WhatsApp number */}
+          <a
+            href="https://wa.me/6512345678?text=Hi%2C%20I'd%20like%20the%20Full%20Shimmy%20bundle"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-gold text-soft-white font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] hover:bg-gold/90 transition-colors touch-target"
+          >
+            Claim This Bundle
+          </a>
         </div>
       </section>
     </>

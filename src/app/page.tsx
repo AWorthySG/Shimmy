@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
+import StatsBar from "@/components/StatsBar";
+import EmailCapture from "@/components/EmailCapture";
 
 export default function Home() {
   const { t } = useI18n();
@@ -66,6 +68,11 @@ export default function Home() {
             <div className="h-8 w-[1px] bg-vermillion/40 animate-pulse-gold" />
           </div>
         </div>
+      </section>
+
+      {/* ─── Stats Bar (Task 4) ─── */}
+      <section className="bg-soft-white px-4 sm:px-6">
+        <StatsBar />
       </section>
 
       {/* ─── Oriental divider ─── */}
@@ -260,6 +267,24 @@ export default function Home() {
             </a>
           </div>
         </AnimateOnScroll>
+
+        {/* Referral incentive (Task 9) */}
+        <p className="relative z-10 text-sm text-center text-charcoal-light mt-6">
+          Love your brows? Refer a friend — you both receive $20 off your next visit.
+          Message us on WhatsApp to redeem.
+        </p>
+      </section>
+
+      {/* ─── Email Capture (Task 7) ─── */}
+      <section className="bg-cream py-12 sm:py-16 px-4 sm:px-6">
+        <div className="mx-auto max-w-xl text-center">
+          <h3 className="font-serif text-lg sm:text-xl text-charcoal">
+            Be first to know about new collections — get $10 off your first set.
+          </h3>
+          <div className="mt-6">
+            <EmailCapture />
+          </div>
+        </div>
       </section>
     </>
   );

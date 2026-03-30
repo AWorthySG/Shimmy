@@ -210,7 +210,7 @@ export default function ServicesPage() {
           <div className="mt-6 sm:mt-8 flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center">
             {/* TODO: Replace with your WhatsApp number */}
             <a
-              href="https://wa.me/6512345678"
+              href="https://wa.me/6589308973"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-magnetic glow-pulse shine-on-hover w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vermillion px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark touch-target"
@@ -271,7 +271,7 @@ export default function ServicesPage() {
           </p>
           {/* TODO: Replace with real WhatsApp number */}
           <a
-            href="https://wa.me/6512345678?text=Hi%2C%20I'd%20like%20the%20Full%20Shimmy%20bundle"
+            href="https://wa.me/6589308973?text=Hi%2C%20I'd%20like%20the%20Full%20Shimmy%20bundle"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-gold text-soft-white font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] hover:bg-gold/90 transition-colors touch-target"

@@ -349,8 +349,8 @@ export default function Home() {
           {/* TODO: Replace with your real WhatsApp number */}
           <p className="text-sm text-center text-charcoal-light mt-6">
             Prefer WhatsApp? Message us at{" "}
-            <a href="https://wa.me/6512345678" target="_blank" rel="noopener noreferrer" className="text-vermillion hover:text-vermillion-dark transition-colors">
-              +65 1234 5678
+            <a href="https://wa.me/6589308973" target="_blank" rel="noopener noreferrer" className="text-vermillion hover:text-vermillion-dark transition-colors">
+              +65 8930 8973
             </a>
           </p>
         </div>
@@ -372,7 +372,7 @@ export default function Home() {
           </p>
           <div className="mt-6 sm:mt-8 flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center">
             <a
-              href="https://wa.me/6512345678"
+              href="https://wa.me/6589308973"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-magnetic animate-pulse-gold glow-pulse w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vermillion px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark touch-target"

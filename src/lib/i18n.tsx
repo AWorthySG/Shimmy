@@ -298,7 +298,7 @@ const en: Record<string, string> = {
   "contact.book.desc":
     "WhatsApp is the quickest way to reach us. Instagram DMs work too. We usually reply within a few hours.",
   "contact.wa.label": "WhatsApp",
-  "contact.wa.desc": "+65 1234 5678 — Quickest way to reach us",
+  "contact.wa.desc": "+65 8930 8973 — Quickest way to reach us",
   "contact.ig.label": "Instagram",
   "contact.ig.desc": "@shimmyhands.shop — DMs always open",
   "contact.hours.tag": "Studio Hours",
@@ -565,7 +565,7 @@ const zh: Record<string, string> = {
   "contact.book.desc":
     "WhatsApp 是最快的联系方式。Instagram 私信也可以。我们通常几小时内回复。",
   "contact.wa.label": "WhatsApp",
-  "contact.wa.desc": "+65 1234 5678 — 最快联系方式",
+  "contact.wa.desc": "+65 8930 8973 — 最快联系方式",
   "contact.ig.label": "Instagram",
   "contact.ig.desc": "@shimmyhands.shop — 私信随时开放",
   "contact.hours.tag": "营业时间",

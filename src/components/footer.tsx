@@ -66,12 +66,12 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-warm-gray">
               <li>
                 <a
-                  href="https://wa.me/6512345678"
+                  href="https://wa.me/6589308973"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="transition-colors hover:text-vermillion touch-target inline-flex items-center py-1"
                 >
-                  WhatsApp: +65 1234 5678
+                  WhatsApp: +65 8930 8973
                 </a>
               </li>
               <li>
@@ -96,7 +96,7 @@ export function Footer() {
           </p>
           <div className="flex gap-6">
             <a
-              href="https://wa.me/6512345678"
+              href="https://wa.me/6589308973"
               target="_blank"
               rel="noopener noreferrer"
               className="text-warm-gray transition-colors hover:text-vermillion touch-target p-2"

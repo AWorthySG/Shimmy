@@ -355,8 +355,8 @@ export function Navbar() {
               {t("nav.book")}
             </Link>
             <div className="mt-8 pt-6 border-t border-gold/10 space-y-3">
-              <a href="https://wa.me/6512345678" target="_blank" rel="noopener noreferrer" className="block text-sm text-warm-gray">
-                WhatsApp: +65 1234 5678
+              <a href="https://wa.me/6589308973" target="_blank" rel="noopener noreferrer" className="block text-sm text-warm-gray">
+                WhatsApp: +65 8930 8973
               </a>
               <a href="https://instagram.com/shimmyhands.shop" target="_blank" rel="noopener noreferrer" className="block text-sm text-warm-gray">
                 @shimmyhands.shop

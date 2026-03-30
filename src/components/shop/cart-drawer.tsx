@@ -32,8 +32,7 @@ export function CartDrawer() {
       "Could you help me confirm availability and arrange payment? Thank you!",
     ].join("\n");
 
-    // TODO: Replace 6512345678 with your actual WhatsApp number
-    const waUrl = `https://wa.me/6512345678?text=${encodeURIComponent(message)}`;
+    const waUrl = `https://wa.me/6589308973?text=${encodeURIComponent(message)}`;
     window.open(waUrl, "_blank", "noopener,noreferrer");
   };
 

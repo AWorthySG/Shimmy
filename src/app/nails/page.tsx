@@ -308,7 +308,7 @@ export default function NailsPage() {
           </p>
           <div className="mt-5 sm:mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <a
-              href="https://wa.me/6512345678"
+              href="https://wa.me/6589308973"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-magnetic animate-pulse-gold glow-pulse w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vermillion px-6 sm:px-8 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark touch-target"

@@ -43,7 +43,7 @@ export default function ContactPage() {
             <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
               {/* TODO: Replace with your WhatsApp number (format: country code + number, no spaces/dashes) */}
               <a
-                href="https://wa.me/6512345678"
+                href="https://wa.me/6589308973"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 sm:gap-4 border border-vermillion/20 bg-cream/50 p-4 sm:p-5 transition-all duration-300 hover:border-vermillion/50 hover:shadow-lg hover:shadow-vermillion/5 touch-target shine-on-hover border-glow"

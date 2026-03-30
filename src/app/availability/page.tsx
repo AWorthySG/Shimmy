@@ -137,7 +137,7 @@ export default function AvailabilityPage() {
 
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <a
-              href="https://wa.me/6512345678"
+              href="https://wa.me/6589308973"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 border border-vermillion bg-vermillion px-6 py-3 text-xs uppercase tracking-[0.2em] text-soft-white transition-all duration-300 hover:bg-vermillion-dark btn-vermillion touch-target glow-pulse shine-on-hover"

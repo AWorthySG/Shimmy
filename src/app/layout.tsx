@@ -40,14 +40,14 @@ export const metadata: Metadata = {
     title: "Shimmy — Beauty Studio Singapore",
     description:
       "Brows shaped for your face. Nails made by hand.",
-    url: "https://shimmybrows.vercel.app",
+    url: "https://shimmyhands.com",
     type: "website",
     siteName: "Shimmy",
     locale: "en_SG",
     /* TODO: Add your OG image URL */
-    // images: [{ url: "https://shimmybrows.vercel.app/og-image.jpg", width: 1200, height: 630 }],
+    // images: [{ url: "https://shimmyhands.com/og-image.jpg", width: 1200, height: 630 }],
   },
-  metadataBase: new URL("https://shimmybrows.vercel.app"),
+  metadataBase: new URL("https://shimmyhands.com"),
   icons: {
     /* TODO: Add your favicon */
     // icon: "/favicon.ico",

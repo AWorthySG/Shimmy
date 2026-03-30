@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About Shimmy | Beauty Studio Singapore',
     description: 'Our story, values, and the artistry behind Shimmy.',
-    url: 'https://shimmybrows.vercel.app/about',
+    url: 'https://shimmyhands.com/about',
     siteName: 'Shimmy',
     locale: 'en_SG',
     type: 'website',

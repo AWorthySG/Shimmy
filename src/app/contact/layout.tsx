@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Book or Enquire | Shimmy Beauty Studio Singapore',
     description: 'Get in touch with Shimmy Beauty Studio — WhatsApp, Instagram, or visit us.',
-    url: 'https://shimmybrows.vercel.app/contact',
+    url: 'https://shimmyhands.com/contact',
     siteName: 'Shimmy',
     locale: 'en_SG',
     type: 'website',

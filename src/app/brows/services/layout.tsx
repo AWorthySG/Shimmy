@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Brow Services & Pricing | Shimmy Singapore',
     description: 'View our full menu of brow services with pricing.',
-    url: 'https://shimmybrows.vercel.app/brows/services',
+    url: 'https://shimmyhands.com/brows/services',
     siteName: 'Shimmy',
     locale: 'en_SG',
     type: 'website',

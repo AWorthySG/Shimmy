@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Eyebrow Embroidery Singapore | Shimmybrows',
     description: 'Expert brow artistry in Singapore. Nano brows, ombre powder brows, and more.',
-    url: 'https://shimmybrows.vercel.app/brows',
+    url: 'https://shimmyhands.com/brows',
     siteName: 'Shimmy',
     locale: 'en_SG',
     type: 'website',

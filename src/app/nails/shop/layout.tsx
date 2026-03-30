@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Shop Press-On Nail Collections | Shimmy Singapore',
     description: 'Shop handcrafted press-on nail collections — each set made by hand.',
-    url: 'https://shimmybrows.vercel.app/nails/shop',
+    url: 'https://shimmyhands.com/nails/shop',
     siteName: 'Shimmy',
     locale: 'en_SG',
     type: 'website',

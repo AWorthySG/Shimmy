@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Hide navbar and footer on /links page (link-in-bio standalone) */
+body.links-page nav,
+body.links-page footer {
+  display: none !important;
+}
+
 :root {
   /* ─── Peach & Sage — Warm Natural Beauty ───
      Built from: #f1e3dc (warm peach cream) + #536442 (deep sage green)

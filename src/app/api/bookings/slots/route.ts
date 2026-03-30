@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase'
 import {
   BOOKING_SERVICES,
   generateAllSlots,
@@ -50,6 +50,15 @@ export async function GET(request: NextRequest) {
   maxDate.setDate(maxDate.getDate() + MAX_ADVANCE_DAYS)
   if (date > maxDate) {
     return NextResponse.json({ slots: [], message: 'Date too far in advance' })
+  }
+
+  let supabase
+  try {
+    supabase = getSupabase()
+  } catch {
+    // Supabase not configured — return all possible slots without filtering
+    const dayOfWeek = date.getDay()
+    return NextResponse.json({ slots: generateAllSlots(dayOfWeek, service.duration) })
   }
 
   // Check if date is blocked

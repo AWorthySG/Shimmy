@@ -1,18 +1,21 @@
-import type { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Links | Shimmy Beauty Studio Singapore',
-  description: 'Quick links to book brow appointments, shop press-on nails, and contact Shimmy Beauty Studio Singapore.',
-}
+import { useEffect } from 'react'
 
 export default function LinksPage() {
+  // Hide navbar and footer on this page (link-in-bio should be standalone)
+  useEffect(() => {
+    document.body.classList.add('links-page')
+    return () => { document.body.classList.remove('links-page') }
+  }, [])
+
   const links = [
     { label: 'Book Brow Appointment', href: '/brows', colour: 'bg-vermillion hover:bg-vermillion-dark' },
     { label: 'Shop Press-On Nails', href: '/nails/shop', colour: 'bg-vermillion hover:bg-vermillion-dark' },
     { label: 'View All Services', href: '/brows/services', colour: 'bg-charcoal/80 hover:bg-charcoal' },
     // TODO: Replace with real WhatsApp number
-    { label: 'WhatsApp Us', href: 'https://wa.me/6512345678', colour: 'bg-green-700 hover:bg-green-800' },
-    { label: 'Follow on Instagram', href: 'https://instagram.com/shimmybrows', colour: 'bg-pink-700 hover:bg-pink-800' },
+    { label: 'WhatsApp Us', href: 'https://wa.me/6512345678', colour: 'bg-jade hover:bg-jade/90' },
+    { label: 'Follow on Instagram', href: 'https://instagram.com/shimmybrows', colour: 'bg-vermillion-dark hover:bg-vermillion' },
   ]
 
   return (

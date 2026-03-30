@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
  *   7. LIFT OFF   (2.3–2.8s) — Painted nail lifts with a gentle glow
  *   8. APPLY      (2.6–3.2s) — Nail floats down and settles onto fingertip
  *   9. SPARKLE    (3.0–3.4s) — Burst of sparkles around completed nail
- *  10. BRANDING   (3.0–3.5s) — "Shimmyhands" fades in elegantly
+ *  10. BRANDING   (3.0–3.5s) — "Nails by Shimmyhands" fades in elegantly
  *  11. FADE       (3.5–4.0s) — Scene dissolves
  */
 export function NailIntro({ onComplete }: { onComplete: () => void }) {
@@ -409,7 +409,7 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
             opacity: 0, animation: isBranding ? "fadeInUp 0.6s ease-out 0.1s forwards" : "none",
           }}
         >
-          Shimmyhands
+          Nails by Shimmyhands
         </text>
         <text
           x="250" y="500" textAnchor="middle"

@@ -264,7 +264,7 @@ export default function ServicesPage() {
         <div className="relative z-10 mx-auto max-w-2xl">
           <h2 className="font-serif text-2xl sm:text-3xl text-gold md:text-4xl">The Full Shimmy</h2>
           <p className="mt-3 text-sm sm:text-base text-soft-white/80">
-            Book any brow service and add a Shimmyhands nail set — save $15.
+            Book any brow service and add a Nails by Shimmyhands set — save $15.
           </p>
           <p className="text-xs text-soft-white/50 mt-2 mb-6">
             Mention this offer when you message us on WhatsApp.

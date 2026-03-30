@@ -49,7 +49,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 /* ──────────────────────────────────────────────
    COPY DICTIONARY
 
-   Voice guide for Shimmybrows:
+   Voice guide for Shimmyhands:
    - Confident, not corporate
    - Warm but direct — like a friend who happens to be an expert
    - Slightly playful, never stiff
@@ -69,8 +69,8 @@ const en: Record<string, string> = {
   "nav.book": "Book Now",
   "nav.brows": "Brows",
   "nav.nails": "Nails",
-  "nav.brows.studio": "Brow Studio",
-  "nav.nails.studio": "Nail Studio",
+  "nav.brows.studio": "Brows by Shimmyhands",
+  "nav.nails.studio": "Nails by Shimmyhands",
   "nav.shop": "Shop",
 
   // ─── Hero ───
@@ -98,7 +98,7 @@ const en: Record<string, string> = {
   "services.viewall": "View All Services →",
 
   // ─── About Snippet (Home) ───
-  "about.tag": "Why Shimmybrows",
+  "about.tag": "Why Shimmyhands",
   "about.title.1": "It's All in",
   "about.title.2": "the Details",
   "about.p1":
@@ -136,10 +136,10 @@ const en: Record<string, string> = {
   "home.title.1": "Beauty That Speaks",
   "home.title.2": "Softly.",
   "home.desc": "Two art forms, one philosophy — every detail shaped around you. From brows that frame your face to nails that tell your story.",
-  "home.brows.title": "Shimmybrows",
+  "home.brows.title": "Brows by Shimmyhands",
   "home.brows.desc": "Eyebrow embroidery designed for your face. Not a template — yours. Fine strokes, careful precision, natural results.",
   "home.brows.cta": "Explore Brows →",
-  "home.nails.title": "Shimmyhands",
+  "home.nails.title": "Nails by Shimmyhands",
   "home.nails.desc": "Handcrafted press-on nails that feel like fingertip jewelry. Each set designed, each detail painted by hand.",
   "home.nails.cta": "Shop Nails →",
   "home.cta.title.1": "Ready to",
@@ -247,11 +247,11 @@ const en: Record<string, string> = {
 
   // ─── About Page ───
   "aboutpage.tag": "Who We Are",
-  "aboutpage.title": "About Shimmybrows",
+  "aboutpage.title": "About Shimmyhands",
   "aboutpage.headline.1": "Why We Do",
   "aboutpage.headline.2": "What We Do",
   "aboutpage.p1":
-    "Shimmybrows began because we kept seeing the same thing — people leaving studios with brows that didn't quite feel like them. The same shapes, the same arches, the same slightly-too-obvious look.",
+    "Shimmyhands began because we kept seeing the same thing — people leaving studios with brows that didn't quite feel like them. The same shapes, the same arches, the same slightly-too-obvious look.",
   "aboutpage.p2":
     "So we decided to do things differently. We became deeply curious about face shapes, stroke angles, and pigment science — all the small things that make the difference between brows that look done and brows that look like yours.",
   "aboutpage.p3":
@@ -300,7 +300,7 @@ const en: Record<string, string> = {
   "contact.wa.label": "WhatsApp",
   "contact.wa.desc": "+65 1234 5678 — Quickest way to reach us",
   "contact.ig.label": "Instagram",
-  "contact.ig.desc": "@shimmybrows — DMs always open",
+  "contact.ig.desc": "@shimmyhands — DMs always open",
   "contact.hours.tag": "Studio Hours",
   "contact.hours.mf": "Monday — Friday",
   "contact.hours.mf.time": "10:00 AM — 8:00 PM",
@@ -339,8 +339,8 @@ const zh: Record<string, string> = {
   "nav.book": "立即预约",
   "nav.brows": "眉毛",
   "nav.nails": "美甲",
-  "nav.brows.studio": "眉毛工作室",
-  "nav.nails.studio": "美甲工作室",
+  "nav.brows.studio": "Brows by Shimmyhands",
+  "nav.nails.studio": "Nails by Shimmyhands",
   "nav.shop": "商店",
 
   // ─── Hero ───
@@ -405,10 +405,10 @@ const zh: Record<string, string> = {
   "home.title.1": "温柔诉说的",
   "home.title.2": "美丽。",
   "home.desc": "两种艺术，一个理念——每个细节都围绕你而设计。从修饰脸庞的眉毛，到诉说故事的指甲。",
-  "home.brows.title": "Shimmybrows",
+  "home.brows.title": "Brows by Shimmyhands",
   "home.brows.desc": "为你的脸量身设计的绣眉。不是模板——是属于你的。精细线条，用心精准，自然效果。",
   "home.brows.cta": "了解眉毛服务 →",
-  "home.nails.title": "Shimmyhands",
+  "home.nails.title": "Nails by Shimmyhands",
   "home.nails.desc": "手工打造的穿戴甲，如同指尖上的珠宝。每一套都用心设计，每一个细节都手工绘制。",
   "home.nails.cta": "选购美甲 →",
   "home.cta.title.1": "准备好",
@@ -516,11 +516,11 @@ const zh: Record<string, string> = {
 
   // ─── About Page ───
   "aboutpage.tag": "关于我们",
-  "aboutpage.title": "关于 Shimmybrows",
+  "aboutpage.title": "关于 Shimmyhands",
   "aboutpage.headline.1": "我们做这件事",
   "aboutpage.headline.2": "是有原因的",
   "aboutpage.p1":
-    "Shimmybrows 的诞生，是因为我们总看到同样的情况——人们带着不太像自己的眉毛离开工作室。千篇一律的形状、一样的弧度、那种稍显明显的感觉。",
+    "Shimmyhands 的诞生，是因为我们总看到同样的情况——人们带着不太像自己的眉毛离开工作室。千篇一律的形状、一样的弧度、那种稍显明显的感觉。",
   "aboutpage.p2":
     "所以我们决定用不同的方式来做。我们对脸型、线条角度和色素科学变得非常好奇——那些让眉毛从「做过的」变成「像你的」的小小细节。",
   "aboutpage.p3":
@@ -567,7 +567,7 @@ const zh: Record<string, string> = {
   "contact.wa.label": "WhatsApp",
   "contact.wa.desc": "+65 1234 5678 — 最快联系方式",
   "contact.ig.label": "Instagram",
-  "contact.ig.desc": "@shimmybrows — 私信随时开放",
+  "contact.ig.desc": "@shimmyhands — 私信随时开放",
   "contact.hours.tag": "营业时间",
   "contact.hours.mf": "周一至周五",
   "contact.hours.mf.time": "上午 10:00 — 晚上 8:00",

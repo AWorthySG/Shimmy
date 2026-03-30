@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'About Shimmy | Beauty Studio Singapore',
   description:
-    'Learn about Shimmy Beauty Studio — our story, philosophy, certifications, and the artistry behind Shimmybrows and Shimmyhands in Singapore.',
+    'Learn about Shimmy Beauty Studio — our story, philosophy, certifications, and the artistry behind Brows by Shimmyhands and Nails by Shimmyhands in Singapore.',
   openGraph: {
     title: 'About Shimmy | Beauty Studio Singapore',
     description: 'Our story, values, and the artistry behind Shimmy.',

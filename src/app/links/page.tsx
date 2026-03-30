@@ -15,7 +15,7 @@ export default function LinksPage() {
     { label: 'View All Services', href: '/brows/services', colour: 'bg-charcoal/80 hover:bg-charcoal' },
     // TODO: Replace with real WhatsApp number
     { label: 'WhatsApp Us', href: 'https://wa.me/6512345678', colour: 'bg-jade hover:bg-jade/90' },
-    { label: 'Follow on Instagram', href: 'https://instagram.com/shimmybrows', colour: 'bg-vermillion-dark hover:bg-vermillion' },
+    { label: 'Follow on Instagram', href: 'https://instagram.com/shimmyhands', colour: 'bg-vermillion-dark hover:bg-vermillion' },
   ]
 
   return (

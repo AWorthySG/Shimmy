@@ -53,7 +53,7 @@ export default function AboutPage() {
               │  TODO: Replace with your photo.       │
               │  Use next/image:                       │
               │  <Image src="/artist.jpg" fill         │
-              │    alt="Shimmybrows artist"            │
+              │    alt="Shimmyhands artist"            │
               │    className="object-cover" />         │
               └──────────────────────────────────────┘ */}
           <AnimateOnScroll animation="fade-right">

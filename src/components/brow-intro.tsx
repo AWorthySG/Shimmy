@@ -349,7 +349,7 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
         </div>
 
         <p className="font-serif text-2xl sm:text-3xl md:text-4xl tracking-[0.08em] text-charcoal">
-          Shimmybrows
+          Brows by Shimmyhands
         </p>
         <p className="mt-2 text-[8px] sm:text-[9px] uppercase tracking-[0.5em] text-warm-gray">
           Brow Artistry

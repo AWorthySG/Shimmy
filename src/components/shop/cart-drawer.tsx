@@ -23,7 +23,7 @@ export function CartDrawer() {
       (item) => `• ${item.product.title} (${item.product.collection}) × ${item.quantity} — $${(item.product.price * item.quantity).toFixed(2)}`
     );
     const message = [
-      "Hi! I'd like to order from Shimmyhands 💅",
+      "Hi! I'd like to order from Nails by Shimmyhands 💅",
       "",
       ...lines,
       "",

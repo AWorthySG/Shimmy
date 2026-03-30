@@ -67,7 +67,7 @@ export default function ContactPage() {
 
               {/* TODO: Replace with your Instagram handle */}
               <a
-                href="https://instagram.com/shimmybrows"
+                href="https://instagram.com/shimmyhands"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 sm:gap-4 border border-vermillion/20 bg-cream/50 p-4 sm:p-5 transition-all duration-300 hover:border-vermillion/50 hover:shadow-lg hover:shadow-vermillion/5 touch-target shine-on-hover border-glow"

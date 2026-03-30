@@ -189,7 +189,7 @@ export default function NailsPage() {
             <div className="relative aspect-[4/5] overflow-hidden bg-cream-dark">
               <Image
                 src="/images/nails/ingenue-lifestyle.jpg"
-                alt="Shimmyhands press-on nails — worn on hand"
+                alt="Nails by Shimmyhands — press-on nails worn on hand"
                 fill
                 className="object-cover ken-burns"
                 sizes="(max-width: 768px) 100vw, 50vw"

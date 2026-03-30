@@ -16,7 +16,7 @@ const faqs = [
     a: 'Numbing cream is applied before the procedure. Most clients report minimal discomfort.',
   },
   {
-    q: 'How long do Shimmyhands press-on nails last?',
+    q: 'How long do Nails by Shimmyhands press-on nails last?',
     a: 'With proper application and care, most sets last 1 to 2 weeks.',
   },
   {

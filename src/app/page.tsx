@@ -94,7 +94,7 @@ export default function Home() {
                   <div className="text-center px-4">
                     <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
                     <p className="text-[9px] uppercase tracking-[0.3em] text-warm-gray/40">
-                      Shimmybrows
+                      Brows by Shimmyhands
                     </p>
                     <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
                   </div>
@@ -122,7 +122,7 @@ export default function Home() {
                 <div className="relative w-full aspect-[3/2] overflow-hidden bg-cream-dark">
                   <Image
                     src="/images/nails/ingenue-1.jpg"
-                    alt="Shimmyhands press-on nails"
+                    alt="Nails by Shimmyhands press-on nails"
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -255,7 +255,7 @@ export default function Home() {
               {t("cta.whatsapp")}
             </a>
             <a
-              href="https://instagram.com/shimmybrows"
+              href="https://instagram.com/shimmyhands"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-magnetic glow-pulse w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-charcoal/20 px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-charcoal hover:border-vermillion hover:text-vermillion touch-target"

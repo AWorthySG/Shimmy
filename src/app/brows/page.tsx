@@ -6,7 +6,7 @@ import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
 import { HomeWithIntro } from "@/components/home-with-intro";
 import { useI18n } from "@/lib/i18n";
 import StatsBar from "@/components/StatsBar";
-import BookingWidget from "@/components/BookingWidget";
+import BookingForm from "@/components/BookingForm";
 import BeforeAfterCard from "@/components/BeforeAfterCard";
 
 export default function Home() {
@@ -345,7 +345,7 @@ export default function Home() {
             </h2>
             <p className="mt-2 text-sm text-charcoal-light">Limited slots available this month — book early to secure your preferred date.</p>
           </AnimateOnScroll>
-          <BookingWidget />
+          <BookingForm />
           {/* TODO: Replace with your real WhatsApp number */}
           <p className="text-sm text-center text-charcoal-light mt-6">
             Prefer WhatsApp? Message us at{" "}

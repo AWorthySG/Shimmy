@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase'
 import {
   BOOKING_SERVICES,
   generateAllSlots,
@@ -13,6 +13,16 @@ import {
  * Creates a new booking.
  */
 export async function POST(request: NextRequest) {
+  let supabase
+  try {
+    supabase = getSupabase()
+  } catch {
+    return NextResponse.json(
+      { error: 'Booking system is not configured yet. Please contact us via WhatsApp.' },
+      { status: 503 },
+    )
+  }
+
   const body = await request.json()
   const { service_id, date, time, client_name, client_email, client_phone, notes } = body
 
@@ -122,6 +132,13 @@ export async function POST(request: NextRequest) {
  * Only returns non-cancelled bookings with limited fields.
  */
 export async function GET(request: NextRequest) {
+  let supabase
+  try {
+    supabase = getSupabase()
+  } catch {
+    return NextResponse.json({ bookings: [] })
+  }
+
   const { searchParams } = request.nextUrl
   const dateStr = searchParams.get('date')
 

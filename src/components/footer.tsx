@@ -44,6 +44,7 @@ export function Footer() {
                 { href: "/nails", label: t("nav.nails.studio") },
                 { href: "/nails/shop", label: t("nav.shop") },
                 { href: "/about", label: t("nav.about") },
+                { href: "/blog", label: t("blog.title") },
                 { href: "/contact", label: t("nav.contact") },
               ].map(({ href, label }) => (
                 <li key={href}>

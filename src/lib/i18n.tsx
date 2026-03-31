@@ -431,6 +431,71 @@ const en: Record<string, string> = {
   "nails.bts.tag": "Behind the Scenes",
   "nails.bts.title": "See the Artistry",
   "nails.collection.view": "View Collection →",
+
+  // ─── Blog ───
+  "blog.tag": "Care Tips & Guides",
+  "blog.title": "Beauty Journal",
+  "blog.desc": "Expert tips on brow aftercare, press-on nail application, and everything in between.",
+  "blog.readmore": "Read More →",
+  "blog.readtime": "min read",
+  "blog.related": "You Might Also Like",
+  "blog.back": "← Back to Journal",
+  "blog.cat.brows": "Brow Care",
+  "blog.cat.nails": "Nail Tips",
+  "blog.cta": "Have more questions? We're always happy to help.",
+
+  // Article 1: Eyebrow Embroidery Aftercare
+  "blog.1.title": "The Complete Eyebrow Embroidery Aftercare Guide",
+  "blog.1.desc": "Everything you need to know about caring for your brows after embroidery — from day one through full healing.",
+  "blog.1.p1": "The first 24 hours after your eyebrow embroidery are the most important. Your brows will look darker than the final result — this is completely normal. The pigment needs time to settle into the skin, and the colour will soften by 30–40% as it heals.",
+  "blog.1.p2": "For the first week, keep your brows dry. Avoid washing your face directly over the brow area — use a damp cloth around it instead. No swimming, saunas, or heavy exercise that causes excessive sweating. When showering, try to keep your face away from the direct stream of water.",
+  "blog.1.p3": "Apply the aftercare ointment provided by your artist in a very thin layer, 2–3 times a day using a clean cotton swab. Less is more here — too much ointment can suffocate the skin and affect pigment retention. Just a light, barely-there layer is perfect.",
+  "blog.1.p4": "Between days 3 and 7, you'll notice light flaking or scabbing. This is your skin healing naturally. Do not pick, scratch, or peel the flakes — let them fall off on their own. Picking can pull pigment out and leave patchy spots.",
+  "blog.1.p5": "Avoid direct sun exposure for at least 2 weeks. UV rays can fade the pigment significantly before it has fully set. If you must be outdoors, wear a wide-brimmed hat. Once healed, applying sunscreen near (not on) your brows helps maintain colour longevity.",
+  "blog.1.p6": "Full healing takes about 4–6 weeks. The colour may seem to 'disappear' around week 2 — don't panic. The pigment is still there, settling beneath the surface layer of skin. By week 4, your true colour will emerge. Your touch-up session at 6–8 weeks will perfect any areas that need it.",
+
+  // Article 2: How to Apply Press-On Nails
+  "blog.2.title": "How to Apply Press-On Nails Like a Pro",
+  "blog.2.desc": "Step-by-step guide to applying handcrafted press-on nails for a salon-quality finish that lasts up to two weeks.",
+  "blog.2.p1": "Start with clean, dry nails. Remove any old polish and wash your hands thoroughly. Push back your cuticles gently with a cuticle pusher — this creates more surface area for the adhesive and gives a cleaner, more natural look at the base of the nail.",
+  "blog.2.p2": "Lightly buff the surface of each natural nail with a fine nail file. This removes the shine and creates a slightly rough texture that helps the adhesive bond much better. Wipe each nail with an alcohol prep pad to remove any oils or dust. This step makes a huge difference in how long your press-ons last.",
+  "blog.2.p3": "Size each press-on nail to your natural nail before applying. The press-on should cover your nail bed edge to edge without overlapping onto the skin. If a nail is slightly too wide, file the sides gently to fit. Getting the right fit is key to both comfort and longevity.",
+  "blog.2.p4": "For the longest hold, use nail glue rather than adhesive tabs. Apply a thin, even layer of glue to both your natural nail and the back of the press-on. Press firmly from the cuticle end down to the tip, holding for 15–20 seconds. Apply gentle pressure from each side as well to ensure full contact.",
+  "blog.2.p5": "After applying all ten nails, avoid submerging your hands in water for at least one hour. This allows the glue to fully cure. For the best results, wear gloves when washing dishes and avoid using your nails as tools. With proper care, your handcrafted press-ons will look beautiful for 1–2 weeks.",
+
+  // Article 3: Nano Brows vs Microblading
+  "blog.3.title": "Nano Brows vs Microblading: Which Is Right for You?",
+  "blog.3.desc": "A clear comparison of the two most popular semi-permanent brow techniques to help you choose the best option for your skin type.",
+  "blog.3.p1": "Both nano brows and microblading create natural-looking, hair-like strokes — but they use very different tools and techniques. Understanding the difference can help you choose the method that will work best with your skin type and lifestyle.",
+  "blog.3.p2": "Microblading uses a handheld tool with tiny blades to create fine incisions in the skin, depositing pigment into each stroke. The result is beautiful, crisp hair strokes. However, microblading works best on normal to dry skin types. On oily skin, the strokes tend to blur and fade faster, sometimes losing their definition within 6–12 months.",
+  "blog.3.p3": "Nano brows use a digital machine with a single ultra-fine needle — thinner than a human hair. The needle deposits pigment into the skin with precise, controlled movements. Because the needle punctures are smaller and more consistent than blade cuts, nano brows tend to heal crisper and last longer, typically 18–24 months.",
+  "blog.3.p4": "The biggest advantage of nano brows is versatility. They work beautifully on all skin types, including oily and combination skin. The technique causes less trauma to the skin, which means less bleeding during the procedure, faster healing, and better pigment retention over time.",
+  "blog.3.p5": "Pain levels are similar for both — numbing cream is applied beforehand, and most clients describe the sensation as mild scratching. Price-wise, nano brows are typically slightly higher due to the advanced equipment, but many clients feel the longer-lasting results make it worthwhile. If you're unsure, book a consultation and we'll help you decide based on your specific skin type and brow goals.",
+
+  // Article 4: How to Remove Press-On Nails
+  "blog.4.title": "How to Safely Remove Press-On Nails Without Damage",
+  "blog.4.desc": "The gentle way to remove press-on nails that keeps your natural nails healthy and undamaged.",
+  "blog.4.p1": "Never force or rip off press-on nails. Pulling them off can tear layers from your natural nail plate, leaving them thin, weak, and painful. With the right approach, removal takes just 10–15 minutes and leaves your nails perfectly intact.",
+  "blog.4.p2": "Soak your fingertips in warm water with a few drops of cuticle oil or gentle soap for 10–15 minutes. The warm water softens the adhesive, and the oil helps break the bond. You'll feel the nails start to loosen naturally as the adhesive dissolves.",
+  "blog.4.p3": "Once the nails feel loose, gently slide a cuticle pusher or an orange stick underneath from the side — never pry from the tip. Rock it slowly and gently. If a nail resists, soak for a few more minutes rather than forcing it. Patience here protects your natural nails.",
+  "blog.4.p4": "After removal, buff away any remaining adhesive gently with a fine nail file. Apply cuticle oil generously and massage it into each nail and the surrounding skin. This restores moisture and keeps your nails strong. Your natural nails should look and feel completely healthy — ready for your next set whenever you like.",
+
+  // Article 5: How to Choose Your Brow Shape
+  "blog.5.title": "How to Choose the Right Brow Shape for Your Face",
+  "blog.5.desc": "A guide to finding the eyebrow shape that naturally complements your unique face structure and features.",
+  "blog.5.p1": "The 'perfect' brow shape doesn't exist in isolation — it depends entirely on your face. Your bone structure, the spacing of your features, and even your natural brow hair pattern all play a role. The goal is enhancement, not transformation.",
+  "blog.5.p2": "For round faces, a slightly higher arch creates the illusion of length, adding definition and structure. Avoid very rounded brows, which can make the face appear even rounder. A soft angled shape with a gentle peak works beautifully.",
+  "blog.5.p3": "For oval faces, you have the most flexibility — most brow shapes work well. A soft, natural arch that follows your brow bone is usually the most flattering. Avoid over-plucking or making the brows too thin, which can throw off the natural balance.",
+  "blog.5.p4": "For square or angular faces, softer, rounded brows help balance strong jawlines and angular features. A curved brow with a low, gentle arch softens the overall look. Avoid sharp angles in the brow, which can make angular features appear harsher.",
+  "blog.5.p5": "The best approach is always a professional consultation. Every face is unique, and a skilled brow artist considers dozens of micro-details — from the distance between your eyes to the height of your forehead. At Shimmyhands, we always start with a thorough face mapping session before any work begins.",
+
+  // Article 6: How to Choose Your Nail Size
+  "blog.6.title": "How to Choose the Right Press-On Nail Size",
+  "blog.6.desc": "A simple guide to finding your perfect press-on nail fit for maximum comfort and longevity.",
+  "blog.6.p1": "The right size press-on nail should cover your natural nail bed from sidewall to sidewall without touching the skin on either side. If a nail overlaps onto your cuticle area or skin, it will lift prematurely and feel uncomfortable. A slightly smaller fit is always better than too large.",
+  "blog.6.p2": "To find your size, measure the widest part of each natural nail. You can do this with a soft measuring tape, or by pressing a piece of clear tape across your nail and marking the edges. Each finger may be a different size — your thumb and middle finger are usually the widest.",
+  "blog.6.p3": "When trying on press-on nails, place each one against your natural nail without adhesive first. Check that it sits flush against the nail bed with no gaps at the sides or base. The cuticle edge of the press-on should follow the curve of your cuticle line naturally.",
+  "blog.6.p4": "If you're between sizes, go with the smaller one and gently file the sides to match your nail width. This gives a seamless, custom-like fit. A well-fitted press-on nail will feel comfortable, stay put for longer, and look indistinguishable from a professional salon set.",
 };
 
 const zh: Record<string, string> = {
@@ -801,4 +866,69 @@ const zh: Record<string, string> = {
   "nails.bts.tag": "幕后花絮",
   "nails.bts.title": "感受手工艺术",
   "nails.collection.view": "查看系列 →",
+
+  // ─── Blog ───
+  "blog.tag": "护理技巧与指南",
+  "blog.title": "美丽日志",
+  "blog.desc": "关于眉毛术后护理、穿戴甲使用技巧等专业建议。",
+  "blog.readmore": "阅读全文 →",
+  "blog.readtime": "分钟阅读",
+  "blog.related": "你可能也想看",
+  "blog.back": "← 返回日志",
+  "blog.cat.brows": "眉毛护理",
+  "blog.cat.nails": "美甲技巧",
+  "blog.cta": "还有更多问题？我们随时乐意帮忙。",
+
+  // 文章 1：绣眉术后护理
+  "blog.1.title": "绣眉术后完全护理指南",
+  "blog.1.desc": "从第一天到完全恢复，关于绣眉后护理你需要知道的一切。",
+  "blog.1.p1": "绣眉后的前 24 小时最为关键。你的眉毛看起来会比最终效果深很多——这完全正常。色素需要时间融入皮肤，愈合过程中颜色会自然变浅 30–40%。",
+  "blog.1.p2": "第一周请保持眉毛干燥。洗脸时避免直接冲洗眉毛区域——用湿毛巾轻轻擦拭周围即可。不要游泳、蒸桑拿或剧烈运动导致大量出汗。淋浴时尽量让脸部避开水流直冲。",
+  "blog.1.p3": "使用纹绣师提供的修复膏，每天用干净棉签薄薄涂抹 2–3 次。少即是多——过多的修复膏会堵塞皮肤，影响留色效果。轻轻一层，几乎看不出来的薄度就刚好。",
+  "blog.1.p4": "第 3 到第 7 天，你会注意到轻微的脱皮或结痂。这是皮肤自然愈合的过程。千万不要抠、挠或撕掉皮屑——让它们自然脱落。抠掉可能会把色素带走，留下不均匀的斑点。",
+  "blog.1.p5": "至少 2 周内避免阳光直射。紫外线会在色素完全稳定之前大幅度加速褪色。如果必须外出，请戴宽檐帽。痊愈后，在眉毛附近（而非眉毛上）涂抹防晒霜有助于延长持色时间。",
+  "blog.1.p6": "完全愈合大约需要 4–6 周。第 2 周左右颜色可能看起来好像'消失'了——别紧张，色素还在，只是沉入了皮肤表层下方。到第 4 周，真正的颜色会浮现出来。6–8 周后的补色环节会完善任何需要调整的区域。",
+
+  // 文章 2：如何佩戴穿戴甲
+  "blog.2.title": "如何像专业人士一样佩戴穿戴甲",
+  "blog.2.desc": "一步步教你佩戴手工穿戴甲，打造沙龙级效果，维持长达两周。",
+  "blog.2.p1": "从干净干燥的指甲开始。去除旧甲油，彻底洗手。用甲皮推轻轻推回甲缘——这样可以增加粘合面积，让穿戴甲根部看起来更干净自然。",
+  "blog.2.p2": "用细磨指甲锉轻轻打磨每个指甲表面，去除光泽并创造略微粗糙的质地，帮助粘合剂更好地附着。用酒精棉片擦拭每个指甲，去除油脂和灰尘。这一步对穿戴甲的持久度影响巨大。",
+  "blog.2.p3": "佩戴前先将每片穿戴甲对准你的指甲试大小。穿戴甲应该完全覆盖甲床，从一侧到另一侧，但不要溢出到皮肤上。如果稍微偏大，轻轻锉磨两侧使其贴合。合适的尺寸是舒适和持久的关键。",
+  "blog.2.p4": "为了最长的持久度，使用指甲胶而非粘贴片。在你的自然指甲和穿戴甲背面都薄薄涂一层胶水。从甲缘端向指尖按压，保持 15–20 秒。同时从两侧轻轻施压，确保完全贴合。",
+  "blog.2.p5": "佩戴完所有十片指甲后，至少一小时内避免将手浸入水中，让胶水充分固化。为了最佳效果，洗碗时戴手套，避免用指甲当工具。细心护理下，你的手工穿戴甲可以美丽维持 1–2 周。",
+
+  // 文章 3：纳米雾眉 vs 微刀雕眉
+  "blog.3.title": "纳米雾眉 vs 微刀雕眉：哪个更适合你？",
+  "blog.3.desc": "两种最热门半永久眉毛技术的清晰对比，帮你根据肤质选择最佳方案。",
+  "blog.3.p1": "纳米雾眉和微刀雕眉都能创造自然逼真的毛发般线条——但使用的工具和技术截然不同。了解区别可以帮你选择最适合自己肤质和生活方式的方法。",
+  "blog.3.p2": "微刀雕眉使用手持刀片工具在皮肤上创造细小切口，将色素沉入每道线条。效果是漂亮清晰的毛发纹路。但微刀技术最适合中性至干性肤质。油性皮肤上，线条容易模糊褪色，有时 6–12 个月内就会失去清晰度。",
+  "blog.3.p3": "纳米雾眉使用数字机器配合单根超细针——比头发丝还细。针头以精确可控的方式将色素送入皮肤。由于针孔比刀片切口更小更均匀，纳米雾眉的愈合效果通常更清晰、维持更久，一般 18–24 个月。",
+  "blog.3.p4": "纳米雾眉最大的优势是适用性广。它适合所有肤质，包括油性和混合性肌肤。这种技术对皮肤的创伤更小，意味着操作中出血更少、愈合更快、色素留存更好。",
+  "blog.3.p5": "两者的疼痛感相似——事前都会涂抹麻醉膏，大多数客人形容感觉像轻微的刮擦。价格方面，纳米雾眉因先进设备通常略高一些，但许多客人觉得更持久的效果物有所值。如果不确定，预约一次咨询，我们会根据你的具体肤质和眉毛目标帮你决定。",
+
+  // 文章 4：如何安全卸除穿戴甲
+  "blog.4.title": "如何安全卸除穿戴甲而不伤指甲",
+  "blog.4.desc": "温和卸除穿戴甲的正确方法，让你的自然指甲保持健康完好。",
+  "blog.4.p1": "千万不要硬拽或撕掉穿戴甲。强行拉扯会撕裂自然指甲的甲层，让指甲变薄、脆弱甚至疼痛。用正确的方法，卸甲只需 10–15 分钟，指甲完好无损。",
+  "blog.4.p2": "将指尖浸泡在温水中，加几滴甲缘油或温和洗手液，浸泡 10–15 分钟。温水软化粘合剂，油脂帮助分解粘合力。你会感觉到穿戴甲随着粘合剂溶解而自然松动。",
+  "blog.4.p3": "穿戴甲松动后，从侧面轻轻将甲皮推或橘木棒滑入底部——绝对不要从指尖撬。慢慢轻柔地摇动。如果某片甲还没松，再多泡几分钟，不要硬来。这里的耐心保护的是你的自然指甲。",
+  "blog.4.p4": "卸除后，用细磨指甲锉轻轻去除残余粘合剂。大量涂抹甲缘油，按摩到每个指甲和周围皮肤。这样可以恢复水分，保持指甲强韧。你的自然指甲应该看起来完全健康——随时准备好迎接下一套穿戴甲。",
+
+  // 文章 5：如何选择适合的眉形
+  "blog.5.title": "如何选择适合你脸型的眉形",
+  "blog.5.desc": "找到自然衬托你独特脸型和五官的眉形指南。",
+  "blog.5.p1": "完美的眉形不是独立存在的——它完全取决于你的脸。你的骨骼结构、五官间距，甚至自然眉毛的生长方向都会影响。目标是提升，而不是改变。",
+  "blog.5.p2": "圆脸适合稍高的眉峰，可以在视觉上拉长脸部，增添立体感和线条感。避免过于圆润的眉毛，那会让脸看起来更圆。带有温柔眉峰的柔和角度效果最好。",
+  "blog.5.p3": "椭圆脸的灵活度最高——大多数眉形都很好看。顺着眉骨走势的自然柔和弧度通常最讨喜。避免过度修眉或让眉毛太细，那会打破自然的平衡感。",
+  "blog.5.p4": "方脸或棱角分明的脸型，柔和的圆弧眉毛可以平衡强势的下颌线和棱角特征。低弧度温和弯曲的眉毛能柔化整体印象。避免眉毛上的尖锐角度，那会让棱角显得更突兀。",
+  "blog.5.p5": "最好的方式始终是专业咨询。每张脸都独一无二，一位优秀的眉毛艺术家会考虑几十个细微之处——从双眼间距到额头高度。在 Shimmyhands，我们总是先进行完整的脸部测量，然后才开始任何操作。",
+
+  // 文章 6：如何选择穿戴甲尺寸
+  "blog.6.title": "如何选择适合的穿戴甲尺寸",
+  "blog.6.desc": "简单指南帮你找到完美贴合的穿戴甲尺寸，最大化舒适度和持久度。",
+  "blog.6.p1": "合适的穿戴甲应该完全覆盖自然甲床，从一侧甲壁到另一侧，但不碰到两侧皮肤。如果穿戴甲溢出到甲缘或皮肤上，它会过早翘起，而且不舒服。稍小的尺寸总比太大好。",
+  "blog.6.p2": "要找到你的尺寸，测量每个自然指甲最宽的部分。可以用软尺，或者将一段透明胶带贴在指甲上标记两侧边缘。每根手指的尺寸可能不同——拇指和中指通常最宽。",
+  "blog.6.p3": "试穿穿戴甲时，先不涂胶水，将每片甲片放在自然指甲上对比。检查它是否紧贴甲床，两侧和底部没有缝隙。穿戴甲的甲缘边缘应该自然跟随你的甲缘弧度。",
+  "blog.6.p4": "如果你介于两个尺寸之间，选择较小的那个，然后轻轻锉磨两侧使其与你的指甲宽度一致。这样可以获得无缝的定制般贴合。合适的穿戴甲佩戴舒适、持久牢固，效果与专业沙龙无异。",
 };

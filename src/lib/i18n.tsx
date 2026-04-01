@@ -309,6 +309,8 @@ const en: Record<string, string> = {
   "contact.wa.desc": "+65 8930 8973 — Quickest way to reach us",
   "contact.ig.label": "Instagram",
   "contact.ig.desc": "@shimmyhands.shop — DMs always open",
+  "contact.google.label": "Google Reviews",
+  "contact.google.desc": "Leave us a review — it means the world",
   "contact.hours.tag": "Studio Hours",
   "contact.hours.mf": "Monday — Friday",
   "contact.hours.mf.time": "10:00 AM — 8:00 PM",
@@ -398,7 +400,7 @@ const en: Record<string, string> = {
   "urgency.nails": "Limited sets remaining",
 
   // ─── Referral ───
-  "referral.text": "Love your brows? Refer a friend — you both receive $20 off your next visit. Message us on WhatsApp to redeem.",
+  "referral.text": "Love your results? Share your referral link — you both receive $20 off your next visit.",
   "referral.wa.prefix": "Prefer WhatsApp? Message us at",
 
   // ─── Bundle Offer ───
@@ -512,6 +514,18 @@ const en: Record<string, string> = {
   "notfound.nails": "Nails",
   "notfound.shop": "Shop",
   "notfound.contact": "Contact",
+
+  // ─── Launch ───
+  "launch.tag": "Coming Soon",
+  "launch.title": "A New Collection Is Coming",
+  "launch.desc": "Be the first to know. Join the waitlist for exclusive early access.",
+  "launch.days": "Days",
+  "launch.hours": "Hours",
+  "launch.minutes": "Minutes",
+  "launch.seconds": "Seconds",
+  "launch.notify": "Notify Me at Launch",
+  "launch.gallery": "First Look",
+  "launch.wa": "Get Early Access via WhatsApp",
 };
 
 const zh: Record<string, string> = {
@@ -762,6 +776,8 @@ const zh: Record<string, string> = {
   "contact.wa.desc": "+65 8930 8973 — 最快联系方式",
   "contact.ig.label": "Instagram",
   "contact.ig.desc": "@shimmyhands.shop — 私信随时开放",
+  "contact.google.label": "谷歌评价",
+  "contact.google.desc": "留下你的评价——对我们意义重大",
   "contact.hours.tag": "营业时间",
   "contact.hours.mf": "周一至周五",
   "contact.hours.mf.time": "上午 10:00 — 晚上 8:00",
@@ -849,7 +865,7 @@ const zh: Record<string, string> = {
   "urgency.nails": "库存有限",
 
   // ─── Referral ───
-  "referral.text": "喜欢你的眉毛？推荐朋友——双方各享 $20 优惠。WhatsApp 联系我们领取。",
+  "referral.text": "喜欢你的效果？分享你的推荐链接——双方各享 $20 优惠。",
   "referral.wa.prefix": "更喜欢 WhatsApp？联系我们",
 
   // ─── Bundle Offer ───
@@ -963,4 +979,16 @@ const zh: Record<string, string> = {
   "notfound.nails": "美甲",
   "notfound.shop": "商店",
   "notfound.contact": "联系我们",
+
+  // ─── Launch ───
+  "launch.tag": "即将推出",
+  "launch.title": "新系列即将到来",
+  "launch.desc": "抢先了解。加入等候名单享受独家提前购买权。",
+  "launch.days": "天",
+  "launch.hours": "时",
+  "launch.minutes": "分",
+  "launch.seconds": "秒",
+  "launch.notify": "发布时通知我",
+  "launch.gallery": "抢先预览",
+  "launch.wa": "通过 WhatsApp 获取提前购买权",
 };

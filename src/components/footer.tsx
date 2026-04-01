@@ -85,6 +85,16 @@ export function Footer() {
                   @shimmyhands.shop
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://g.page/shimmyhands/review"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-vermillion touch-target inline-flex items-center py-1"
+                >
+                  {t("contact.google.label")}
+                </a>
+              </li>
               <li>{t("footer.location")}</li>
             </ul>
           </div>

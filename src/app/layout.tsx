@@ -46,8 +46,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Shimmy",
     locale: "en_SG",
-    /* TODO: Add your OG image URL */
-    // images: [{ url: "https://shimmyhands.com/og-image.jpg", width: 1200, height: 630 }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   metadataBase: new URL("https://shimmyhands.com"),
   icons: {

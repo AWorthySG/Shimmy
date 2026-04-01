@@ -36,6 +36,7 @@ export default function AdminPage() {
   const [blockDate, setBlockDate] = useState('')
   const [blockReason, setBlockReason] = useState('')
   const [actionMsg, setActionMsg] = useState('')
+  const [updatingId, setUpdatingId] = useState<string | null>(null)
 
   const handleLogin = () => {
     if (pass === ADMIN_PASS) {
@@ -62,6 +63,28 @@ export default function AdminPage() {
   useEffect(() => {
     if (authed) fetchBookings()
   }, [authed, fetchBookings])
+
+  const handleStatusChange = async (bookingId: string, newStatus: 'confirmed' | 'cancelled') => {
+    setUpdatingId(bookingId)
+    try {
+      const res = await fetch(`/api/bookings/${bookingId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus }),
+      })
+      if (res.ok) {
+        await fetchBookings()
+      } else {
+        const data = await res.json()
+        setActionMsg(data.error || 'Failed to update booking')
+        setTimeout(() => setActionMsg(''), 3000)
+      }
+    } catch {
+      setActionMsg('Network error')
+      setTimeout(() => setActionMsg(''), 3000)
+    }
+    setUpdatingId(null)
+  }
 
   const handleBlockDate = async () => {
     if (!blockDate) return
@@ -175,6 +198,24 @@ export default function AdminPage() {
                     </span>
                   </div>
                   {b.notes && <p className="mt-2 text-xs text-charcoal-light italic">{b.notes}</p>}
+                  {b.status === 'pending' && (
+                    <div className="mt-3 flex items-center gap-2">
+                      <button
+                        onClick={() => handleStatusChange(b.id, 'confirmed')}
+                        disabled={updatingId === b.id}
+                        className="text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 bg-jade text-soft-white hover:bg-jade/80 transition-colors disabled:opacity-50"
+                      >
+                        {updatingId === b.id ? '...' : 'Confirm'}
+                      </button>
+                      <button
+                        onClick={() => handleStatusChange(b.id, 'cancelled')}
+                        disabled={updatingId === b.id}
+                        className="text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 bg-red-500 text-soft-white hover:bg-red-600 transition-colors disabled:opacity-50"
+                      >
+                        {updatingId === b.id ? '...' : 'Cancel'}
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

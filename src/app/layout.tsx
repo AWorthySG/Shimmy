@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Providers } from "@/components/providers";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 const italiana = Italiana({
   variable: "--font-playfair",
@@ -49,9 +50,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://shimmyhands.com"),
   icons: {
-    /* TODO: Add your favicon */
-    // icon: "/favicon.ico",
-    // apple: "/apple-touch-icon.png",
+    icon: "/favicon.svg",
   },
 };
 
@@ -70,6 +69,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
+          <WhatsAppFloat />
         </Providers>
       </body>
     </html>

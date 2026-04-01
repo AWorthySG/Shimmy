@@ -68,14 +68,14 @@ export default function ProductDetailPage() {
           {/* Image gallery */}
           <AnimateOnScroll animation="fade-right">
             <div>
-              {/* Main image */}
-              <div className="relative aspect-square bg-gradient-to-br from-cream-dark/50 via-cream to-vermillion/5 overflow-hidden border border-vermillion/10">
+              {/* Main image with arrow navigation */}
+              <div className="relative aspect-square bg-gradient-to-br from-cream-dark/50 via-cream to-vermillion/5 overflow-hidden border border-vermillion/10 group/gallery">
                 {product.images.length > 0 ? (
                   <Image
                     src={product.images[activeImage]}
                     alt={product.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-opacity duration-300"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority
                   />
@@ -83,6 +83,29 @@ export default function ProductDetailPage() {
                   <div className="w-full h-full flex items-center justify-center">
                     <span className="text-4xl sm:text-5xl text-gold/20">✦</span>
                   </div>
+                )}
+                {/* Arrow navigation */}
+                {product.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={() => setActiveImage((prev) => (prev === 0 ? product.images.length - 1 : prev - 1))}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-soft-white/80 text-charcoal hover:bg-soft-white transition-all opacity-0 group-hover/gallery:opacity-100 touch-target"
+                      aria-label="Previous image"
+                    >
+                      ←
+                    </button>
+                    <button
+                      onClick={() => setActiveImage((prev) => (prev === product.images.length - 1 ? 0 : prev + 1))}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-soft-white/80 text-charcoal hover:bg-soft-white transition-all opacity-0 group-hover/gallery:opacity-100 touch-target"
+                      aria-label="Next image"
+                    >
+                      →
+                    </button>
+                    {/* Image counter */}
+                    <div className="absolute bottom-2 right-2 bg-charcoal/60 text-soft-white text-[10px] px-2 py-1">
+                      {activeImage + 1} / {product.images.length}
+                    </div>
+                  </>
                 )}
               </div>
               {/* Thumbnail strip */}
@@ -149,8 +172,29 @@ export default function ProductDetailPage() {
                 {added ? t("shop.added") : t("shop.add")}
               </button>
 
+              {/* Features, colours, hardware */}
+              {(product.features.length > 0 || product.colours || product.hardware) && (
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {product.features.map((f) => (
+                    <span key={f} className="text-[10px] uppercase tracking-[0.1em] text-vermillion-dark border border-vermillion/20 bg-vermillion/5 px-3 py-1.5">
+                      {f}
+                    </span>
+                  ))}
+                  {product.colours?.map((c) => (
+                    <span key={c} className="text-[10px] uppercase tracking-[0.1em] text-charcoal-light border border-gold/20 bg-gold/5 px-3 py-1.5">
+                      {c}
+                    </span>
+                  ))}
+                  {product.hardware?.map((h) => (
+                    <span key={h} className="text-[10px] uppercase tracking-[0.1em] text-charcoal-light border border-gold/20 bg-gold/5 px-3 py-1.5">
+                      {h}
+                    </span>
+                  ))}
+                </div>
+              )}
+
               {/* Product details */}
-              <div className="mt-10 border-t border-gold/15 pt-6">
+              <div className="mt-8 border-t border-gold/15 pt-6">
                 <h3 className="text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-3">
                   What&apos;s Included
                 </h3>

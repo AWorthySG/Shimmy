@@ -6,6 +6,7 @@ import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 import StatsBar from "@/components/StatsBar";
 import EmailCapture from "@/components/EmailCapture";
+import InstagramFeed from "@/components/InstagramFeed";
 
 export default function Home() {
   const { t } = useI18n();
@@ -226,6 +227,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ─── Instagram Feed ─── */}
+      <InstagramFeed />
 
       {/* ─── CTA Banner ─── */}
       <section className="relative overflow-hidden shine-sweep bg-gradient-to-r from-cream-dark via-cream to-cream-dark py-16 sm:py-20 px-4 sm:px-6 text-center">

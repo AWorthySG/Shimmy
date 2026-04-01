@@ -12,6 +12,7 @@ import {
   getProductsByCollection,
   getCollectionByHandle,
 } from "@/lib/products";
+import SizeGuide from "@/components/SizeGuide";
 
 export default function ProductDetailPage() {
   const { t } = useI18n();
@@ -48,8 +49,31 @@ export default function ProductDetailPage() {
     .filter((p) => p.id !== product.id)
     .slice(0, 3);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    description: product.description,
+    image: product.images.length > 0 ? `https://shimmyhands.com${product.images[0]}` : undefined,
+    brand: {
+      "@type": "Brand",
+      name: "Shimmyhands",
+    },
+    offers: {
+      "@type": "Offer",
+      price: product.price,
+      priceCurrency: "SGD",
+      availability: "https://schema.org/InStock",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* ─── Breadcrumb ─── */}
       <div className="bg-cream-dark/30 px-4 sm:px-6 py-3">
         <div className="mx-auto max-w-6xl">
@@ -171,6 +195,8 @@ export default function ProductDetailPage() {
               >
                 {added ? t("shop.added") : t("shop.add")}
               </button>
+
+              <SizeGuide />
 
               {/* Features, colours, hardware */}
               {(product.features.length > 0 || product.colours || product.hardware) && (

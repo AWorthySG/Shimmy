@@ -15,8 +15,15 @@ export default function EmailCapture() {
       return
     }
     setError('')
-    // TODO: Connect to email service provider (Mailchimp, Klaviyo, or Resend)
-    console.log('Email submitted:', email)
+    try {
+      await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+    } catch {
+      // Non-critical — show success anyway
+    }
     setSubmitted(true)
   }
 

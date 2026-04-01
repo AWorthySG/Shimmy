@@ -692,24 +692,50 @@ a, button {
     transform: none;
   }
   .btn-magnetic:hover,
-  .btn-vermillion:hover,
-  .card-lift:hover {
+  .btn-vermillion:hover {
     transform: none;
   }
+  /* Disable card-lift hover transforms */
+  .card-lift {
+    transition: none !important;
+  }
+  .card-lift:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  /* Disable shine-on-hover effects */
+  .shine-on-hover::after {
+    display: none !important;
+  }
   .shine-sweep::after,
-  .shine-on-hover::after,
   .glow-pulse::before,
   .sparkle::before,
   .sparkle::after {
     animation: none !important;
     opacity: 0 !important;
   }
+  /* Disable glow-pulse animation */
+  .glow-pulse::before {
+    display: none !important;
+  }
+  /* Disable shimmer-text animation */
   .shimmer-text {
     animation: none !important;
+    background: none !important;
     -webkit-text-fill-color: var(--charcoal) !important;
   }
   .border-glow {
     animation: none !important;
+  }
+  /* Disable ken-burns animation */
+  .ken-burns {
+    animation: none !important;
+    transform: none !important;
+  }
+  /* Disable video-cinematic animation */
+  .video-cinematic {
+    animation: none !important;
+    transform: none !important;
   }
 }
 

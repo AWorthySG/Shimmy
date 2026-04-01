@@ -148,7 +148,7 @@ export async function GET(request: NextRequest) {
 
   const { data, error } = await supabase
     .from('bookings')
-    .select('date, time, duration_minutes, service_name, status')
+    .select('id, date, time, duration_minutes, service_name, status, client_name, client_email, client_phone, notes, created_at')
     .eq('date', dateStr)
     .neq('status', 'cancelled')
     .order('time')

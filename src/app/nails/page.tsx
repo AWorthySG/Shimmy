@@ -27,6 +27,7 @@ export default function NailsPage() {
         <div className="absolute inset-0 overflow-hidden video-vignette">
           <video
             autoPlay muted loop playsInline
+            preload="auto"
             className="absolute inset-0 w-full h-full object-cover video-cinematic"
             style={{ filter: "brightness(0.8) saturate(1.1) contrast(1.05)" }}
           >
@@ -121,6 +122,9 @@ export default function NailsPage() {
                     ) : isVideo ? (
                       <video
                         autoPlay muted loop playsInline
+                        preload="none"
+                        // @ts-expect-error loading="lazy" is used for lazy-loading hint
+                        loading="lazy"
                         className="w-full h-full object-cover zoom-smooth"
                       >
                         <source src={src} type="video/mp4" />
@@ -252,7 +256,8 @@ export default function NailsPage() {
               {/* Lifestyle videos with cinematic zoom */}
               <div className="group card-lift overflow-hidden border border-vermillion/10 bg-cream/30">
                 <div className="relative aspect-[3/4] overflow-hidden video-vignette">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover video-cinematic">
+                  {/* @ts-expect-error loading="lazy" is used for lazy-loading hint */}
+                  <video autoPlay muted loop playsInline preload="none" loading="lazy" className="w-full h-full object-cover video-cinematic">
                     <source src="/videos/lifestyle-vid-1.mp4" type="video/mp4" />
                   </video>
                 </div>
@@ -262,7 +267,8 @@ export default function NailsPage() {
               </div>
               <div className="group card-lift overflow-hidden border border-vermillion/10 bg-cream/30">
                 <div className="relative aspect-[3/4] overflow-hidden video-vignette">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover video-cinematic" style={{ animationDelay: "-5s" }}>
+                  {/* @ts-expect-error loading="lazy" is used for lazy-loading hint */}
+                  <video autoPlay muted loop playsInline preload="none" loading="lazy" className="w-full h-full object-cover video-cinematic" style={{ animationDelay: "-5s" }}>
                     <source src="/videos/lifestyle-vid-2.mp4" type="video/mp4" />
                   </video>
                 </div>

@@ -8,6 +8,7 @@ import { useI18n } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { collections, products, type Product } from "@/lib/products";
 import EmailCapture from "@/components/EmailCapture";
+import RestockNotify from "@/components/RestockNotify";
 
 function ProductCard({ product }: { product: Product }) {
   const { t } = useI18n();
@@ -69,9 +70,12 @@ function ProductCard({ product }: { product: Product }) {
         </div>
         {/* Limited stock badge (Task 6) */}
         {limitedStockCollections[product.collectionHandle] && (
-          <span className="inline-block text-[10px] text-red-500 font-medium mt-1">
-            {t("urgency.nails")}
-          </span>
+          <>
+            <span className="inline-block text-[10px] text-red-500 font-medium mt-1">
+              {t("urgency.nails")}
+            </span>
+            <RestockNotify />
+          </>
         )}
 
         <button

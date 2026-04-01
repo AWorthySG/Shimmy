@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { AnimateOnScroll, Stagger } from '@/components/animate-on-scroll'
 import { useI18n } from '@/lib/i18n'
 import { blogPosts } from '@/lib/blog'
@@ -44,6 +45,17 @@ export default function BlogPage() {
                   href={`/blog/${post.slug}`}
                   className="group card-lift shine-on-hover border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40"
                 >
+                  {/* Hero image */}
+                  <div className="relative aspect-[3/2] w-full overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={t(post.titleKey)}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+
                   {/* Category badge + read time */}
                   <div className="px-5 sm:px-6 pt-5 sm:pt-6 flex items-center justify-between">
                     <span className={`text-[9px] uppercase tracking-[0.2em] px-2 py-1 border ${

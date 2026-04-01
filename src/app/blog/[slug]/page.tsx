@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { AnimateOnScroll } from '@/components/animate-on-scroll'
 import { useI18n } from '@/lib/i18n'
@@ -57,6 +58,18 @@ export default function BlogArticlePage() {
           </p>
         </div>
       </section>
+
+      {/* Hero Image */}
+      <div className="relative w-full aspect-[3/2] overflow-hidden">
+        <Image
+          src={post.image}
+          alt={t(post.titleKey)}
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
+      </div>
 
       {/* Divider */}
       <div className="flex items-center justify-center gap-3 my-6">

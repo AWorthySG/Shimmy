@@ -7,6 +7,7 @@ export interface BlogPost {
   readTime: number // minutes
   contentKeys: string[] // array of paragraph i18n keys
   relatedSlugs: string[]
+  image: string
 }
 
 export const blogPosts: BlogPost[] = [
@@ -19,6 +20,7 @@ export const blogPosts: BlogPost[] = [
     readTime: 4,
     contentKeys: ['blog.1.p1', 'blog.1.p2', 'blog.1.p3', 'blog.1.p4', 'blog.1.p5', 'blog.1.p6'],
     relatedSlugs: ['how-to-choose-brow-shape', 'nano-brows-vs-microblading'],
+    image: '/images/testimonials/hui-ling-portrait.jpg',
   },
   {
     slug: 'how-to-apply-press-on-nails',
@@ -29,6 +31,7 @@ export const blogPosts: BlogPost[] = [
     readTime: 3,
     contentKeys: ['blog.2.p1', 'blog.2.p2', 'blog.2.p3', 'blog.2.p4', 'blog.2.p5'],
     relatedSlugs: ['how-to-remove-press-on-nails', 'how-to-choose-nail-size'],
+    image: '/images/nails/sweater-flatlay-1.jpg',
   },
   {
     slug: 'nano-brows-vs-microblading',
@@ -39,6 +42,7 @@ export const blogPosts: BlogPost[] = [
     readTime: 5,
     contentKeys: ['blog.3.p1', 'blog.3.p2', 'blog.3.p3', 'blog.3.p4', 'blog.3.p5'],
     relatedSlugs: ['eyebrow-embroidery-aftercare-guide', 'how-to-choose-brow-shape'],
+    image: '/images/testimonials/priya-portrait.jpg',
   },
   {
     slug: 'how-to-remove-press-on-nails',
@@ -49,6 +53,7 @@ export const blogPosts: BlogPost[] = [
     readTime: 3,
     contentKeys: ['blog.4.p1', 'blog.4.p2', 'blog.4.p3', 'blog.4.p4'],
     relatedSlugs: ['how-to-apply-press-on-nails', 'how-to-choose-nail-size'],
+    image: '/images/nails/ingenue-lifestyle.jpg',
   },
   {
     slug: 'how-to-choose-brow-shape',
@@ -59,6 +64,7 @@ export const blogPosts: BlogPost[] = [
     readTime: 4,
     contentKeys: ['blog.5.p1', 'blog.5.p2', 'blog.5.p3', 'blog.5.p4', 'blog.5.p5'],
     relatedSlugs: ['eyebrow-embroidery-aftercare-guide', 'nano-brows-vs-microblading'],
+    image: '/images/testimonials/nurul-portrait.jpg',
   },
   {
     slug: 'how-to-choose-nail-size',
@@ -69,6 +75,7 @@ export const blogPosts: BlogPost[] = [
     readTime: 3,
     contentKeys: ['blog.6.p1', 'blog.6.p2', 'blog.6.p3', 'blog.6.p4'],
     relatedSlugs: ['how-to-apply-press-on-nails', 'how-to-remove-press-on-nails'],
+    image: '/images/nails/lovers-flatlay-5.jpg',
   },
 ]
 

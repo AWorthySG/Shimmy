@@ -5,6 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Providers } from "@/components/providers";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const italiana = Italiana({
   variable: "--font-playfair",
@@ -65,6 +66,7 @@ export default function RootLayout({
       className={`${italiana.variable} ${lora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col safe-bottom">
+        <GoogleAnalytics />
         <Providers>
           <Navbar />
           <main className="flex-1">{children}</main>

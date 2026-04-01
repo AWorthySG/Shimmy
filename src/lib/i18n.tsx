@@ -173,6 +173,14 @@ const en: Record<string, string> = {
   "shop.handcrafted.tag": "Handcrafted",
   "shop.handcrafted.title": "Made by Hand, Worn with Love",
   "shop.handcrafted.desc": "Every set is designed and painted by hand in our Singapore studio. No moulds, no mass production \u2014 just careful artistry, one nail at a time.",
+  "shop.sizeguide": "Size Guide",
+  "shop.sizeguide.title": "Find Your Size",
+  "shop.sizeguide.tip": "Measure the widest part of your natural nail. If between sizes, go smaller and file to fit.",
+  "shop.sizeguide.close": "Close",
+  "shop.sizeguide.blog": "Read the full sizing guide \u2192",
+  "shop.restock.title": "Notify me when restocked",
+  "shop.restock.btn": "Notify Me",
+  "shop.restock.success": "We'll let you know!",
 
   // ─── Services Page ───
   "svcpage.tag": "Our Services",
@@ -496,6 +504,14 @@ const en: Record<string, string> = {
   "blog.6.p2": "To find your size, measure the widest part of each natural nail. You can do this with a soft measuring tape, or by pressing a piece of clear tape across your nail and marking the edges. Each finger may be a different size — your thumb and middle finger are usually the widest.",
   "blog.6.p3": "When trying on press-on nails, place each one against your natural nail without adhesive first. Check that it sits flush against the nail bed with no gaps at the sides or base. The cuticle edge of the press-on should follow the curve of your cuticle line naturally.",
   "blog.6.p4": "If you're between sizes, go with the smaller one and gently file the sides to match your nail width. This gives a seamless, custom-like fit. A well-fitted press-on nail will feel comfortable, stay put for longer, and look indistinguishable from a professional salon set.",
+
+  // ─── 404 Not Found ───
+  "notfound.title": "Page Not Found",
+  "notfound.desc": "The page you're looking for doesn't exist.",
+  "notfound.brows": "Brows",
+  "notfound.nails": "Nails",
+  "notfound.shop": "Shop",
+  "notfound.contact": "Contact",
 };
 
 const zh: Record<string, string> = {
@@ -612,6 +628,14 @@ const zh: Record<string, string> = {
   "shop.handcrafted.tag": "手工制作",
   "shop.handcrafted.title": "手工制作，用心佩戴",
   "shop.handcrafted.desc": "每一套都在我们的新加坡工作室手工设计和绑制。没有模具，没有批量生产\u2014\u2014只有用心的艺术，一片一片地完成。",
+  "shop.sizeguide": "尺寸指南",
+  "shop.sizeguide.title": "找到你的尺寸",
+  "shop.sizeguide.tip": "测量自然指甲最宽处。如果介于两个尺寸之间，选择较小的，再锉磨调整。",
+  "shop.sizeguide.close": "关闭",
+  "shop.sizeguide.blog": "阅读完整的尺寸指南 \u2192",
+  "shop.restock.title": "补货时通知我",
+  "shop.restock.btn": "通知我",
+  "shop.restock.success": "补货时会通知你！",
 
   // ─── Services Page ───
   "svcpage.tag": "我们的服务",
@@ -931,4 +955,12 @@ const zh: Record<string, string> = {
   "blog.6.p2": "要找到你的尺寸，测量每个自然指甲最宽的部分。可以用软尺，或者将一段透明胶带贴在指甲上标记两侧边缘。每根手指的尺寸可能不同——拇指和中指通常最宽。",
   "blog.6.p3": "试穿穿戴甲时，先不涂胶水，将每片甲片放在自然指甲上对比。检查它是否紧贴甲床，两侧和底部没有缝隙。穿戴甲的甲缘边缘应该自然跟随你的甲缘弧度。",
   "blog.6.p4": "如果你介于两个尺寸之间，选择较小的那个，然后轻轻锉磨两侧使其与你的指甲宽度一致。这样可以获得无缝的定制般贴合。合适的穿戴甲佩戴舒适、持久牢固，效果与专业沙龙无异。",
+
+  // ─── 404 未找到 ───
+  "notfound.title": "页面未找到",
+  "notfound.desc": "您要找的页面不存在。",
+  "notfound.brows": "眉毛",
+  "notfound.nails": "美甲",
+  "notfound.shop": "商店",
+  "notfound.contact": "联系我们",
 };

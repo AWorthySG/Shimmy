@@ -4,8 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Providers } from "@/components/providers";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { PageTransition } from "@/components/PageTransition";
 
 const italiana = Italiana({
   variable: "--font-playfair",
@@ -68,7 +67,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <Providers>
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1"><PageTransition>{children}</PageTransition></main>
           <Footer />
           <WhatsAppFloat />
         </Providers>

@@ -5,6 +5,12 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Providers } from "@/components/providers";
 import { PageTransition } from "@/components/PageTransition";
+import WelcomeBanner from "@/components/WelcomeBanner";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
+import SocialProofToast from "@/components/SocialProofToast";
+import SpinWheel from "@/components/SpinWheel";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 const italiana = Italiana({
   variable: "--font-playfair",
@@ -66,10 +72,14 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col safe-bottom">
         <GoogleAnalytics />
         <Providers>
+          <WelcomeBanner />
           <Navbar />
           <main className="flex-1"><PageTransition>{children}</PageTransition></main>
           <Footer />
           <WhatsAppFloat />
+          <ExitIntentPopup />
+          <SocialProofToast />
+          <SpinWheel />
         </Providers>
       </body>
     </html>

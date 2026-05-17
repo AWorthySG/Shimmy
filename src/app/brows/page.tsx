@@ -9,6 +9,7 @@ import StatsBar from "@/components/StatsBar";
 import BookingForm from "@/components/BookingForm";
 import BeforeAfterCard from "@/components/BeforeAfterCard";
 import { ParallaxLayer } from "@/components/ParallaxLayer";
+import StickyBookBar from "@/components/StickyBookBar";
 
 export default function Home() {
   const { t } = useI18n();
@@ -406,6 +407,7 @@ export default function Home() {
         </AnimateOnScroll>
       </section>
     </>
+    <StickyBookBar serviceName="Brow Consultation" href="/brows" />
     </HomeWithIntro>
   );
 }

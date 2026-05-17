@@ -7,6 +7,7 @@ import { useI18n } from "@/lib/i18n";
 import StatsBar from "@/components/StatsBar";
 import EmailCapture from "@/components/EmailCapture";
 import InstagramFeed from "@/components/InstagramFeed";
+import Stories from "@/components/Stories";
 
 export default function Home() {
   const { t } = useI18n();
@@ -74,6 +75,11 @@ export default function Home() {
       {/* ─── Stats Bar (Task 4) ─── */}
       <section className="bg-soft-white px-4 sm:px-6">
         <StatsBar />
+      </section>
+
+      {/* ─── Stories ─── */}
+      <section className="bg-soft-white py-6 px-4 sm:px-6">
+        <Stories />
       </section>
 
       {/* ─── Oriental divider ─── */}

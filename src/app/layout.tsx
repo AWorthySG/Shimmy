@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Providers } from "@/components/providers";
+import { PageTransition } from "@/components/PageTransition";
 
 const italiana = Italiana({
   variable: "--font-playfair",
@@ -68,7 +69,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col safe-bottom">
         <Providers>
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1"><PageTransition>{children}</PageTransition></main>
           <Footer />
         </Providers>
       </body>

@@ -8,6 +8,7 @@ import { useI18n } from "@/lib/i18n";
 import StatsBar from "@/components/StatsBar";
 import BookingForm from "@/components/BookingForm";
 import BeforeAfterCard from "@/components/BeforeAfterCard";
+import { ParallaxLayer } from "@/components/ParallaxLayer";
 
 export default function Home() {
   const { t } = useI18n();
@@ -57,8 +58,12 @@ export default function Home() {
       {/* ─── Hero ─── */}
       <section className="relative flex min-h-[70vh] sm:min-h-[80vh] md:min-h-[85vh] flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-cream-dark via-cream to-soft-white rice-paper px-4 sm:px-6 text-center">
         {/* Animated decorative circles */}
-        <div className="pointer-events-none absolute -top-32 -right-32 h-64 w-64 sm:h-96 sm:w-96 rounded-full bg-vermillion/5 animate-float" />
-        <div className="pointer-events-none absolute -bottom-48 -left-48 h-80 w-80 sm:h-[500px] sm:w-[500px] rounded-full bg-jade/5 animate-float-reverse" />
+        <ParallaxLayer speed={0.15}>
+          <div className="pointer-events-none absolute -top-32 -right-32 h-64 w-64 sm:h-96 sm:w-96 rounded-full bg-vermillion/5 animate-float" />
+        </ParallaxLayer>
+        <ParallaxLayer speed={-0.1}>
+          <div className="pointer-events-none absolute -bottom-48 -left-48 h-80 w-80 sm:h-[500px] sm:w-[500px] rounded-full bg-jade/5 animate-float-reverse" />
+        </ParallaxLayer>
 
         {/* Spinning decorative star — top right */}
         <div className="pointer-events-none absolute top-20 right-8 sm:right-20 text-vermillion/10 text-4xl sm:text-5xl animate-spin-slow animate-petal">

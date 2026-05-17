@@ -31,6 +31,17 @@ body.links-page footer {
   --rosewood: #6E5A4E;         /* Deep clay */
 }
 
+.dark {
+  --background: #1a1816;
+  --foreground: #f0e8e2;
+  --cream: #2a2420;
+  --cream-dark: #1e1a17;
+  --soft-white: #222018;
+  --charcoal: #f0e8e2;
+  --charcoal-light: #c8beb5;
+  --warm-gray: #8a7e74;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -330,7 +341,7 @@ a, button {
   box-shadow: 0 8px 25px -5px rgba(168, 146, 121, 0.25);
 }
 .btn-magnetic:active {
-  transform: translateY(0px);
+  transform: translateY(0px) scale(0.96);
 }
 
 /* Vermillion button hover */
@@ -343,6 +354,30 @@ a, button {
 }
 .btn-vermillion:active {
   transform: translateY(0px);
+}
+
+/* ─── Micro-interaction utilities ─── */
+.btn-bounce:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%), rgba(255,255,255,0.3) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-ripple:active::after {
+  opacity: 1;
 }
 
 /* ─── Image reveal on hover ─── */

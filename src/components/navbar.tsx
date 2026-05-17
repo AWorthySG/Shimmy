@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { useI18n } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { CartDrawer } from "@/components/shop/cart-drawer";
+import { DarkModeToggle } from "@/components/DarkModeToggle";
 
 const browsLinks = [
   { href: "/brows", key: "nav.brows.studio" },
@@ -180,6 +181,9 @@ export function Navbar() {
             )}
           </button>
 
+          {/* Dark mode toggle */}
+          <DarkModeToggle />
+
           {/* Language toggle */}
           <button
             onClick={toggleLocale}
@@ -209,6 +213,8 @@ export function Navbar() {
               </span>
             )}
           </button>
+
+          <DarkModeToggle />
 
           <button
             onClick={toggleLocale}

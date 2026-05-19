@@ -1,14 +1,11 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { BOOKING_SERVICES, MAX_ADVANCE_DAYS, type BookingService } from '@/lib/booking'
+import { BOOKING_SERVICES, type BookingService } from '@/lib/booking'
 import { useI18n } from '@/lib/i18n'
+import Calendar from '@/components/Calendar'
 
 type Step = 'service' | 'date' | 'time' | 'details' | 'confirm' | 'done'
-
-function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0]
-}
 
 function formatDisplayDate(dateStr: string): string {
   const d = new Date(dateStr + 'T00:00:00')
@@ -25,112 +22,6 @@ function formatTime(time: string): string {
   const period = h >= 12 ? 'PM' : 'AM'
   const hour12 = h === 0 ? 12 : h > 12 ? h - 12 : h
   return `${hour12}:${String(m).padStart(2, '0')} ${period}`
-}
-
-// Simple calendar component
-function Calendar({
-  selectedDate,
-  onSelect,
-}: {
-  selectedDate: string | null
-  onSelect: (date: string) => void
-}) {
-  const [viewMonth, setViewMonth] = useState(() => {
-    const now = new Date()
-    return new Date(now.getFullYear(), now.getMonth(), 1)
-  })
-
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-
-  const maxDate = new Date(today)
-  maxDate.setDate(maxDate.getDate() + MAX_ADVANCE_DAYS)
-
-  const year = viewMonth.getFullYear()
-  const month = viewMonth.getMonth()
-  const firstDay = new Date(year, month, 1).getDay()
-  const daysInMonth = new Date(year, month + 1, 0).getDate()
-
-  const prevMonth = () => {
-    const prev = new Date(year, month - 1, 1)
-    if (prev >= new Date(today.getFullYear(), today.getMonth(), 1)) {
-      setViewMonth(prev)
-    }
-  }
-  const nextMonth = () => {
-    const next = new Date(year, month + 1, 1)
-    if (next <= maxDate) {
-      setViewMonth(next)
-    }
-  }
-
-  const monthLabel = viewMonth.toLocaleDateString('en-SG', { month: 'long', year: 'numeric' })
-
-  return (
-    <div>
-      {/* Month navigation */}
-      <div className="flex items-center justify-between mb-4">
-        <button
-          onClick={prevMonth}
-          className="p-2 text-charcoal-light hover:text-vermillion transition-colors touch-target"
-        >
-          ←
-        </button>
-        <span className="font-serif text-base text-charcoal">{monthLabel}</span>
-        <button
-          onClick={nextMonth}
-          className="p-2 text-charcoal-light hover:text-vermillion transition-colors touch-target"
-        >
-          →
-        </button>
-      </div>
-
-      {/* Day headers */}
-      <div className="grid grid-cols-7 gap-1 mb-2">
-        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((d) => (
-          <div key={d} className="text-center text-[10px] uppercase tracking-[0.1em] text-warm-gray py-1">
-            {d}
-          </div>
-        ))}
-      </div>
-
-      {/* Day cells */}
-      <div className="grid grid-cols-7 gap-1">
-        {/* Empty cells for days before the 1st */}
-        {Array.from({ length: firstDay }).map((_, i) => (
-          <div key={`empty-${i}`} />
-        ))}
-
-        {Array.from({ length: daysInMonth }).map((_, i) => {
-          const day = i + 1
-          const date = new Date(year, month, day)
-          const dateStr = formatDate(date)
-          const isPast = date < today
-          const isTooFar = date > maxDate
-          const isSunday = date.getDay() === 0
-          const isDisabled = isPast || isTooFar || isSunday
-          const isSelected = dateStr === selectedDate
-
-          return (
-            <button
-              key={day}
-              onClick={() => !isDisabled && onSelect(dateStr)}
-              disabled={isDisabled}
-              className={`aspect-square flex items-center justify-center text-sm transition-all duration-200 ${
-                isSelected
-                  ? 'bg-vermillion text-soft-white'
-                  : isDisabled
-                    ? 'text-warm-gray/30 cursor-not-allowed'
-                    : 'text-charcoal hover:bg-vermillion/10 hover:text-vermillion cursor-pointer'
-              }`}
-            >
-              {day}
-            </button>
-          )
-        })}
-      </div>
-    </div>
-  )
 }
 
 export default function BookingForm() {
@@ -243,6 +134,14 @@ export default function BookingForm() {
               {i < 4 && <div className="w-6 h-[1px] bg-vermillion/15" />}
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Sticky service price summary */}
+      {step !== 'service' && step !== 'done' && selectedService && (
+        <div className="mb-6 flex items-center justify-between bg-cream/50 border border-vermillion/15 px-4 py-3 text-sm">
+          <span className="font-serif text-charcoal">{selectedService.name}</span>
+          <span className="text-xs text-warm-gray">{selectedService.duration} min · {selectedService.price}</span>
         </div>
       )}
 

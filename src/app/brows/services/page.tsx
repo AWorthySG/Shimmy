@@ -5,6 +5,7 @@ import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 import FAQ, { faqKeys } from "@/components/FAQ";
 import StickyBookBar from "@/components/StickyBookBar";
+import ServiceComparison from "@/components/ServiceComparison";
 
 /* ──────────────────────────────────────────────
    TODO: Update each service below with your
@@ -191,6 +192,9 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
+
+      {/* Service Comparison Table */}
+      <ServiceComparison />
 
       {/* CTA */}
       <section className="bg-cream py-12 sm:py-16 px-4 sm:px-6 text-center">

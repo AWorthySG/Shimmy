@@ -423,6 +423,85 @@ const en: Record<string, string> = {
   "faq.5.q": "Can I book a consultation without committing to a service?",
   "faq.5.a": "Yes. We welcome a no-obligation consultation to discuss what suits you best.",
 
+  // ─── Service-Specific FAQs ───
+  "faq.svc.emb.1.q": "Will eyebrow embroidery scar?",
+  "faq.svc.emb.1.a": "No. Eyebrow embroidery only deposits pigment into the upper layers of skin — it doesn't go deep enough to cause scarring when performed by a trained artist with proper aftercare.",
+  "faq.svc.emb.2.q": "How soon can I get my brows wet after embroidery?",
+  "faq.svc.emb.2.a": "Keep your brows completely dry for the first 7 days. After that, gentle contact with water is fine, but avoid soaking or heavy steam for at least 2 weeks.",
+
+  "faq.svc.mic.1.q": "Does microblading work on oily skin?",
+  "faq.svc.mic.1.a": "It can, but oily skin tends to blur and fade microblading strokes faster. If you have oily skin, nano brows are usually a better long-term option.",
+  "faq.svc.mic.2.q": "Will microblading look too dark at first?",
+  "faq.svc.mic.2.a": "Yes — brows typically appear 30–40% darker immediately after the session. The colour softens significantly as the skin heals over the following 2 weeks.",
+
+  "faq.svc.nano.1.q": "Why are nano brows more expensive?",
+  "faq.svc.nano.1.a": "Nano brows use advanced digital equipment with ultra-fine needles that require specialised training. The results are also longer-lasting, typically 18–24 months.",
+  "faq.svc.nano.2.q": "Can nano brows be removed?",
+  "faq.svc.nano.2.a": "Yes. Nano brow pigment can be removed or lightened through saline removal or laser treatments, though it's best to consult with a professional first.",
+
+  "faq.svc.ombre.1.q": "Does ombre powder look like makeup?",
+  "faq.svc.ombre.1.a": "It gives a soft, filled-in finish similar to brow powder — but more subtle and natural-looking than what you'd achieve with daily makeup. It's designed to look like 'your brows, but better'.",
+  "faq.svc.ombre.2.q": "Is ombre powder suitable for sparse brows?",
+  "faq.svc.ombre.2.a": "Absolutely. Ombre powder is one of the best options for sparse brows because it creates a soft wash of colour that gives the illusion of fullness without relying on existing hair.",
+
+  "faq.svc.shp.1.q": "How often should I get my brows shaped?",
+  "faq.svc.shp.1.a": "Every 3–4 weeks is ideal to maintain a clean shape. Hair grows at different rates, so your artist may suggest a schedule that works best for you.",
+  "faq.svc.shp.2.q": "Does threading hurt more than waxing?",
+  "faq.svc.shp.2.a": "Most people find threading slightly more precise but a little more pinchy than waxing. Both are quick — the sensation lasts only a few seconds per area.",
+
+  "faq.svc.lip.1.q": "How long does lip blush take to heal?",
+  "faq.svc.lip.1.a": "Full healing takes about 4–6 weeks. Expect some dryness and flaking in the first week — the true colour emerges around week 3 to 4.",
+  "faq.svc.lip.2.q": "Can I choose my lip colour?",
+  "faq.svc.lip.2.a": "Yes! We custom-blend pigments during your consultation to match the shade you want — from a natural 'my lips but better' tint to a more noticeable rosy flush.",
+
+  // ─── Glossary ───
+  "glossary.nano_needle": "An ultra-fine single needle used in a digital machine to deposit pigment with extreme precision — thinner than a human hair.",
+  "glossary.microblading": "A manual technique using a handheld blade to create fine, hair-like incisions that hold pigment, mimicking natural brow hairs.",
+  "glossary.ombre_powder": "A machine-based shading technique that creates a soft, gradient brow — lighter at the front, gradually deeper at the tail.",
+  "glossary.fan_strokes": "A pattern of strokes that fan outward from the brow's inner corner, mimicking how natural brow hairs grow.",
+  "glossary.pigment_retention": "How well the deposited pigment stays visible in the skin over time — affected by skin type, aftercare, and technique.",
+  "glossary.numbing_cream": "A topical anaesthetic applied before the procedure to minimise discomfort. Takes about 15 minutes to take full effect.",
+  "glossary.touch_up": "A follow-up session (usually 6–8 weeks after the initial procedure) to perfect any areas where pigment may have faded unevenly.",
+  "glossary.caviar_finish": "A textured, slightly raised nail art finish that uses tiny beads to create a luxurious, caviar-like surface.",
+
+  // ─── Process Page ───
+  "process.tag": "Your Appointment",
+  "process.title": "What to Expect",
+  "process.step.1.title": "Consultation",
+  "process.step.1.time": "15 min",
+  "process.step.1.desc": "We start with face mapping and an honest conversation about the shape and style that will complement your features best.",
+  "process.step.2.title": "Design",
+  "process.step.2.time": "15 min",
+  "process.step.2.desc": "Using a pencil outline on your skin, we draw, adjust, and redraw until you're completely happy with the shape. No rushing this part.",
+  "process.step.3.title": "Numbing",
+  "process.step.3.time": "15 min",
+  "process.step.3.desc": "We apply a topical numbing cream and let you relax while it takes effect. Most clients feel little to no discomfort afterwards.",
+  "process.step.4.title": "The Procedure",
+  "process.step.4.time": "60 min",
+  "process.step.4.desc": "Careful strokes, one at a time. We check in with you throughout — your comfort and the result both matter equally.",
+  "process.step.5.title": "Reveal",
+  "process.step.5.time": "5 min",
+  "process.step.5.desc": "Mirror check — this is the fun part. We make any fine adjustments so you leave feeling confident and happy.",
+  "process.step.6.title": "Aftercare Briefing",
+  "process.step.6.time": "10 min",
+  "process.step.6.desc": "We walk you through the healing process and send you home with an aftercare kit and a printed guide.",
+  "process.cta": "Ready to book?",
+
+  // ─── Press / As Seen In ───
+  "press.title": "As Seen In",
+
+  // ─── Seasonal Banners ───
+  "seasonal.cny": "CNY-ready brows — book before the rush",
+  "seasonal.spring": "Bridal brow packages available — enquire today",
+  "seasonal.summer": "Sun-proof your brows — book a consultation",
+  "seasonal.fall": "New season, new look — refresh your brows",
+  "seasonal.holiday": "Gift a Shimmy experience this holiday",
+  "seasonal.cta.cny": "Book Now",
+  "seasonal.cta.spring": "Enquire",
+  "seasonal.cta.summer": "Book Now",
+  "seasonal.cta.fall": "Book Now",
+  "seasonal.cta.holiday": "Shop Gifts",
+
   // ─── Most Popular Badge ───
   "badge.popular": "Most Popular",
 
@@ -526,6 +605,26 @@ const en: Record<string, string> = {
   "launch.notify": "Notify Me at Launch",
   "launch.gallery": "First Look",
   "launch.wa": "Get Early Access via WhatsApp",
+
+  // ─── Mobile Nav Groups ───
+  "nav.mobile.info": "Info",
+  "nav.mobile.blog": "Blog",
+
+  // ─── Service Comparison Table ───
+  "compare.title": "Service",
+  "compare.duration": "Duration",
+  "compare.longevity": "Longevity",
+  "compare.skintype": "Skin Type",
+  "compare.price": "Price",
+  "compare.longevity.embroidery": "12–18 months",
+  "compare.longevity.microblading": "6–12 months",
+  "compare.longevity.nano": "18–24 months",
+  "compare.longevity.ombre": "12–18 months",
+  "compare.longevity.shaping": "4–6 weeks",
+  "compare.longevity.lip": "12–18 months",
+  "compare.skin.normaldry": "Normal to dry",
+  "compare.skin.all": "All types",
+  "compare.heading": "Compare Our Services",
 };
 
 const zh: Record<string, string> = {
@@ -991,4 +1090,24 @@ const zh: Record<string, string> = {
   "launch.notify": "发布时通知我",
   "launch.gallery": "抢先预览",
   "launch.wa": "通过 WhatsApp 获取提前购买权",
+
+  // ─── 手机导航分组 ───
+  "nav.mobile.info": "信息",
+  "nav.mobile.blog": "博客",
+
+  // ─── 服务对比表 ───
+  "compare.title": "服务",
+  "compare.duration": "时长",
+  "compare.longevity": "持久度",
+  "compare.skintype": "肤质",
+  "compare.price": "价格",
+  "compare.longevity.embroidery": "12–18 个月",
+  "compare.longevity.microblading": "6–12 个月",
+  "compare.longevity.nano": "18–24 个月",
+  "compare.longevity.ombre": "12–18 个月",
+  "compare.longevity.shaping": "4–6 周",
+  "compare.longevity.lip": "12–18 个月",
+  "compare.skin.normaldry": "中性至干性",
+  "compare.skin.all": "所有肤质",
+  "compare.heading": "服务对比",
 };

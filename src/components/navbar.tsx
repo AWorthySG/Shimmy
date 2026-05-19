@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useI18n } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
+import { useWishlist } from "@/lib/wishlist";
 import { CartDrawer } from "@/components/shop/cart-drawer";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
+import SearchOverlay from "@/components/SearchOverlay";
 
 const browsLinks = [
   { href: "/brows", key: "nav.brows.studio" },
@@ -29,6 +31,10 @@ export function Navbar() {
   const [mobileNailsOpen, setMobileNailsOpen] = useState(false);
   const { locale, toggleLocale, t } = useI18n();
   const { cartCount, setIsCartOpen } = useCart();
+  const { count: wishlistCount } = useWishlist();
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const closeSearch = useCallback(() => setSearchOpen(false), []);
 
   const browsRef = useRef<HTMLLIElement>(null);
   const nailsRef = useRef<HTMLLIElement>(null);
@@ -163,6 +169,34 @@ export function Navbar() {
         </ul>
 
         <div className="hidden lg:flex items-center gap-4">
+          {/* Search icon */}
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="relative text-charcoal-light transition-colors hover:text-vermillion touch-target p-2"
+            aria-label="Search"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </button>
+
+          {/* Wishlist icon */}
+          <Link
+            href="/wishlist"
+            className="relative text-charcoal-light transition-colors hover:text-vermillion touch-target p-2"
+            aria-label="Wishlist"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+            </svg>
+            {wishlistCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-vermillion text-[9px] font-medium text-soft-white">
+                {wishlistCount}
+              </span>
+            )}
+          </Link>
+
           {/* Cart icon */}
           <button
             onClick={() => setIsCartOpen(true)}
@@ -237,140 +271,114 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 top-[57px] z-40 bg-soft-white overflow-y-auto safe-bottom">
-          <div className="px-6 py-8">
-            {/* Decorative top border */}
-            <div className="mb-6 flex items-center gap-3">
-              <div className="h-[1px] flex-1 bg-gradient-to-r from-vermillion/30 to-transparent" />
-              <span className="text-vermillion/30 text-xs">✦</span>
-              <div className="h-[1px] flex-1 bg-gradient-to-l from-vermillion/30 to-transparent" />
+      {/* Mobile menu — backdrop overlay */}
+      <div
+        className={`lg:hidden fixed inset-0 top-[57px] z-30 bg-charcoal/50 transition-opacity duration-300 ${
+          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setMobileOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* Mobile menu — bottom sheet */}
+      <div
+        className={`lg:hidden fixed inset-x-0 bottom-0 top-[57px] z-40 flex flex-col justify-end transition-transform duration-300 ease-out pointer-events-none ${
+          mobileOpen ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        <div className="pointer-events-auto bg-soft-white overflow-y-auto max-h-full safe-bottom rounded-t-2xl shadow-2xl">
+          {/* Drag handle */}
+          <div className="flex justify-center pt-3 pb-2">
+            <div className="w-10 h-1 rounded-full bg-warm-gray/30" />
+          </div>
+
+          <div className="px-6 pb-8">
+            {/* Brows group */}
+            <div className="mb-5">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-warm-gray mb-2">{t("nav.brows")}</p>
+              <ul className="space-y-1">
+                {browsLinks.map(({ href, key }) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`block py-3 text-base tracking-wide border-b border-gold/8 touch-target ${
+                        pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
+                      }`}
+                    >
+                      {t(key)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <ul className="flex flex-col gap-1">
-              {/* Home */}
-              <li>
-                <Link
-                  href="/"
-                  onClick={() => setMobileOpen(false)}
-                  className={`block py-4 text-lg uppercase tracking-[0.15em] border-b border-gold/10 touch-target ${
-                    pathname === "/" ? "text-vermillion" : "text-charcoal-light"
-                  }`}
-                >
-                  {t("nav.home")}
-                </Link>
-              </li>
+            {/* Nails group */}
+            <div className="mb-5">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-warm-gray mb-2">{t("nav.nails")}</p>
+              <ul className="space-y-1">
+                {nailsLinks.map(({ href, key }) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`block py-3 text-base tracking-wide border-b border-gold/8 touch-target ${
+                        pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
+                      }`}
+                    >
+                      {t(key)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              {/* Brows accordion */}
-              <li>
-                <button
-                  onClick={() => setMobileBrowsOpen(!mobileBrowsOpen)}
-                  className={`w-full flex items-center justify-between py-4 text-lg uppercase tracking-[0.15em] border-b border-gold/10 touch-target ${
-                    pathname.startsWith("/brows") ? "text-vermillion" : "text-charcoal-light"
-                  }`}
-                >
-                  {t("nav.brows")}
-                  <svg className={`w-4 h-4 transition-transform duration-200 ${mobileBrowsOpen ? "rotate-180" : ""}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M3 5l3 3 3-3" />
-                  </svg>
-                </button>
-                {mobileBrowsOpen && (
-                  <ul className="pl-4 pb-2">
-                    {browsLinks.map(({ href, key }) => (
-                      <li key={href}>
-                        <Link
-                          href={href}
-                          onClick={() => setMobileOpen(false)}
-                          className={`block py-3 text-base uppercase tracking-[0.12em] border-b border-gold/5 touch-target ${
-                            pathname === href ? "text-vermillion" : "text-charcoal-light/80"
-                          }`}
-                        >
-                          {t(key)}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
+            {/* Info group */}
+            <div className="mb-6">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-warm-gray mb-2">{t("nav.mobile.info")}</p>
+              <ul className="space-y-1">
+                {[
+                  { href: "/about", key: "nav.about" },
+                  { href: "/blog", key: "nav.mobile.blog" },
+                  { href: "/contact", key: "nav.contact" },
+                ].map(({ href, key }) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`block py-3 text-base tracking-wide border-b border-gold/8 touch-target ${
+                        pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
+                      }`}
+                    >
+                      {t(key)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              {/* Nails accordion */}
-              <li>
-                <button
-                  onClick={() => setMobileNailsOpen(!mobileNailsOpen)}
-                  className={`w-full flex items-center justify-between py-4 text-lg uppercase tracking-[0.15em] border-b border-gold/10 touch-target ${
-                    pathname.startsWith("/nails") ? "text-vermillion" : "text-charcoal-light"
-                  }`}
-                >
-                  {t("nav.nails")}
-                  <svg className={`w-4 h-4 transition-transform duration-200 ${mobileNailsOpen ? "rotate-180" : ""}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M3 5l3 3 3-3" />
-                  </svg>
-                </button>
-                {mobileNailsOpen && (
-                  <ul className="pl-4 pb-2">
-                    {nailsLinks.map(({ href, key }) => (
-                      <li key={href}>
-                        <Link
-                          href={href}
-                          onClick={() => setMobileOpen(false)}
-                          className={`block py-3 text-base uppercase tracking-[0.12em] border-b border-gold/5 touch-target ${
-                            pathname === href ? "text-vermillion" : "text-charcoal-light/80"
-                          }`}
-                        >
-                          {t(key)}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-
-              {/* About */}
-              <li>
-                <Link
-                  href="/about"
-                  onClick={() => setMobileOpen(false)}
-                  className={`block py-4 text-lg uppercase tracking-[0.15em] border-b border-gold/10 touch-target ${
-                    pathname === "/about" ? "text-vermillion" : "text-charcoal-light"
-                  }`}
-                >
-                  {t("nav.about")}
-                </Link>
-              </li>
-
-              {/* Contact */}
-              <li>
-                <Link
-                  href="/contact"
-                  onClick={() => setMobileOpen(false)}
-                  className={`block py-4 text-lg uppercase tracking-[0.15em] border-b border-gold/10 touch-target ${
-                    pathname === "/contact" ? "text-vermillion" : "text-charcoal-light"
-                  }`}
-                >
-                  {t("nav.contact")}
-                </Link>
-              </li>
-            </ul>
-
-            <Link
-              href="/contact"
-              onClick={() => setMobileOpen(false)}
-              className="mt-8 flex items-center justify-center border border-vermillion bg-vermillion/5 px-5 py-4 text-sm uppercase tracking-[0.2em] text-vermillion-dark touch-target"
-            >
-              {t("nav.book")}
-            </Link>
-            <div className="mt-8 pt-6 border-t border-gold/10 space-y-3">
-              <a href="https://wa.me/6589308973" target="_blank" rel="noopener noreferrer" className="block text-sm text-warm-gray">
-                WhatsApp: +65 8930 8973
+            {/* CTA buttons */}
+            <div className="flex flex-col gap-3">
+              <a
+                href="https://wa.me/6589308973"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center gap-2 border border-vermillion bg-vermillion/5 px-5 py-4 text-xs uppercase tracking-[0.2em] text-vermillion-dark touch-target"
+              >
+                {t("cta.whatsapp")}
               </a>
-              <a href="https://instagram.com/shimmyhands.shop" target="_blank" rel="noopener noreferrer" className="block text-sm text-warm-gray">
-                @shimmyhands.shop
-              </a>
+              <Link
+                href="/contact"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center bg-vermillion px-5 py-4 text-xs uppercase tracking-[0.2em] text-soft-white touch-target"
+              >
+                {t("nav.book")}
+              </Link>
             </div>
           </div>
         </div>
-      )}
+      </div>
 
       {/* Cart Drawer */}
       <CartDrawer />

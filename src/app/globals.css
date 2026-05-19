@@ -40,6 +40,18 @@ body.links-page footer {
   --charcoal: #f0e8e2;
   --charcoal-light: #c8beb5;
   --warm-gray: #8a7e74;
+  --gold: #C4A882;
+  --gold-dark: #A89068;
+  --gold-light: #D8C4A8;
+  --vermillion: #6E8058;
+  --vermillion-dark: #5A6C46;
+  --vermillion-light: #8A9C72;
+  --jade: #8A9C72;
+  --jade-light: #A4B890;
+}
+
+.dark .rice-paper {
+  background: none;
 }
 
 @theme inline {

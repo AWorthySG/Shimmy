@@ -103,7 +103,10 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-10 sm:mt-12 border-t border-charcoal/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-warm-gray">
-            &copy; {new Date().getFullYear()} Shimmy. {t("footer.rights")}
+            &copy; {new Date().getFullYear()} Shimmy. {t("footer.rights")}{" "}
+            <Link href="/terms" className="underline underline-offset-2 transition-colors hover:text-vermillion">Terms</Link>
+            {" · "}
+            <Link href="/privacy" className="underline underline-offset-2 transition-colors hover:text-vermillion">Privacy</Link>
           </p>
           <div className="flex gap-6">
             <a

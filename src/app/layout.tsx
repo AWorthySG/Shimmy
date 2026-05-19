@@ -11,6 +11,8 @@ import SocialProofToast from "@/components/SocialProofToast";
 import SpinWheel from "@/components/SpinWheel";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import ScrollToTop from "@/components/ScrollToTop";
+import CookieConsent from "@/components/CookieConsent";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
 const italiana = Italiana({
@@ -83,7 +85,9 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1"><PageTransition>{children}</PageTransition></main>
           <Footer />
+          <CookieConsent />
           <WhatsAppFloat />
+          <ScrollToTop />
           <ExitIntentPopup />
           <SocialProofToast />
           <SpinWheel />

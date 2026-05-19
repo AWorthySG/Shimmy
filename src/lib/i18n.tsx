@@ -339,6 +339,11 @@ const en: Record<string, string> = {
   "footer.rights": "All rights reserved.",
   "footer.location": "Singapore",
 
+  // ─── Cookie Consent ───
+  "cookie.text": "We use cookies to improve your experience. By continuing, you agree to our cookie policy.",
+  "cookie.accept": "Accept",
+  "cookie.learn": "Learn More",
+
   // ─── Stats Bar ───
   "stats.brows": "Brows Shaped",
   "stats.rating": "Average Rating",
@@ -961,6 +966,11 @@ const zh: Record<string, string> = {
   "footer.contact": "联系方式",
   "footer.rights": "版权所有。",
   "footer.location": "新加坡",
+
+  // ─── Cookie Consent ───
+  "cookie.text": "我们使用 Cookie 来提升你的体验。继续浏览即表示你同意我们的 Cookie 政策。",
+  "cookie.accept": "接受",
+  "cookie.learn": "了解更多",
 
   // ─── Stats Bar ───
   "stats.brows": "已塑造眉数",

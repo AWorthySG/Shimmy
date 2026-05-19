@@ -336,6 +336,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── What to Expect — link to process page ─── */}
+      <section className="bg-cream py-12 sm:py-14 px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <AnimateOnScroll animation="fade-up">
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark mb-2">
+              {t("process.tag")}
+            </p>
+            <h2 className="font-serif text-2xl sm:text-3xl text-charcoal">
+              {t("process.title")}
+            </h2>
+            <p className="mt-3 mx-auto max-w-xl text-sm text-charcoal-light">
+              {t("process.timeline")}
+            </p>
+            <Link
+              href="/brows/process"
+              className="underline-grow mt-6 inline-block text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
+            >
+              See the full journey →
+            </Link>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
       {/* ─── Booking Widget (Task 1) ─── */}
       <section className="bg-soft-white py-16 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-3xl">

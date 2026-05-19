@@ -499,6 +499,55 @@ const en: Record<string, string> = {
   "process.healing.desc": "Day one: your brows will look 30–40% darker than the final colour — that's completely normal and expected. During week one, light flaking and itching will happen as the surface heals; resist the urge to pick or scratch. The colour may look patchy as scabs come away, but don't worry. By week four, the true colour emerges as the deeper pigment settles into your skin. At 6–8 weeks, you'll come back for a touch-up where we perfect any spots that healed unevenly and lock in the final shape.",
   "process.cta": "Ready to book? We'd love to create something you'll enjoy waking up to.",
 
+  // ─── Process — Extended Journey (Sign-Up to Long-Term) ───
+  // Phase headers
+  "process.phase.1": "Before Your Appointment",
+  "process.phase.2": "At the Studio",
+  "process.phase.3": "Your Healing Journey",
+  "process.phase.4": "The Touch-Up",
+  "process.phase.5": "Long-Term Care",
+
+  // Phase 1: Booking & Prep
+  "process.signup.title": "Reach Out",
+  "process.signup.time": "Day 1",
+  "process.signup.desc": "Message us on WhatsApp at +65 8930 8973 or use the booking form on the brows page. Tell us a little about what you're after — the technique you're considering, any concerns, and the timeline you're working with. We usually reply within a few hours and we never push you towards anything. If you'd like a free 15-minute video consultation before committing to an appointment, just ask.",
+
+  "process.book.title": "Confirm Your Slot",
+  "process.book.time": "Within 24 hours",
+  "process.book.desc": "Once you've decided on a date, we'll send you a confirmation with the appointment details and a small deposit link to secure the slot (the deposit goes towards your final payment). We'll also email you a pre-appointment guide that explains what to do in the days leading up — and what to avoid. If you need to reschedule, just give us 24 hours' notice and we'll move things around without any fuss.",
+
+  "process.prep.title": "Get Ready",
+  "process.prep.time": "48 hours before",
+  "process.prep.desc": "Two days before your appointment, ease off anything that thins your blood — alcohol, caffeine, aspirin, fish oil, and vitamin E supplements. These can cause more bleeding during the procedure, which affects pigment retention. The day before, avoid sun exposure on your face. And the morning of, eat a proper meal — a 2-hour session feels much longer on an empty stomach.",
+
+  // Phase 3: Healing Journey (expanded)
+  "process.heal.1.title": "Day 1 to 3 — Bold & Tender",
+  "process.heal.1.desc": "Your brows will look noticeably darker than the final result — about 30 to 40% bolder. There may be slight swelling and tenderness, which usually settles within 24 hours. Keep the brows dry, apply the aftercare ointment we provide using a clean cotton swab, and avoid touching the area with your hands. No makeup on or around the brows.",
+
+  "process.heal.2.title": "Day 4 to 7 — Peeling & Flaking",
+  "process.heal.2.desc": "Light flaking begins. Tiny scabs will form and fall away on their own — this is the surface skin healing over the pigment beneath. Do not pick, scratch, or peel. If you remove a scab early, you can pull pigment out with it and create patchy spots. Itching is normal. Keep applying ointment sparingly. Showering is fine, but avoid direct water on the brows.",
+
+  "process.heal.3.title": "Week 2 to 4 — The Ghosting Phase",
+  "process.heal.3.desc": "This is the phase that scares everyone. The colour appears to fade dramatically or disappear entirely. Don't panic. The pigment hasn't gone anywhere — it's settling beneath a fresh layer of skin that's slowly becoming translucent. This is a normal stage of healing and it happens to every client. Resist the urge to message us in alarm (we promise it's coming back).",
+
+  "process.heal.4.title": "Week 4 to 6 — True Colour Returns",
+  "process.heal.4.desc": "The pigment blooms back from underneath as the new skin clears. You'll see the actual healed colour for the first time — softer than day one, and likely close to what you'll have for the next year or two. Some areas may have healed lighter or unevenly. That's expected and exactly what your touch-up appointment is for.",
+
+  // Phase 4: Touch-Up
+  "process.touchup.title": "The Touch-Up Appointment",
+  "process.touchup.time": "Week 6 to 8",
+  "process.touchup.desc": "This is included in your first session. We invite you back about 6 to 8 weeks after the initial procedure to perfect the result. We'll assess how the colour settled, fill in any spots that faded unevenly, sharpen lines if needed, and lock in the final shape. The touch-up takes about an hour and uses the same numbing protocol. Aftercare for the touch-up is identical but usually heals faster than the first round.",
+
+  // Phase 5: Long-Term
+  "process.longterm.title": "12 to 24 Months Later",
+  "process.longterm.desc": "Brow embroidery is semi-permanent — the colour gradually fades over 12 to 24 months as your skin naturally exfoliates. The fade is even, so you'll never have a harsh line or odd patch as it ages. Most clients book a colour refresh about once every 12 to 18 months to keep things looking fresh, which is shorter and lower-cost than starting over. We'll send you a friendly reminder when it's time.",
+
+  "process.longterm.maintain.title": "Daily Maintenance",
+  "process.longterm.maintain.desc": "Once fully healed, your brows need almost no special care — but a few habits help them last. Apply SPF near (not directly on) the brows during sun exposure; UV is the biggest cause of premature fading. Avoid harsh exfoliants and retinoids directly on the brow area. And if you ever feel like your brows could use a refresh between sessions, a brow shaping appointment can extend the look of your embroidery for months.",
+
+  "process.faq.cta": "Have questions? Read our",
+  "process.faq.link": "brow care articles",
+
   // ─── Press / As Seen In ───
   "press.title": "As Seen In",
 
@@ -1190,6 +1239,53 @@ const zh: Record<string, string> = {
   "process.healing.title": "离开之后",
   "process.healing.desc": "第一天：你的眉毛会比最终颜色深 30–40%——这完全正常，不用担心。第一周，表皮愈合时会有轻微脱皮和发痒；请忍住不要抠或挠。痂皮脱落时颜色可能看起来不均匀，但别着急。到了第四周，深层色素在皮肤中沉淀，真正的颜色就会显现。6–8 周后，你会回来做补色，我们会完善任何愈合不均匀的地方，锁定最终形状。",
   "process.cta": "准备好预约了吗？我们很期待为你打造每天醒来都会喜欢的眉毛。",
+
+  // ─── Process — 完整旅程（从报名到长期护理） ───
+  "process.phase.1": "预约前",
+  "process.phase.2": "在工作室",
+  "process.phase.3": "你的愈合旅程",
+  "process.phase.4": "补色环节",
+  "process.phase.5": "长期护理",
+
+  "process.signup.title": "联系我们",
+  "process.signup.time": "第 1 天",
+  "process.signup.desc": "WhatsApp 联系我们 +65 8930 8973，或使用眉毛页面的预约表单。告诉我们你想了解什么——考虑的技法、任何顾虑、以及时间安排。我们通常几小时内会回覆，绝不会推销。如果你想在确定预约前先进行 15 分钟的免费视讯咨询，告诉我们就好。",
+
+  "process.book.title": "确认时段",
+  "process.book.time": "24 小时内",
+  "process.book.desc": "确定日期后，我们会发送预约详情确认，以及一个小额订金链接来锁定时段（订金会抵扣最终费用）。我们也会用邮件发送预约前指南，说明事前几天要做和要避免的事项。如果需要改期，提前 24 小时告诉我们，我们会顺利帮你调整。",
+
+  "process.prep.title": "事前准备",
+  "process.prep.time": "前 48 小时",
+  "process.prep.desc": "预约前两天，请减少会让血液变稀的东西——酒精、咖啡因、阿司匹林、鱼油、维他命 E 补充剂。这些会让操作时出血增加，影响留色。前一天避免脸部日晒。预约当天早上请好好吃一顿——空腹坐 2 小时会感觉特别漫长。",
+
+  // 阶段 3：愈合旅程（详细分阶段）
+  "process.heal.1.title": "第 1–3 天 — 颜色浓烈，可能稍微肿胀",
+  "process.heal.1.desc": "眉毛看起来会比最终效果明显深色——大约深 30% 到 40%。可能会有轻微的肿胀和压痛感，通常 24 小时内会消退。保持眉毛干燥，用干净棉签薄薄涂抹我们提供的修护膏，避免用手碰触。眉部和周围不要化妆。",
+
+  "process.heal.2.title": "第 4–7 天 — 脱皮与结痂",
+  "process.heal.2.desc": "开始轻微脱皮。细小痂皮会自行形成并脱落——这是表层皮肤在底层色素之上愈合的过程。请不要抠、不要抓、不要撕。提早撕掉痂皮可能把色素一起带走，造成斑驳。痒是正常的。继续少量涂抹修护膏。可以洗澡，但避免水直接冲到眉毛。",
+
+  "process.heal.3.title": "第 2–4 周 — 消色期",
+  "process.heal.3.desc": "这个阶段会让所有人都心慌。颜色看起来明显变淡甚至完全消失。别紧张。色素并没有跑掉——它正沉在一层新的、慢慢变透明的皮肤底下。这是愈合的正常阶段，每位客人都会经历。请忍住马上私讯我们的冲动（我们保证颜色会回来）。",
+
+  "process.heal.4.title": "第 4–6 周 — 真色浮现",
+  "process.heal.4.desc": "随著新皮肤变清透，色素从下方重新浮现。你将第一次看到真正愈合后的颜色——比第一天柔和，也很接近你接下来一到两年会拥有的样子。可能某些区域比较淡或不均匀。这是预期之中的，正是补色环节存在的原因。",
+
+  // 阶段 4：补色
+  "process.touchup.title": "补色预约",
+  "process.touchup.time": "第 6–8 周",
+  "process.touchup.desc": "这一环节已包含在你的第一次费用中。我们会邀请你在初次操作后约 6 到 8 周回来精修效果。我们会评估愈合后的颜色、补上褪色不均的地方、必要时锐化线条、并定下最终眉形。补色大约一小时，使用相同的麻醉流程。术后护理与第一次相同，但通常愈合得更快。",
+
+  // 阶段 5：长期
+  "process.longterm.title": "12 到 24 个月之后",
+  "process.longterm.desc": "绣眉是半永久的——颜色会随著皮肤自然代谢，在 12 到 24 个月间逐渐变淡。褪色是均匀的，老化时不会出现生硬的线条或奇怪的斑块。大多数客人每 12 至 18 个月回来做一次补色保养，比从头再做一次更短也更省。到时候我们会发送温馨提醒。",
+
+  "process.longterm.maintain.title": "日常维护",
+  "process.longterm.maintain.desc": "完全愈合后，眉毛几乎不需要特别护理——但几个习惯能让效果更持久。日晒时在眉毛附近（不要直接擦在上面）涂防晒；紫外线是早期褪色的最大原因。避免在眉部区域直接使用刺激性去角质或维 A 酸产品。如果你觉得两次操作之间想让眉毛重新精神起来，可以预约一次修眉，能延长绣眉效果数月之久。",
+
+  "process.faq.cta": "还有问题？阅读我们的",
+  "process.faq.link": "眉毛护理文章",
 
   // ─── Press / As Seen In ───
   "press.title": "媒体报道",

@@ -1,9 +1,59 @@
 "use client";
 
+import Link from "next/link";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 
-const steps = [1, 2, 3, 4, 5, 6] as const;
+const appointmentSteps = [1, 2, 3, 4, 5, 6] as const;
+const healingStages = [1, 2, 3, 4] as const;
+
+function PhaseDivider({ label }: { label: string }) {
+  return (
+    <div className="flex items-center justify-center gap-4 my-4">
+      <div className="h-[1px] flex-1 max-w-[80px] bg-gradient-to-r from-transparent to-vermillion/30" />
+      <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">{label}</span>
+      <div className="h-[1px] flex-1 max-w-[80px] bg-gradient-to-l from-transparent to-vermillion/30" />
+    </div>
+  );
+}
+
+function TimelineItem({
+  number,
+  title,
+  time,
+  desc,
+  isLast,
+}: {
+  number: string | number;
+  title: string;
+  time?: string;
+  desc: string;
+  isLast?: boolean;
+}) {
+  return (
+    <div className="relative flex gap-5 sm:gap-8">
+      <div className="flex flex-col items-center shrink-0">
+        <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-vermillion/30 bg-cream text-vermillion font-serif text-base sm:text-lg">
+          {number}
+        </div>
+        {!isLast && (
+          <div className="w-[2px] flex-1 bg-gradient-to-b from-vermillion/20 to-vermillion/5 my-2" />
+        )}
+      </div>
+      <div className={`pb-8 sm:pb-12 ${isLast ? "pb-0 sm:pb-0" : ""}`}>
+        <div className="flex items-baseline gap-3 flex-wrap">
+          <h3 className="font-serif text-lg sm:text-xl text-charcoal">{title}</h3>
+          {time && (
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.15em] text-warm-gray">
+              {time}
+            </span>
+          )}
+        </div>
+        <p className="mt-2 text-sm leading-relaxed text-charcoal-light">{desc}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function ProcessPage() {
   const { t } = useI18n();
@@ -23,110 +73,180 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      {/* Oriental divider */}
-      <div className="flex items-center justify-center gap-3 my-8">
-        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-xs">✦</span>
-        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
-
-      {/* What to Bring — checklist */}
+      {/* ───────────── PHASE 1: Before Your Appointment ───────────── */}
       <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-2xl">
           <AnimateOnScroll animation="fade-up">
-            <h2 className="font-serif text-xl sm:text-2xl text-charcoal md:text-3xl mb-4">
-              {t("process.bring.title")}
-            </h2>
-            <p className="text-sm leading-relaxed text-charcoal-light">
-              {t("process.bring.desc")}
-            </p>
+            <PhaseDivider label={t("process.phase.1")} />
           </AnimateOnScroll>
+
+          <div className="mt-10">
+            <AnimateOnScroll animation="fade-up" delay={50}>
+              <TimelineItem
+                number={1}
+                title={t("process.signup.title")}
+                time={t("process.signup.time")}
+                desc={t("process.signup.desc")}
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll animation="fade-up" delay={100}>
+              <TimelineItem
+                number={2}
+                title={t("process.book.title")}
+                time={t("process.book.time")}
+                desc={t("process.book.desc")}
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll animation="fade-up" delay={150}>
+              <TimelineItem
+                number={3}
+                title={t("process.prep.title")}
+                time={t("process.prep.time")}
+                desc={t("process.prep.desc")}
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll animation="fade-up" delay={200}>
+              <TimelineItem
+                number={4}
+                title={t("process.bring.title")}
+                desc={t("process.bring.desc")}
+                isLast
+              />
+            </AnimateOnScroll>
+          </div>
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="flex items-center justify-center gap-3 my-2">
-        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-xs">✦</span>
-        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
-
-      {/* Timeline intro + steps */}
-      <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
+      {/* ───────────── PHASE 2: At the Studio ───────────── */}
+      <section className="bg-cream py-14 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-2xl">
-          {/* Timeline header */}
           <AnimateOnScroll animation="fade-up">
-            <p className="mb-10 text-sm leading-relaxed text-charcoal-light text-center">
+            <PhaseDivider label={t("process.phase.2")} />
+          </AnimateOnScroll>
+
+          <AnimateOnScroll animation="fade-up" delay={50}>
+            <p className="mt-8 mb-10 text-sm leading-relaxed text-charcoal-light text-center">
               {t("process.timeline")}
             </p>
           </AnimateOnScroll>
 
-          {steps.map((step, i) => {
-            const isLast = i === steps.length - 1;
-            const descContent = t(`process.step.${step}.desc`);
-
-            return (
-              <AnimateOnScroll
-                key={step}
-                animation="fade-up"
-                delay={i * 100}
-              >
-                <div className="relative flex gap-5 sm:gap-8">
-                  {/* Left: number + connector line */}
-                  <div className="flex flex-col items-center shrink-0">
-                    <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-vermillion/30 bg-cream text-vermillion font-serif text-lg sm:text-xl">
-                      {step}
-                    </div>
-                    {!isLast && (
-                      <div className="w-[2px] flex-1 bg-gradient-to-b from-vermillion/20 to-vermillion/5 my-2" />
-                    )}
-                  </div>
-
-                  {/* Right: content */}
-                  <div
-                    className={`pb-8 sm:pb-12 ${isLast ? "pb-0 sm:pb-0" : ""}`}
-                  >
-                    <div className="flex items-baseline gap-3">
-                      <h3 className="font-serif text-lg sm:text-xl text-charcoal">
-                        {t(`process.step.${step}.title`)}
-                      </h3>
-                      <span className="text-[10px] sm:text-xs uppercase tracking-[0.15em] text-warm-gray">
-                        {t(`process.step.${step}.time`)}
-                      </span>
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-charcoal-light">
-                      {descContent}
-                    </p>
-                  </div>
-                </div>
-              </AnimateOnScroll>
-            );
-          })}
+          {appointmentSteps.map((step, i) => (
+            <AnimateOnScroll
+              key={step}
+              animation="fade-up"
+              delay={i * 80}
+            >
+              <TimelineItem
+                number={step}
+                title={t(`process.step.${step}.title`)}
+                time={t(`process.step.${step}.time`)}
+                desc={t(`process.step.${step}.desc`)}
+                isLast={i === appointmentSteps.length - 1}
+              />
+            </AnimateOnScroll>
+          ))}
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="flex items-center justify-center gap-3 my-2">
-        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-xs">✦</span>
-        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
+      {/* ───────────── PHASE 3: Your Healing Journey ───────────── */}
+      <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-2xl">
+          <AnimateOnScroll animation="fade-up">
+            <PhaseDivider label={t("process.phase.3")} />
+          </AnimateOnScroll>
 
-      {/* After You Leave — healing section */}
+          <div className="mt-10">
+            {healingStages.map((stage, i) => (
+              <AnimateOnScroll
+                key={stage}
+                animation="fade-up"
+                delay={i * 80}
+              >
+                <TimelineItem
+                  number="✦"
+                  title={t(`process.heal.${stage}.title`)}
+                  desc={t(`process.heal.${stage}.desc`)}
+                  isLast={i === healingStages.length - 1}
+                />
+              </AnimateOnScroll>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────── PHASE 4: The Touch-Up ───────────── */}
       <section className="bg-cream-dark py-14 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-2xl">
           <AnimateOnScroll animation="fade-up">
-            <h2 className="font-serif text-xl sm:text-2xl text-charcoal md:text-3xl mb-4">
-              {t("process.healing.title")}
-            </h2>
-            <p className="text-sm leading-relaxed text-charcoal-light">
-              {t("process.healing.desc")}
+            <PhaseDivider label={t("process.phase.4")} />
+          </AnimateOnScroll>
+
+          <AnimateOnScroll animation="fade-up" delay={50}>
+            <div className="mt-10 border border-vermillion/15 bg-soft-white/60 p-6 sm:p-8 oriental-corner">
+              <div className="flex items-baseline gap-3 flex-wrap">
+                <h2 className="font-serif text-xl sm:text-2xl text-charcoal">
+                  {t("process.touchup.title")}
+                </h2>
+                <span className="text-[10px] sm:text-xs uppercase tracking-[0.15em] text-warm-gray">
+                  {t("process.touchup.time")}
+                </span>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-charcoal-light">
+                {t("process.touchup.desc")}
+              </p>
+            </div>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
+      {/* ───────────── PHASE 5: Long-Term Care ───────────── */}
+      <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-2xl">
+          <AnimateOnScroll animation="fade-up">
+            <PhaseDivider label={t("process.phase.5")} />
+          </AnimateOnScroll>
+
+          <div className="mt-10 grid gap-6 sm:gap-8">
+            <AnimateOnScroll animation="fade-up" delay={50}>
+              <div>
+                <h3 className="font-serif text-lg sm:text-xl text-charcoal">
+                  {t("process.longterm.title")}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-charcoal-light">
+                  {t("process.longterm.desc")}
+                </p>
+              </div>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll animation="fade-up" delay={100}>
+              <div>
+                <h3 className="font-serif text-lg sm:text-xl text-charcoal">
+                  {t("process.longterm.maintain.title")}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-charcoal-light">
+                  {t("process.longterm.maintain.desc")}
+                </p>
+              </div>
+            </AnimateOnScroll>
+          </div>
+
+          {/* Link to blog */}
+          <AnimateOnScroll animation="fade-up" delay={200}>
+            <p className="mt-10 text-center text-sm text-charcoal-light">
+              {t("process.faq.cta")}{" "}
+              <Link
+                href="/blog"
+                className="text-vermillion-dark hover:text-vermillion underline-grow transition-colors"
+              >
+                {t("process.faq.link")}
+              </Link>
+              .
             </p>
           </AnimateOnScroll>
         </div>
       </section>
 
-      {/* CTA with WhatsApp button */}
+      {/* ───────────── CTA ───────────── */}
       <section className="bg-cream py-12 sm:py-16 px-4 sm:px-6 text-center">
         <div className="mx-auto max-w-2xl">
           <h2 className="font-serif text-xl sm:text-2xl text-charcoal md:text-3xl">

@@ -250,10 +250,10 @@ export default function BookingForm() {
       {step === 'service' && (
         <div>
           <h3 className="font-serif text-xl sm:text-2xl text-charcoal text-center mb-2">
-            Select a Service
+            {t('book.step.service')}
           </h3>
           <p className="text-sm text-charcoal-light text-center mb-8">
-            Choose the service you&apos;d like to book.
+            {t('book.step.service.desc')}
           </p>
           <div className="space-y-3">
             {BOOKING_SERVICES.map((service) => (
@@ -285,10 +285,10 @@ export default function BookingForm() {
             onClick={() => setStep('service')}
             className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
           >
-            ← Back
+            {t('shop.back')}
           </button>
           <h3 className="font-serif text-xl sm:text-2xl text-charcoal text-center mb-2">
-            Pick a Date
+            {t('book.step.date')}
           </h3>
           <p className="text-sm text-charcoal-light text-center mb-6">
             {selectedService?.name} · {selectedService?.duration} min
@@ -315,10 +315,10 @@ export default function BookingForm() {
             onClick={() => setStep('date')}
             className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
           >
-            ← Back
+            {t('shop.back')}
           </button>
           <h3 className="font-serif text-xl sm:text-2xl text-charcoal text-center mb-2">
-            Choose a Time
+            {t('book.step.time')}
           </h3>
           <p className="text-sm text-charcoal-light text-center mb-6">
             {selectedService?.name} · {selectedDate && formatDisplayDate(selectedDate)}
@@ -336,7 +336,7 @@ export default function BookingForm() {
                 onClick={() => setStep('date')}
                 className="mt-4 text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors touch-target"
               >
-                Choose another date
+                {t('book.step.time.another')}
               </button>
             </div>
           ) : (
@@ -369,10 +369,10 @@ export default function BookingForm() {
             onClick={() => setStep('time')}
             className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
           >
-            ← Back
+            {t('shop.back')}
           </button>
           <h3 className="font-serif text-xl sm:text-2xl text-charcoal text-center mb-2">
-            Your Details
+            {t('book.step.details')}
           </h3>
           <p className="text-sm text-charcoal-light text-center mb-8">
             {t("book.step.details.desc")}
@@ -440,7 +440,7 @@ export default function BookingForm() {
             }}
             className="mt-6 w-full bg-vermillion text-soft-white py-3.5 text-xs uppercase tracking-[0.2em] hover:bg-vermillion-dark transition-colors touch-target"
           >
-            Review Booking
+            {t('book.review')}
           </button>
           {error && <p className="text-xs text-red-500 mt-2 text-center">{error}</p>}
         </div>
@@ -453,10 +453,10 @@ export default function BookingForm() {
             onClick={() => setStep('details')}
             className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
           >
-            ← Back
+            {t('shop.back')}
           </button>
           <h3 className="font-serif text-xl sm:text-2xl text-charcoal text-center mb-2">
-            Confirm Your Booking
+            {t('book.confirm.title')}
           </h3>
           <p className="text-sm text-charcoal-light text-center mb-8">
             {t("book.confirm.desc")}
@@ -483,19 +483,19 @@ export default function BookingForm() {
             </div>
             <div className="h-[1px] bg-vermillion/10" />
             <div className="flex justify-between items-start">
-              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">Name</span>
+              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t('book.label.name')}</span>
               <span className="text-sm text-charcoal text-right">{clientName}</span>
             </div>
             <div className="h-[1px] bg-vermillion/10" />
             <div className="flex justify-between items-start">
-              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">Phone</span>
+              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t('book.label.phone')}</span>
               <span className="text-sm text-charcoal text-right">{clientPhone}</span>
             </div>
             {clientEmail && (
               <>
                 <div className="h-[1px] bg-vermillion/10" />
                 <div className="flex justify-between items-start">
-                  <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">Email</span>
+                  <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t('book.label.email')}</span>
                   <span className="text-sm text-charcoal text-right">{clientEmail}</span>
                 </div>
               </>
@@ -504,7 +504,7 @@ export default function BookingForm() {
               <>
                 <div className="h-[1px] bg-vermillion/10" />
                 <div className="flex justify-between items-start">
-                  <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">Notes</span>
+                  <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t('book.label.notes')}</span>
                   <span className="text-sm text-charcoal text-right max-w-[200px]">{notes}</span>
                 </div>
               </>
@@ -529,7 +529,7 @@ export default function BookingForm() {
             <span className="text-jade text-2xl">✓</span>
           </div>
           <h3 className="font-serif text-xl sm:text-2xl text-charcoal mb-2">
-            Booking Submitted!
+            {t('book.done.title')}
           </h3>
           <p className="text-sm text-charcoal-light max-w-md mx-auto">
             {bookingResult.message}
@@ -545,7 +545,7 @@ export default function BookingForm() {
               onClick={resetBooking}
               className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors touch-target"
             >
-              Book Another Appointment
+              {t('book.done.another')}
             </button>
           </div>
         </div>

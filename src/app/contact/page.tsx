@@ -157,7 +157,7 @@ export default function ContactPage() {
             <div className="mt-6 sm:mt-8 aspect-[4/3] border border-vermillion/10 bg-gradient-to-br from-cream-dark to-jade/5 flex flex-col items-center justify-center">
               <span className="text-4xl sm:text-5xl text-vermillion/20">📍</span>
               <p className="mt-4 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-warm-gray">
-                Map Embed Here
+                {t("contact.visit.title")}
               </p>
               {/* TODO: Replace with your actual address */}
               <p className="mt-2 text-sm text-charcoal-light">

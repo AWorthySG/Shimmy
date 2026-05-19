@@ -1,18 +1,19 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { useI18n } from '@/lib/i18n'
 
 interface StatConfig {
   target: number
   decimals: number
   suffix: string
-  label: string
+  labelKey: string
 }
 
 const stats: StatConfig[] = [
-  { target: 200, decimals: 0, suffix: '+', label: 'Brows Shaped' },
-  { target: 5.0, decimals: 1, suffix: '', label: 'Average Rating' },
-  { target: 2, decimals: 0, suffix: '', label: 'Years in Singapore' },
+  { target: 200, decimals: 0, suffix: '+', labelKey: 'stats.brows' },
+  { target: 5.0, decimals: 1, suffix: '', labelKey: 'stats.rating' },
+  { target: 2, decimals: 0, suffix: '', labelKey: 'stats.years' },
 ]
 
 function easeOutQuad(t: number): number {
@@ -66,6 +67,7 @@ function AnimatedNumber({ target, decimals, suffix, run }: { target: number; dec
 }
 
 export default function StatsBar() {
+  const { t } = useI18n()
   const containerRef = useRef<HTMLDivElement>(null)
   const [hasAnimated, setHasAnimated] = useState(false)
 
@@ -92,11 +94,11 @@ export default function StatsBar() {
   return (
     <div ref={containerRef} className="grid grid-cols-3 gap-4 py-10 sm:py-12 border-y border-vermillion/15 mx-auto max-w-4xl">
       {stats.map((s) => (
-        <div key={s.label} className="text-center">
+        <div key={s.labelKey} className="text-center">
           <p className="text-2xl sm:text-3xl font-serif font-bold text-charcoal">
             <AnimatedNumber target={s.target} decimals={s.decimals} suffix={s.suffix} run={hasAnimated} />
           </p>
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.15em] text-warm-gray mt-1">{s.label}</p>
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.15em] text-warm-gray mt-1">{t(s.labelKey)}</p>
         </div>
       ))}
     </div>

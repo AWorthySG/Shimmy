@@ -139,9 +139,6 @@ export default function ServicesPage() {
                   <p className="text-[10px] uppercase tracking-[0.3em] text-warm-gray/50">
                     {service.title}
                   </p>
-                  <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-warm-gray/30">
-                    Service photo
-                  </p>
                   <div className="mx-auto w-16 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-3" />
                 </div>
               </div>
@@ -279,7 +276,7 @@ export default function ServicesPage() {
           </a>
         </div>
       </section>
-      <StickyBookBar serviceName="Brow Service" href="https://wa.me/6589308973" />
+      <StickyBookBar serviceName={t("svcpage.title")} href="https://wa.me/6589308973" />
     </>
   );
 }

@@ -49,7 +49,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 /* ──────────────────────────────────────────────
    COPY DICTIONARY
 
-   Voice guide for Shimmyhands:
+   Voice guide for Shimmy:
    - Confident, not corporate
    - Warm but direct — like a friend who happens to be an expert
    - Slightly playful, never stiff
@@ -88,17 +88,17 @@ const en: Record<string, string> = {
   "services.title": "Find Your Fit",
   "services.embroidery.title": "Eyebrow Embroidery",
   "services.embroidery.desc":
-    "Where it all began. Fine blade strokes that build gentle fullness — the kind that looks effortless, not obvious.",
+    "Where it all began. Fine blade strokes that build gentle fullness — a finish that looks effortless, not obvious.",
   "services.nano.title": "Nano Brows",
   "services.nano.desc":
-    "A digital nano-needle for strokes so fine and natural, people will simply think you were born with beautiful brows.",
+    "A digital nano-needle delivers strokes so fine that people will simply think you were born with beautiful brows.",
   "services.ombre.title": "Ombre Powder Brows",
   "services.ombre.desc":
     "That soft, powdery finish you love — the one that usually takes 15 minutes every morning. This one stays for up to two years.",
   "services.viewall": "View All Services →",
 
   // ─── About Snippet (Home) ───
-  "about.tag": "Why Shimmyhands",
+  "about.tag": "Why Shimmy",
   "about.title.1": "It's All in",
   "about.title.2": "the Details",
   "about.p1":
@@ -119,7 +119,7 @@ const en: Record<string, string> = {
   "testimonials.2.name": "Priya Nair",
   "testimonials.2.service": "Nano Brows",
   "testimonials.3.text":
-    "I was really nervous beforehand. She walked me through every step, kept checking I was comfortable, and the result is honestly the best beauty decision I've ever made.",
+    "I was really nervous beforehand. She walked me through every step, kept checking I was comfortable, and honestly, it's the best beauty decision I've ever made.",
   "testimonials.3.name": "Nurul Aisyah",
   "testimonials.3.service": "Ombre Powder Brows",
 
@@ -137,7 +137,7 @@ const en: Record<string, string> = {
   "home.title.2": "Softly.",
   "home.desc": "Two art forms, one philosophy — every detail shaped around you. From brows that frame your face to nails that tell your story.",
   "home.brows.title": "Brows by Shimmyhands",
-  "home.brows.desc": "Eyebrow embroidery designed for your face. Not a template — yours. Fine strokes, careful precision, natural results.",
+  "home.brows.desc": "Eyebrow embroidery designed for your face. Not a template — yours. Fine strokes, careful precision, brows that look like you.",
   "home.brows.cta": "Explore Brows →",
   "home.nails.title": "Nails by Shimmyhands",
   "home.nails.desc": "Handcrafted press-on nails that feel like fingertip jewelry. Each set designed, each detail painted by hand.",
@@ -195,7 +195,7 @@ const en: Record<string, string> = {
   // ─── Services Data ───
   "svc.embroidery.title": "Eyebrow Embroidery",
   "svc.embroidery.price": "From $388",
-  "svc.embroidery.duration": "2 — 2.5 hours",
+  "svc.embroidery.duration": "2–2.5 hours",
   "svc.embroidery.desc":
     "Our signature technique. Fine blade strokes that build natural fullness one hair at a time — for brows that look like they simply grew that way.",
   "svc.embroidery.inc.1": "Full brow design consultation (we take our time with this)",
@@ -205,7 +205,7 @@ const en: Record<string, string> = {
 
   "svc.microblading.title": "Microblading",
   "svc.microblading.price": "From $488",
-  "svc.microblading.duration": "2 — 2.5 hours",
+  "svc.microblading.duration": "2–2.5 hours",
   "svc.microblading.desc":
     "Hand-drawn strokes with a manual blade, where each line is crafted to mimic a real hair. The kind of subtle detail that makes your brows look quietly beautiful.",
   "svc.microblading.inc.1": "Brow mapping with symmetry analysis",
@@ -215,7 +215,7 @@ const en: Record<string, string> = {
 
   "svc.nano.title": "Nano Brows",
   "svc.nano.price": "From $588",
-  "svc.nano.duration": "2 — 3 hours",
+  "svc.nano.duration": "2–3 hours",
   "svc.nano.desc":
     "Our most precise technique. A digital nano-needle places pigment with remarkable accuracy, and it works beautifully on every skin type — including oilier skin where other methods sometimes fade.",
   "svc.nano.inc.1": "Digital precision brow mapping",
@@ -225,7 +225,7 @@ const en: Record<string, string> = {
 
   "svc.ombre.title": "Ombre Powder Brows",
   "svc.ombre.price": "From $488",
-  "svc.ombre.duration": "2 — 2.5 hours",
+  "svc.ombre.duration": "2–2.5 hours",
   "svc.ombre.desc":
     "Lighter at the front, gently deeper at the tail — that soft, powdered look you might spend time creating each morning, except this one stays put for up to two years.",
   "svc.ombre.inc.1": "Custom gradient density",
@@ -235,7 +235,7 @@ const en: Record<string, string> = {
 
   "svc.shaping.title": "Brow Shaping & Design",
   "svc.shaping.price": "From $48",
-  "svc.shaping.duration": "30 — 45 minutes",
+  "svc.shaping.duration": "30–45 minutes",
   "svc.shaping.desc":
     "Not quite ready for semi-permanent? This is a lovely place to start. We'll sculpt the perfect arch for your face using threading, waxing, or a combination of both.",
   "svc.shaping.inc.1": "Face shape and bone structure analysis",
@@ -245,7 +245,7 @@ const en: Record<string, string> = {
 
   "svc.lip.title": "Lip Blush",
   "svc.lip.price": "From $488",
-  "svc.lip.duration": "2 — 2.5 hours",
+  "svc.lip.duration": "2–2.5 hours",
   "svc.lip.desc":
     "A soft, semi-permanent tint that gives your lips a gentle flush of colour — like a quiet glow that brightens your whole face.",
   "svc.lip.inc.1": "Lip shape and colour consultation",
@@ -255,11 +255,11 @@ const en: Record<string, string> = {
 
   // ─── About Page ───
   "aboutpage.tag": "Who We Are",
-  "aboutpage.title": "About Shimmyhands",
+  "aboutpage.title": "About Shimmy",
   "aboutpage.headline.1": "Why We Do",
   "aboutpage.headline.2": "What We Do",
   "aboutpage.p1":
-    "Shimmyhands began because we kept seeing the same thing — people leaving studios with brows that didn't quite feel like them. The same shapes, the same arches, the same slightly-too-obvious look.",
+    "Shimmy began because we kept seeing the same thing — people leaving studios with brows that didn't quite feel like them. The same shapes, the same arches, the same slightly-too-obvious look.",
   "aboutpage.p2":
     "So we decided to do things differently. We became deeply curious about face shapes, stroke angles, and pigment science — all the small things that make the difference between brows that look done and brows that look like yours.",
   "aboutpage.p3":
@@ -291,7 +291,7 @@ const en: Record<string, string> = {
   "gallery.tag": "Our Work",
   "gallery.title": "Gallery",
   "gallery.desc":
-    "Real clients, real brows, no filters. Every pair is designed from scratch — each one is as unique as the person wearing them.",
+    "Real clients, real brows, no filters. Every pair is designed from scratch — as unique as the person wearing them.",
   "gallery.ig": "See More on Instagram →",
   "gallery.ig.desc":
     "We share our latest work and behind-the-scenes moments on Instagram.",
@@ -306,16 +306,16 @@ const en: Record<string, string> = {
   "contact.book.desc":
     "WhatsApp is the quickest way to reach us. Instagram DMs work too. We usually reply within a few hours.",
   "contact.wa.label": "WhatsApp",
-  "contact.wa.desc": "+65 8930 8973 — Quickest way to reach us",
+  "contact.wa.desc": "+65 8930 8973 — quickest way to reach us",
   "contact.ig.label": "Instagram",
   "contact.ig.desc": "@shimmyhands.shop — DMs always open",
   "contact.google.label": "Google Reviews",
   "contact.google.desc": "Leave us a review — it means the world",
   "contact.hours.tag": "Studio Hours",
-  "contact.hours.mf": "Monday — Friday",
-  "contact.hours.mf.time": "10:00 AM — 8:00 PM",
+  "contact.hours.mf": "Monday–Friday",
+  "contact.hours.mf.time": "10:00 AM–8:00 PM",
   "contact.hours.sat": "Saturday",
-  "contact.hours.sat.time": "10:00 AM — 6:00 PM",
+  "contact.hours.sat.time": "10:00 AM–6:00 PM",
   "contact.hours.sun": "Sunday",
   "contact.hours.sun.time": "By Appointment Only",
   "contact.visit.title": "Visit Us",
@@ -333,7 +333,7 @@ const en: Record<string, string> = {
   "footer.desc":
     "Brows designed for your face — thoughtfully, one appointment at a time.",
   "footer.links": "Quick Links",
-  "footer.contact": "Get In Touch",
+  "footer.contact": "Get in Touch",
   "footer.rights": "All rights reserved.",
   "footer.location": "Singapore",
 
@@ -345,7 +345,7 @@ const en: Record<string, string> = {
   // ─── Email Capture ───
   "email.placeholder": "Your email address",
   "email.cta": "Get $10 Off",
-  "email.success": "Thank you — we will be in touch!",
+  "email.success": "Thank you — we'll be in touch!",
   "email.error": "Please enter a valid email address.",
   "email.heading": "Be first to know about new collections — get $10 off your first set.",
 
@@ -396,7 +396,7 @@ const en: Record<string, string> = {
   "book.online.title": "Schedule Your Consultation",
 
   // ─── Urgency / Availability ───
-  "urgency.brows": "Limited slots available this month — book early to secure your preferred date.",
+  "urgency.brows": "Slots are filling up this month — best to book early if you've got a date in mind.",
   "urgency.nails": "Limited sets remaining",
 
   // ─── Referral ───
@@ -419,7 +419,7 @@ const en: Record<string, string> = {
   "faq.3.q": "Is the eyebrow embroidery procedure painful?",
   "faq.3.a": "Numbing cream is applied before the procedure. Most clients report minimal discomfort.",
   "faq.4.q": "How long do Nails by Shimmyhands press-on nails last?",
-  "faq.4.a": "With proper application and care, most sets last 1 to 2 weeks.",
+  "faq.4.a": "With proper application and care, most sets last 1–2 weeks.",
   "faq.5.q": "Can I book a consultation without committing to a service?",
   "faq.5.a": "Yes. We welcome a no-obligation consultation to discuss what suits you best.",
 
@@ -641,7 +641,7 @@ const zh: Record<string, string> = {
   "shop.filter": "按系列筛选",
   "shop.handcrafted.tag": "手工制作",
   "shop.handcrafted.title": "手工制作，用心佩戴",
-  "shop.handcrafted.desc": "每一套都在我们的新加坡工作室手工设计和绑制。没有模具，没有批量生产\u2014\u2014只有用心的艺术，一片一片地完成。",
+  "shop.handcrafted.desc": "每一套都在我们的新加坡工作室手工设计和绘制。没有模具，没有批量生产\u2014\u2014只有用心的艺术，一片一片地完成。",
   "shop.sizeguide": "尺寸指南",
   "shop.sizeguide.title": "找到你的尺寸",
   "shop.sizeguide.tip": "测量自然指甲最宽处。如果介于两个尺寸之间，选择较小的，再锉磨调整。",
@@ -668,9 +668,9 @@ const zh: Record<string, string> = {
   "svc.embroidery.desc":
     "我们的招牌技法。精细刀片逐根描绘，打造自然丰盈的眉毛——像天生长出来的那样自然。",
   "svc.embroidery.inc.1": "完整眉形设计咨询（我们会花时间好好聊）",
-  "svc.embroidery.inc.2": "舒缓麻醉，让你安心放松",
+  "svc.embroidery.inc.2": "贴心麻醉，让你舒适放松",
   "svc.embroidery.inc.3": "双层叠加，打造逼真深度",
-  "svc.embroidery.inc.4": "带走术后护理套装",
+  "svc.embroidery.inc.4": "赠送术后护理套装",
 
   "svc.microblading.title": "微刀雕眉",
   "svc.microblading.price": "从 $488 起",
@@ -679,7 +679,7 @@ const zh: Record<string, string> = {
     "手工逐笔描绘，每一笔都模仿真实毛发。那种安静而美好的细腻感，让你的眉毛看起来自然又精致。",
   "svc.microblading.inc.1": "眉形测量与对称分析",
   "svc.microblading.inc.2": "定制色素颜色匹配",
-  "svc.microblading.inc.3": "轻羽毛线条技法",
+  "svc.microblading.inc.3": "羽毛般轻盈的线条技法",
   "svc.microblading.inc.4": "6周内免费补色",
 
   "svc.nano.title": "纳米雾眉",
@@ -706,13 +706,13 @@ const zh: Record<string, string> = {
   "svc.shaping.price": "从 $48 起",
   "svc.shaping.duration": "30 — 45 分钟",
   "svc.shaping.desc":
-    "还没准备好做半永久？这是一个很好的起点。我们会用线雕、热蜡或两者结合，为你找到最适合的眉形。",
-  "svc.shaping.inc.1": "脸型与骨骼结构分析",
+    "还没准备好做半永久？这是一个很好的起点。我们会用线修、热蜡或两者结合，为你找到最适合的眉形。",
+  "svc.shaping.inc.1": "脸型与面部轮廓分析",
   "svc.shaping.inc.2": "精准眉形设计",
-  "svc.shaping.inc.3": "线雕、热蜡或组合技法",
+  "svc.shaping.inc.3": "线修、热蜡或组合技法",
   "svc.shaping.inc.4": "眉毛定型凝胶收尾",
 
-  "svc.lip.title": "唇部轻纹",
+  "svc.lip.title": "漂唇",
   "svc.lip.price": "从 $488 起",
   "svc.lip.duration": "2 — 2.5 小时",
   "svc.lip.desc":
@@ -730,9 +730,9 @@ const zh: Record<string, string> = {
   "aboutpage.p1":
     "Shimmyhands 的诞生，是因为我们总看到同样的情况——人们带着不太像自己的眉毛离开工作室。千篇一律的形状、一样的弧度、那种稍显明显的感觉。",
   "aboutpage.p2":
-    "所以我们决定用不同的方式来做。我们对脸型、线条角度和色素科学变得非常好奇——那些让眉毛从「做过的」变成「像你的」的小小细节。",
+    "所以我们决定用不同的方式来做。我们对脸型、线条角度和色素科学变得非常好奇——那些让眉毛从“做过的”变成“像你的”的小小细节。",
   "aboutpage.p3":
-    "每一位来找我们的客人都会得到同样的用心：全部的专注、真诚的建议，以及为她的脸精心设计的眉毛。我们宁愿多花一点时间，也要做到最好。",
+    "每一位来找我们的客人都会得到同样的用心：全部的专注、真诚的建议，以及为客人的脸精心设计的眉毛。我们宁愿多花一点时间，也要做到最好。",
   "aboutpage.values.tag": "我们的工作方式",
   "aboutpage.values.title": "我们相信的",
   "aboutpage.v1.title": "用心精准",
@@ -769,7 +769,7 @@ const zh: Record<string, string> = {
   "contact.title": "期待你的消息",
   "contact.desc": "无论你已经想好了还是还在考虑——我们都很乐意帮忙。",
   "contact.book.title.1": "预约",
-  "contact.book.title.2": "你的时间",
+  "contact.book.title.2": "你的时段",
   "contact.book.desc":
     "WhatsApp 是最快的联系方式。Instagram 私信也可以。我们通常几小时内回复。",
   "contact.wa.label": "WhatsApp",
@@ -791,21 +791,21 @@ const zh: Record<string, string> = {
   "contact.visit.address.2": "Singapore 238888",
   "contact.prep.tag": "到店前的小提醒",
   "contact.prep.1": "预约前24小时尽量避免咖啡和酒精",
-  "contact.prep.2": "请素颜到店，眉毛不要化妆",
+  "contact.prep.2": "请勿涂抹眉部彩妆，眉毛保持干净裸妆即可",
   "contact.prep.3": "提前10分钟到，让我们有时间好好聊",
   "contact.prep.4": "如有任何皮肤问题或过敏，请提前告知我们",
 
   // ─── Footer ───
-  "footer.desc": "为你的脸用心设计的眉毛——一次一个预约。",
+  "footer.desc": "为你的脸用心设计的眉毛——每一次预约，都用心对待。",
   "footer.links": "快速导航",
   "footer.contact": "联系方式",
   "footer.rights": "版权所有。",
   "footer.location": "新加坡",
 
   // ─── Stats Bar ───
-  "stats.brows": "眉毛塑造",
+  "stats.brows": "已塑造眉数",
   "stats.rating": "平均评分",
-  "stats.years": "扎根新加坡",
+  "stats.years": "年扎根新加坡",
 
   // ─── Email Capture ───
   "email.placeholder": "请输入邮箱地址",
@@ -927,7 +927,7 @@ const zh: Record<string, string> = {
   "blog.1.p3": "使用纹绣师提供的修复膏，每天用干净棉签薄薄涂抹 2–3 次。少即是多——过多的修复膏会堵塞皮肤，影响留色效果。轻轻一层，几乎看不出来的薄度就刚好。",
   "blog.1.p4": "第 3 到第 7 天，你会注意到轻微的脱皮或结痂。这是皮肤自然愈合的过程。千万不要抠、挠或撕掉皮屑——让它们自然脱落。抠掉可能会把色素带走，留下不均匀的斑点。",
   "blog.1.p5": "至少 2 周内避免阳光直射。紫外线会在色素完全稳定之前大幅度加速褪色。如果必须外出，请戴宽檐帽。痊愈后，在眉毛附近（而非眉毛上）涂抹防晒霜有助于延长持色时间。",
-  "blog.1.p6": "完全愈合大约需要 4–6 周。第 2 周左右颜色可能看起来好像'消失'了——别紧张，色素还在，只是沉入了皮肤表层下方。到第 4 周，真正的颜色会浮现出来。6–8 周后的补色环节会完善任何需要调整的区域。",
+  "blog.1.p6": "完全愈合大约需要 4–6 周。第 2 周左右颜色可能看起来好像“消失”了——别紧张，色素还在，只是沉入了皮肤表层下方。到第 4 周，真正的颜色会浮现出来。6–8 周后的补色环节会完善任何需要调整的区域。",
 
   // 文章 2：如何佩戴穿戴甲
   "blog.2.title": "如何像专业人士一样佩戴穿戴甲",
@@ -952,7 +952,7 @@ const zh: Record<string, string> = {
   "blog.4.desc": "温和卸除穿戴甲的正确方法，让你的自然指甲保持健康完好。",
   "blog.4.p1": "千万不要硬拽或撕掉穿戴甲。强行拉扯会撕裂自然指甲的甲层，让指甲变薄、脆弱甚至疼痛。用正确的方法，卸甲只需 10–15 分钟，指甲完好无损。",
   "blog.4.p2": "将指尖浸泡在温水中，加几滴甲缘油或温和洗手液，浸泡 10–15 分钟。温水软化粘合剂，油脂帮助分解粘合力。你会感觉到穿戴甲随着粘合剂溶解而自然松动。",
-  "blog.4.p3": "穿戴甲松动后，从侧面轻轻将甲皮推或橘木棒滑入底部——绝对不要从指尖撬。慢慢轻柔地摇动。如果某片甲还没松，再多泡几分钟，不要硬来。这里的耐心保护的是你的自然指甲。",
+  "blog.4.p3": "穿戴甲松动后，用甲皮推或橘木棒从侧面轻轻滑入甲片底部——绝对不要从指尖撬。慢慢轻柔地摇动。如果某片甲还没松，再多泡几分钟，不要硬来。这里的耐心保护的是你的自然指甲。",
   "blog.4.p4": "卸除后，用细磨指甲锉轻轻去除残余粘合剂。大量涂抹甲缘油，按摩到每个指甲和周围皮肤。这样可以恢复水分，保持指甲强韧。你的自然指甲应该看起来完全健康——随时准备好迎接下一套穿戴甲。",
 
   // 文章 5：如何选择适合的眉形
@@ -985,7 +985,7 @@ const zh: Record<string, string> = {
   "launch.title": "新系列即将到来",
   "launch.desc": "抢先了解。加入等候名单享受独家提前购买权。",
   "launch.days": "天",
-  "launch.hours": "时",
+  "launch.hours": "小时",
   "launch.minutes": "分",
   "launch.seconds": "秒",
   "launch.notify": "发布时通知我",

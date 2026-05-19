@@ -58,12 +58,7 @@ export default function AboutPage() {
               └──────────────────────────────────────┘ */}
           <AnimateOnScroll animation="fade-right">
           <div className="aspect-[3/4] bg-gradient-to-br from-vermillion/10 via-cream-dark to-jade/5 flex items-center justify-center reveal-overlay">
-            <div className="text-center">
-              <span className="text-5xl sm:text-7xl text-gold/20 animate-petal-slow">✦</span>
-              <p className="mt-4 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-warm-gray">
-                Artist Photo
-              </p>
-            </div>
+            <span className="text-5xl sm:text-7xl text-gold/20 animate-petal-slow">✦</span>
           </div>
           </AnimateOnScroll>
 
@@ -148,14 +143,15 @@ export default function AboutPage() {
               │  certification logos / badges.         │
               │  Use next/image for each.              │
               └──────────────────────────────────────┘ */}
+          {/* TODO: Replace placeholder certification badges with real logos */}
           <div className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 max-w-md sm:max-w-none mx-auto">
-            {["Certification 1", "Certification 2", "Certification 3"].map(
-              (cert) => (
+            {[1, 2, 3].map(
+              (n) => (
                 <div
-                  key={cert}
-                  className="flex h-16 sm:h-20 items-center justify-center border border-vermillion/15 text-[10px] sm:text-xs text-warm-gray"
+                  key={n}
+                  className="flex h-16 sm:h-20 items-center justify-center border border-vermillion/15 text-[10px] sm:text-xs text-warm-gray/40"
                 >
-                  {cert}
+                  ✦
                 </div>
               ),
             )}

@@ -101,7 +101,7 @@ export default function Home() {
                   <div className="text-center px-4">
                     <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
                     <p className="text-[9px] uppercase tracking-[0.3em] text-warm-gray/40">
-                      Brows by Shimmyhands
+                      {t("home.brows.title")}
                     </p>
                     <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
                   </div>

@@ -188,9 +188,6 @@ export default function Home() {
             <div className="aspect-[4/5] bg-gradient-to-br from-vermillion/10 via-cream-dark to-jade/5 flex items-center justify-center reveal-overlay">
               <div className="text-center">
                 <span className="text-5xl sm:text-6xl text-gold/30">✦</span>
-                <p className="mt-4 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-warm-gray">
-                  Your Photo Here
-                </p>
               </div>
             </div>
           </AnimateOnScroll>
@@ -240,17 +237,17 @@ export default function Home() {
               <BeforeAfterCard
                 before="/images/results/before-1.jpg"
                 after="/images/results/after-1.jpg"
-                label="Nano Brows"
+                label={t("services.nano.title")}
               />
               <BeforeAfterCard
                 before="/images/results/before-2.jpg"
                 after="/images/results/after-2.jpg"
-                label="Ombre Powder Brows"
+                label={t("services.ombre.title")}
               />
               <BeforeAfterCard
                 before="/images/results/before-3.jpg"
                 after="/images/results/after-3.jpg"
-                label="Eyebrow Embroidery"
+                label={t("services.embroidery.title")}
               />
             </Stagger>
           </div>
@@ -286,9 +283,6 @@ export default function Home() {
                       <div className="mx-auto w-12 h-[1px] bg-vermillion/20 mb-3" />
                       <p className="text-[10px] uppercase tracking-[0.25em] text-vermillion/30">
                         {item.service}
-                      </p>
-                      <p className="mt-1 text-[8px] uppercase tracking-[0.2em] text-cream-dark/20">
-                        Client result photo
                       </p>
                       <div className="mx-auto w-12 h-[1px] bg-vermillion/20 mt-3" />
                     </div>
@@ -407,7 +401,7 @@ export default function Home() {
         </AnimateOnScroll>
       </section>
     </>
-    <StickyBookBar serviceName="Brow Consultation" href="/brows" />
+    <StickyBookBar serviceName={t("hero.cta.book")} href="/brows" />
     </HomeWithIntro>
   );
 }

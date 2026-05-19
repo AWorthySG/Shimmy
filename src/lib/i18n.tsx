@@ -257,15 +257,15 @@ const en: Record<string, string> = {
   "aboutpage.tag": "Founder Story",
   "aboutpage.title": "About Shimmy",
   "aboutpage.headline.1": "Meet",
-  "aboutpage.headline.2": "Cherry",
+  "aboutpage.headline.2": "Abigail",
   "aboutpage.p1":
-    "In 2021, Cherry Tan walked out of a brow embroidery appointment in tears. Uneven arches, pigment two shades too dark, a shape lifted off someone else's Pinterest board. She was a graphic designer at the time — she could see exactly what was wrong, line by line, and she had to live with it on her face for a year.",
+    "Before Shimmy, Abigail Chung was the friend everyone came to for nails and lashes. She had a knack for the small, careful details — the kind that turn a set of nails from nice into something people actually notice. She loved it, and she was good at it. Then she got pregnant, and everything paused. Lash fumes, nail dust, long hours hunched over a desk — none of it was compatible with the baby on the way. She needed a new direction.",
   "aboutpage.p2":
-    "That year wasn't quiet. She read everything she could find on facial anatomy and pigment chemistry. She flew to Seoul, then Osaka, training under masters who treated brows like architecture — millimetres, golden ratios, hair direction mapped to bone structure. By the time her own brows had finally faded, she wasn't going back to design. She was opening a studio.",
+    "That's when brows found her. She flew to Foshan, China, and spent over a year training under Yang Yi at one of the country's most respected brow academies. Not a weekend course — a full apprenticeship. She practised on dozens of local clients, learned the art of face mapping from someone who'd been doing it for decades, and built friendships with artists from across the country. It wasn't just technique she picked up there — it was a philosophy. Every face has its own architecture, and the brows should honour it.",
   "aboutpage.p3":
-    "Shimmy is what came out of it. Brows by Shimmyhands is the original craft — embroidery, nano, ombre, lip blush — done slowly, mapped properly, made to suit your face and not a trend cycle. Nails came later, almost by accident. Clients kept asking, \"where do I get nails that match this energy?\" So Cherry started handcrafting press-ons in the same studio, same standard. Two services, one philosophy.",
+    "She came back to Singapore with a clear purpose: to bring this craft home and do it properly. Brows by Shimmyhands is the result — embroidery, nano, ombre, lip blush — each one mapped to the individual face, never rushed, never templated. The nails came back too, eventually. Clients kept saying, \"you made my brows feel like me — can you do the same for my hands?\" Nails by Shimmyhands was a natural extension of the same standard.",
   "aboutpage.p4":
-    "The throughline is simple: beauty done with care, made for you — not the algorithm. No upsells, no rushed appointments, no shape you'll have to grow out of. Just an honest conversation, a steady hand, and work you'll still love a year from now.",
+    "For Abigail, this was never just about brows. It's about the moment a woman looks in the mirror and actually likes what she sees — the quiet confidence that comes from a face that feels right. Beautiful brows won't fix everything, but they're a good first step. And that step is what Shimmy is here to give you.",
   "aboutpage.values.tag": "How We Work",
   "aboutpage.values.title": "What We Believe In",
   "aboutpage.v1.title": "Careful Precision",
@@ -884,15 +884,15 @@ const zh: Record<string, string> = {
   "aboutpage.tag": "创始人故事",
   "aboutpage.title": "关于 Shimmy",
   "aboutpage.headline.1": "认识",
-  "aboutpage.headline.2": "Cherry",
+  "aboutpage.headline.2": "Abigail",
   "aboutpage.p1":
-    "2021 年，Cherry Tan 从一家绣眉工作室走出来的时候，眼泪在打转。眉峰两边不对称，色素深了整整两个色号，眉形是别人 Pinterest 上抄来的。那时候她是平面设计师——哪里出了问题，她一眼就看得明明白白，可那对眉毛得在她脸上跟着她过整整一年。",
+    "在 Shimmy 之前，Abigail Chung 是朋友圈里那个大家都找她做美甲和睫毛的人。她擅长那些细致入微的小细节——能把一套指甲从「还不错」变成「真的好看」的那种。她喜欢这件事，也做得很好。然后她怀孕了，一切就暂停了。嫁接睫毛的胶水味、指甲粉尘、长时间弯腰——这些都跟肚子里的宝宝不兼容。她需要一个新方向。",
   "aboutpage.p2":
-    "那一年她没闲着。她把能找到的脸部解剖学和色素化学资料都翻了一遍。飞首尔，再飞大阪，跟着把眉毛当建筑来对待的老师学习——毫米的精度、黄金比例、毛流走向对应骨骼结构。等到自己那对眉毛终于褪干净，她也不打算回去做设计了。她准备开一间工作室。",
+    "就在那时候，她遇见了眉毛这门手艺。她飞到中国佛山，在全国最受认可的纹绣学院之一，跟着杨艺老师学了一年多。不是几天的速成班——是正式的跟师学艺。她为几十位当地客人做练习，跟着一位从业几十年的老师学脸部测量，也和全国各地的纹绣师结下了友谊。她在那里带回来的不仅是技术——还有一种理念。每张脸都有自己的结构，眉毛应该尊重它。",
   "aboutpage.p3":
-    "Shimmy 就是这样诞生的。Brows by Shimmyhands 是最初的本行——绣眉、纳米眉、雾眉、唇釉——慢慢做、设计到位、为你的脸而做，不追当下的风潮。美甲是后来才加上的，算是无心插柳。客人一直问：「能在哪里做到跟这对眉毛同一种氛围的指甲？」于是 Cherry 在同一间工作室、用同样的标准，开始亲手打造穿戴甲。两项服务，一种态度。",
+    "回到新加坡后，她的目标很清楚：把这门手艺带回来，认真地做。Brows by Shimmyhands 就是这样来的——绣眉、纳米眉、雾眉、唇釉——每一位都根据你的脸来设计，从不赶工，绝不套模板。美甲后来也回来了。客人总说：「你让我的眉毛变得像我自己——手上也能做到吗？」Nails by Shimmyhands 是同一套标准的自然延伸。",
   "aboutpage.p4":
-    "贯穿始终的想法很简单：用心去做，为你而做——不是为算法。不推销、不赶时间、不做你过几个月就想长掉的眉形。只有一次真诚的对话、一双稳的手，以及你一年后依然喜欢的作品。",
+    "对 Abigail 来说，这从来不只是关于眉毛。而是那个你照镜子时终于觉得好看的瞬间——那种脸对了之后带来的安静的自信。漂亮的眉毛不能解决所有问题，但它是很好的第一步。而这一步，就是 Shimmy 存在的意义。",
   "aboutpage.values.tag": "我们的工作方式",
   "aboutpage.values.title": "我们相信的",
   "aboutpage.v1.title": "用心精准",

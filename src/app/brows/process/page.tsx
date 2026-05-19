@@ -30,17 +30,40 @@ export default function ProcessPage() {
         <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
       </div>
 
-      {/* Timeline */}
+      {/* What to Bring — checklist */}
       <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-2xl">
+          <AnimateOnScroll animation="fade-up">
+            <h2 className="font-serif text-xl sm:text-2xl text-charcoal md:text-3xl mb-4">
+              {t("process.bring.title")}
+            </h2>
+            <p className="text-sm leading-relaxed text-charcoal-light">
+              {t("process.bring.desc")}
+            </p>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="flex items-center justify-center gap-3 my-2">
+        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
+        <span className="text-vermillion/40 text-xs">✦</span>
+        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
+      </div>
+
+      {/* Timeline intro + steps */}
+      <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-2xl">
+          {/* Timeline header */}
+          <AnimateOnScroll animation="fade-up">
+            <p className="mb-10 text-sm leading-relaxed text-charcoal-light text-center">
+              {t("process.timeline")}
+            </p>
+          </AnimateOnScroll>
+
           {steps.map((step, i) => {
             const isLast = i === steps.length - 1;
-            const desc = t(`process.step.${step}.desc`);
-
-            // Step 3 uses the same i18n-driven description as the others.
-            // The glossary tooltip can be added later by wrapping a specific
-            // term in the rendered text if needed.
-            const descContent = desc;
+            const descContent = t(`process.step.${step}.desc`);
 
             return (
               <AnimateOnScroll
@@ -60,7 +83,9 @@ export default function ProcessPage() {
                   </div>
 
                   {/* Right: content */}
-                  <div className={`pb-8 sm:pb-12 ${isLast ? "pb-0 sm:pb-0" : ""}`}>
+                  <div
+                    className={`pb-8 sm:pb-12 ${isLast ? "pb-0 sm:pb-0" : ""}`}
+                  >
                     <div className="flex items-baseline gap-3">
                       <h3 className="font-serif text-lg sm:text-xl text-charcoal">
                         {t(`process.step.${step}.title`)}
@@ -80,7 +105,28 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Divider */}
+      <div className="flex items-center justify-center gap-3 my-2">
+        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
+        <span className="text-vermillion/40 text-xs">✦</span>
+        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
+      </div>
+
+      {/* After You Leave — healing section */}
+      <section className="bg-cream-dark py-14 sm:py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-2xl">
+          <AnimateOnScroll animation="fade-up">
+            <h2 className="font-serif text-xl sm:text-2xl text-charcoal md:text-3xl mb-4">
+              {t("process.healing.title")}
+            </h2>
+            <p className="text-sm leading-relaxed text-charcoal-light">
+              {t("process.healing.desc")}
+            </p>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
+      {/* CTA with WhatsApp button */}
       <section className="bg-cream py-12 sm:py-16 px-4 sm:px-6 text-center">
         <div className="mx-auto max-w-2xl">
           <h2 className="font-serif text-xl sm:text-2xl text-charcoal md:text-3xl">

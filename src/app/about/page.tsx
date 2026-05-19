@@ -83,6 +83,9 @@ export default function AboutPage() {
               <p>
                 {t("aboutpage.p3")}
               </p>
+              <p>
+                {t("aboutpage.p4")}
+              </p>
             </div>
           </div>
           </AnimateOnScroll>

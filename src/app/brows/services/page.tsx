@@ -6,6 +6,8 @@ import { useI18n } from "@/lib/i18n";
 import FAQ, { faqKeys } from "@/components/FAQ";
 import StickyBookBar from "@/components/StickyBookBar";
 import ServiceComparison from "@/components/ServiceComparison";
+import ServiceFAQ from "@/components/ServiceFAQ";
+import Glossary from "@/components/Glossary";
 
 /* ──────────────────────────────────────────────
    TODO: Update each service below with your
@@ -19,6 +21,7 @@ export default function ServicesPage() {
 
   const services = [
     {
+      id: "embroidery",
       title: t("svc.embroidery.title"),
       price: t("svc.embroidery.price"),       /* TODO: Your actual price */
       duration: t("svc.embroidery.duration"),  /* TODO: Your actual duration */
@@ -32,6 +35,7 @@ export default function ServicesPage() {
       ],
     },
     {
+      id: "microblading",
       title: t("svc.microblading.title"),
       price: t("svc.microblading.price"),
       duration: t("svc.microblading.duration"),
@@ -45,6 +49,7 @@ export default function ServicesPage() {
       ],
     },
     {
+      id: "nano",
       title: t("svc.nano.title"),
       price: t("svc.nano.price"),
       duration: t("svc.nano.duration"),
@@ -58,6 +63,7 @@ export default function ServicesPage() {
       ],
     },
     {
+      id: "ombre",
       title: t("svc.ombre.title"),
       price: t("svc.ombre.price"),
       duration: t("svc.ombre.duration"),
@@ -71,6 +77,7 @@ export default function ServicesPage() {
       ],
     },
     {
+      id: "shaping",
       title: t("svc.shaping.title"),
       price: t("svc.shaping.price"),
       duration: t("svc.shaping.duration"),
@@ -84,6 +91,7 @@ export default function ServicesPage() {
       ],
     },
     {
+      id: "lip",
       title: t("svc.lip.title"),
       price: t("svc.lip.price"),
       duration: t("svc.lip.duration"),
@@ -173,7 +181,7 @@ export default function ServicesPage() {
                   {t("svcpage.includes")}
                 </p>
                 <ul className="grid gap-2 sm:grid-cols-2">
-                  {service.includes.map((item) => (
+                  {service.includes.map((item, idx) => (
                     <li
                       key={item}
                       className="flex items-start gap-2 text-sm text-charcoal-light"
@@ -181,11 +189,21 @@ export default function ServicesPage() {
                       <span className="mt-0.5 text-vermillion text-xs shrink-0">
                         ◆
                       </span>
-                      {item}
+                      {/* Wrap "Numbing" with glossary tooltip for embroidery inc.2 */}
+                      {service.id === "embroidery" && idx === 1 ? (
+                        <span>
+                          <Glossary term="Numbing" definition={t("glossary.numbing_cream")} /> for a comfortable experience
+                        </span>
+                      ) : (
+                        item
+                      )}
                     </li>
                   ))}
                 </ul>
               </div>
+
+              {/* Service-specific FAQ */}
+              <ServiceFAQ serviceId={service.id} />
               </div>{/* end padding wrapper */}
             </div>
             </AnimateOnScroll>

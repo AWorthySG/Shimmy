@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Stagger } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
+import { useWishlist } from "@/lib/wishlist";
 import { collections, products, type Product } from "@/lib/products";
 import EmailCapture from "@/components/EmailCapture";
 import RestockNotify from "@/components/RestockNotify";
@@ -13,7 +14,9 @@ import RestockNotify from "@/components/RestockNotify";
 function ProductCard({ product }: { product: Product }) {
   const { t } = useI18n();
   const { addItem } = useCart();
+  const { toggleItem, isInWishlist } = useWishlist();
   const [added, setAdded] = useState(false);
+  const wishlisted = isInWishlist(product.id);
 
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -21,6 +24,12 @@ function ProductCard({ product }: { product: Product }) {
     addItem(product);
     setAdded(true);
     setTimeout(() => setAdded(false), 1200);
+  };
+
+  const handleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleItem(product.id);
   };
 
   return (
@@ -49,6 +58,27 @@ function ProductCard({ product }: { product: Product }) {
             </div>
           </div>
         )}
+
+        {/* Wishlist heart button */}
+        <button
+          onClick={handleWishlist}
+          className="absolute top-2 right-2 z-10 p-2 transition-all duration-200 hover:scale-110"
+          aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill={wishlisted ? "#e53e3e" : "none"}
+            stroke={wishlisted ? "#e53e3e" : "currentColor"}
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={wishlisted ? "" : "text-charcoal/60 drop-shadow-sm"}
+          >
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+          </svg>
+        </button>
       </div>
 
       <div className="p-4 sm:p-5">
@@ -102,14 +132,56 @@ const limitedStockCollections: Record<string, boolean> = {
   'ingenue': false,
 }
 
+type SortOption = "newest" | "price-asc" | "price-desc";
+
+const ALL_COLOURS = [
+  "Evergreen", "Mulled Wine", "Midnight", "Amethyst",
+  "Baby Blue", "Sweet Mint", "Milky Lavender", "Cool Dawn",
+  "Warm Sunset", "Peach", "Nude", "Blush",
+];
+
 export default function ShopPage() {
   const { t } = useI18n();
   const [activeFilter, setActiveFilter] = useState("all");
+  const [sortBy, setSortBy] = useState<SortOption>("newest");
+  const [selectedColours, setSelectedColours] = useState<string[]>([]);
 
-  const filtered =
-    activeFilter === "all"
-      ? products
+  const toggleColour = (colour: string) => {
+    setSelectedColours((prev) =>
+      prev.includes(colour)
+        ? prev.filter((c) => c !== colour)
+        : [...prev, colour]
+    );
+  };
+
+  const filtered = useMemo(() => {
+    let result = activeFilter === "all"
+      ? [...products]
       : products.filter((p) => p.collectionHandle === activeFilter);
+
+    // Apply colour filter (AND with collection)
+    if (selectedColours.length > 0) {
+      result = result.filter((p) =>
+        p.colours?.some((c) => selectedColours.includes(c))
+      );
+    }
+
+    // Apply sorting
+    switch (sortBy) {
+      case "price-asc":
+        result.sort((a, b) => a.price - b.price);
+        break;
+      case "price-desc":
+        result.sort((a, b) => b.price - a.price);
+        break;
+      case "newest":
+      default:
+        // Keep original order (newest)
+        break;
+    }
+
+    return result;
+  }, [activeFilter, sortBy, selectedColours]);
 
   // Compute min price per collection for "From $X" display (Task 2)
   const collectionMinPrices = useMemo(() => {
@@ -140,35 +212,81 @@ export default function ShopPage() {
       {/* ─── Filter Tabs ─── */}
       <section className="bg-soft-white border-b border-gold/15 sticky top-[57px] z-30">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-3">
-          <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 -mx-1 px-1">
-            <button
-              onClick={() => setActiveFilter("all")}
-              className={`shrink-0 px-4 py-2 text-[10px] uppercase tracking-[0.15em] transition-all duration-300 touch-target ${
-                activeFilter === "all"
-                  ? "bg-vermillion text-soft-white"
-                  : "border border-vermillion/20 text-charcoal-light hover:border-vermillion hover:text-vermillion"
-              }`}
-            >
-              {t("shop.all")}
-            </button>
-            {collections.map((c) => (
+          {/* Collection filters + Sort dropdown row */}
+          <div className="flex items-center gap-2">
+            <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 -mx-1 px-1 flex-1">
               <button
-                key={c.handle}
-                onClick={() => setActiveFilter(c.handle)}
-                className={`shrink-0 px-4 py-2 text-[10px] uppercase tracking-[0.15em] transition-all duration-300 whitespace-nowrap touch-target ${
-                  activeFilter === c.handle
+                onClick={() => setActiveFilter("all")}
+                className={`shrink-0 px-4 py-2 text-[10px] uppercase tracking-[0.15em] transition-all duration-300 touch-target ${
+                  activeFilter === "all"
                     ? "bg-vermillion text-soft-white"
                     : "border border-vermillion/20 text-charcoal-light hover:border-vermillion hover:text-vermillion"
                 }`}
               >
-                {c.title}
-                {collectionMinPrices[c.handle] && (
-                  <span className="ml-1.5 text-[9px] opacity-70">
-                    From ${collectionMinPrices[c.handle]}
-                  </span>
-                )}
+                {t("shop.all")}
+              </button>
+              {collections.map((c) => (
+                <button
+                  key={c.handle}
+                  onClick={() => setActiveFilter(c.handle)}
+                  className={`shrink-0 px-4 py-2 text-[10px] uppercase tracking-[0.15em] transition-all duration-300 whitespace-nowrap touch-target ${
+                    activeFilter === c.handle
+                      ? "bg-vermillion text-soft-white"
+                      : "border border-vermillion/20 text-charcoal-light hover:border-vermillion hover:text-vermillion"
+                  }`}
+                >
+                  {c.title}
+                  {collectionMinPrices[c.handle] && (
+                    <span className="ml-1.5 text-[9px] opacity-70">
+                      From ${collectionMinPrices[c.handle]}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+
+            {/* Sort dropdown */}
+            <div className="shrink-0">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as SortOption)}
+                className="px-3 py-2 text-[10px] uppercase tracking-[0.15em] border border-vermillion/20 bg-soft-white text-charcoal-light hover:border-vermillion hover:text-vermillion transition-all duration-300 cursor-pointer focus:outline-none focus:border-vermillion/50 appearance-none pr-7"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23999' stroke-width='1.2'/%3E%3C/svg%3E")`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'right 8px center',
+                }}
+              >
+                <option value="newest">Newest</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Colour filter chips */}
+          <div className="flex gap-2 overflow-x-auto scrollbar-hide mt-2 pb-1 -mx-1 px-1">
+            {ALL_COLOURS.map((colour) => (
+              <button
+                key={colour}
+                onClick={() => toggleColour(colour)}
+                className={`shrink-0 px-3 py-1.5 text-[9px] uppercase tracking-[0.12em] transition-all duration-300 whitespace-nowrap touch-target ${
+                  selectedColours.includes(colour)
+                    ? "bg-vermillion text-soft-white"
+                    : "border border-vermillion/15 text-charcoal-light hover:border-vermillion/40 hover:text-vermillion"
+                }`}
+              >
+                {colour}
               </button>
             ))}
+            {selectedColours.length > 0 && (
+              <button
+                onClick={() => setSelectedColours([])}
+                className="shrink-0 px-3 py-1.5 text-[9px] uppercase tracking-[0.12em] text-warm-gray hover:text-vermillion transition-colors touch-target"
+              >
+                Clear
+              </button>
+            )}
           </div>
         </div>
       </section>

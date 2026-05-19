@@ -1,7 +1,89 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
+import Calendar from "@/components/Calendar";
+
+function MiniBookingCalendar() {
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [slotsCount, setSlotsCount] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [blockedDates, setBlockedDates] = useState<string[]>([]);
+
+  // Fetch blocked dates on mount (best effort)
+  useEffect(() => {
+    async function fetchBlocked() {
+      try {
+        const res = await fetch("/api/bookings/blocked-dates");
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data.dates)) {
+            setBlockedDates(data.dates);
+          }
+        }
+      } catch {
+        // Non-critical, ignore
+      }
+    }
+    fetchBlocked();
+  }, []);
+
+  const handleDateSelect = useCallback(async (date: string) => {
+    setSelectedDate(date);
+    setLoading(true);
+    setSlotsCount(null);
+    try {
+      const res = await fetch(`/api/bookings/slots?date=${date}&service=embroidery`);
+      if (res.ok) {
+        const data = await res.json();
+        setSlotsCount(data.slots?.length ?? 0);
+      } else {
+        setSlotsCount(0);
+      }
+    } catch {
+      setSlotsCount(0);
+    }
+    setLoading(false);
+  }, []);
+
+  return (
+    <div>
+      <div className="border border-vermillion/15 bg-cream/30 p-4 sm:p-6">
+        <Calendar
+          selectedDate={selectedDate}
+          onSelect={handleDateSelect}
+          blockedDates={blockedDates}
+          readOnly
+        />
+      </div>
+      {selectedDate && (
+        <div className="mt-4 text-center">
+          {loading ? (
+            <div className="inline-block w-4 h-4 border-2 border-vermillion/20 border-t-vermillion rounded-full animate-spin" />
+          ) : (
+            <>
+              <p className="text-sm text-charcoal-light">
+                {slotsCount !== null && slotsCount > 0
+                  ? `${slotsCount} slots available`
+                  : "No slots available"}
+              </p>
+              {slotsCount !== null && slotsCount > 0 && (
+                <Link
+                  href="/brows"
+                  className="mt-3 inline-block px-5 py-2.5 text-[10px] uppercase tracking-[0.2em] bg-vermillion text-soft-white hover:bg-vermillion-dark transition-colors touch-target"
+                >
+                  Book This Date
+                </Link>
+              )}
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function ContactPage() {
   const { t } = useI18n();
@@ -147,23 +229,12 @@ export default function ContactPage() {
               {t("contact.visit.desc")}
             </p>
 
-            {/* ┌──────────────────────────────────────┐
-                │  TODO: Replace with Google Maps embed │
-                │  <iframe                              │
-                │    src="https://maps.google.com/..."  │
-                │    className="w-full h-full border-0" │
-                │    loading="lazy" />                  │
-                └──────────────────────────────────────┘ */}
-            <div className="mt-6 sm:mt-8 aspect-[4/3] border border-vermillion/10 bg-gradient-to-br from-cream-dark to-jade/5 flex flex-col items-center justify-center">
-              <span className="text-4xl sm:text-5xl text-vermillion/20">📍</span>
-              <p className="mt-4 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-warm-gray">
-                {t("contact.visit.title")}
-              </p>
-              {/* TODO: Replace with your actual address */}
-              <p className="mt-2 text-sm text-charcoal-light">
-                {t("contact.visit.address.1")}
-              </p>
-              <p className="text-sm text-charcoal-light">{t("contact.visit.address.2")}</p>
+            {/* Mini booking calendar */}
+            <div className="mt-6 sm:mt-8">
+              <h3 className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">
+                Check Availability
+              </h3>
+              <MiniBookingCalendar />
             </div>
 
             {/* Pre-visit info */}

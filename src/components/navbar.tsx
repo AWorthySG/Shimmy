@@ -230,6 +230,34 @@ export function Navbar() {
 
         {/* Mobile controls */}
         <div className="lg:hidden flex items-center gap-2">
+          {/* Search icon */}
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="relative text-charcoal-light transition-colors hover:text-vermillion touch-target p-2"
+            aria-label="Search"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </button>
+
+          {/* Wishlist icon */}
+          <Link
+            href="/wishlist"
+            className="relative text-charcoal-light transition-colors hover:text-vermillion touch-target p-2"
+            aria-label="Wishlist"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+            </svg>
+            {wishlistCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-vermillion text-[9px] font-medium text-soft-white">
+                {wishlistCount}
+              </span>
+            )}
+          </Link>
+
           {/* Cart icon */}
           <button
             onClick={() => setIsCartOpen(true)}
@@ -382,6 +410,9 @@ export function Navbar() {
 
       {/* Cart Drawer */}
       <CartDrawer />
+
+      {/* Search Overlay */}
+      {searchOpen && <SearchOverlay onClose={closeSearch} />}
     </header>
   );
 }

@@ -987,6 +987,85 @@ const zh: Record<string, string> = {
   "faq.5.q": "可以只做咨询不做服务吗？",
   "faq.5.a": "当然可以。我们欢迎无压力的咨询，帮你了解什么最适合你。",
 
+  // ─── Service-Specific FAQs ───
+  "faq.svc.emb.1.q": "绣眉会留疤吗？",
+  "faq.svc.emb.1.a": "不会。绣眉只是将色素植入皮肤表层——在专业操作和正确护理下，不会深到留疤的程度。",
+  "faq.svc.emb.2.q": "绣眉后多久可以沾水？",
+  "faq.svc.emb.2.a": "前 7 天请保持眉毛完全干燥。之后可以轻微接触水，但至少 2 周内避免浸泡或蒸汽。",
+
+  "faq.svc.mic.1.q": "油性皮肤适合微刀雕眉吗？",
+  "faq.svc.mic.1.a": "可以做，但油性皮肤容易让微刀线条模糊和褪色更快。如果你是油性肤质，纳米雾眉通常是更好的长期选择。",
+  "faq.svc.mic.2.q": "微刀雕眉一开始会不会太深？",
+  "faq.svc.mic.2.a": "会的——刚做完的眉毛通常比最终效果深 30-40%。随着皮肤在接下来 2 周内愈合，颜色会明显变浅。",
+
+  "faq.svc.nano.1.q": "为什么纳米雾眉比较贵？",
+  "faq.svc.nano.1.a": "纳米雾眉使用先进的数字设备和超细针头，需要专业培训。效果也更持久，通常可维持 18-24 个月。",
+  "faq.svc.nano.2.q": "纳米雾眉可以去除吗？",
+  "faq.svc.nano.2.a": "可以。纳米雾眉色素可以通过盐水去除或激光治疗来去除或淡化，建议先咨询专业人士。",
+
+  "faq.svc.ombre.1.q": "渐变粉黛眉看起来像化妆吗？",
+  "faq.svc.ombre.1.a": "它呈现柔和的填充效果，类似眉粉——但比每天化妆更自然细腻。设计理念是让你看起来'还是你的眉毛，只是更好看了'。",
+  "faq.svc.ombre.2.q": "渐变粉黛眉适合眉毛稀疏的人吗？",
+  "faq.svc.ombre.2.a": "非常适合。渐变粉黛眉是稀疏眉毛的最佳选择之一，因为它营造出柔和的色彩层次感，不依赖现有毛发就能打造丰盈效果。",
+
+  "faq.svc.shp.1.q": "多久需要修一次眉？",
+  "faq.svc.shp.1.a": "理想情况下每 3-4 周一次，以保持整洁的眉形。每个人毛发生长速度不同，你的眉毛师会建议最适合你的频率。",
+  "faq.svc.shp.2.q": "线修比热蜡更痛吗？",
+  "faq.svc.shp.2.a": "大多数人觉得线修更精准但稍微有点刺痛，比热蜡感觉强一点。两种方式都很快——每个区域的感觉只持续几秒钟。",
+
+  "faq.svc.lip.1.q": "漂唇需要多久恢复？",
+  "faq.svc.lip.1.a": "完全恢复大约需要 4-6 周。第一周可能会有干燥和脱皮——真正的颜色会在第 3 到 4 周显现。",
+  "faq.svc.lip.2.q": "可以选择唇色吗？",
+  "faq.svc.lip.2.a": "当然可以！我们会在咨询时为你定制调配色素，从自然的'裸唇色但更好看'到更明显的玫瑰色调，你来选择。",
+
+  // ─── Glossary ───
+  "glossary.nano_needle": "数字机器中使用的超细单针，精准植入色素——比头发丝还细。",
+  "glossary.microblading": "一种手工技术，使用手持刀片创造细小的毛发状切口来填入色素，模仿自然眉毛。",
+  "glossary.ombre_powder": "一种机器晕染技术，打造柔和的渐变眉——前端较浅，尾部渐渐加深。",
+  "glossary.fan_strokes": "从眉头向外扇形展开的线条样式，模仿自然眉毛的生长方向。",
+  "glossary.pigment_retention": "植入色素在皮肤中保持可见的程度——受肤质、术后护理和技术影响。",
+  "glossary.numbing_cream": "操作前涂抹的外用麻醉膏，减少不适感。大约 15 分钟后完全生效。",
+  "glossary.touch_up": "补色环节（通常在首次操作后 6-8 周），完善色素可能不均匀褪色的区域。",
+  "glossary.caviar_finish": "一种纹理凸起的美甲工艺，使用微小珠子打造奢华的鱼子酱质感表面。",
+
+  // ─── Process Page ───
+  "process.tag": "你的预约流程",
+  "process.title": "你的预约流程",
+  "process.step.1.title": "咨询",
+  "process.step.1.time": "15 分钟",
+  "process.step.1.desc": "我们从面部测量和真诚的对话开始，聊聊哪种形状和风格最能衬托你的五官。",
+  "process.step.2.title": "设计",
+  "process.step.2.time": "15 分钟",
+  "process.step.2.desc": "用铅笔在你的皮肤上勾勒轮廓，反复调整，直到你完全满意为止。这一步我们绝不赶时间。",
+  "process.step.3.title": "麻醉",
+  "process.step.3.time": "15 分钟",
+  "process.step.3.desc": "我们涂抹外用麻醉膏，让你放松等待它生效。大多数客人之后几乎感觉不到不适。",
+  "process.step.4.title": "操作",
+  "process.step.4.time": "60 分钟",
+  "process.step.4.desc": "一笔一笔，用心描绘。全程关注你的感受——你的舒适和最终效果同样重要。",
+  "process.step.5.title": "揭晓",
+  "process.step.5.time": "5 分钟",
+  "process.step.5.desc": "照镜子的时刻——这是最开心的环节。我们会做最后的微调，让你带着自信和满意离开。",
+  "process.step.6.title": "术后说明",
+  "process.step.6.time": "10 分钟",
+  "process.step.6.desc": "我们详细讲解恢复过程，并送你术后护理套装和一份打印的护理指南。",
+  "process.cta": "准备好预约了吗？",
+
+  // ─── Press / As Seen In ───
+  "press.title": "媒体报道",
+
+  // ─── Seasonal Banners ───
+  "seasonal.cny": "新年焕新眉——趁早预约不排队",
+  "seasonal.spring": "新娘眉毛套餐——立即咨询",
+  "seasonal.summer": "夏日防晒眉——预约咨询",
+  "seasonal.fall": "新季节新面貌——焕新你的眉毛",
+  "seasonal.holiday": "送一份 Shimmy 体验作为节日礼物",
+  "seasonal.cta.cny": "立即预约",
+  "seasonal.cta.spring": "立即咨询",
+  "seasonal.cta.summer": "立即预约",
+  "seasonal.cta.fall": "立即预约",
+  "seasonal.cta.holiday": "选购礼品",
+
   // ─── Most Popular Badge ───
   "badge.popular": "最受欢迎",
 

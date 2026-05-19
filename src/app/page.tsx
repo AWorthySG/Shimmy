@@ -8,6 +8,7 @@ import StatsBar from "@/components/StatsBar";
 import EmailCapture from "@/components/EmailCapture";
 import InstagramFeed from "@/components/InstagramFeed";
 import Stories from "@/components/Stories";
+import PressBanner from "@/components/PressBanner";
 
 export default function Home() {
   const { t } = useI18n();
@@ -236,6 +237,9 @@ export default function Home() {
 
       {/* ─── Instagram Feed ─── */}
       <InstagramFeed />
+
+      {/* ─── Press / As Seen In ─── */}
+      <PressBanner />
 
       {/* ─── CTA Banner ─── */}
       <section className="relative overflow-hidden shine-sweep bg-gradient-to-r from-cream-dark via-cream to-cream-dark py-16 sm:py-20 px-4 sm:px-6 text-center">

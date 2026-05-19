@@ -140,7 +140,7 @@ const en: Record<string, string> = {
   "home.brows.desc": "Eyebrow embroidery designed for your face. Not a template — yours. Fine strokes, careful precision, brows that look like you.",
   "home.brows.cta": "Explore Brows →",
   "home.nails.title": "Nails by Shimmyhands",
-  "home.nails.desc": "Handcrafted press-on nails that feel like fingertip jewelry. Each set designed, each detail painted by hand.",
+  "home.nails.desc": "Handcrafted press-on nails that feel like fingertip jewellery. Each set designed, each detail painted by hand.",
   "home.nails.cta": "Shop Nails →",
   "home.cta.title.1": "Ready to",
   "home.cta.title.2": "Shimmy",
@@ -150,7 +150,7 @@ const en: Record<string, string> = {
   "nails.hero.tag": "Press-On Nails, Singapore",
   "nails.hero.title.1": "Nails That Tell",
   "nails.hero.title.2": "a Story.",
-  "nails.hero.desc": "Handcrafted press-on nail sets — each one designed and painted by hand. Fingertip jewelry like no other.",
+  "nails.hero.desc": "Handcrafted press-on nail sets — each one designed and painted by hand. Fingertip jewellery like no other.",
   "nails.hero.cta": "Shop Collections",
   "nails.shop.tag": "Collections",
   "nails.shop.title": "Shop Press-On Nails",
@@ -442,7 +442,7 @@ const en: Record<string, string> = {
   "faq.svc.nano.2.a": "Yes. Nano brow pigment can be removed or lightened through saline removal or laser treatments, though it's best to consult with a professional first.",
 
   "faq.svc.ombre.1.q": "Does ombre powder look like makeup?",
-  "faq.svc.ombre.1.a": "It gives a soft, filled-in finish similar to brow powder — but more subtle and natural-looking than what you'd achieve with daily makeup. It's designed to look like 'your brows, but better'.",
+  "faq.svc.ombre.1.a": "It gives a soft, filled-in finish similar to brow powder — but more subtle and softer than what you'd achieve with daily makeup. It's designed to look like 'your brows, but better'.",
   "faq.svc.ombre.2.q": "Is ombre powder suitable for sparse brows?",
   "faq.svc.ombre.2.a": "Absolutely. Ombre powder is one of the best options for sparse brows because it creates a soft wash of colour that gives the illusion of fullness without relying on existing hair.",
 
@@ -557,7 +557,7 @@ const en: Record<string, string> = {
   // Article 3: Nano Brows vs Microblading
   "blog.3.title": "Nano Brows vs Microblading: Which Is Right for You?",
   "blog.3.desc": "A clear comparison of the two most popular semi-permanent brow techniques to help you choose the best option for your skin type.",
-  "blog.3.p1": "Both nano brows and microblading create natural-looking, hair-like strokes — but they use very different tools and techniques. Understanding the difference can help you choose the method that will work best with your skin type and lifestyle.",
+  "blog.3.p1": "Both nano brows and microblading create soft, hair-like strokes — but they use very different tools and techniques. Understanding the difference can help you choose the method that will work best with your skin type and lifestyle.",
   "blog.3.p2": "Microblading uses a handheld tool with tiny blades to create fine incisions in the skin, depositing pigment into each stroke. The result is beautiful, crisp hair strokes. However, microblading works best on normal to dry skin types. On oily skin, the strokes tend to blur and fade faster, sometimes losing their definition within 6–12 months.",
   "blog.3.p3": "Nano brows use a digital machine with a single ultra-fine needle — thinner than a human hair. The needle deposits pigment into the skin with precise, controlled movements. Because the needle punctures are smaller and more consistent than blade cuts, nano brows tend to heal crisper and last longer, typically 18–24 months.",
   "blog.3.p4": "The biggest advantage of nano brows is versatility. They work beautifully on all skin types, including oily and combination skin. The technique causes less trauma to the skin, which means less bleeding during the procedure, faster healing, and better pigment retention over time.",
@@ -578,7 +578,7 @@ const en: Record<string, string> = {
   "blog.5.p2": "For round faces, a slightly higher arch creates the illusion of length, adding definition and structure. Avoid very rounded brows, which can make the face appear even rounder. A soft angled shape with a gentle peak works beautifully.",
   "blog.5.p3": "For oval faces, you have the most flexibility — most brow shapes work well. A soft, natural arch that follows your brow bone is usually the most flattering. Avoid over-plucking or making the brows too thin, which can throw off the natural balance.",
   "blog.5.p4": "For square or angular faces, softer, rounded brows help balance strong jawlines and angular features. A curved brow with a low, gentle arch softens the overall look. Avoid sharp angles in the brow, which can make angular features appear harsher.",
-  "blog.5.p5": "The best approach is always a professional consultation. Every face is unique, and a skilled brow artist considers dozens of micro-details — from the distance between your eyes to the height of your forehead. At Shimmyhands, we always start with a thorough face mapping session before any work begins.",
+  "blog.5.p5": "The best approach is always a professional consultation. Every face is unique, and a skilled brow artist considers dozens of micro-details — from the distance between your eyes to the height of your forehead. At Shimmy, we always start with a thorough face mapping session before any work begins.",
 
   // Article 6: How to Choose Your Nail Size
   "blog.6.title": "How to Choose the Right Press-On Nail Size",
@@ -587,6 +587,63 @@ const en: Record<string, string> = {
   "blog.6.p2": "To find your size, measure the widest part of each natural nail. You can do this with a soft measuring tape, or by pressing a piece of clear tape across your nail and marking the edges. Each finger may be a different size — your thumb and middle finger are usually the widest.",
   "blog.6.p3": "When trying on press-on nails, place each one against your natural nail without adhesive first. Check that it sits flush against the nail bed with no gaps at the sides or base. The cuticle edge of the press-on should follow the curve of your cuticle line naturally.",
   "blog.6.p4": "If you're between sizes, go with the smaller one and gently file the sides to match your nail width. This gives a seamless, custom-like fit. A well-fitted press-on nail will feel comfortable, stay put for longer, and look indistinguishable from a professional salon set.",
+
+  // Article 7: Lip Blush — What to Expect
+  "blog.7.title": "Lip Blush Singapore: What to Expect and How Long It Lasts",
+  "blog.7.desc": "From colour selection to healing — here's exactly what happens during a lip blush appointment and how long the results actually last.",
+  "blog.7.p1": "Lip blush is a semi-permanent treatment that deposits soft pigment into the lips to even out tone, define the shape, and add a subtle wash of colour. Think of it as a tinted lip stain that lives in your lips for 2–3 years. The finish is soft and matte — nothing like the dark, lined look of older lip tattoos. Most clients leave looking like they're wearing a sheer lipstick they never have to reapply.",
+  "blog.7.p2": "Your appointment starts with colour mapping. We'll show you 4–6 shade options based on your natural lip tone, undertone, and the look you want — whether that's a 'my lips but better' nude, a soft rose, or a deeper berry. The pigment always heals about 40% lighter than it looks on day one, so we choose with healed colour in mind. This part is unhurried — you'll see swatches against your skin before anything else happens.",
+  "blog.7.p3": "Numbing happens in two stages: a pre-numb before we draw the outline, then a stronger numb once the lips are open. Sensitivity varies — the lips have more nerve endings than the brows, so some clients describe it as a vibration with mild pinching. It's manageable, and we pause whenever you need. The full session runs about 2 to 2.5 hours, including consultation, numbing, and the actual work.",
+  "blog.7.p4": "The first week is the most dramatic. Day 1 to 3, lips look bold and slightly swollen — like you've been eating beetroot. Day 4 to 7, they peel in soft flakes (don't pick) and seem to lose all colour. This is normal. The 'ghosting' phase scares everyone. Then around day 10 to 14, the true colour blooms back from underneath. Your touch-up at 6 to 8 weeks locks in the final shade.",
+  "blog.7.p5": "Lip blush typically lasts 2 to 3 years in Singapore's climate, though heavy sun exposure and frequent exfoliating treatments can shorten that. Smokers and clients who use strong actives like retinol or AHAs near the mouth tend to fade faster. A yearly colour boost keeps the shade looking fresh — much shorter and cheaper than a full first session.",
+  "blog.7.p6": "Aftercare is simple but strict. Keep lips dry for the first 24 hours, then balm them constantly for the next 10 days — dryness is the biggest culprit behind patchy healing. Avoid spicy food, hot drinks, and direct lip contact (yes, including kissing and oily food) for the first week. Sunscreen on the lips becomes a daily habit afterwards. If you're considering it, message us on WhatsApp at +65 8930 8973 — we'll talk you through colour options before you book.",
+
+  // Article 8: First Eyebrow Embroidery Appointment
+  "blog.8.title": "What Happens at Your First Eyebrow Embroidery Appointment",
+  "blog.8.desc": "A walkthrough of your first brow embroidery session — what to bring, what we do, and how long the whole thing takes.",
+  "blog.8.p1": "Booking your first brow embroidery session can feel like a leap. You're trusting someone with your face for the next year or two. The good news: the appointment is far less mysterious than Instagram makes it look. Most of it is conversation, drawing, and waiting for numbing cream to kick in. The actual pigment work is the shortest part.",
+  "blog.8.p2": "Come bare-faced if you can, or with minimal makeup around the brow area. Bring reference photos if you have a shape in mind — but don't worry if you don't. We'll start with face mapping: measuring the symmetry of your features, your brow bone, and the spacing of your eyes. This is where the shape is decided, and it has nothing to do with trends. Your face dictates what works.",
+  "blog.8.p3": "Next comes the pencil draw. We sketch the proposed shape onto your skin with a removable brow pencil and hand you a mirror. This is your moment — speak up. Want it slightly thicker at the front? A softer arch? A more defined tail? We redraw until you're 100% happy. Nothing permanent happens until you've signed off on the shape. This step alone can take 20 to 30 minutes.",
+  "blog.8.p4": "Once the design is approved, numbing cream goes on for about 15 minutes. You can scroll your phone, sip water, or just rest your eyes. After that, we begin the actual embroidery — strokes for microblading or fine pigment passes for nano brows. Most clients describe the sensation as light scratching. We check in with you constantly, and we'll pause anytime you want a break.",
+  "blog.8.p5": "After the first pass, we apply a second layer of pigment, wipe everything clean, and hand you the mirror for the reveal. Expect the colour to look bold — 30 to 40% darker than the final healed result. This is normal and expected. We'll explain everything you're seeing and walk you through what the next 6 weeks will look like as the brows heal and settle.",
+  "blog.8.p6": "You'll leave with an aftercare kit, a printed guide, and a follow-up appointment scheduled for 6 to 8 weeks later — that's the touch-up where we perfect anything that healed unevenly. Block out 2.5 to 3 hours for the first session in total. Plan a quiet day after — no gym, no swim, no heavy sweating. If you have any questions before booking, WhatsApp us at +65 8930 8973.",
+
+  // Article 9: Brow Embroidery During Pregnancy
+  "blog.9.title": "Brow Embroidery During Pregnancy: What You Need to Know",
+  "blog.9.desc": "Whether you can get brows done while pregnant or breastfeeding — and the safer alternatives we recommend until after.",
+  "blog.9.p1": "We get asked this a lot, especially in the second trimester when energy is back and the wedding-photo or baby-shower count starts climbing. The honest answer: we don't perform brow embroidery on anyone who is pregnant or breastfeeding. It's not because the pigment itself is dangerous — it's about everything else around the procedure that becomes harder to predict during pregnancy.",
+  "blog.9.p2": "Three main reasons. First, the numbing cream we use contains topical anaesthetics like lidocaine, which haven't been studied enough in pregnancy for us to feel comfortable applying them. Second, hormonal changes during pregnancy affect how skin absorbs and holds pigment — the colour can heal unevenly, blotchy, or much darker than intended. Third, the risk of infection, however small, carries higher stakes when you're carrying.",
+  "blog.9.p3": "Healing is also unpredictable. Pregnancy increases blood flow and changes skin sensitivity dramatically. Some clients heal beautifully; others end up with patchy retention that needs multiple correction sessions. Spending 2.5 hours getting brows done is also genuinely uncomfortable when you can't lie flat in the third trimester, and we'd rather you enjoy it than tolerate it.",
+  "blog.9.p4": "If you have a big event coming up, there are safer options. Brow shaping, threading, and tinting are all fine during pregnancy — they don't break the skin or use anaesthetic. A good tint plus a clean shape can carry you through photos beautifully. Brow lamination is generally considered safe too, though we recommend checking with your doctor if you have a sensitive pregnancy.",
+  "blog.9.p5": "Most clients book their embroidery for around 3 to 6 months after birth, or once they've finished breastfeeding. By then your hormones have settled, your skin is back to its usual baseline, and you can actually enjoy the appointment. We're happy to hold a future booking slot for you — WhatsApp us at +65 8930 8973 and we'll pencil you in for when you're ready.",
+
+  // Article 10: Press-On Nails vs Gel Manicure
+  "blog.10.title": "Press-On Nails vs Gel Manicure: Which Is Right for You?",
+  "blog.10.desc": "Cost, time, durability, and nail health compared — a frank look at when press-ons win, and when gel might suit you better.",
+  "blog.10.p1": "The press-on versus gel debate isn't about which is 'better' — they solve different problems. Gel is a salon commitment: you book a 90-minute slot, sit while it's painted and cured, and come back to have it filed off. Press-ons are designed for the woman who wants beautiful nails on her own schedule, without parking in a chair on a Saturday. Both can look incredible. The right choice depends on how you actually live.",
+  "blog.10.p2": "On time: gel takes 60 to 120 minutes at a salon, plus travel. A handcrafted press-on set takes 5 to 10 minutes to put on at home, once you've got your size. If your week is back-to-back meetings and a baby's nap schedule, that gap matters. Press-ons also let you switch designs whenever — Monday meeting nails, Saturday wedding nails — without removing anything chemically.",
+  "blog.10.p3": "On nail health: gel removal is where most damage happens. Soaking in acetone, filing, and the inevitable peeling all thin the natural nail plate. Done repeatedly without breaks, gel can leave nails weak and brittle. Press-ons skip the acetone soak entirely — they come off with warm water and oil in 10 minutes. Your natural nails get a rest between sets.",
+  "blog.10.p4": "On longevity: a good gel manicure lasts 2 to 3 weeks before lifting. Handcrafted press-ons with proper application last 1 to 2 weeks, sometimes longer with careful wear. Gel wins on raw durability — but you can't change the design mid-cycle. Press-ons let you rotate sets, which means you're not stuck with chipped nails before an event.",
+  "blog.10.p5": "On design freedom: this is where press-ons pull ahead in Singapore. Salon gel designs are limited to what your tech can paint freehand or with stickers in a single session. Press-ons can be hand-painted in advance with intricate detail — 3D charms, gradient airbrushing, micro-French tips — that simply isn't feasible in a live appointment. Sets like our Lovers' Heartbeat or Ingénue collections take hours of artist time before they reach you.",
+  "blog.10.p6": "On cost: a quality gel manicure in Singapore runs $50 to $90. A handcrafted Nails by Shimmyhands set is in a similar range, but it's yours forever — many clients re-wear sets two or three times. If you've ever felt locked into a chipped gel design two weeks into a 3-week stretch, press-ons are worth trying. WhatsApp us at +65 8930 8973 if you'd like help choosing your first set.",
+
+  // Article 11: Make Press-Ons Last Longer
+  "blog.11.title": "How to Make Press-On Nails Last Longer (Pro Tips)",
+  "blog.11.desc": "Small habits that double the wear time of your press-on nails — from prep to daily routine to bedtime.",
+  "blog.11.p1": "If your press-ons keep popping off in three days, the problem is almost always prep — not the nails themselves. The adhesive is fighting against natural oils, moisture, and the curve of your nail. Win those three battles and a well-applied set comfortably hits 10 to 14 days. Here's what actually moves the needle, based on what we see clients get wrong most often.",
+  "blog.11.p2": "Skip moisturiser, cuticle oil, and hand cream for at least an hour before applying. Even invisible residue blocks the glue from bonding. Wash your hands with regular soap (not the moisturising kind), then wipe each nail with an alcohol prep pad or 90%+ isopropyl alcohol. The nail surface should feel slightly dry and matte before you start — not glossy. This single step is the biggest determinant of wear time.",
+  "blog.11.p3": "Push back cuticles and lightly buff the nail surface. The shine you're sanding away is a smooth layer the glue can't grip onto. A few gentle swipes with a 240-grit buffer is enough — you're not trying to thin the nail, just dull the surface. Wipe again with alcohol after buffing to clear the dust, then move quickly to application before your nails pick up oil again.",
+  "blog.11.p4": "Use nail glue, not adhesive tabs, if you want maximum wear. Apply a thin layer of glue to both the natural nail and the press-on. Place the press-on at the cuticle line first, then press down towards the tip while squeezing the sides. Hold firm for 20 seconds per nail. The most common mistake is rushing this step — short hold time means weak bonds and early lifting.",
+  "blog.11.p5": "Daily habits matter more than people think. Wear gloves for dishwashing, scrubbing, and hair washing — hot soapy water dissolves glue faster than almost anything else. Don't use your nails as tools to open cans, scratch labels, or pry stickers. Reapply a tiny drop of glue at the first sign of lifting at the edge, rather than waiting for the whole nail to come off. With these habits, even a 2-week set is realistic in Singapore humidity.",
+
+  // Article 12: Best Designs for Singapore Weather
+  "blog.12.title": "Best Nail Designs for Singapore Weather (and How to Care)",
+  "blog.12.desc": "Humidity, sun, sea — Singapore is rough on nails. Here's which designs hold up best and the small care habits that protect them.",
+  "blog.12.p1": "Singapore weather is brutal on nails in a way most beauty content ignores. Constant humidity softens adhesives. Aircon-to-outdoor temperature swings expand and contract the nail bed. Sunscreen, sand, and chlorine all chip away at finishes. The designs that thrive here aren't just pretty — they're built to survive the climate. Here's what we recommend, and how to care for each.",
+  "blog.12.p2": "Solid colours and minimalist designs are the workhorses of humid weather. A clean nude, a glossy red, or a soft milky white shows wear far less than complex art does — and if a chip happens at the tip, it's easier to disguise. Our Ingénue collection leans into this for a reason: clean lines, neutral tones, and finishes that look polished even when they're three days into a Bali trip.",
+  "blog.12.p3": "If you want texture or detail, look for designs where the art is sealed under multiple top coat layers rather than sitting on top. Hand-painted florals, micro-pearls, and 3D charms can all do well in humidity if they're properly sealed — which is why handcrafted press-ons hold up better than rushed salon nail art. Designs like our Lovers' Heartbeat sets are built with extra topcoat specifically for this.",
+  "blog.12.p4": "Avoid foil chrome and raw glitter in the rainy months unless you're staying indoors. Chrome finishes oxidise faster in humidity and can dull within days. Loose glitter without a thick sealing layer catches on hair and clothing and lifts the topcoat with it. If you love the sparkle, choose embedded glitter sets where the pieces are locked inside cured layers.",
+  "blog.12.p5": "Daily care makes the biggest difference. Apply a fresh layer of clear top coat every 3 to 4 days — it takes 30 seconds and restores the seal that humidity has slowly broken down. Wear gloves at the beach or pool. Reapply hand cream and cuticle oil at night, not during the day, to keep the nail bed flexible without coating the surface. If you want help picking a set that suits your week, message us on WhatsApp at +65 8930 8973.",
 
   // ─── 404 Not Found ───
   "notfound.title": "Page Not Found",
@@ -765,7 +822,7 @@ const zh: Record<string, string> = {
   // ─── Services Data ───
   "svc.embroidery.title": "绣眉",
   "svc.embroidery.price": "从 $388 起",
-  "svc.embroidery.duration": "2 — 2.5 小时",
+  "svc.embroidery.duration": "2–2.5 小时",
   "svc.embroidery.desc":
     "我们的招牌技法。精细刀片逐根描绘，打造自然丰盈的眉毛——像天生长出来的那样自然。",
   "svc.embroidery.inc.1": "完整眉形设计咨询（我们会花时间好好聊）",
@@ -775,7 +832,7 @@ const zh: Record<string, string> = {
 
   "svc.microblading.title": "微刀雕眉",
   "svc.microblading.price": "从 $488 起",
-  "svc.microblading.duration": "2 — 2.5 小时",
+  "svc.microblading.duration": "2–2.5 小时",
   "svc.microblading.desc":
     "手工逐笔描绘，每一笔都模仿真实毛发。那种安静而美好的细腻感，让你的眉毛看起来自然又精致。",
   "svc.microblading.inc.1": "眉形测量与对称分析",
@@ -785,7 +842,7 @@ const zh: Record<string, string> = {
 
   "svc.nano.title": "纳米雾眉",
   "svc.nano.price": "从 $588 起",
-  "svc.nano.duration": "2 — 3 小时",
+  "svc.nano.duration": "2–3 小时",
   "svc.nano.desc":
     "我们最精细的技术。数字纳米针精准植入色素，效果出色，而且特别适合各种肤质——包括容易让其他技术褪色的油性皮肤。",
   "svc.nano.inc.1": "数字精准眉形设计",
@@ -795,7 +852,7 @@ const zh: Record<string, string> = {
 
   "svc.ombre.title": "渐变粉黛眉",
   "svc.ombre.price": "从 $488 起",
-  "svc.ombre.duration": "2 — 2.5 小时",
+  "svc.ombre.duration": "2–2.5 小时",
   "svc.ombre.desc":
     "前面淡淡的，尾部渐渐加深——就像你每天精心晕染眉粉的效果，只不过这个可以维持两年左右。",
   "svc.ombre.inc.1": "定制渐变浓度",
@@ -805,7 +862,7 @@ const zh: Record<string, string> = {
 
   "svc.shaping.title": "眉形设计",
   "svc.shaping.price": "从 $48 起",
-  "svc.shaping.duration": "30 — 45 分钟",
+  "svc.shaping.duration": "30–45 分钟",
   "svc.shaping.desc":
     "还没准备好做半永久？这是一个很好的起点。我们会用线修、热蜡或两者结合，为你找到最适合的眉形。",
   "svc.shaping.inc.1": "脸型与面部轮廓分析",
@@ -815,7 +872,7 @@ const zh: Record<string, string> = {
 
   "svc.lip.title": "漂唇",
   "svc.lip.price": "从 $488 起",
-  "svc.lip.duration": "2 — 2.5 小时",
+  "svc.lip.duration": "2–2.5 小时",
   "svc.lip.desc":
     "柔和的半永久唇色，给嘴唇添上一层淡淡的红润——那种安静的光彩，能温柔地点亮整张脸。",
   "svc.lip.inc.1": "唇形与颜色咨询",
@@ -1000,27 +1057,27 @@ const zh: Record<string, string> = {
   "faq.svc.mic.1.q": "油性皮肤适合微刀雕眉吗？",
   "faq.svc.mic.1.a": "可以做，但油性皮肤容易让微刀线条模糊和褪色更快。如果你是油性肤质，纳米雾眉通常是更好的长期选择。",
   "faq.svc.mic.2.q": "微刀雕眉一开始会不会太深？",
-  "faq.svc.mic.2.a": "会的——刚做完的眉毛通常比最终效果深 30-40%。随着皮肤在接下来 2 周内愈合，颜色会明显变浅。",
+  "faq.svc.mic.2.a": "会的——刚做完的眉毛通常比最终效果深 30–40%。随着皮肤在接下来 2 周内愈合，颜色会明显变浅。",
 
   "faq.svc.nano.1.q": "为什么纳米雾眉比较贵？",
-  "faq.svc.nano.1.a": "纳米雾眉使用先进的数字设备和超细针头，需要专业培训。效果也更持久，通常可维持 18-24 个月。",
+  "faq.svc.nano.1.a": "纳米雾眉使用先进的数字设备和超细针头，需要专业培训。效果也更持久，通常可维持 18–24 个月。",
   "faq.svc.nano.2.q": "纳米雾眉可以去除吗？",
   "faq.svc.nano.2.a": "可以。纳米雾眉色素可以通过盐水去除或激光治疗来去除或淡化，建议先咨询专业人士。",
 
   "faq.svc.ombre.1.q": "渐变粉黛眉看起来像化妆吗？",
-  "faq.svc.ombre.1.a": "它呈现柔和的填充效果，类似眉粉——但比每天化妆更自然细腻。设计理念是让你看起来'还是你的眉毛，只是更好看了'。",
+  "faq.svc.ombre.1.a": "它呈现柔和的填充效果，类似眉粉——但比每天化妆更自然细腻。设计理念是让你看起来“还是你的眉毛，只是更好看了”。",
   "faq.svc.ombre.2.q": "渐变粉黛眉适合眉毛稀疏的人吗？",
   "faq.svc.ombre.2.a": "非常适合。渐变粉黛眉是稀疏眉毛的最佳选择之一，因为它营造出柔和的色彩层次感，不依赖现有毛发就能打造丰盈效果。",
 
   "faq.svc.shp.1.q": "多久需要修一次眉？",
-  "faq.svc.shp.1.a": "理想情况下每 3-4 周一次，以保持整洁的眉形。每个人毛发生长速度不同，你的眉毛师会建议最适合你的频率。",
+  "faq.svc.shp.1.a": "理想情况下每 3–4 周一次，以保持整洁的眉形。每个人毛发生长速度不同，你的眉毛师会建议最适合你的频率。",
   "faq.svc.shp.2.q": "线修比热蜡更痛吗？",
   "faq.svc.shp.2.a": "大多数人觉得线修更精准但稍微有点刺痛，比热蜡感觉强一点。两种方式都很快——每个区域的感觉只持续几秒钟。",
 
   "faq.svc.lip.1.q": "漂唇需要多久恢复？",
-  "faq.svc.lip.1.a": "完全恢复大约需要 4-6 周。第一周可能会有干燥和脱皮——真正的颜色会在第 3 到 4 周显现。",
+  "faq.svc.lip.1.a": "完全恢复大约需要 4–6 周。第一周可能会有干燥和脱皮——真正的颜色会在第 3 到 4 周显现。",
   "faq.svc.lip.2.q": "可以选择唇色吗？",
-  "faq.svc.lip.2.a": "当然可以！我们会在咨询时为你定制调配色素，从自然的'裸唇色但更好看'到更明显的玫瑰色调，你来选择。",
+  "faq.svc.lip.2.a": "当然可以！我们会在咨询时为你定制调配色素，从自然的“裸唇色但更好看”到更明显的玫瑰色调，你来选择。",
 
   // ─── Glossary ───
   "glossary.nano_needle": "数字机器中使用的超细单针，精准植入色素——比头发丝还细。",
@@ -1029,12 +1086,12 @@ const zh: Record<string, string> = {
   "glossary.fan_strokes": "从眉头向外扇形展开的线条样式，模仿自然眉毛的生长方向。",
   "glossary.pigment_retention": "植入色素在皮肤中保持可见的程度——受肤质、术后护理和技术影响。",
   "glossary.numbing_cream": "操作前涂抹的外用麻醉膏，减少不适感。大约 15 分钟后完全生效。",
-  "glossary.touch_up": "补色环节（通常在首次操作后 6-8 周），完善色素可能不均匀褪色的区域。",
+  "glossary.touch_up": "补色环节（通常在首次操作后 6–8 周），完善色素可能不均匀褪色的区域。",
   "glossary.caviar_finish": "一种纹理凸起的美甲工艺，使用微小珠子打造奢华的鱼子酱质感表面。",
 
   // ─── Process Page ───
-  "process.tag": "你的预约流程",
-  "process.title": "你的预约流程",
+  "process.tag": "你的预约",
+  "process.title": "流程一览",
   "process.step.1.title": "咨询",
   "process.step.1.time": "15 分钟",
   "process.step.1.desc": "我们从面部测量和真诚的对话开始，聊聊哪种形状和风格最能衬托你的五官。",
@@ -1144,7 +1201,7 @@ const zh: Record<string, string> = {
   "blog.5.p2": "圆脸适合稍高的眉峰，可以在视觉上拉长脸部，增添立体感和线条感。避免过于圆润的眉毛，那会让脸看起来更圆。带有温柔眉峰的柔和角度效果最好。",
   "blog.5.p3": "椭圆脸的灵活度最高——大多数眉形都很好看。顺着眉骨走势的自然柔和弧度通常最讨喜。避免过度修眉或让眉毛太细，那会打破自然的平衡感。",
   "blog.5.p4": "方脸或棱角分明的脸型，柔和的圆弧眉毛可以平衡强势的下颌线和棱角特征。低弧度温和弯曲的眉毛能柔化整体印象。避免眉毛上的尖锐角度，那会让棱角显得更突兀。",
-  "blog.5.p5": "最好的方式始终是专业咨询。每张脸都独一无二，一位优秀的眉毛艺术家会考虑几十个细微之处——从双眼间距到额头高度。在 Shimmyhands，我们总是先进行完整的脸部测量，然后才开始任何操作。",
+  "blog.5.p5": "最好的方式始终是专业咨询。每张脸都独一无二，一位优秀的眉毛艺术家会考虑几十个细微之处——从双眼间距到额头高度。在 Shimmy，我们总是先进行完整的脸部测量，然后才开始任何操作。",
 
   // 文章 6：如何选择穿戴甲尺寸
   "blog.6.title": "如何选择适合的穿戴甲尺寸",

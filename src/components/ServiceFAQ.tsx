@@ -54,7 +54,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
       </button>
       <div
         className={`overflow-hidden transition-all duration-300 ${
-          open ? 'max-h-40 pb-4 sm:pb-5' : 'max-h-0'
+          open ? 'max-h-96 pb-4 sm:pb-5' : 'max-h-0'
         }`}
       >
         <p className="text-sm leading-relaxed text-charcoal-light">{a}</p>

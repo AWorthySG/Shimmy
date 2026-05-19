@@ -2,7 +2,6 @@
 
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
-import Glossary from "@/components/Glossary";
 
 const steps = [1, 2, 3, 4, 5, 6] as const;
 
@@ -38,21 +37,10 @@ export default function ProcessPage() {
             const isLast = i === steps.length - 1;
             const desc = t(`process.step.${step}.desc`);
 
-            // Wrap "numbing cream" glossary term in step 3
-            const descContent =
-              step === 3 ? (
-                <>
-                  We apply a topical{" "}
-                  <Glossary
-                    term={<>{t("process.step.3.title").toLowerCase()}</>}
-                    definition={t("glossary.numbing_cream")}
-                  />{" "}
-                  cream and let you relax while it takes effect. Most clients
-                  feel little to no discomfort afterwards.
-                </>
-              ) : (
-                desc
-              );
+            // Step 3 uses the same i18n-driven description as the others.
+            // The glossary tooltip can be added later by wrapping a specific
+            // term in the rendered text if needed.
+            const descContent = desc;
 
             return (
               <AnimateOnScroll

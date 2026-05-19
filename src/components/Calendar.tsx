@@ -4,7 +4,12 @@ import { useState } from 'react'
 import { MAX_ADVANCE_DAYS } from '@/lib/booking'
 
 function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0]
+  // Use local components — avoid toISOString() which shifts to UTC
+  // and causes off-by-one day in timezones east of UTC (e.g. SGT).
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, '0')
+  const d = String(date.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
 }
 
 export default function Calendar({

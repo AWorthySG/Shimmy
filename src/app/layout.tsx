@@ -11,6 +11,7 @@ import SocialProofToast from "@/components/SocialProofToast";
 import SpinWheel from "@/components/SpinWheel";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
 const italiana = Italiana({
   variable: "--font-playfair",
@@ -32,7 +33,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover", // Support notched devices (iPhone, Android)
-  themeColor: "#f9f2ee",
+  themeColor: "#536442",
 };
 
 export const metadata: Metadata = {
@@ -54,6 +55,12 @@ export const metadata: Metadata = {
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   metadataBase: new URL("https://shimmyhands.com"),
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Shimmyhands',
+  },
   icons: {
     icon: "/favicon.svg",
   },
@@ -80,6 +87,7 @@ export default function RootLayout({
           <ExitIntentPopup />
           <SocialProofToast />
           <SpinWheel />
+          <ServiceWorkerRegister />
         </Providers>
       </body>
     </html>

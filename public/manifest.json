@@ -1,0 +1,40 @@
+{
+  "name": "Shimmyhands — Beauty Studio Singapore",
+  "short_name": "Shimmyhands",
+  "description": "Brows shaped for your face. Nails made by hand.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f9f2ee",
+  "theme_color": "#536442",
+  "orientation": "portrait-primary",
+  "categories": ["beauty", "lifestyle", "shopping"],
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Book Brows",
+      "short_name": "Brows",
+      "url": "/brows",
+      "icons": [{ "src": "/icons/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Shop Nails",
+      "short_name": "Nails",
+      "url": "/nails/shop",
+      "icons": [{ "src": "/icons/icon.svg", "sizes": "any" }]
+    }
+  ]
+}

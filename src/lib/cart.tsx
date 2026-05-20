@@ -101,17 +101,21 @@ async function syncCartToApi(sessionId: string, items: CartItem[]): Promise<void
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>(() => {
-    if (typeof window === "undefined") return [];
-    return loadCart();
-  });
+  const [items, setItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const hydrated = typeof window !== "undefined";
+  const [hydrated, setHydrated] = useState(false);
 
   // Refs for debounced sync
   const syncTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sessionIdRef = useRef<string>("");
   const initialSyncDoneRef = useRef(false);
+
+  // Hydrate from localStorage on mount
+  useEffect(() => {
+    const stored = loadCart();
+    if (stored.length > 0) setItems(stored);
+    setHydrated(true);
+  }, []);
 
   // Initialize session ID and fetch remote cart on mount
   useEffect(() => {

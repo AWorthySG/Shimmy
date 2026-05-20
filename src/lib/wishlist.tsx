@@ -46,12 +46,15 @@ function saveWishlist(ids: string[]) {
 }
 
 export function WishlistProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<string[]>(() => {
-    if (typeof window === "undefined") return [];
-    return loadWishlist();
-  });
+  const [items, setItems] = useState<string[]>([]);
+  const [hydrated, setHydrated] = useState(false);
 
-  const hydrated = typeof window !== "undefined";
+  // Hydrate from localStorage on mount
+  useEffect(() => {
+    const stored = loadWishlist();
+    if (stored.length > 0) setItems(stored);
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
     if (hydrated) saveWishlist(items);

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 
 // Simple password gate — not production auth, just a basic barrier
 const ADMIN_PASS = 'shimmy2024' // TODO: Move to env var for production
+const ADMIN_HEADERS = { 'x-admin-key': ADMIN_PASS }
 
 interface Booking {
   id: string
@@ -51,7 +52,9 @@ export default function AdminPage() {
     if (!selectedDate) return
     setLoading(true)
     try {
-      const res = await fetch(`/api/bookings?date=${selectedDate}`)
+      const res = await fetch(`/api/bookings?date=${selectedDate}`, {
+        headers: ADMIN_HEADERS,
+      })
       const data = await res.json()
       setBookings(data.bookings || [])
     } catch {
@@ -69,7 +72,7 @@ export default function AdminPage() {
     try {
       const res = await fetch(`/api/bookings/${bookingId}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...ADMIN_HEADERS },
         body: JSON.stringify({ status: newStatus }),
       })
       if (res.ok) {
@@ -91,7 +94,7 @@ export default function AdminPage() {
     try {
       const res = await fetch('/api/admin/block-date', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...ADMIN_HEADERS },
         body: JSON.stringify({ date: blockDate, reason: blockReason || null }),
       })
       if (res.ok) {

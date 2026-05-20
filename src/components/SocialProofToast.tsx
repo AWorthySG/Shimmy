@@ -66,7 +66,7 @@ export default function SocialProofToast() {
 
   return (
     <div
-      className={`fixed bottom-6 left-6 z-[100] max-w-xs transition-all duration-400 hidden sm:block ${
+      className={`fixed bottom-6 left-6 z-[95] max-w-xs transition-all duration-400 hidden sm:block ${
         isVisible
           ? "translate-y-0 opacity-100"
           : "translate-y-4 opacity-0"

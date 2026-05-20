@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
+import { requireAdmin } from '@/lib/admin-auth'
 
 export async function POST(request: NextRequest) {
+  const authError = requireAdmin(request)
+  if (authError) return authError
+
   let supabase
   try {
     supabase = getSupabase()

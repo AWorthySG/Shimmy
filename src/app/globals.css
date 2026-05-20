@@ -20,7 +20,7 @@ body.links-page footer {
   --soft-white: #FDF7F4;       /* Lightest peach-white */
   --charcoal: #2E3328;         /* Forest ink — warm dark green-black */
   --charcoal-light: #4A5240;   /* Softer forest */
-  --warm-gray: #8E8A82;        /* Stone — warm neutral */
+  --warm-gray: #7A7670;        /* Stone — warm neutral (darkened for WCAG AA) */
   --vermillion: #536442;       /* YOUR SAGE — the hero green accent */
   --vermillion-dark: #3E4D31;  /* Deeper sage */
   --vermillion-light: #6E8058; /* Lighter sage */
@@ -48,6 +48,9 @@ body.links-page footer {
   --vermillion-light: #8A9C72;
   --jade: #8A9C72;
   --jade-light: #A4B890;
+  --ink: #f0e8e2;
+  --plum: #B0A090;
+  --rosewood: #C0A898;
 }
 
 .dark .rice-paper {

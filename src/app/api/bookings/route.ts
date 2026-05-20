@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
+import { requireAdmin } from '@/lib/admin-auth'
 import {
   BOOKING_SERVICES,
   generateAllSlots,
@@ -23,7 +24,12 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  const body = await request.json()
+  let body
+  try {
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
+  }
   const { service_id, date, time, client_name, client_email, client_phone, notes } = body
 
   // Validate required fields
@@ -132,6 +138,9 @@ export async function POST(request: NextRequest) {
  * Only returns non-cancelled bookings with limited fields.
  */
 export async function GET(request: NextRequest) {
+  const authError = requireAdmin(request)
+  if (authError) return authError
+
   let supabase
   try {
     supabase = getSupabase()

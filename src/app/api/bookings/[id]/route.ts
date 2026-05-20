@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
+import { requireAdmin } from '@/lib/admin-auth'
 
 /*
  * Required Supabase RLS policy — run this SQL in the Supabase dashboard:
@@ -17,6 +18,9 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const authError = requireAdmin(request)
+  if (authError) return authError
+
   const { id } = await params
 
   let supabase

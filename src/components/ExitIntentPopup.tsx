@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
+import { useOverlay } from "@/lib/overlay";
 
 export default function ExitIntentPopup() {
   const [visible, setVisible] = useState(false);
@@ -9,6 +10,7 @@ export default function ExitIntentPopup() {
   const [error, setError] = useState("");
   const readyRef = useRef(false);
   const hasHoverRef = useRef(false);
+  const { activeOverlay, openOverlay, closeOverlay } = useOverlay();
 
   useEffect(() => {
     // Don't render on touch-only devices (no mouse)
@@ -39,7 +41,17 @@ export default function ExitIntentPopup() {
     };
   }, []);
 
-  const close = useCallback(() => setVisible(false), []);
+  // When visible becomes true and no other overlay is open, register with overlay context
+  useEffect(() => {
+    if (visible && activeOverlay === null) {
+      openOverlay('exit-intent');
+    }
+  }, [visible, activeOverlay, openOverlay]);
+
+  const close = useCallback(() => {
+    setVisible(false);
+    closeOverlay();
+  }, [closeOverlay]);
 
   const handleSubmit = async () => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -59,7 +71,7 @@ export default function ExitIntentPopup() {
     setSubmitted(true);
   };
 
-  if (!visible) return null;
+  if (!visible || (activeOverlay !== null && activeOverlay !== 'exit-intent')) return null;
 
   return (
     <div

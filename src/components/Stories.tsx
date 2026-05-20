@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 
 interface Story {
@@ -36,6 +36,24 @@ const RING_COLORS: Record<string, string> = {
 
 export default function Stories() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Escape key to close overlay
+  useEffect(() => {
+    if (activeIndex === null) return;
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setActiveIndex(null);
+    }
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [activeIndex]);
+
+  // Auto-focus close button when overlay opens
+  useEffect(() => {
+    if (activeIndex !== null) {
+      closeButtonRef.current?.focus();
+    }
+  }, [activeIndex]);
 
   return (
     <>
@@ -72,6 +90,7 @@ export default function Stories() {
           onClick={() => setActiveIndex(null)}
         >
           <button
+            ref={closeButtonRef}
             onClick={() => setActiveIndex(null)}
             className="absolute top-4 right-4 text-soft-white text-3xl leading-none z-10 hover:text-soft-white/80 transition-colors"
             aria-label="Close story"

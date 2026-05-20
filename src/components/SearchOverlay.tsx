@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import Link from "next/link";
 import { products } from "@/lib/products";
 import { blogPosts } from "@/lib/blog";
 import { useI18n } from "@/lib/i18n";
+import { useOverlay } from "@/lib/overlay";
 
 interface SearchResult {
   type: "Product" | "Article" | "Page";
@@ -30,6 +31,21 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { t } = useI18n();
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { activeOverlay, openOverlay, closeOverlay } = useOverlay();
+
+  // Register with overlay context on mount
+  useEffect(() => {
+    openOverlay('search');
+    return () => { closeOverlay(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // If another overlay takes over, close search
+  useEffect(() => {
+    if (activeOverlay !== null && activeOverlay !== 'search') {
+      onClose();
+    }
+  }, [activeOverlay, onClose]);
 
   // Auto-focus input
   useEffect(() => {
@@ -108,6 +124,34 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
     debounceRef.current = setTimeout(() => search(val), 200);
   };
 
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  const handleFocusTrap = useCallback((e: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== "Tab") return;
+    const overlay = overlayRef.current;
+    if (!overlay) return;
+
+    const focusable = overlay.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length === 0) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }, []);
+
   const typeBadgeColor = (type: string) => {
     switch (type) {
       case "Product": return "bg-vermillion/10 text-vermillion-dark";
@@ -118,7 +162,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-start justify-center">
+    <div ref={overlayRef} className="fixed inset-0 z-[100] flex items-start justify-center" onKeyDown={handleFocusTrap} role="dialog" aria-modal="true">
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-charcoal/60 backdrop-blur-sm"

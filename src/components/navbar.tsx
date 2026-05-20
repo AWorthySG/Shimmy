@@ -87,6 +87,13 @@ export function Navbar() {
           <li ref={browsRef} className="relative">
             <button
               onClick={() => { setBrowsOpen(!browsOpen); setNailsOpen(false); }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setBrowsOpen(!browsOpen); setNailsOpen(false); }
+                else if (e.key === 'Escape') { setBrowsOpen(false); }
+                else if (e.key === 'ArrowDown') { e.preventDefault(); setBrowsOpen(true); setNailsOpen(false); }
+              }}
+              aria-haspopup="true"
+              aria-expanded={browsOpen}
               className={`flex items-center gap-1 text-sm uppercase tracking-[0.15em] transition-colors duration-300 underline-grow hover:text-vermillion ${
                 pathname.startsWith("/brows") ? "text-vermillion font-medium" : "text-charcoal-light"
               }`}
@@ -97,11 +104,12 @@ export function Navbar() {
               </svg>
             </button>
             {browsOpen && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-soft-white/95 backdrop-blur-safe border border-gold/15 shadow-lg py-2">
+              <div role="menu" className="absolute top-full left-0 mt-2 w-48 bg-soft-white/95 backdrop-blur-safe border border-gold/15 shadow-lg py-2">
                 {browsLinks.map(({ href, key }) => (
                   <Link
                     key={href}
                     href={href}
+                    role="menuitem"
                     className={`block px-4 py-2.5 text-xs uppercase tracking-[0.12em] transition-colors hover:text-vermillion hover:bg-vermillion/5 ${
                       pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
                     }`}
@@ -117,6 +125,13 @@ export function Navbar() {
           <li ref={nailsRef} className="relative">
             <button
               onClick={() => { setNailsOpen(!nailsOpen); setBrowsOpen(false); }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setNailsOpen(!nailsOpen); setBrowsOpen(false); }
+                else if (e.key === 'Escape') { setNailsOpen(false); }
+                else if (e.key === 'ArrowDown') { e.preventDefault(); setNailsOpen(true); setBrowsOpen(false); }
+              }}
+              aria-haspopup="true"
+              aria-expanded={nailsOpen}
               className={`flex items-center gap-1 text-sm uppercase tracking-[0.15em] transition-colors duration-300 underline-grow hover:text-vermillion ${
                 pathname.startsWith("/nails") ? "text-vermillion font-medium" : "text-charcoal-light"
               }`}
@@ -127,11 +142,12 @@ export function Navbar() {
               </svg>
             </button>
             {nailsOpen && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-soft-white/95 backdrop-blur-safe border border-gold/15 shadow-lg py-2">
+              <div role="menu" className="absolute top-full left-0 mt-2 w-48 bg-soft-white/95 backdrop-blur-safe border border-gold/15 shadow-lg py-2">
                 {nailsLinks.map(({ href, key }) => (
                   <Link
                     key={href}
                     href={href}
+                    role="menuitem"
                     className={`block px-4 py-2.5 text-xs uppercase tracking-[0.12em] transition-colors hover:text-vermillion hover:bg-vermillion/5 ${
                       pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
                     }`}

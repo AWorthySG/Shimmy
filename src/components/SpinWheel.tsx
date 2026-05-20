@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
+import { useOverlay } from "@/lib/overlay";
 
 const SEGMENTS = [
   "$5 Off",
@@ -23,6 +24,7 @@ export default function SpinWheel() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const alreadySpunRef = useRef(false);
+  const { activeOverlay, openOverlay, closeOverlay } = useOverlay();
 
   useEffect(() => {
     if (localStorage.getItem("shimmy-spun")) {
@@ -38,14 +40,16 @@ export default function SpinWheel() {
   const openModal = useCallback(() => {
     setModalOpen(true);
     setShowTrigger(false);
-  }, []);
+    openOverlay('spin-wheel');
+  }, [openOverlay]);
 
   const closeModal = useCallback(() => {
     setModalOpen(false);
+    closeOverlay();
     if (result) {
       localStorage.setItem("shimmy-spun", "true");
     }
-  }, [result]);
+  }, [result, closeOverlay]);
 
   const spin = useCallback(() => {
     if (spinning || result) return;
@@ -100,7 +104,7 @@ export default function SpinWheel() {
   return (
     <>
       {/* Trigger pill button */}
-      {showTrigger && (
+      {showTrigger && activeOverlay === null && (
         <button
           onClick={openModal}
           className="fixed bottom-6 left-6 z-[90] flex items-center gap-2 bg-vermillion text-soft-white px-4 py-2.5 rounded-full text-xs font-medium shadow-lg hover:bg-vermillion-dark transition-colors"
@@ -111,7 +115,7 @@ export default function SpinWheel() {
       )}
 
       {/* Modal overlay */}
-      {modalOpen && (
+      {modalOpen && activeOverlay === 'spin-wheel' && (
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-charcoal/60 backdrop-blur-sm px-4"
           onClick={closeModal}

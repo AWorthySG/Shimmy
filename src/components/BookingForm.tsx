@@ -279,50 +279,58 @@ export default function BookingForm() {
 
           <div className="space-y-4">
             <div>
-              <label className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
+              <label htmlFor="booking-name" className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
                 Name <span className="text-red-400">*</span>
               </label>
               <input
+                id="booking-name"
                 type="text"
                 value={clientName}
                 onChange={(e) => setClientName(e.target.value)}
                 placeholder={t("book.placeholder.name")}
+                maxLength={100}
                 className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors"
               />
             </div>
             <div>
-              <label className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
+              <label htmlFor="booking-phone" className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
                 Phone <span className="text-red-400">*</span>
               </label>
               <input
+                id="booking-phone"
                 type="tel"
                 value={clientPhone}
                 onChange={(e) => setClientPhone(e.target.value)}
                 placeholder={t("book.placeholder.phone")}
+                maxLength={20}
                 className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors"
               />
             </div>
             <div>
-              <label className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
+              <label htmlFor="booking-email" className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
                 Email <span className="text-warm-gray text-[9px]">(optional)</span>
               </label>
               <input
+                id="booking-email"
                 type="email"
                 value={clientEmail}
                 onChange={(e) => setClientEmail(e.target.value)}
                 placeholder={t("book.placeholder.email")}
+                maxLength={254}
                 className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors"
               />
             </div>
             <div>
-              <label className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
+              <label htmlFor="booking-notes" className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
                 Notes <span className="text-warm-gray text-[9px]">(optional)</span>
               </label>
               <textarea
+                id="booking-notes"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder={t("book.placeholder.notes")}
                 rows={3}
+                maxLength={500}
                 className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors resize-none"
               />
             </div>

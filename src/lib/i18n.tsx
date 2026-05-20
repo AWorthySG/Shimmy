@@ -137,7 +137,7 @@ const en: Record<string, string> = {
   "home.title.2": "Softly.",
   "home.desc": "Two art forms, one philosophy — every detail shaped around you. From brows that frame your face to nails that tell your story.",
   "home.brows.title": "Brows by Shimmyhands",
-  "home.brows.desc": "Eyebrow embroidery designed for your face. Not a template — yours. Fine strokes, careful precision, brows that look like you.",
+  "home.brows.desc": "Eyebrow embroidery designed for your face. Not a template — yours. Fine strokes, steady hands, brows that look like you.",
   "home.brows.cta": "Explore Brows →",
   "home.nails.title": "Nails by Shimmyhands",
   "home.nails.desc": "Handcrafted press-on nails that feel like fingertip jewellery. Each set designed, each detail painted by hand.",
@@ -197,7 +197,7 @@ const en: Record<string, string> = {
   "svc.embroidery.price": "From $388",
   "svc.embroidery.duration": "2–2.5 hours",
   "svc.embroidery.desc":
-    "Our signature technique. Fine blade strokes that build natural fullness one hair at a time — for brows that look like they simply grew that way.",
+    "Our signature technique. Fine blade strokes that build gentle fullness one hair at a time — for brows that look like they simply grew that way.",
   "svc.embroidery.inc.1": "Full brow design consultation (we take our time with this)",
   "svc.embroidery.inc.2": "Numbing for a comfortable experience",
   "svc.embroidery.inc.3": "Two-pass layering for realistic depth",
@@ -211,7 +211,7 @@ const en: Record<string, string> = {
   "svc.microblading.inc.1": "Brow mapping with symmetry analysis",
   "svc.microblading.inc.2": "Custom pigment colour matching",
   "svc.microblading.inc.3": "Featherlight stroke technique",
-  "svc.microblading.inc.4": "Complimentary touch-up within 6 weeks",
+  "svc.microblading.inc.4": "Touch-up included within 6–8 weeks",
 
   "svc.nano.title": "Nano Brows",
   "svc.nano.price": "From $588",
@@ -231,7 +231,7 @@ const en: Record<string, string> = {
   "svc.ombre.inc.1": "Custom gradient density",
   "svc.ombre.inc.2": "Soft machine shading technique",
   "svc.ombre.inc.3": "Lovely for those who fill their brows daily",
-  "svc.ombre.inc.4": "Low maintenance, beautiful results",
+  "svc.ombre.inc.4": "No daily brow routine needed once healed",
 
   "svc.shaping.title": "Brow Shaping & Design",
   "svc.shaping.price": "From $48",
@@ -283,7 +283,7 @@ const en: Record<string, string> = {
   "aboutpage.certs.tag": "Credentials",
   "aboutpage.certs.title": "Always Learning",
   "aboutpage.certs.desc":
-    "Certified across multiple advanced techniques and always upskilling. We stay curious because our clients deserve the very best we can offer.",
+    "Certified in microblading, nano, ombre, and lip blush techniques — and still adding to that list. Craft doesn't stand still, and neither do we.",
   "aboutpage.cta.title.1": "Ready for Your Brows to",
   "aboutpage.cta.title.2": "Shimmy",
   "aboutpage.cta.desc": "We'd love to create something you'll enjoy waking up to.",
@@ -340,14 +340,14 @@ const en: Record<string, string> = {
   "footer.location": "Singapore",
 
   // ─── Cookie Consent ───
-  "cookie.text": "We use cookies to improve your experience. By continuing, you agree to our cookie policy.",
+  "cookie.text": "We use cookies so the site works properly and remembers your preferences. Staying means you're okay with that.",
   "cookie.accept": "Accept",
   "cookie.learn": "Learn More",
 
   // ─── Stats Bar ───
   "stats.brows": "Brows Shaped",
   "stats.rating": "Average Rating",
-  "stats.years": "Years in Singapore",
+  "stats.years": "Years creating brows in SG",
 
   // ─── Email Capture ───
   "email.placeholder": "Your email address",
@@ -366,7 +366,7 @@ const en: Record<string, string> = {
   "book.step.service": "Select a Service",
   "book.step.service.desc": "Choose the service you'd like to book.",
   "book.step.date": "Pick a Date",
-  "book.step.date.note": "Sundays are closed. Greyed-out dates are unavailable.",
+  "book.step.date.note": "Sundays are by appointment only. Greyed-out dates are unavailable.",
   "book.step.time": "Choose a Time",
   "book.step.time.loading": "Loading available times...",
   "book.step.time.another": "Choose another date",
@@ -424,11 +424,11 @@ const en: Record<string, string> = {
   "faq.2.q": "What is the difference between nano brows and microblading?",
   "faq.2.a": "Microblading uses a manual blade. Nano brows use a digital nano-needle, producing finer strokes that suit all skin types, including oily skin where microblading may fade faster.",
   "faq.3.q": "Is the eyebrow embroidery procedure painful?",
-  "faq.3.a": "Numbing cream is applied before the procedure. Most clients report minimal discomfort.",
+  "faq.3.a": "We apply numbing cream before we start, and most clients say they barely feel anything — a light scratching at most. We also reapply between passes, so comfort stays consistent the whole way through.",
   "faq.4.q": "How long do Nails by Shimmyhands press-on nails last?",
   "faq.4.a": "With proper application and care, most sets last 1–2 weeks.",
   "faq.5.q": "Can I book a consultation without committing to a service?",
-  "faq.5.a": "Yes. We welcome a no-obligation consultation to discuss what suits you best.",
+  "faq.5.a": "Absolutely. Just message us and we'll have a proper chat about what you're after — zero commitment, zero pressure.",
 
   // ─── Service-Specific FAQs ───
   "faq.svc.emb.1.q": "Will eyebrow embroidery scar?",
@@ -555,7 +555,7 @@ const en: Record<string, string> = {
   "seasonal.cny": "CNY-ready brows — book before the rush",
   "seasonal.spring": "Bridal brow packages available — enquire today",
   "seasonal.summer": "Sun-proof your brows — book a consultation",
-  "seasonal.fall": "New season, new look — refresh your brows",
+  "seasonal.fall": "Year-end glow-up — get your brows sorted before the holidays",
   "seasonal.holiday": "Gift a Shimmy experience this holiday",
   "seasonal.cta.cny": "Book Now",
   "seasonal.cta.spring": "Enquire",
@@ -585,7 +585,7 @@ const en: Record<string, string> = {
   // ─── Blog ───
   "blog.tag": "Care Tips & Guides",
   "blog.title": "Beauty Journal",
-  "blog.desc": "Expert tips on brow aftercare, press-on nail application, and everything in between.",
+  "blog.desc": "Honest guides on brow aftercare, press-on nails, and the questions nobody else answers.",
   "blog.readmore": "Read More →",
   "blog.readtime": "min read",
   "blog.related": "You Might Also Like",
@@ -637,7 +637,7 @@ const en: Record<string, string> = {
   "blog.5.p2": "For round faces, a slightly higher arch creates the illusion of length, adding definition and structure. Avoid very rounded brows, which can make the face appear even rounder. A soft angled shape with a gentle peak works beautifully.",
   "blog.5.p3": "For oval faces, you have the most flexibility — most brow shapes work well. A soft, natural arch that follows your brow bone is usually the most flattering. Avoid over-plucking or making the brows too thin, which can throw off the natural balance.",
   "blog.5.p4": "For square or angular faces, softer, rounded brows help balance strong jawlines and angular features. A curved brow with a low, gentle arch softens the overall look. Avoid sharp angles in the brow, which can make angular features appear harsher.",
-  "blog.5.p5": "The best approach is always a professional consultation. Every face is unique, and a skilled brow artist considers dozens of micro-details — from the distance between your eyes to the height of your forehead. At Shimmy, we always start with a thorough face mapping session before any work begins.",
+  "blog.5.p5": "The best approach is always a professional consultation. Every face is unique, and your brow artist will consider dozens of micro-details — from the distance between your eyes to the height of your forehead. At Shimmy, we always start with a thorough face mapping session before any work begins.",
 
   // Article 6: How to Choose Your Nail Size
   "blog.6.title": "How to Choose the Right Press-On Nail Size",
@@ -798,7 +798,7 @@ const en: Record<string, string> = {
   "compare.longevity.nano": "18–24 months",
   "compare.longevity.ombre": "12–18 months",
   "compare.longevity.shaping": "4–6 weeks",
-  "compare.longevity.lip": "12–18 months",
+  "compare.longevity.lip": "24–36 months",
   "compare.skin.normaldry": "Normal to dry",
   "compare.skin.all": "All types",
   "compare.heading": "Compare Our Services",
@@ -956,7 +956,7 @@ const zh: Record<string, string> = {
   "svc.microblading.inc.1": "眉形测量与对称分析",
   "svc.microblading.inc.2": "定制色素颜色匹配",
   "svc.microblading.inc.3": "羽毛般轻盈的线条技法",
-  "svc.microblading.inc.4": "6周内免费补色",
+  "svc.microblading.inc.4": "6–8 周内包含补色",
 
   "svc.nano.title": "纳米雾眉",
   "svc.nano.price": "从 $588 起",
@@ -988,7 +988,7 @@ const zh: Record<string, string> = {
   "svc.shaping.inc.3": "线修、热蜡或组合技法",
   "svc.shaping.inc.4": "眉毛定型凝胶收尾",
 
-  "svc.lip.title": "漂唇",
+  "svc.lip.title": "唇釉",
   "svc.lip.price": "从 $488 起",
   "svc.lip.duration": "2–2.5 小时",
   "svc.lip.desc":
@@ -1004,11 +1004,11 @@ const zh: Record<string, string> = {
   "aboutpage.headline.1": "认识",
   "aboutpage.headline.2": "Abigail",
   "aboutpage.p1":
-    "在 Shimmy 之前，Abigail Chung 是朋友圈里那个大家都找她做美甲和睫毛的人。她擅长那些细致入微的小细节——能把一套指甲从「还不错」变成「真的好看」的那种。她喜欢这件事，也做得很好。然后她怀孕了，一切就暂停了。嫁接睫毛的胶水味、指甲粉尘、长时间弯腰——这些都跟肚子里的宝宝不兼容。她需要一个新方向。",
+    "在 Shimmy 之前，Abigail Chung 是朋友圈里那个大家都找她做美甲和睫毛的人。她擅长那些细致入微的小细节——能把一套指甲从“还不错”变成“真的好看”的那种。她喜欢这件事，也做得很好。然后她怀孕了，一切就暂停了。嫁接睫毛的胶水味、指甲粉尘、长时间弯腰——这些都跟肚子里的宝宝不兼容。她需要一个新方向。",
   "aboutpage.p2":
     "就在那时候，她遇见了眉毛这门手艺。她飞到中国佛山，在全国最受认可的纹绣学院之一，跟着杨艺老师学了一年多。不是几天的速成班——是正式的跟师学艺。她为几十位当地客人做练习，跟着一位从业几十年的老师学脸部测量，也和全国各地的纹绣师结下了友谊。她在那里带回来的不仅是技术——还有一种理念。每张脸都有自己的结构，眉毛应该尊重它。",
   "aboutpage.p3":
-    "回到新加坡后，她的目标很清楚：把这门手艺带回来，认真地做。Brows by Shimmyhands 就是这样来的——绣眉、纳米眉、雾眉、唇釉——每一位都根据你的脸来设计，从不赶工，绝不套模板。美甲后来也回来了。客人总说：「你让我的眉毛变得像我自己——手上也能做到吗？」Nails by Shimmyhands 是同一套标准的自然延伸。",
+    "回到新加坡后，她的目标很清楚：把这门手艺带回来，认真地做。Brows by Shimmyhands 就是这样来的——绣眉、纳米眉、雾眉、唇釉——每一项都根据你的脸来设计，从不赶工，绝不套模板。美甲后来也回来了。客人总说：“你让我的眉毛变得像我自己——手上也能做到吗？”Nails by Shimmyhands 是同一套标准的自然延伸。",
   "aboutpage.p4":
     "对 Abigail 来说，这从来不只是关于眉毛。而是那个你照镜子时终于觉得好看的瞬间——那种脸对了之后带来的安静的自信。漂亮的眉毛不能解决所有问题，但它是很好的第一步。而这一步，就是 Shimmy 存在的意义。",
   "aboutpage.values.tag": "我们的工作方式",
@@ -1107,7 +1107,7 @@ const zh: Record<string, string> = {
   "book.step.service": "选择服务",
   "book.step.service.desc": "选择你想预约的服务。",
   "book.step.date": "选择日期",
-  "book.step.date.note": "周日休息。灰色日期不可预约。",
+  "book.step.date.note": "周日仅限预约。灰色日期不可预约。",
   "book.step.time": "选择时间",
   "book.step.time.loading": "正在加载可用时段...",
   "book.step.time.another": "选择其他日期",
@@ -1249,7 +1249,7 @@ const zh: Record<string, string> = {
 
   "process.signup.title": "联系我们",
   "process.signup.time": "第 1 天",
-  "process.signup.desc": "WhatsApp 联系我们 +65 8930 8973，或使用眉毛页面的预约表单。告诉我们你想了解什么——考虑的技法、任何顾虑、以及时间安排。我们通常几小时内会回覆，绝不会推销。如果你想在确定预约前先进行 15 分钟的免费视讯咨询，告诉我们就好。",
+  "process.signup.desc": "WhatsApp 联系我们 +65 8930 8973，或使用眉毛页面的预约表单。告诉我们你想了解什么——考虑的技法、任何顾虑、以及时间安排。我们通常几小时内会回复，绝不会推销。如果你想在确定预约前先进行 15 分钟的免费视讯咨询，告诉我们就好。",
 
   "process.book.title": "确认时段",
   "process.book.time": "24 小时内",
@@ -1324,7 +1324,7 @@ const zh: Record<string, string> = {
   // ─── Blog ───
   "blog.tag": "护理技巧与指南",
   "blog.title": "美丽日志",
-  "blog.desc": "关于眉毛术后护理、穿戴甲使用技巧等专业建议。",
+  "blog.desc": "关于眉毛术后护理、穿戴甲使用技巧，以及那些别人不太讲的问题。",
   "blog.readmore": "阅读全文 →",
   "blog.readtime": "分钟阅读",
   "blog.related": "你可能也想看",
@@ -1504,7 +1504,7 @@ const zh: Record<string, string> = {
 
   // ─── 404 未找到 ───
   "notfound.title": "页面未找到",
-  "notfound.desc": "您要找的页面不存在。",
+  "notfound.desc": "你要找的页面不存在。",
   "notfound.brows": "眉毛",
   "notfound.nails": "美甲",
   "notfound.shop": "商店",
@@ -1537,7 +1537,7 @@ const zh: Record<string, string> = {
   "compare.longevity.nano": "18–24 个月",
   "compare.longevity.ombre": "12–18 个月",
   "compare.longevity.shaping": "4–6 周",
-  "compare.longevity.lip": "12–18 个月",
+  "compare.longevity.lip": "24–36 个月",
   "compare.skin.normaldry": "中性至干性",
   "compare.skin.all": "所有肤质",
   "compare.heading": "服务对比",

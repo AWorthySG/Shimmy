@@ -872,6 +872,101 @@ const en: Record<string, string> = {
   "tryon.help.step2": "Pick your favourite brow style",
   "tryon.help.step3": "Adjust to taste, then save or share",
   "tryon.help.dismiss": "Got it",
+
+  // ─── Pricing & longevity ───
+  "tryon.price.from": "From",
+  "tryon.longevity.label": "Lasts",
+  "tryon.longevity.nano": "12–18 months",
+  "tryon.longevity.microblading": "12–18 months",
+  "tryon.longevity.ombre": "2–3 years",
+  "tryon.longevity.embroidery": "1–2 years",
+  "tryon.popular.badge": "Most booked",
+  "tryon.tried.this.month": "tried this month",
+
+  // ─── Brow colour picker ───
+  "tryon.color.title": "Brow Colour",
+  "tryon.color.auburn": "Auburn",
+  "tryon.color.soft-brown": "Soft Brown",
+  "tryon.color.rich-brown": "Rich Brown",
+  "tryon.color.espresso": "Espresso",
+  "tryon.color.black-brown": "Black Brown",
+
+  // ─── Live camera capture ───
+  "tryon.camera.start": "Take a Photo",
+  "tryon.camera.title": "Position Your Face",
+  "tryon.camera.guide": "Keep your face inside the circle and look straight ahead.",
+  "tryon.camera.capture": "Capture",
+  "tryon.camera.retake": "Retake",
+  "tryon.camera.cancel": "Cancel",
+  "tryon.camera.countdown": "Get ready...",
+  "tryon.camera.error":
+    "We couldn't access your camera. Check your browser permissions.",
+
+  // ─── A/B compare two styles ───
+  "tryon.ab.toggle": "Compare two styles",
+  "tryon.ab.left": "Left",
+  "tryon.ab.right": "Right",
+  "tryon.ab.pick": "Pick a style for each side",
+  "tryon.ab.exit": "Exit compare",
+  "tryon.ab.winner": "I prefer this one",
+
+  // ─── Branded share card ───
+  "tryon.card.brand": "Brows by Shimmyhands",
+  "tryon.card.tagline": "Tried at shimmyhands.com",
+  "tryon.card.download": "Download Story Card",
+  "tryon.card.code": "MENTION TRYON FOR S$50 OFF",
+
+  // ─── Save my look (lead capture) ───
+  "tryon.save.title": "Save Your Look",
+  "tryon.save.desc":
+    "We'll text you a reminder when you're ready to book — no spam, promise.",
+  "tryon.save.name": "Name",
+  "tryon.save.phone": "Phone (WhatsApp)",
+  "tryon.save.email": "Email (optional)",
+  "tryon.save.submit": "Save & Get Reminder",
+  "tryon.save.success":
+    "Saved! We've noted your favourite style — talk soon.",
+  "tryon.save.error": "Couldn't save right now. Please try again.",
+  "tryon.save.cancel": "Not now",
+
+  // ─── Book this look CTA ───
+  "tryon.book.this.look": "Book This Look",
+  "tryon.book.note.prefix": "Tried in visualizer:",
+
+  // ─── Face shape quiz ───
+  "tryon.quiz.open": "Not sure which style? Take the 30-sec quiz →",
+  "tryon.quiz.title": "Find Your Best Brows",
+  "tryon.quiz.subtitle":
+    "Three quick questions — we'll suggest the styles that flatter you most.",
+  "tryon.quiz.next": "Next",
+  "tryon.quiz.back": "Back",
+  "tryon.quiz.skip": "Skip quiz",
+  "tryon.quiz.q1": "Looking in a mirror, your face feels…",
+  "tryon.quiz.q1.a": "Shorter / rounder",
+  "tryon.quiz.q1.b": "Balanced / oval",
+  "tryon.quiz.q1.c": "Longer / narrow",
+  "tryon.quiz.q2": "Your jawline is…",
+  "tryon.quiz.q2.a": "Soft and rounded",
+  "tryon.quiz.q2.b": "Strong and angular",
+  "tryon.quiz.q2.c": "Tapered toward a pointed chin",
+  "tryon.quiz.q3": "You want your brows to look…",
+  "tryon.quiz.q3.a": "Soft and effortless",
+  "tryon.quiz.q3.b": "Polished and defined",
+  "tryon.quiz.result.title": "Your face shape: {shape}",
+  "tryon.quiz.result.subtitle": "We recommend these styles for you:",
+  "tryon.quiz.result.try": "Try this style",
+  "tryon.quiz.shape.oval": "Oval",
+  "tryon.quiz.shape.round": "Round",
+  "tryon.quiz.shape.square": "Square",
+  "tryon.quiz.shape.heart": "Heart",
+  "tryon.quiz.shape.long": "Long",
+
+  // ─── Real client gallery ───
+  "tryon.gallery.title": "Real Clients · Real Results",
+  "tryon.gallery.subtitle":
+    "Synthetic previews show shape — these photos show our actual handwork.",
+  "tryon.gallery.before": "Before",
+  "tryon.gallery.after": "After",
 };
 
 const zh: Record<string, string> = {
@@ -1672,4 +1767,98 @@ const zh: Record<string, string> = {
   "tryon.help.step2": "挑一个你喜欢的眉形",
   "tryon.help.step3": "微调到你满意为止，然后保存或分享",
   "tryon.help.dismiss": "明白了",
+
+  // ─── 价格和持久度 ───
+  "tryon.price.from": "起价",
+  "tryon.longevity.label": "持久",
+  "tryon.longevity.nano": "12–18 个月",
+  "tryon.longevity.microblading": "12–18 个月",
+  "tryon.longevity.ombre": "2–3 年",
+  "tryon.longevity.embroidery": "1–2 年",
+  "tryon.popular.badge": "最受欢迎",
+  "tryon.tried.this.month": "人本月试戴",
+
+  // ─── 眉色选择 ───
+  "tryon.color.title": "眉色",
+  "tryon.color.auburn": "赤褐色",
+  "tryon.color.soft-brown": "柔棕色",
+  "tryon.color.rich-brown": "深棕色",
+  "tryon.color.espresso": "浓棕色",
+  "tryon.color.black-brown": "黑棕色",
+
+  // ─── 即时拍照 ───
+  "tryon.camera.start": "立即拍照",
+  "tryon.camera.title": "调整你的位置",
+  "tryon.camera.guide": "把脸保持在圆圈内，直视前方。",
+  "tryon.camera.capture": "拍照",
+  "tryon.camera.retake": "重拍",
+  "tryon.camera.cancel": "取消",
+  "tryon.camera.countdown": "准备好...",
+  "tryon.camera.error":
+    "无法访问相机，请检查浏览器权限。",
+
+  // ─── 两个风格对比 ───
+  "tryon.ab.toggle": "对比两种风格",
+  "tryon.ab.left": "左",
+  "tryon.ab.right": "右",
+  "tryon.ab.pick": "为每边挑一个风格",
+  "tryon.ab.exit": "退出对比",
+  "tryon.ab.winner": "我更喜欢这个",
+
+  // ─── 品牌分享卡 ───
+  "tryon.card.brand": "Brows by Shimmyhands",
+  "tryon.card.tagline": "试戴自 shimmyhands.com",
+  "tryon.card.download": "下载故事卡",
+  "tryon.card.code": "提及试戴可享 S$50 折扣",
+
+  // ─── 保存你的样子 ───
+  "tryon.save.title": "保存你的样子",
+  "tryon.save.desc":
+    "等你准备好预约时，我们会发提醒——保证不发垃圾消息。",
+  "tryon.save.name": "姓名",
+  "tryon.save.phone": "电话（WhatsApp）",
+  "tryon.save.email": "邮箱（可选）",
+  "tryon.save.submit": "保存并获取提醒",
+  "tryon.save.success":
+    "保存成功！我们记下你喜欢的风格了——回头联系。",
+  "tryon.save.error": "暂时无法保存，请再试一次。",
+  "tryon.save.cancel": "暂不",
+
+  // ─── 预约这个样子 ───
+  "tryon.book.this.look": "预约这个样子",
+  "tryon.book.note.prefix": "试戴中选定：",
+
+  // ─── 面型小测试 ───
+  "tryon.quiz.open": "不确定哪个风格？做个 30 秒测试 →",
+  "tryon.quiz.title": "找到最适合你的眉形",
+  "tryon.quiz.subtitle": "三个快速问题——我们会推荐最显瘦你的风格。",
+  "tryon.quiz.next": "下一题",
+  "tryon.quiz.back": "返回",
+  "tryon.quiz.skip": "跳过测试",
+  "tryon.quiz.q1": "对着镜子看，你的脸感觉…",
+  "tryon.quiz.q1.a": "较短／较圆",
+  "tryon.quiz.q1.b": "匀称／椭圆",
+  "tryon.quiz.q1.c": "较长／窄",
+  "tryon.quiz.q2": "你的下巴线条…",
+  "tryon.quiz.q2.a": "柔和圆润",
+  "tryon.quiz.q2.b": "硬朗有棱角",
+  "tryon.quiz.q2.c": "下巴尖窄",
+  "tryon.quiz.q3": "你想要的眉形…",
+  "tryon.quiz.q3.a": "自然轻松",
+  "tryon.quiz.q3.b": "精致立体",
+  "tryon.quiz.result.title": "你的脸型：{shape}",
+  "tryon.quiz.result.subtitle": "我们为你推荐这些风格：",
+  "tryon.quiz.result.try": "试这个风格",
+  "tryon.quiz.shape.oval": "椭圆型",
+  "tryon.quiz.shape.round": "圆型",
+  "tryon.quiz.shape.square": "方型",
+  "tryon.quiz.shape.heart": "心型",
+  "tryon.quiz.shape.long": "长型",
+
+  // ─── 真实客户案例 ───
+  "tryon.gallery.title": "真实客户・真实效果",
+  "tryon.gallery.subtitle":
+    "合成预览展示形状——这些照片展示我们的实际作品。",
+  "tryon.gallery.before": "之前",
+  "tryon.gallery.after": "之后",
 };

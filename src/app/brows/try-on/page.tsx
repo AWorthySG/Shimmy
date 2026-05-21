@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import BrowTryOn from "@/components/BrowTryOn";
+import TryOnGallery from "@/components/TryOnGallery";
 import { useI18n } from "@/lib/i18n";
 
 export default function BrowTryOnPage() {
@@ -45,6 +46,9 @@ export default function BrowTryOnPage() {
       <section className="bg-soft-white py-10 sm:py-14 px-4 sm:px-6">
         <BrowTryOn />
       </section>
+
+      {/* ─── Real client gallery ─── */}
+      <TryOnGallery />
 
       {/* ─── How to Use ─── */}
       <section className="bg-cream py-14 sm:py-20 px-4 sm:px-6">

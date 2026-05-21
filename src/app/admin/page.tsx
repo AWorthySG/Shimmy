@@ -20,6 +20,16 @@ interface Booking {
   created_at: string
 }
 
+interface Lead {
+  id: string
+  name: string
+  phone: string
+  email: string | null
+  style_id: string
+  style_name: string
+  created_at: string
+}
+
 function formatTime(time: string): string {
   const [h, m] = time.split(':').map(Number)
   const period = h >= 12 ? 'PM' : 'AM'
@@ -38,6 +48,12 @@ export default function AdminPage() {
   const [blockReason, setBlockReason] = useState('')
   const [actionMsg, setActionMsg] = useState('')
   const [updatingId, setUpdatingId] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<'bookings' | 'leads'>('bookings')
+  const [leads, setLeads] = useState<Lead[]>([])
+  const [leadsTotal, setLeadsTotal] = useState(0)
+  const [leadsLoading, setLeadsLoading] = useState(false)
+  const [leadsPage, setLeadsPage] = useState(0)
+  const LEADS_PER_PAGE = 20
 
   const handleLogin = () => {
     if (pass === ADMIN_PASS) {
@@ -63,9 +79,28 @@ export default function AdminPage() {
     setLoading(false)
   }, [selectedDate])
 
+  const fetchLeads = useCallback(async (page = 0) => {
+    setLeadsLoading(true)
+    try {
+      const res = await fetch(`/api/admin/leads?limit=${LEADS_PER_PAGE}&offset=${page * LEADS_PER_PAGE}`, {
+        headers: ADMIN_HEADERS,
+      })
+      const data = await res.json()
+      setLeads(data.leads || [])
+      setLeadsTotal(data.total || 0)
+    } catch {
+      setLeads([])
+    }
+    setLeadsLoading(false)
+  }, [])
+
   useEffect(() => {
     if (authed) fetchBookings()
   }, [authed, fetchBookings])
+
+  useEffect(() => {
+    if (authed && activeTab === 'leads') fetchLeads(leadsPage)
+  }, [authed, activeTab, leadsPage, fetchLeads])
 
   const handleStatusChange = async (bookingId: string, newStatus: 'confirmed' | 'cancelled') => {
     setUpdatingId(bookingId)
@@ -148,9 +183,31 @@ export default function AdminPage() {
         </div>
       </div>
 
+      {/* Tabs */}
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 pt-6">
+        <div className="flex gap-1 border-b border-vermillion/10">
+          {([['bookings', 'Bookings'], ['leads', 'Try-On Leads']] as const).map(([key, label]) => (
+            <button
+              key={key}
+              onClick={() => setActiveTab(key)}
+              className={`px-5 py-2.5 text-xs uppercase tracking-[0.2em] transition-colors border-b-2 -mb-px ${
+                activeTab === key
+                  ? 'border-vermillion text-vermillion'
+                  : 'border-transparent text-warm-gray hover:text-charcoal'
+              }`}
+            >
+              {label}
+              {key === 'leads' && leadsTotal > 0 && (
+                <span className="ml-2 inline-flex items-center justify-center bg-vermillion/10 text-vermillion text-[10px] px-1.5 py-0.5 rounded-full">{leadsTotal}</span>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="mx-auto max-w-5xl px-4 sm:px-6 py-8 grid gap-8 lg:grid-cols-3">
         {/* Left: Bookings view */}
-        <div className="lg:col-span-2">
+        {activeTab === 'bookings' && <><div className="lg:col-span-2">
           <div className="flex items-center gap-4 mb-6">
             <h2 className="font-serif text-xl text-charcoal">Bookings</h2>
             <input
@@ -271,6 +328,118 @@ export default function AdminPage() {
             </div>
           </div>
         </div>
+        </>}
+
+        {/* ─── Leads tab ─── */}
+        {activeTab === 'leads' && <div className="lg:col-span-3">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="font-serif text-xl text-charcoal">
+              Try-On Leads
+              {leadsTotal > 0 && <span className="ml-2 text-sm font-normal text-warm-gray">({leadsTotal} total)</span>}
+            </h2>
+            <button
+              onClick={() => fetchLeads(leadsPage)}
+              className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors"
+            >
+              Refresh
+            </button>
+          </div>
+
+          {leadsLoading ? (
+            <p className="text-sm text-warm-gray">Loading...</p>
+          ) : leads.length === 0 ? (
+            <div className="border border-vermillion/10 bg-soft-white p-8 text-center">
+              <p className="text-sm text-warm-gray">No leads yet. When clients save a look from the brow try-on, they&apos;ll appear here.</p>
+            </div>
+          ) : (
+            <>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="border-b border-vermillion/15">
+                      <th className="text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3 pr-4">Name</th>
+                      <th className="text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3 pr-4">WhatsApp</th>
+                      <th className="text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3 pr-4">Email</th>
+                      <th className="text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3 pr-4">Style</th>
+                      <th className="text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3 pr-4">Date</th>
+                      <th className="text-right text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {leads.map((lead) => (
+                      <tr key={lead.id} className="border-b border-vermillion/8 hover:bg-cream/30 transition-colors">
+                        <td className="py-3 pr-4">
+                          <p className="text-sm text-charcoal font-medium">{lead.name}</p>
+                        </td>
+                        <td className="py-3 pr-4">
+                          <a
+                            href={`https://wa.me/${lead.phone.replace(/[^+\d]/g, '')}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm text-vermillion hover:text-vermillion-dark transition-colors"
+                          >
+                            {lead.phone}
+                          </a>
+                        </td>
+                        <td className="py-3 pr-4">
+                          <p className="text-sm text-charcoal-light">{lead.email || '—'}</p>
+                        </td>
+                        <td className="py-3 pr-4">
+                          <span className="text-[10px] uppercase tracking-[0.15em] text-vermillion-dark border border-vermillion/20 bg-vermillion/5 px-2 py-0.5">
+                            {lead.style_name}
+                          </span>
+                        </td>
+                        <td className="py-3 pr-4">
+                          <p className="text-xs text-warm-gray">
+                            {new Date(lead.created_at).toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          </p>
+                          <p className="text-[10px] text-warm-gray/60">
+                            {new Date(lead.created_at).toLocaleTimeString('en-SG', { hour: '2-digit', minute: '2-digit' })}
+                          </p>
+                        </td>
+                        <td className="py-3 text-right">
+                          <a
+                            href={`https://wa.me/${lead.phone.replace(/[^+\d]/g, '')}?text=${encodeURIComponent(`Hi ${lead.name}! You recently tried the ${lead.style_name} look on our brow visualizer — shall we book a consultation?`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 bg-jade text-soft-white hover:bg-jade/80 transition-colors"
+                          >
+                            Follow up
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Pagination */}
+              {leadsTotal > LEADS_PER_PAGE && (
+                <div className="mt-6 flex items-center justify-between">
+                  <p className="text-xs text-warm-gray">
+                    Showing {leadsPage * LEADS_PER_PAGE + 1}–{Math.min((leadsPage + 1) * LEADS_PER_PAGE, leadsTotal)} of {leadsTotal}
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setLeadsPage((p) => Math.max(0, p - 1))}
+                      disabled={leadsPage === 0}
+                      className="text-xs uppercase tracking-[0.15em] px-3 py-1.5 border border-vermillion/20 text-charcoal hover:border-vermillion/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                    >
+                      Previous
+                    </button>
+                    <button
+                      onClick={() => setLeadsPage((p) => p + 1)}
+                      disabled={(leadsPage + 1) * LEADS_PER_PAGE >= leadsTotal}
+                      className="text-xs uppercase tracking-[0.15em] px-3 py-1.5 border border-vermillion/20 text-charcoal hover:border-vermillion/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </div>}
       </div>
     </div>
   )

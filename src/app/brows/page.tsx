@@ -181,6 +181,38 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── Brow Try-On Discoverability ─── */}
+      <section className="bg-cream-dark py-14 sm:py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-4xl">
+          <AnimateOnScroll animation="fade-up">
+            <div className="relative oriental-corner border border-vermillion/30 bg-cream/60 px-6 py-10 sm:py-14 text-center">
+              <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
+              <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+                {t("tryon.tag")}
+              </p>
+              <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
+                {t("tryon.discover.title")}
+              </h2>
+              <p className="mt-3 mx-auto max-w-xl text-sm sm:text-base text-charcoal-light">
+                {t("tryon.discover.desc")}
+              </p>
+              <Link
+                href="/brows/try-on"
+                className="btn-magnetic shine-on-hover mt-6 sm:mt-8 inline-block bg-vermillion px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark touch-target"
+              >
+                {t("tryon.discover.cta")}
+              </Link>
+              <p className="mt-4 text-[10px] uppercase tracking-[0.2em] text-vermillion-dark">
+                <span aria-hidden="true" className="mr-2">
+                  ✦
+                </span>
+                {t("tryon.upload.privacy")}
+              </p>
+            </div>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
       {/* ─── About Snippet ─── */}
       <section className="bg-cream py-16 sm:py-20 md:py-24 px-4 sm:px-6">
         <div className="mx-auto grid max-w-6xl items-center gap-8 sm:gap-12 md:grid-cols-2">

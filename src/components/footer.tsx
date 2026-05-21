@@ -42,6 +42,7 @@ export function Footer() {
                 { href: "/brows", label: t("nav.brows.studio") },
                 { href: "/brows/services", label: t("nav.services") },
                 { href: "/brows/process", label: t("process.title") },
+                { href: "/brows/try-on", label: t("tryon.tag") },
                 { href: "/nails", label: t("nav.nails.studio") },
                 { href: "/nails/shop", label: t("nav.shop") },
                 { href: "/about", label: t("nav.about") },

@@ -802,6 +802,49 @@ const en: Record<string, string> = {
   "compare.skin.normaldry": "Normal to dry",
   "compare.skin.all": "All types",
   "compare.heading": "Compare Our Services",
+
+  // ─── Brow Try-On ───
+  "tryon.tag": "Brow Try-On",
+  "tryon.title": "See Your Future Brows",
+  "tryon.desc":
+    "Upload a photo, pick a style, and see how your brows could look. All processing happens on your device — your photo never leaves your phone.",
+  "tryon.upload.title": "Upload Your Photo",
+  "tryon.upload.desc": "A clear, front-facing photo works best.",
+  "tryon.upload.choose": "Choose File",
+  "tryon.upload.camera": "Use Camera",
+  "tryon.upload.privacy":
+    "Your photo stays on your device. Nothing is uploaded.",
+  "tryon.upload.drop": "Drag and drop a photo here",
+  "tryon.upload.invalid": "That doesn't look like an image — please try again.",
+  "tryon.loading.model": "Warming up the brow scanner...",
+  "tryon.detecting": "Finding your brows...",
+  "tryon.noface":
+    "We couldn't find a face. Try a clearer front-facing photo.",
+  "tryon.error.model":
+    "Couldn't load the brow scanner. Check your connection and try again.",
+  "tryon.tip": "Tip: Use a well-lit, front-facing photo for best results.",
+  "tryon.styles.title": "Choose a Style",
+  "tryon.control.thickness": "Thickness",
+  "tryon.control.intensity": "Colour Depth",
+  "tryon.control.arch": "Arch Position",
+  "tryon.compare": "Hold to compare",
+  "tryon.download": "Download",
+  "tryon.share": "Share via WhatsApp",
+  "tryon.retry": "Try Another Photo",
+  "tryon.cta.title": "Love what you see?",
+  "tryon.cta.desc":
+    "Book a consultation and let's bring this look to life.",
+  "tryon.cta.book": "Book a Consultation",
+  "tryon.discover.title": "Try Before You Book",
+  "tryon.discover.desc":
+    "Upload a photo and see how each brow style suits you — instantly, privately, free.",
+  "tryon.discover.cta": "Try on Brow Styles →",
+  "tryon.style.nano-soft": "Nano — Soft Natural",
+  "tryon.style.nano-defined": "Nano — Defined",
+  "tryon.style.microblading-feathered": "Microblading — Feathered",
+  "tryon.style.ombre-light": "Ombre — Light",
+  "tryon.style.ombre-bold": "Ombre — Bold",
+  "tryon.style.embroidery-classic": "Embroidery — Classic",
 };
 
 const zh: Record<string, string> = {
@@ -1541,4 +1584,43 @@ const zh: Record<string, string> = {
   "compare.skin.normaldry": "中性至干性",
   "compare.skin.all": "所有肤质",
   "compare.heading": "服务对比",
+
+  // ─── Brow Try-On ───
+  "tryon.tag": "眉毛试戴",
+  "tryon.title": "预览你的新眉毛",
+  "tryon.desc":
+    "上传照片，选择风格，立刻看到不同眉形戴在你脸上的效果。所有处理都在你的设备上完成——照片绝不会离开你的手机。",
+  "tryon.upload.title": "上传你的照片",
+  "tryon.upload.desc": "清晰的正面照效果最好。",
+  "tryon.upload.choose": "选择文件",
+  "tryon.upload.camera": "使用相机",
+  "tryon.upload.privacy": "你的照片只留在你的设备上，不会上传到任何地方。",
+  "tryon.upload.drop": "将照片拖到这里",
+  "tryon.upload.invalid": "这看起来不是一张图片——请重试。",
+  "tryon.loading.model": "正在准备眉毛识别...",
+  "tryon.detecting": "正在识别眉毛...",
+  "tryon.noface": "未能检测到人脸，请尝试更清晰的正面照。",
+  "tryon.error.model": "无法加载眉毛识别工具，请检查网络后重试。",
+  "tryon.tip": "提示：使用光线良好的正面照片效果最佳。",
+  "tryon.styles.title": "选择风格",
+  "tryon.control.thickness": "粗细",
+  "tryon.control.intensity": "颜色深浅",
+  "tryon.control.arch": "眉峰位置",
+  "tryon.compare": "按住对比",
+  "tryon.download": "下载",
+  "tryon.share": "通过 WhatsApp 分享",
+  "tryon.retry": "试另一张照片",
+  "tryon.cta.title": "喜欢这个效果吗？",
+  "tryon.cta.desc": "预约咨询，让我们把这个样子变为现实。",
+  "tryon.cta.book": "预约咨询",
+  "tryon.discover.title": "先试戴，再预约",
+  "tryon.discover.desc":
+    "上传一张照片，看看每种眉形戴在你脸上的样子——快速、私密、免费。",
+  "tryon.discover.cta": "试戴眉形 →",
+  "tryon.style.nano-soft": "纳米眉 — 自然柔和",
+  "tryon.style.nano-defined": "纳米眉 — 立体清晰",
+  "tryon.style.microblading-feathered": "微刀雕 — 羽毛感",
+  "tryon.style.ombre-light": "雾眉 — 浅色",
+  "tryon.style.ombre-bold": "雾眉 — 浓重",
+  "tryon.style.embroidery-classic": "绣眉 — 经典",
 };

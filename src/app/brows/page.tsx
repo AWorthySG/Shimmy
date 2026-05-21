@@ -10,7 +10,6 @@ import BookingForm from "@/components/BookingForm";
 import BeforeAfterCard from "@/components/BeforeAfterCard";
 import { ParallaxLayer } from "@/components/ParallaxLayer";
 import StickyBookBar from "@/components/StickyBookBar";
-import SeasonalBanner from "@/components/SeasonalBanner";
 
 export default function Home() {
   const { t } = useI18n();
@@ -118,9 +117,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ─── Seasonal Banner ─── */}
-      <SeasonalBanner />
 
       {/* ─── Stats Bar (Task 4) ─── */}
       <section className="bg-soft-white px-4 sm:px-6">

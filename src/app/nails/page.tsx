@@ -6,6 +6,7 @@ import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 import { collections, products } from "@/lib/products";
 import { NailsWithIntro } from "@/components/nails-with-intro";
+import SeasonalBanner from "@/components/SeasonalBanner";
 
 export default function NailsPage() {
   const { t } = useI18n();
@@ -75,6 +76,9 @@ export default function NailsPage() {
           </div>
         </div>
       </section>
+
+      {/* ─── Seasonal Banner ─── */}
+      <SeasonalBanner />
 
       {/* ─── Divider ─── */}
       <div className="flex items-center justify-center gap-3 my-4 sm:my-5">

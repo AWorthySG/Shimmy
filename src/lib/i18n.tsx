@@ -553,7 +553,7 @@ const en: Record<string, string> = {
 
   // ─── Seasonal Banners ───
   "seasonal.cny": "CNY-ready brows — book before the rush",
-  "seasonal.spring": "Bridal brow packages available — enquire today",
+  "seasonal.spring": "Bridal nail packages available — bespoke sets to match your day",
   "seasonal.summer": "Sun-proof your brows — book a consultation",
   "seasonal.fall": "Year-end glow-up — get your brows sorted before the holidays",
   "seasonal.holiday": "Gift a Shimmy experience this holiday",
@@ -1292,7 +1292,7 @@ const zh: Record<string, string> = {
 
   // ─── Seasonal Banners ───
   "seasonal.cny": "新年焕新眉——趁早预约不排队",
-  "seasonal.spring": "新娘眉毛套餐——立即咨询",
+  "seasonal.spring": "新娘美甲套餐——为你的大日子量身订制",
   "seasonal.summer": "夏日防晒眉——预约咨询",
   "seasonal.fall": "新季节新面貌——焕新你的眉毛",
   "seasonal.holiday": "送一份 Shimmy 体验作为节日礼物",

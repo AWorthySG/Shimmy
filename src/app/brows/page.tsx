@@ -10,6 +10,8 @@ import BookingForm from "@/components/BookingForm";
 import BeforeAfterCard from "@/components/BeforeAfterCard";
 import { ParallaxLayer } from "@/components/ParallaxLayer";
 import StickyBookBar from "@/components/StickyBookBar";
+import GoogleReviews from "@/components/GoogleReviews";
+import ClientCounter from "@/components/ClientCounter";
 
 export default function Home() {
   const { t } = useI18n();
@@ -122,6 +124,9 @@ export default function Home() {
       <section className="bg-soft-white px-4 sm:px-6">
         <StatsBar />
       </section>
+
+      {/* ─── Client Counter ─── */}
+      <ClientCounter />
 
       {/* ─── Oriental divider ─── */}
       <div className="flex items-center justify-center gap-3 my-8"><div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" /><span className="text-vermillion/40 text-xs">✦</span><div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" /></div>
@@ -364,6 +369,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── Google Reviews ─── */}
+      <GoogleReviews />
+
       {/* ─── What to Expect — link to process page ─── */}
       <section className="bg-cream py-12 sm:py-14 px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">
@@ -409,6 +417,55 @@ export default function Home() {
             </a>
           </p>
         </div>
+      </section>
+
+      {/* ─── FAQ Section ─── */}
+      <section className="bg-cream py-14 sm:py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+              {t("faq.tag")}
+            </p>
+            <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
+              {t("faq.title")}
+            </h2>
+          </div>
+          {[
+            { q: "faq.brows.1.q", a: "faq.brows.1.a" },
+            { q: "faq.brows.2.q", a: "faq.brows.2.a" },
+            { q: "faq.brows.3.q", a: "faq.brows.3.a" },
+            { q: "faq.brows.4.q", a: "faq.brows.4.a" },
+          ].map((faq) => (
+            <div key={faq.q} className="border-b border-vermillion/10 py-4 sm:py-5">
+              <p className="text-sm sm:text-base font-medium text-charcoal">{t(faq.q)}</p>
+              <p className="mt-2 text-sm leading-relaxed text-charcoal-light">{t(faq.a)}</p>
+            </div>
+          ))}
+        </div>
+        {/* FAQ JSON-LD structured data for rich snippets */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: [
+                { q: "faq.brows.1.q", a: "faq.brows.1.a" },
+                { q: "faq.brows.2.q", a: "faq.brows.2.a" },
+                { q: "faq.brows.3.q", a: "faq.brows.3.a" },
+                { q: "faq.brows.4.q", a: "faq.brows.4.a" },
+              ].map((item) => ({
+                '@type': 'Question',
+                name: t(item.q),
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: t(item.a),
+                },
+              })),
+            }),
+          }}
+        />
       </section>
 
       {/* ─── CTA Banner ─── */}

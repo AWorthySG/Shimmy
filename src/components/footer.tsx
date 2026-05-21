@@ -48,6 +48,9 @@ export function Footer() {
                 { href: "/about", label: t("nav.about") },
                 { href: "/blog", label: t("blog.title") },
                 { href: "/contact", label: t("nav.contact") },
+                { href: "/referral", label: t("nav.referral") },
+                { href: "/gift-cards", label: t("nav.gift.cards") },
+                { href: "/loyalty", label: t("nav.loyalty") },
               ].map(({ href, label }) => (
                 <li key={href}>
                   <Link

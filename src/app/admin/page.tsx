@@ -30,6 +30,19 @@ interface Lead {
   created_at: string
 }
 
+interface AnalyticsData {
+  period: string
+  summary: {
+    pageViews: number
+    tryOnCompletions: number
+    cartAdds: number
+    leadsSaved: number
+  }
+  topPages: { page: string; count: number }[]
+  topEvents: { event: string; count: number }[]
+  daily: { date: string; count: number }[]
+}
+
 function formatTime(time: string): string {
   const [h, m] = time.split(':').map(Number)
   const period = h >= 12 ? 'PM' : 'AM'
@@ -48,12 +61,15 @@ export default function AdminPage() {
   const [blockReason, setBlockReason] = useState('')
   const [actionMsg, setActionMsg] = useState('')
   const [updatingId, setUpdatingId] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState<'bookings' | 'leads'>('bookings')
+  const [activeTab, setActiveTab] = useState<'bookings' | 'leads' | 'analytics'>('bookings')
   const [leads, setLeads] = useState<Lead[]>([])
   const [leadsTotal, setLeadsTotal] = useState(0)
   const [leadsLoading, setLeadsLoading] = useState(false)
   const [leadsPage, setLeadsPage] = useState(0)
   const LEADS_PER_PAGE = 20
+  const [analyticsPeriod, setAnalyticsPeriod] = useState<'7d' | '30d' | '90d'>('7d')
+  const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(null)
+  const [analyticsLoading, setAnalyticsLoading] = useState(false)
 
   const handleLogin = () => {
     if (pass === ADMIN_PASS) {
@@ -94,6 +110,20 @@ export default function AdminPage() {
     setLeadsLoading(false)
   }, [])
 
+  const fetchAnalytics = useCallback(async (period: '7d' | '30d' | '90d') => {
+    setAnalyticsLoading(true)
+    try {
+      const res = await fetch(`/api/analytics?period=${period}`, {
+        headers: ADMIN_HEADERS,
+      })
+      const data = await res.json()
+      setAnalyticsData(data)
+    } catch {
+      setAnalyticsData(null)
+    }
+    setAnalyticsLoading(false)
+  }, [])
+
   useEffect(() => {
     if (authed) fetchBookings()
   }, [authed, fetchBookings])
@@ -101,6 +131,10 @@ export default function AdminPage() {
   useEffect(() => {
     if (authed && activeTab === 'leads') fetchLeads(leadsPage)
   }, [authed, activeTab, leadsPage, fetchLeads])
+
+  useEffect(() => {
+    if (authed && activeTab === 'analytics') fetchAnalytics(analyticsPeriod)
+  }, [authed, activeTab, analyticsPeriod, fetchAnalytics])
 
   const handleStatusChange = async (bookingId: string, newStatus: 'confirmed' | 'cancelled') => {
     setUpdatingId(bookingId)
@@ -186,7 +220,7 @@ export default function AdminPage() {
       {/* Tabs */}
       <div className="mx-auto max-w-5xl px-4 sm:px-6 pt-6">
         <div className="flex gap-1 border-b border-vermillion/10">
-          {([['bookings', 'Bookings'], ['leads', 'Try-On Leads']] as const).map(([key, label]) => (
+          {([['bookings', 'Bookings'], ['leads', 'Try-On Leads'], ['analytics', 'Analytics']] as const).map(([key, label]) => (
             <button
               key={key}
               onClick={() => setActiveTab(key)}
@@ -329,6 +363,105 @@ export default function AdminPage() {
           </div>
         </div>
         </>}
+
+        {/* ─── Analytics tab ─── */}
+        {activeTab === 'analytics' && <div className="lg:col-span-3">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="font-serif text-xl text-charcoal">Analytics</h2>
+            <div className="flex gap-2">
+              {(['7d', '30d', '90d'] as const).map((p) => (
+                <button
+                  key={p}
+                  onClick={() => setAnalyticsPeriod(p)}
+                  className={`px-3 py-1.5 text-xs uppercase tracking-[0.15em] border transition-colors ${
+                    analyticsPeriod === p
+                      ? 'border-vermillion bg-vermillion text-soft-white'
+                      : 'border-vermillion/20 text-charcoal hover:border-vermillion/50'
+                  }`}
+                >
+                  {p === '7d' ? '7 Days' : p === '30d' ? '30 Days' : '90 Days'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {analyticsLoading ? (
+            <p className="text-sm text-warm-gray">Loading...</p>
+          ) : !analyticsData?.summary ? (
+            <div className="border border-vermillion/10 bg-soft-white p-8 text-center">
+              <p className="text-sm text-warm-gray">No analytics data for this period.</p>
+            </div>
+          ) : (
+            <>
+              {/* Summary cards */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                {[
+                  { label: 'Page Views', value: analyticsData.summary.pageViews },
+                  { label: 'Try-On Completions', value: analyticsData.summary.tryOnCompletions },
+                  { label: 'Cart Adds', value: analyticsData.summary.cartAdds },
+                  { label: 'Leads Saved', value: analyticsData.summary.leadsSaved },
+                ].map((card) => (
+                  <div key={card.label} className="border border-vermillion/15 bg-soft-white p-5 text-center">
+                    <p className="font-serif text-2xl text-vermillion">{card.value}</p>
+                    <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-warm-gray">{card.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Top Pages */}
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="border border-vermillion/15 bg-soft-white p-5">
+                  <h3 className="text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">Top Pages</h3>
+                  {analyticsData.topPages.length === 0 ? (
+                    <p className="text-sm text-warm-gray">No page data.</p>
+                  ) : (
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b border-vermillion/10">
+                          <th className="text-left text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Page</th>
+                          <th className="text-right text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Count</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {analyticsData.topPages.map((p) => (
+                          <tr key={p.page} className="border-b border-vermillion/5">
+                            <td className="py-2 text-sm text-charcoal">{p.page}</td>
+                            <td className="py-2 text-sm text-charcoal text-right font-medium">{p.count}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+                </div>
+
+                {/* Top Events */}
+                <div className="border border-vermillion/15 bg-soft-white p-5">
+                  <h3 className="text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">Top Events</h3>
+                  {analyticsData.topEvents.length === 0 ? (
+                    <p className="text-sm text-warm-gray">No event data.</p>
+                  ) : (
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b border-vermillion/10">
+                          <th className="text-left text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Event</th>
+                          <th className="text-right text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Count</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {analyticsData.topEvents.map((e) => (
+                          <tr key={e.event} className="border-b border-vermillion/5">
+                            <td className="py-2 text-sm text-charcoal">{e.event}</td>
+                            <td className="py-2 text-sm text-charcoal text-right font-medium">{e.count}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+        </div>}
 
         {/* ─── Leads tab ─── */}
         {activeTab === 'leads' && <div className="lg:col-span-3">

@@ -7,6 +7,9 @@ import { useI18n } from "@/lib/i18n";
 import { collections, products } from "@/lib/products";
 import { NailsWithIntro } from "@/components/nails-with-intro";
 import SeasonalBanner from "@/components/SeasonalBanner";
+import GoogleReviews from "@/components/GoogleReviews";
+import ClientCounter from "@/components/ClientCounter";
+import InstagramFeed from "@/components/InstagramFeed";
 
 export default function NailsPage() {
   const { t } = useI18n();
@@ -79,6 +82,9 @@ export default function NailsPage() {
 
       {/* ─── Seasonal Banner ─── */}
       <SeasonalBanner />
+
+      {/* ─── Client Counter ─── */}
+      <ClientCounter />
 
       {/* ─── Divider ─── */}
       <div className="flex items-center justify-center gap-3 my-4 sm:my-5">
@@ -283,6 +289,61 @@ export default function NailsPage() {
             </Stagger>
           </div>
         </div>
+      </section>
+
+      {/* ─── Google Reviews ─── */}
+      <GoogleReviews />
+
+      {/* ─── Instagram Feed ─── */}
+      <InstagramFeed />
+
+      {/* ─── FAQ Section ─── */}
+      <section className="bg-cream py-10 sm:py-14 px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl">
+          <div className="text-center mb-8">
+            <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+              {t("faq.tag")}
+            </p>
+            <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
+              {t("faq.title")}
+            </h2>
+          </div>
+          {[
+            { q: "faq.nails.1.q", a: "faq.nails.1.a" },
+            { q: "faq.nails.2.q", a: "faq.nails.2.a" },
+            { q: "faq.nails.3.q", a: "faq.nails.3.a" },
+            { q: "faq.nails.4.q", a: "faq.nails.4.a" },
+          ].map((faq) => (
+            <div key={faq.q} className="border-b border-vermillion/10 py-4 sm:py-5">
+              <p className="text-sm sm:text-base font-medium text-charcoal">{t(faq.q)}</p>
+              <p className="mt-2 text-sm leading-relaxed text-charcoal-light">{t(faq.a)}</p>
+            </div>
+          ))}
+        </div>
+        {/* FAQ JSON-LD structured data for rich snippets */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: [
+                { q: "faq.nails.1.q", a: "faq.nails.1.a" },
+                { q: "faq.nails.2.q", a: "faq.nails.2.a" },
+                { q: "faq.nails.3.q", a: "faq.nails.3.a" },
+                { q: "faq.nails.4.q", a: "faq.nails.4.a" },
+              ].map((item) => ({
+                '@type': 'Question',
+                name: t(item.q),
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: t(item.a),
+                },
+              })),
+            }),
+          }}
+        />
       </section>
 
       {/* ─── Divider ─── */}

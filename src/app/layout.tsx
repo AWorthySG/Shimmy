@@ -14,6 +14,7 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/CookieConsent";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import PageViewTracker from "@/components/PageViewTracker";
 
 const italiana = Italiana({
   variable: "--font-playfair",
@@ -91,6 +92,7 @@ export default function RootLayout({
           <ExitIntentPopup />
           <SocialProofToast />
           <SpinWheel />
+          <PageViewTracker />
           <ServiceWorkerRegister />
         </Providers>
       </body>

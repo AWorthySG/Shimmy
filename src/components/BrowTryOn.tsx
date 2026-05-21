@@ -9,12 +9,19 @@ import {
   type ChangeEvent,
   type DragEvent,
   type PointerEvent as ReactPointerEvent,
+  type FormEvent,
 } from "react";
+import { useRouter } from "next/navigation";
 import {
   BROW_STYLES,
+  BROW_COLORS,
+  FACE_SHAPE_QUIZ,
+  resolveFaceShape,
+  recommendedStylesFor,
   densityAlpha,
   densityStroke,
   type BrowStyle,
+  type FaceShape,
 } from "@/lib/brow-styles";
 import { useI18n } from "@/lib/i18n";
 
@@ -33,6 +40,7 @@ const WASM_BASE =
   "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/wasm";
 
 const HELP_STORAGE_KEY = "shimmy-tryon-help-shown";
+const QUIZ_STORAGE_KEY = "shimmy-tryon-quiz-done";
 
 type LandmarkPoint = { x: number; y: number; z?: number };
 
@@ -118,11 +126,6 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
 
 /* ──────────────────────────────────────────────
    EXIF orientation handling.
-   Phones often save photos with an orientation
-   tag rather than rotating the pixel data. We
-   read it with `exifr` and pre-rotate onto a
-   fresh canvas so detection (and everything
-   downstream) sees an upright image.
    ────────────────────────────────────────────── */
 async function readOrientation(file: File): Promise<number> {
   try {
@@ -141,7 +144,6 @@ function applyOrientationToImage(
   const w = img.naturalWidth;
   const h = img.naturalHeight;
   const canvas = document.createElement("canvas");
-  // Orientations 5-8 swap dimensions.
   const swap = orientation >= 5 && orientation <= 8;
   canvas.width = swap ? h : w;
   canvas.height = swap ? w : h;
@@ -179,7 +181,6 @@ function applyOrientationToImage(
       ctx.translate(-w, 0);
       break;
     default:
-      // 1 (or unknown) — no transform.
       break;
   }
   ctx.drawImage(img, 0, 0);
@@ -187,10 +188,7 @@ function applyOrientationToImage(
 }
 
 /* ──────────────────────────────────────────────
-   Drawing — paints one brow into an offscreen
-   canvas using the SVG path data, then composites
-   it onto the main canvas with the right
-   translation, rotation, and scale.
+   Drawing — paints one brow with optional colour override.
    ────────────────────────────────────────────── */
 function drawBrowOnto(
   ctx: CanvasRenderingContext2D,
@@ -200,8 +198,8 @@ function drawBrowOnto(
   intensity: number,
   arch: number,
   mirror: boolean,
+  colorOverride?: string,
 ): void {
-  // Offscreen 100x100 (matches the style's path coordinate space)
   const off = document.createElement("canvas");
   const PATH_SIZE = 100;
   off.width = PATH_SIZE;
@@ -209,25 +207,22 @@ function drawBrowOnto(
   const oc = off.getContext("2d");
   if (!oc) return;
 
-  // Render the path as a fat stroke
+  const paintColor = colorOverride ?? style.color;
+
   oc.clearRect(0, 0, PATH_SIZE, PATH_SIZE);
   oc.lineCap = "round";
   oc.lineJoin = "round";
-  oc.strokeStyle = style.color;
-  oc.fillStyle = style.color;
+  oc.strokeStyle = paintColor;
+  oc.fillStyle = paintColor;
   oc.lineWidth = densityStroke(style.density);
 
   try {
     const path = new Path2D(style.pathData);
     oc.stroke(path);
   } catch {
-    // If the path string fails to parse for any reason, give up silently —
-    // we don't want the whole feature to crash on a bad path.
     return;
   }
 
-  // Soften edges with a subtle blur. We re-draw via a temporary canvas
-  // because not all browsers honour ctx.filter on every operation.
   const blurred = document.createElement("canvas");
   blurred.width = PATH_SIZE;
   blurred.height = PATH_SIZE;
@@ -236,8 +231,6 @@ function drawBrowOnto(
   bc.filter = "blur(1.2px)";
   bc.drawImage(off, 0, 0);
 
-  // Apply intensity as the final alpha. Density already affects stroke
-  // width; combine with the user's intensity slider for fine control.
   const baseAlpha = densityAlpha(style.density);
   const alpha = Math.max(0, Math.min(1, baseAlpha * intensity));
 
@@ -245,19 +238,14 @@ function drawBrowOnto(
   ctx.globalAlpha = alpha;
   ctx.globalCompositeOperation = style.blendMode ?? "multiply";
 
-  // Translate to the region centre, rotate to match the brow slope,
-  // then scale to the bounding box.
   const drawWidth = region.width * thickness;
   const drawHeight = region.height * thickness;
   const yOffset = arch;
 
   ctx.translate(region.cx, region.cy + yOffset);
-  // Mirror the right brow by inverting X scale BEFORE rotation so the
-  // rotation direction stays consistent in viewer-space.
   ctx.rotate(region.rotation);
   if (mirror) ctx.scale(-1, 1);
 
-  // Path coordinates are in 0..100; centre that on origin.
   ctx.translate(-drawWidth / 2, -drawHeight / 2);
   ctx.scale(drawWidth / PATH_SIZE, drawHeight / PATH_SIZE);
 
@@ -267,15 +255,14 @@ function drawBrowOnto(
 
 /* ──────────────────────────────────────────────
    Renders just the photo with brows applied
-   into an offscreen canvas. Used by the live
-   preview, the compare overlay, and the
-   download flow.
+   into an offscreen canvas.
    ────────────────────────────────────────────── */
 function renderWithBrows(
   source: HTMLImageElement | HTMLCanvasElement,
   landmarks: LandmarkPoint[],
   style: BrowStyle,
   controls: EditorControls,
+  colorOverride?: string,
 ): HTMLCanvasElement {
   const out = document.createElement("canvas");
   const w =
@@ -300,6 +287,7 @@ function renderWithBrows(
       controls.intensity,
       controls.archLeft,
       false,
+      colorOverride,
     );
   }
   if (rightRegion) {
@@ -311,19 +299,53 @@ function renderWithBrows(
       controls.intensity,
       controls.archRight,
       true,
+      colorOverride,
     );
   }
   return out;
 }
 
 /* ──────────────────────────────────────────────
-   Watermark — only drawn on the exported PNG,
-   never on the live canvas. Bottom-right, white
-   text with a soft dark shadow for legibility.
+   Renders only the LEFT half of an image with the
+   provided style (used for A/B compare).
+   ────────────────────────────────────────────── */
+function renderHalfWithBrows(
+  source: HTMLImageElement | HTMLCanvasElement,
+  landmarks: LandmarkPoint[],
+  style: BrowStyle,
+  controls: EditorControls,
+  half: "left" | "right",
+  colorOverride?: string,
+): HTMLCanvasElement {
+  const full = renderWithBrows(source, landmarks, style, controls, colorOverride);
+  const out = document.createElement("canvas");
+  out.width = full.width;
+  out.height = full.height;
+  const ctx = out.getContext("2d");
+  if (!ctx) return out;
+
+  ctx.save();
+  ctx.beginPath();
+  if (half === "left") {
+    ctx.rect(0, 0, Math.round(full.width / 2), full.height);
+  } else {
+    ctx.rect(
+      Math.round(full.width / 2),
+      0,
+      full.width - Math.round(full.width / 2),
+      full.height,
+    );
+  }
+  ctx.clip();
+  ctx.drawImage(full, 0, 0);
+  ctx.restore();
+  return out;
+}
+
+/* ──────────────────────────────────────────────
+   Watermark — only drawn on the exported PNG.
    ────────────────────────────────────────────── */
 function drawWatermark(ctx: CanvasRenderingContext2D, w: number, h: number) {
-  // Main text sized at ~2.5% of image height. Clamp so it stays readable
-  // on both tiny and very large images.
   const mainSize = Math.max(14, Math.min(48, Math.round(h * 0.025)));
   const subSize = Math.max(10, Math.round(mainSize * 0.6));
   const padding = 16;
@@ -349,12 +371,110 @@ function drawWatermark(ctx: CanvasRenderingContext2D, w: number, h: number) {
 }
 
 /* ──────────────────────────────────────────────
-   StylePreview — tiny SVG card preview for the
-   style picker. Uses the same path data so the
-   thumbnail matches what'll get applied.
+   IG-Story 9:16 card composer.
    ────────────────────────────────────────────── */
-function StylePreview({ style }: { style: BrowStyle }) {
-  const rgb = hexToRgb(style.color);
+function composeStoryCard(
+  source: HTMLCanvasElement,
+  brand: string,
+  tagline: string,
+  styleName: string,
+  promoCode: string,
+): HTMLCanvasElement {
+  const W = 1080;
+  const H = 1920;
+  const card = document.createElement("canvas");
+  card.width = W;
+  card.height = H;
+  const ctx = card.getContext("2d");
+  if (!ctx) return card;
+
+  // Dark base
+  ctx.fillStyle = "#1A1410";
+  ctx.fillRect(0, 0, W, H);
+
+  // Compute draw rect — fit the source photo centered horizontally with margin.
+  const sourceAspect = source.width / source.height;
+  const targetW = W - 80; // 40px side margins
+  const targetH = Math.round(targetW / sourceAspect);
+  const dy = Math.round((H - targetH) / 2);
+  ctx.drawImage(source, 40, dy, targetW, targetH);
+
+  // Top gradient overlay
+  const topGrad = ctx.createLinearGradient(0, 0, 0, 420);
+  topGrad.addColorStop(0, "rgba(0,0,0,0.75)");
+  topGrad.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.fillStyle = topGrad;
+  ctx.fillRect(0, 0, W, 420);
+
+  // Bottom gradient overlay
+  const botGrad = ctx.createLinearGradient(0, H - 460, 0, H);
+  botGrad.addColorStop(0, "rgba(0,0,0,0)");
+  botGrad.addColorStop(1, "rgba(0,0,0,0.85)");
+  ctx.fillStyle = botGrad;
+  ctx.fillRect(0, H - 460, W, 460);
+
+  // Brand text (top)
+  ctx.fillStyle = "#FFFFFF";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  ctx.font = `600 84px 'Georgia', 'Times New Roman', serif`;
+  ctx.fillText(brand, W / 2, 120);
+
+  // Subtitle (top)
+  ctx.font = `400 36px 'Georgia', 'Times New Roman', serif`;
+  ctx.fillStyle = "rgba(255,255,255,0.85)";
+  ctx.fillText(tagline, W / 2, 230);
+
+  // Decorative divider
+  ctx.fillStyle = "#D33B2D"; // vermillion
+  ctx.fillRect(W / 2 - 40, 300, 80, 3);
+
+  // Style name (bottom)
+  ctx.textBaseline = "alphabetic";
+  ctx.fillStyle = "#FFFFFF";
+  ctx.font = `500 56px 'Georgia', 'Times New Roman', serif`;
+  ctx.fillText(styleName, W / 2, H - 220);
+
+  // Promo code (bottom)
+  ctx.fillStyle = "#FFD78A";
+  ctx.font = `600 34px ui-sans-serif, system-ui, -apple-system, sans-serif`;
+  // Letter-spacing approximation: paint character-by-character
+  drawTrackedText(ctx, promoCode, W / 2, H - 140, 4);
+
+  // Site URL
+  ctx.fillStyle = "rgba(255,255,255,0.75)";
+  ctx.font = `400 28px ui-sans-serif, system-ui, -apple-system, sans-serif`;
+  ctx.fillText("shimmyhands.com", W / 2, H - 80);
+
+  return card;
+}
+
+function drawTrackedText(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  cx: number,
+  y: number,
+  letterSpacing: number,
+) {
+  ctx.save();
+  ctx.textAlign = "left";
+  const chars = Array.from(text);
+  const widths = chars.map((c) => ctx.measureText(c).width);
+  const totalWidth =
+    widths.reduce((s, w) => s + w, 0) + letterSpacing * Math.max(0, chars.length - 1);
+  let x = cx - totalWidth / 2;
+  for (let i = 0; i < chars.length; i++) {
+    ctx.fillText(chars[i], x, y);
+    x += widths[i] + letterSpacing;
+  }
+  ctx.restore();
+}
+
+/* ──────────────────────────────────────────────
+   StylePreview — tiny SVG card preview
+   ────────────────────────────────────────────── */
+function StylePreview({ style, color }: { style: BrowStyle; color?: string }) {
+  const rgb = hexToRgb(color ?? style.color);
   const fill = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
   return (
     <svg
@@ -378,9 +498,7 @@ function StylePreview({ style }: { style: BrowStyle }) {
 }
 
 /* ──────────────────────────────────────────────
-   HelpOverlay — first-visit walkthrough shown
-   under the page header. Stored under
-   `shimmy-tryon-help-shown` in localStorage.
+   HelpOverlay
    ────────────────────────────────────────────── */
 function HelpOverlay({
   onDismiss,
@@ -446,16 +564,56 @@ function HelpOverlay({
 }
 
 /* ──────────────────────────────────────────────
+   ModalShell — reusable centred modal w/ overlay
+   ────────────────────────────────────────────── */
+function ModalShell({
+  onClose,
+  children,
+  maxWidthClass = "max-w-[400px]",
+  ariaLabel,
+}: {
+  onClose: () => void;
+  children: React.ReactNode;
+  maxWidthClass?: string;
+  ariaLabel?: string;
+}) {
+  // Lock body scroll while mounted.
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, []);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal/70"
+      role="dialog"
+      aria-modal="true"
+      aria-label={ariaLabel}
+      onClick={onClose}
+    >
+      <div
+        className={`relative w-full ${maxWidthClass} max-h-[90vh] overflow-y-auto bg-cream border border-vermillion/20 rounded-sm shadow-2xl`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────
    Main Component
    ────────────────────────────────────────────── */
 export default function BrowTryOn() {
   const { t } = useI18n();
+  const router = useRouter();
 
   const [step, setStep] = useState<Step>("upload");
   const [landmarkerStatus, setLandmarkerStatus] =
     useState<LandmarkerStatus>("idle");
-  // Source can be the original image element or a pre-rotated canvas (for
-  // photos with EXIF orientation). We treat both as drawable sources.
   const [uploadedSource, setUploadedSource] = useState<
     HTMLImageElement | HTMLCanvasElement | null
   >(null);
@@ -470,17 +628,24 @@ export default function BrowTryOn() {
   const [archRight, setArchRight] = useState(0);
   const [independent, setIndependent] = useState(false);
   const [compareOn, setCompareOn] = useState(false);
-  const [comparePos, setComparePos] = useState(50); // 0-100 %
+  const [comparePos, setComparePos] = useState(50);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
 
+  // ── New feature state ──
+  const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const [showCameraModal, setShowCameraModal] = useState(false);
+  const [showQuizModal, setShowQuizModal] = useState(false);
+  const [abMode, setAbMode] = useState(false);
+  const [styleA, setStyleA] = useState<string | null>(null);
+  const [styleB, setStyleB] = useState<string | null>(null);
+  const [abPicking, setAbPicking] = useState<"A" | "B" | null>(null);
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const compareWrapperRef = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const cameraInputRef = useRef<HTMLInputElement | null>(null);
-  // FaceLandmarker is dynamically imported so we don't add it to the bundle
-  // for users who never make it to the editor step.
   const faceLandmarkerRef = useRef<{
     detect: (
       img: HTMLImageElement | HTMLCanvasElement,
@@ -493,8 +658,17 @@ export default function BrowTryOn() {
     [selectedStyleId],
   );
 
-  // Effective offsets for each brow — falls back to the synced value when
-  // independent mode is off.
+  const colorOverride = useMemo(() => {
+    if (!selectedColorId) return undefined;
+    return BROW_COLORS.find((c) => c.id === selectedColorId)?.color;
+  }, [selectedColorId]);
+
+  const selectedColorName = useMemo(() => {
+    if (!selectedColorId) return null;
+    const c = BROW_COLORS.find((c) => c.id === selectedColorId);
+    return c ? t(c.nameKey) : null;
+  }, [selectedColorId, t]);
+
   const effectiveArchLeft = independent ? archLeft : archSynced;
   const effectiveArchRight = independent ? archRight : archSynced;
 
@@ -505,7 +679,7 @@ export default function BrowTryOn() {
         setShowHelp(true);
       }
     } catch {
-      // localStorage may be unavailable (e.g. private browsing).
+      // localStorage may be unavailable.
     }
   }, []);
 
@@ -582,7 +756,7 @@ export default function BrowTryOn() {
     [loadLandmarker, t],
   );
 
-  /* ── Image loading + EXIF orientation handling ── */
+  /* ── Image loading + EXIF orientation ── */
   const processFile = useCallback(
     async (file: File) => {
       setErrorMsg(null);
@@ -592,7 +766,6 @@ export default function BrowTryOn() {
       }
 
       setStep("detecting");
-      // Read EXIF first; it's cheap and lets us pre-rotate before detection.
       const orientation = await readOrientation(file);
       const objectUrl = URL.createObjectURL(file);
       const img = new Image();
@@ -600,13 +773,11 @@ export default function BrowTryOn() {
       img.onload = async () => {
         URL.revokeObjectURL(objectUrl);
 
-        // Apply EXIF rotation onto a canvas (no-op for orientation 1).
         const oriented =
           orientation && orientation !== 1
             ? applyOrientationToImage(img, orientation)
             : null;
 
-        // Cap large images so detection + canvas stay responsive.
         const MAX_DIM = 1600;
         const srcW = oriented ? oriented.width : img.naturalWidth;
         const srcH = oriented ? oriented.height : img.naturalHeight;
@@ -638,11 +809,32 @@ export default function BrowTryOn() {
     [runDetection, t],
   );
 
-  /* ── File input handlers ── */
+  /* ── Process a raw canvas (from live camera) ── */
+  const processCanvas = useCallback(
+    async (cnv: HTMLCanvasElement) => {
+      setErrorMsg(null);
+      setStep("detecting");
+      const MAX_DIM = 1600;
+      let toUse: HTMLCanvasElement = cnv;
+      if (cnv.width > MAX_DIM || cnv.height > MAX_DIM) {
+        const scale = MAX_DIM / Math.max(cnv.width, cnv.height);
+        const targetW = Math.round(cnv.width * scale);
+        const targetH = Math.round(cnv.height * scale);
+        const tmp = document.createElement("canvas");
+        tmp.width = targetW;
+        tmp.height = targetH;
+        const ctx = tmp.getContext("2d");
+        if (ctx) ctx.drawImage(cnv, 0, 0, targetW, targetH);
+        toUse = tmp;
+      }
+      void runDetection(toUse);
+    },
+    [runDetection],
+  );
+
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) void processFile(file);
-    // Reset so the same file can be re-picked
     e.target.value = "";
   };
 
@@ -662,7 +854,7 @@ export default function BrowTryOn() {
     setIsDragging(false);
   };
 
-  /* ── Canvas redraw — runs on any control change ── */
+  /* ── Canvas redraw ── */
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -688,17 +880,65 @@ export default function BrowTryOn() {
 
       ctx.clearRect(0, 0, w, h);
 
-      // When compare is ON we paint the original first, then clip-paint
-      // the "with brows" version up to the slider position. When OFF we
-      // just paint the full "with brows" result.
-      if (compareOn) {
+      // A/B compare mode: split-render two styles vertically
+      if (abMode) {
         ctx.drawImage(uploadedSource, 0, 0, w, h);
-        const withBrows = renderWithBrows(uploadedSource, landmarks, selectedStyle, {
+        const sA = styleA
+          ? BROW_STYLES.find((s) => s.id === styleA)
+          : null;
+        const sB = styleB
+          ? BROW_STYLES.find((s) => s.id === styleB)
+          : null;
+        const controls: EditorControls = {
           thickness,
           intensity,
           archLeft: effectiveArchLeft,
           archRight: effectiveArchRight,
-        });
+        };
+        if (sA) {
+          const half = renderHalfWithBrows(
+            uploadedSource,
+            landmarks,
+            sA,
+            controls,
+            "left",
+            colorOverride,
+          );
+          ctx.drawImage(half, 0, 0, w, h);
+        }
+        if (sB) {
+          const half = renderHalfWithBrows(
+            uploadedSource,
+            landmarks,
+            sB,
+            controls,
+            "right",
+            colorOverride,
+          );
+          ctx.drawImage(half, 0, 0, w, h);
+        }
+        // Centre divider
+        ctx.save();
+        ctx.fillStyle = "rgba(255,255,255,0.85)";
+        ctx.fillRect(Math.round(w / 2) - 1, 0, 2, h);
+        ctx.restore();
+        return;
+      }
+
+      if (compareOn) {
+        ctx.drawImage(uploadedSource, 0, 0, w, h);
+        const withBrows = renderWithBrows(
+          uploadedSource,
+          landmarks,
+          selectedStyle,
+          {
+            thickness,
+            intensity,
+            archLeft: effectiveArchLeft,
+            archRight: effectiveArchRight,
+          },
+          colorOverride,
+        );
         const clipW = Math.round((comparePos / 100) * w);
         if (clipW > 0) {
           ctx.save();
@@ -709,12 +949,18 @@ export default function BrowTryOn() {
           ctx.restore();
         }
       } else {
-        const withBrows = renderWithBrows(uploadedSource, landmarks, selectedStyle, {
-          thickness,
-          intensity,
-          archLeft: effectiveArchLeft,
-          archRight: effectiveArchRight,
-        });
+        const withBrows = renderWithBrows(
+          uploadedSource,
+          landmarks,
+          selectedStyle,
+          {
+            thickness,
+            intensity,
+            archLeft: effectiveArchLeft,
+            archRight: effectiveArchRight,
+          },
+          colorOverride,
+        );
         ctx.drawImage(withBrows, 0, 0, w, h);
       }
     };
@@ -732,9 +978,13 @@ export default function BrowTryOn() {
     effectiveArchRight,
     compareOn,
     comparePos,
+    colorOverride,
+    abMode,
+    styleA,
+    styleB,
   ]);
 
-  /* ── Compare slider drag — pointer events cover mouse + touch ── */
+  /* ── Compare slider drag ── */
   const draggingRef = useRef(false);
 
   const updateComparePos = useCallback((clientX: number) => {
@@ -750,11 +1000,10 @@ export default function BrowTryOn() {
   const handleCompareDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (!compareOn) return;
     draggingRef.current = true;
-    // Capture so we keep getting events even if the pointer leaves the box.
     try {
       e.currentTarget.setPointerCapture(e.pointerId);
     } catch {
-      // Some environments may not support pointer capture; safe to ignore.
+      // ignore
     }
     updateComparePos(e.clientX);
   };
@@ -779,15 +1028,18 @@ export default function BrowTryOn() {
     const canvas = canvasRef.current;
     if (!canvas || !uploadedSource || !landmarks) return;
 
-    // Build a fresh "final" render (always full, not compare-clipped) and
-    // add the watermark. We do NOT mutate the live canvas — the watermark
-    // must never appear in the preview.
-    const finalCanvas = renderWithBrows(uploadedSource, landmarks, selectedStyle, {
-      thickness,
-      intensity,
-      archLeft: effectiveArchLeft,
-      archRight: effectiveArchRight,
-    });
+    const finalCanvas = renderWithBrows(
+      uploadedSource,
+      landmarks,
+      selectedStyle,
+      {
+        thickness,
+        intensity,
+        archLeft: effectiveArchLeft,
+        archRight: effectiveArchRight,
+      },
+      colorOverride,
+    );
     const ctx = finalCanvas.getContext("2d");
     if (ctx) drawWatermark(ctx, finalCanvas.width, finalCanvas.height);
 
@@ -800,11 +1052,54 @@ export default function BrowTryOn() {
     document.body.removeChild(a);
   };
 
+  const handleDownloadStoryCard = () => {
+    if (!uploadedSource || !landmarks) return;
+    const photo = renderWithBrows(
+      uploadedSource,
+      landmarks,
+      selectedStyle,
+      {
+        thickness,
+        intensity,
+        archLeft: effectiveArchLeft,
+        archRight: effectiveArchRight,
+      },
+      colorOverride,
+    );
+    const card = composeStoryCard(
+      photo,
+      t("tryon.card.brand"),
+      t("tryon.card.tagline"),
+      t(selectedStyle.nameKey),
+      t("tryon.card.code"),
+    );
+    const url = card.toDataURL("image/png");
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `shimmyhands-tryon-story.png`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   const handleShareWhatsApp = () => {
     const template = t("tryon.share.message");
     const styleName = t(selectedStyle.nameKey);
     const message = encodeURIComponent(template.replace("{style}", styleName));
     window.open(`https://wa.me/6589308973?text=${message}`, "_blank");
+  };
+
+  const handleBookThisLook = () => {
+    const styleName = t(selectedStyle.nameKey);
+    const colorPart = selectedColorName
+      ? `, color: ${selectedColorName}`
+      : "";
+    const note = `${t("tryon.book.note.prefix")} ${styleName}${colorPart}, arch L:${effectiveArchLeft} R:${effectiveArchRight}`;
+    const params = new URLSearchParams({
+      style: selectedStyle.id,
+      note,
+    });
+    router.push(`/contact?${params.toString()}`);
   };
 
   const handleReset = () => {
@@ -814,7 +1109,53 @@ export default function BrowTryOn() {
     setErrorMsg(null);
     setCompareOn(false);
     setComparePos(50);
+    setAbMode(false);
+    setStyleA(null);
+    setStyleB(null);
+    setAbPicking(null);
   };
+
+  /* ── A/B mode toggle ── */
+  const enterAbMode = () => {
+    setAbMode(true);
+    setCompareOn(false);
+    setStyleA(selectedStyleId);
+    setStyleB(null);
+    setAbPicking("B");
+  };
+
+  const exitAbMode = () => {
+    setAbMode(false);
+    setAbPicking(null);
+  };
+
+  const pickWinner = (id: string | null) => {
+    if (!id) return;
+    setSelectedStyleId(id);
+    exitAbMode();
+  };
+
+  const handleStyleClick = (id: string) => {
+    if (abMode) {
+      if (abPicking === "A") {
+        setStyleA(id);
+        setAbPicking("B");
+      } else {
+        // default to B
+        setStyleB(id);
+        setAbPicking(null);
+      }
+      return;
+    }
+    setSelectedStyleId(id);
+  };
+
+  // Whether the floating Book CTA should show. Hide when any modal is open.
+  const showBookCta =
+    step === "editor" &&
+    !showSaveModal &&
+    !showCameraModal &&
+    !showQuizModal;
 
   /* ──────────────────────────────────────────────
      Render
@@ -858,10 +1199,10 @@ export default function BrowTryOn() {
               </button>
               <button
                 type="button"
-                onClick={() => cameraInputRef.current?.click()}
+                onClick={() => setShowCameraModal(true)}
                 className="w-full sm:w-auto inline-block border border-charcoal/20 px-6 py-3 text-xs uppercase tracking-[0.2em] text-charcoal hover:border-vermillion hover:text-vermillion transition-colors"
               >
-                {t("tryon.upload.camera")}
+                {t("tryon.camera.start")}
               </button>
             </div>
 
@@ -873,19 +1214,9 @@ export default function BrowTryOn() {
               className="hidden"
               aria-label={t("tryon.upload.choose")}
             />
-            <input
-              ref={cameraInputRef}
-              type="file"
-              accept="image/*"
-              capture="user"
-              onChange={handleFileChange}
-              className="hidden"
-              aria-label={t("tryon.upload.camera")}
-            />
 
             <div className="mt-8 mx-auto max-w-md border-t border-vermillion/15 pt-5">
               <p className="text-[11px] uppercase tracking-[0.2em] text-vermillion-dark">
-                {/* lock icon */}
                 <span aria-hidden="true" className="mr-2">
                   ✦
                 </span>
@@ -902,6 +1233,17 @@ export default function BrowTryOn() {
 
           <p className="mt-6 text-center text-xs text-warm-gray italic">
             {t("tryon.tip")}
+          </p>
+
+          {/* Quiz promo link */}
+          <p className="mt-4 text-center">
+            <button
+              type="button"
+              onClick={() => setShowQuizModal(true)}
+              className="text-sm text-vermillion hover:text-vermillion-dark underline-offset-4 hover:underline transition-colors"
+            >
+              {t("tryon.quiz.open")}
+            </button>
           </p>
         </div>
       )}
@@ -941,255 +1283,468 @@ export default function BrowTryOn() {
 
       {/* ─── Editor Step ─── */}
       {step === "editor" && (
-        <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.4fr_1fr]">
-          {/* Canvas column */}
-          <div>
-            <p className="text-xs text-vermillion-dark italic mb-3">
-              {t("tryon.tip")}
-            </p>
-            <div
-              ref={compareWrapperRef}
-              onPointerDown={handleCompareDown}
-              onPointerMove={handleCompareMove}
-              onPointerUp={handleCompareUp}
-              onPointerCancel={handleCompareUp}
-              className={`relative bg-cream-dark/40 border border-vermillion/15 overflow-hidden rounded-sm select-none ${
-                compareOn ? "touch-none cursor-ew-resize" : ""
-              }`}
+        <>
+          {/* Quiz promo link */}
+          <p className="mb-3 text-center sm:text-left">
+            <button
+              type="button"
+              onClick={() => setShowQuizModal(true)}
+              className="text-sm text-vermillion hover:text-vermillion-dark underline-offset-4 hover:underline transition-colors"
             >
-              <canvas
-                ref={canvasRef}
-                aria-label={t("tryon.title")}
-                className="block w-full h-auto"
-              />
+              {t("tryon.quiz.open")}
+            </button>
+          </p>
 
-              {/* Drag handle + dividing line — only visible when compare is on */}
-              {compareOn && (
-                <>
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute top-0 bottom-0"
-                    style={{
-                      left: `${comparePos}%`,
-                      width: "2px",
-                      background: "rgba(255,255,255,0.9)",
-                      boxShadow: "0 0 6px rgba(0,0,0,0.45)",
-                      transform: "translateX(-1px)",
-                    }}
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute"
-                    style={{
-                      left: `${comparePos}%`,
-                      top: "50%",
-                      transform: "translate(-50%, -50%)",
-                      width: "36px",
-                      height: "36px",
-                      borderRadius: "9999px",
-                      background: "rgba(255,255,255,0.95)",
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.35)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "var(--vermillion-dark)",
-                      fontSize: "14px",
-                      fontWeight: 600,
-                      letterSpacing: "-0.05em",
-                    }}
-                  >
-                    ◀▶
-                  </div>
-                </>
-              )}
-            </div>
-            {compareOn && (
-              <p className="mt-2 text-[11px] text-vermillion-dark text-center">
-                {t("tryon.compare.hint")}
-              </p>
-            )}
-            <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-vermillion-dark text-center">
-              <span aria-hidden="true" className="mr-2">
-                ✦
-              </span>
-              {t("tryon.upload.privacy")}
-            </p>
-          </div>
-
-          {/* Controls column */}
-          <div className="space-y-6">
-            {/* Style picker */}
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.4fr_1fr]">
+            {/* Canvas column */}
             <div>
-              <h3 className="text-[10px] uppercase tracking-[0.3em] text-vermillion-dark mb-3">
-                {t("tryon.styles.title")}
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {BROW_STYLES.map((style) => {
-                  const active = style.id === selectedStyleId;
-                  return (
-                    <button
-                      key={style.id}
-                      type="button"
-                      onClick={() => setSelectedStyleId(style.id)}
-                      aria-pressed={active}
-                      title={t(style.descKey)}
-                      className={`text-left p-2 border transition-all ${
-                        active
-                          ? "border-vermillion bg-vermillion/5"
-                          : "border-vermillion/15 bg-cream/30 hover:border-vermillion/40"
-                      }`}
+              <p className="text-xs text-vermillion-dark italic mb-3">
+                {t("tryon.tip")}
+              </p>
+              <div
+                ref={compareWrapperRef}
+                onPointerDown={handleCompareDown}
+                onPointerMove={handleCompareMove}
+                onPointerUp={handleCompareUp}
+                onPointerCancel={handleCompareUp}
+                className={`relative bg-cream-dark/40 border border-vermillion/15 overflow-hidden rounded-sm select-none ${
+                  compareOn ? "touch-none cursor-ew-resize" : ""
+                }`}
+              >
+                <canvas
+                  ref={canvasRef}
+                  aria-label={t("tryon.title")}
+                  className="block w-full h-auto"
+                />
+
+                {/* Compare drag handle */}
+                {compareOn && !abMode && (
+                  <>
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute top-0 bottom-0"
+                      style={{
+                        left: `${comparePos}%`,
+                        width: "2px",
+                        background: "rgba(255,255,255,0.9)",
+                        boxShadow: "0 0 6px rgba(0,0,0,0.45)",
+                        transform: "translateX(-1px)",
+                      }}
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute"
+                      style={{
+                        left: `${comparePos}%`,
+                        top: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: "36px",
+                        height: "36px",
+                        borderRadius: "9999px",
+                        background: "rgba(255,255,255,0.95)",
+                        boxShadow: "0 2px 8px rgba(0,0,0,0.35)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "var(--vermillion-dark)",
+                        fontSize: "14px",
+                        fontWeight: 600,
+                        letterSpacing: "-0.05em",
+                      }}
                     >
-                      <div className="aspect-[2/1] bg-cream-dark/30 flex items-center justify-center p-1">
-                        <StylePreview style={style} />
+                      ◀▶
+                    </div>
+                  </>
+                )}
+
+                {/* A/B overlay labels + winner buttons */}
+                {abMode && (
+                  <>
+                    <div className="pointer-events-none absolute inset-y-0 left-0 w-1/2 flex flex-col">
+                      <div className="m-2 self-start bg-charcoal/70 text-soft-white text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-sm">
+                        {t("tryon.ab.left")}
+                        {styleA && (
+                          <span className="ml-2 normal-case tracking-normal">
+                            · {t(BROW_STYLES.find((s) => s.id === styleA)?.nameKey ?? "")}
+                          </span>
+                        )}
                       </div>
-                      <p className="mt-2 text-[10px] leading-tight text-charcoal font-medium">
-                        {t(style.nameKey)}
-                      </p>
-                      <p className="mt-1 text-[9px] leading-snug text-charcoal-light">
-                        {t(style.descKey)}
-                      </p>
-                    </button>
-                  );
-                })}
+                      <div className="flex-1" />
+                      {styleA && (
+                        <div className="pointer-events-auto m-2 self-start">
+                          <button
+                            type="button"
+                            onClick={() => pickWinner(styleA)}
+                            className="bg-vermillion text-soft-white text-[10px] uppercase tracking-[0.2em] px-3 py-2 rounded-sm hover:bg-vermillion-dark transition-colors"
+                          >
+                            {t("tryon.ab.winner")}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 flex flex-col">
+                      <div className="m-2 self-end bg-charcoal/70 text-soft-white text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-sm">
+                        {t("tryon.ab.right")}
+                        {styleB && (
+                          <span className="ml-2 normal-case tracking-normal">
+                            · {t(BROW_STYLES.find((s) => s.id === styleB)?.nameKey ?? "")}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex-1" />
+                      {styleB && (
+                        <div className="pointer-events-auto m-2 self-end">
+                          <button
+                            type="button"
+                            onClick={() => pickWinner(styleB)}
+                            className="bg-vermillion text-soft-white text-[10px] uppercase tracking-[0.2em] px-3 py-2 rounded-sm hover:bg-vermillion-dark transition-colors"
+                          >
+                            {t("tryon.ab.winner")}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )}
               </div>
-            </div>
-
-            {/* Sliders */}
-            <div className="space-y-4">
-              <SliderRow
-                label={t("tryon.control.thickness")}
-                min={0.5}
-                max={2}
-                step={0.05}
-                value={thickness}
-                onChange={setThickness}
-                format={(v) => `${v.toFixed(2)}x`}
-              />
-              <SliderRow
-                label={t("tryon.control.intensity")}
-                min={0}
-                max={1}
-                step={0.01}
-                value={intensity}
-                onChange={setIntensity}
-                format={(v) => `${Math.round(v * 100)}%`}
-              />
-
-              {/* Independent toggle */}
-              <label className="flex items-center justify-between gap-3 cursor-pointer">
-                <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal">
-                  {t("tryon.control.independent")}
-                </span>
-                <input
-                  type="checkbox"
-                  checked={independent}
-                  onChange={(e) => {
-                    const next = e.target.checked;
-                    setIndependent(next);
-                    // When turning ON, seed both sides from the synced value
-                    // so the visuals don't jump. When turning OFF, seed the
-                    // synced value from the left side as a sensible default.
-                    if (next) {
-                      setArchLeft(archSynced);
-                      setArchRight(archSynced);
-                    } else {
-                      setArchSynced(archLeft);
-                    }
-                  }}
-                  className="h-4 w-4 accent-vermillion"
-                  aria-label={t("tryon.control.independent")}
-                />
-              </label>
-
-              {independent ? (
-                <>
-                  <SliderRow
-                    label={`${t("tryon.control.arch")} · ${t("tryon.control.arch.left")}`}
-                    min={-10}
-                    max={10}
-                    step={1}
-                    value={archLeft}
-                    onChange={setArchLeft}
-                    format={(v) =>
-                      v > 0 ? `+${v}px` : v < 0 ? `${v}px` : "0px"
-                    }
-                  />
-                  <SliderRow
-                    label={`${t("tryon.control.arch")} · ${t("tryon.control.arch.right")}`}
-                    min={-10}
-                    max={10}
-                    step={1}
-                    value={archRight}
-                    onChange={setArchRight}
-                    format={(v) =>
-                      v > 0 ? `+${v}px` : v < 0 ? `${v}px` : "0px"
-                    }
-                  />
-                </>
-              ) : (
-                <SliderRow
-                  label={t("tryon.control.arch")}
-                  min={-10}
-                  max={10}
-                  step={1}
-                  value={archSynced}
-                  onChange={setArchSynced}
-                  format={(v) =>
-                    v > 0 ? `+${v}px` : v < 0 ? `${v}px` : "0px"
-                  }
-                />
+              {compareOn && !abMode && (
+                <p className="mt-2 text-[11px] text-vermillion-dark text-center">
+                  {t("tryon.compare.hint")}
+                </p>
               )}
+              {abMode && (
+                <p className="mt-2 text-[11px] text-vermillion-dark text-center">
+                  {abPicking
+                    ? `${t("tryon.ab.pick")} (${abPicking === "A" ? t("tryon.ab.left") : t("tryon.ab.right")})`
+                    : t("tryon.ab.pick")}
+                </p>
+              )}
+              <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-vermillion-dark text-center">
+                <span aria-hidden="true" className="mr-2">
+                  ✦
+                </span>
+                {t("tryon.upload.privacy")}
+              </p>
             </div>
 
-            {/* Compare toggle — drag-slider mode */}
-            <button
-              type="button"
-              onClick={() => setCompareOn((v) => !v)}
-              aria-pressed={compareOn}
-              className={`w-full border px-4 py-2.5 text-xs uppercase tracking-[0.2em] transition-colors select-none ${
-                compareOn
-                  ? "border-vermillion bg-vermillion/5 text-vermillion-dark"
-                  : "border-charcoal/20 text-charcoal hover:border-vermillion hover:text-vermillion"
-              }`}
-            >
-              {t("tryon.compare.toggle")}:{" "}
-              {compareOn ? t("tryon.compare.on") : t("tryon.compare.off")}
-            </button>
-
-            {/* Action buttons */}
-            <div className="grid grid-cols-2 gap-2">
+            {/* Controls column */}
+            <div className="space-y-6 pb-24 sm:pb-6">
+              {/* A/B toggle */}
               <button
                 type="button"
-                onClick={handleDownload}
-                className="inline-block bg-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors"
+                onClick={abMode ? exitAbMode : enterAbMode}
+                aria-pressed={abMode}
+                className={`w-full border px-4 py-2.5 text-xs uppercase tracking-[0.2em] transition-colors select-none ${
+                  abMode
+                    ? "border-vermillion bg-vermillion/5 text-vermillion-dark"
+                    : "border-charcoal/20 text-charcoal hover:border-vermillion hover:text-vermillion"
+                }`}
               >
-                {t("tryon.download")}
+                {abMode ? t("tryon.ab.exit") : t("tryon.ab.toggle")}
               </button>
+
+              {/* Style picker */}
+              <div>
+                <h3 className="text-[10px] uppercase tracking-[0.3em] text-vermillion-dark mb-3">
+                  {abMode
+                    ? `${t("tryon.ab.pick")}${abPicking ? ` · ${abPicking === "A" ? t("tryon.ab.left") : t("tryon.ab.right")}` : ""}`
+                    : t("tryon.styles.title")}
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {BROW_STYLES.map((style) => {
+                    const active = abMode
+                      ? style.id === styleA || style.id === styleB
+                      : style.id === selectedStyleId;
+                    const slot = abMode
+                      ? style.id === styleA
+                        ? "A"
+                        : style.id === styleB
+                          ? "B"
+                          : null
+                      : null;
+                    return (
+                      <button
+                        key={style.id}
+                        type="button"
+                        onClick={() => handleStyleClick(style.id)}
+                        aria-pressed={active}
+                        title={t(style.descKey)}
+                        className={`relative text-left p-2 border transition-all ${
+                          active
+                            ? "border-vermillion bg-vermillion/5"
+                            : "border-vermillion/15 bg-cream/30 hover:border-vermillion/40"
+                        }`}
+                      >
+                        {style.isPopular && (
+                          <span className="absolute top-1 right-1 bg-vermillion text-soft-white text-[8px] uppercase tracking-[0.1em] px-1.5 py-0.5 rounded-sm z-10">
+                            {t("tryon.popular.badge")}
+                          </span>
+                        )}
+                        {slot && (
+                          <span className="absolute top-1 left-1 bg-charcoal text-soft-white text-[8px] uppercase tracking-[0.1em] px-1.5 py-0.5 rounded-sm z-10">
+                            {slot}
+                          </span>
+                        )}
+                        <div className="aspect-[2/1] bg-cream-dark/30 flex items-center justify-center p-1">
+                          <StylePreview style={style} color={colorOverride} />
+                        </div>
+                        <p className="mt-2 text-[10px] leading-tight text-charcoal font-medium">
+                          {t(style.nameKey)}
+                        </p>
+                        <p className="mt-1 text-[9px] leading-snug text-charcoal-light">
+                          {t(style.descKey)}
+                        </p>
+                        <p className="mt-1.5 text-[10px] uppercase tracking-[0.1em] text-vermillion-dark font-medium">
+                          {t("tryon.price.from")} S${style.priceFrom}
+                        </p>
+                        <p className="text-[9px] leading-tight text-warm-gray">
+                          {style.triedThisMonth} {t("tryon.tried.this.month")}
+                        </p>
+                        <p className="mt-1 text-[9px] leading-tight text-charcoal-light">
+                          {t("tryon.longevity.label")}: {t(style.longevityKey)}
+                        </p>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Brow colour picker */}
+              <div>
+                <h3 className="text-[10px] uppercase tracking-[0.3em] text-vermillion-dark mb-3">
+                  {t("tryon.color.title")}
+                </h3>
+                <div className="flex flex-wrap items-center gap-3">
+                  {BROW_COLORS.map((c) => {
+                    const active = c.id === selectedColorId;
+                    return (
+                      <button
+                        key={c.id}
+                        type="button"
+                        onClick={() =>
+                          setSelectedColorId(active ? null : c.id)
+                        }
+                        aria-pressed={active}
+                        aria-label={t(c.nameKey)}
+                        title={t(c.nameKey)}
+                        className={`h-8 w-8 rounded-full transition-all ${
+                          active
+                            ? "ring-2 ring-vermillion ring-offset-2 ring-offset-cream"
+                            : "ring-1 ring-charcoal/15 hover:ring-vermillion/40"
+                        }`}
+                        style={{ backgroundColor: c.color }}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Sliders */}
+              <div className="space-y-4">
+                <SliderRow
+                  label={t("tryon.control.thickness")}
+                  min={0.5}
+                  max={2}
+                  step={0.05}
+                  value={thickness}
+                  onChange={setThickness}
+                  format={(v) => `${v.toFixed(2)}x`}
+                />
+                <SliderRow
+                  label={t("tryon.control.intensity")}
+                  min={0}
+                  max={1}
+                  step={0.01}
+                  value={intensity}
+                  onChange={setIntensity}
+                  format={(v) => `${Math.round(v * 100)}%`}
+                />
+
+                <label className="flex items-center justify-between gap-3 cursor-pointer">
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal">
+                    {t("tryon.control.independent")}
+                  </span>
+                  <input
+                    type="checkbox"
+                    checked={independent}
+                    onChange={(e) => {
+                      const next = e.target.checked;
+                      setIndependent(next);
+                      if (next) {
+                        setArchLeft(archSynced);
+                        setArchRight(archSynced);
+                      } else {
+                        setArchSynced(archLeft);
+                      }
+                    }}
+                    className="h-4 w-4 accent-vermillion"
+                    aria-label={t("tryon.control.independent")}
+                  />
+                </label>
+
+                {independent ? (
+                  <>
+                    <SliderRow
+                      label={`${t("tryon.control.arch")} · ${t("tryon.control.arch.left")}`}
+                      min={-10}
+                      max={10}
+                      step={1}
+                      value={archLeft}
+                      onChange={setArchLeft}
+                      format={(v) =>
+                        v > 0 ? `+${v}px` : v < 0 ? `${v}px` : "0px"
+                      }
+                    />
+                    <SliderRow
+                      label={`${t("tryon.control.arch")} · ${t("tryon.control.arch.right")}`}
+                      min={-10}
+                      max={10}
+                      step={1}
+                      value={archRight}
+                      onChange={setArchRight}
+                      format={(v) =>
+                        v > 0 ? `+${v}px` : v < 0 ? `${v}px` : "0px"
+                      }
+                    />
+                  </>
+                ) : (
+                  <SliderRow
+                    label={t("tryon.control.arch")}
+                    min={-10}
+                    max={10}
+                    step={1}
+                    value={archSynced}
+                    onChange={setArchSynced}
+                    format={(v) =>
+                      v > 0 ? `+${v}px` : v < 0 ? `${v}px` : "0px"
+                    }
+                  />
+                )}
+              </div>
+
+              {/* Compare toggle */}
               <button
                 type="button"
-                onClick={handleShareWhatsApp}
-                className="inline-block bg-jade px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:opacity-90 transition-opacity"
+                onClick={() => {
+                  if (abMode) return;
+                  setCompareOn((v) => !v);
+                }}
+                aria-pressed={compareOn}
+                disabled={abMode}
+                className={`w-full border px-4 py-2.5 text-xs uppercase tracking-[0.2em] transition-colors select-none ${
+                  abMode
+                    ? "border-charcoal/10 text-charcoal/30 cursor-not-allowed"
+                    : compareOn
+                      ? "border-vermillion bg-vermillion/5 text-vermillion-dark"
+                      : "border-charcoal/20 text-charcoal hover:border-vermillion hover:text-vermillion"
+                }`}
               >
-                {t("tryon.share")}
+                {t("tryon.compare.toggle")}:{" "}
+                {compareOn ? t("tryon.compare.on") : t("tryon.compare.off")}
+              </button>
+
+              {/* Action buttons */}
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={handleDownload}
+                  className="inline-block bg-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors"
+                >
+                  {t("tryon.download")}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleShareWhatsApp}
+                  className="inline-block bg-jade px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:opacity-90 transition-opacity"
+                >
+                  {t("tryon.share")}
+                </button>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowSaveModal(true)}
+                  className="inline-block border border-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-vermillion hover:bg-vermillion hover:text-soft-white transition-colors"
+                >
+                  {t("tryon.save.title")}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDownloadStoryCard}
+                  className="inline-block border border-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-vermillion hover:bg-vermillion hover:text-soft-white transition-colors"
+                >
+                  {t("tryon.card.download")}
+                </button>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleReset}
+                className="w-full text-xs uppercase tracking-[0.2em] text-charcoal-light hover:text-vermillion transition-colors py-2"
+              >
+                {t("tryon.retry")}
               </button>
             </div>
-
-            <button
-              type="button"
-              onClick={handleReset}
-              className="w-full text-xs uppercase tracking-[0.2em] text-charcoal-light hover:text-vermillion transition-colors py-2"
-            >
-              {t("tryon.retry")}
-            </button>
           </div>
-        </div>
+        </>
+      )}
+
+      {/* ─── Floating Book This Look CTA ─── */}
+      {showBookCta && (
+        <button
+          type="button"
+          onClick={handleBookThisLook}
+          className="fixed bottom-20 sm:bottom-4 left-1/2 -translate-x-1/2 bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.2em] shadow-lg z-40 hover:bg-vermillion-dark transition-colors rounded-sm"
+        >
+          {t("tryon.book.this.look")}
+        </button>
+      )}
+
+      {/* ─── Save my look modal ─── */}
+      {showSaveModal && (
+        <SaveLookModal
+          onClose={() => setShowSaveModal(false)}
+          styleId={selectedStyle.id}
+          styleName={t(selectedStyle.nameKey)}
+          t={t}
+        />
+      )}
+
+      {/* ─── Camera modal ─── */}
+      {showCameraModal && (
+        <CameraModal
+          onClose={() => setShowCameraModal(false)}
+          onCapture={(cnv) => {
+            setShowCameraModal(false);
+            void processCanvas(cnv);
+          }}
+          t={t}
+        />
+      )}
+
+      {/* ─── Quiz modal ─── */}
+      {showQuizModal && (
+        <QuizModal
+          onClose={() => setShowQuizModal(false)}
+          onPickStyle={(id) => {
+            setSelectedStyleId(id);
+            setShowQuizModal(false);
+            try {
+              localStorage.setItem(QUIZ_STORAGE_KEY, "true");
+            } catch {
+              // ignore
+            }
+          }}
+          t={t}
+        />
       )}
     </div>
   );
 }
 
 /* ──────────────────────────────────────────────
-   SliderRow — labelled slider with live value
+   SliderRow
    ────────────────────────────────────────────── */
 function SliderRow({
   label,
@@ -1227,5 +1782,573 @@ function SliderRow({
         className="mt-2 w-full accent-vermillion"
       />
     </label>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   SaveLookModal — lead capture
+   ────────────────────────────────────────────── */
+function SaveLookModal({
+  onClose,
+  styleId,
+  styleName,
+  t,
+}: {
+  onClose: () => void;
+  styleId: string;
+  styleName: string;
+  t: (k: string) => string;
+}) {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+    setStatus("idle");
+    try {
+      const res = await fetch("/api/save-look", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          email: email || undefined,
+          style_id: styleId,
+          style_name: styleName,
+        }),
+      });
+      if (!res.ok) {
+        setStatus("error");
+      } else {
+        setStatus("success");
+        setTimeout(() => onClose(), 2000);
+      }
+    } catch {
+      setStatus("error");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <ModalShell
+      onClose={onClose}
+      ariaLabel={t("tryon.save.title")}
+      maxWidthClass="max-w-[420px]"
+    >
+      <form onSubmit={handleSubmit} className="p-6 sm:p-8">
+        <div className="h-[2px] w-[40px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-3" />
+        <h2 className="font-serif text-xl text-charcoal">
+          {t("tryon.save.title")}
+        </h2>
+        <p className="mt-2 text-sm text-charcoal-light">
+          {t("tryon.save.desc")}
+        </p>
+
+        <div className="mt-5 space-y-4">
+          <label className="block">
+            <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal">
+              {t("tryon.save.name")} *
+            </span>
+            <input
+              type="text"
+              required
+              maxLength={100}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="mt-2 w-full border border-charcoal/20 px-3 py-2 text-sm bg-soft-white focus:border-vermillion focus:outline-none"
+            />
+          </label>
+          <label className="block">
+            <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal">
+              {t("tryon.save.phone")} *
+            </span>
+            <input
+              type="tel"
+              required
+              pattern="[+\d\s\-()]{6,20}"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="mt-2 w-full border border-charcoal/20 px-3 py-2 text-sm bg-soft-white focus:border-vermillion focus:outline-none"
+            />
+          </label>
+          <label className="block">
+            <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal">
+              {t("tryon.save.email")}
+            </span>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-2 w-full border border-charcoal/20 px-3 py-2 text-sm bg-soft-white focus:border-vermillion focus:outline-none"
+            />
+          </label>
+        </div>
+
+        {status === "success" && (
+          <p className="mt-4 text-sm text-jade" role="status">
+            {t("tryon.save.success")}
+          </p>
+        )}
+        {status === "error" && (
+          <p className="mt-4 text-sm text-vermillion-dark" role="alert">
+            {t("tryon.save.error")}
+          </p>
+        )}
+
+        <div className="mt-6 flex flex-col-reverse sm:flex-row gap-2">
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-1 border border-charcoal/20 px-4 py-3 text-xs uppercase tracking-[0.2em] text-charcoal hover:border-vermillion hover:text-vermillion transition-colors"
+          >
+            {t("tryon.save.cancel")}
+          </button>
+          <button
+            type="submit"
+            disabled={submitting}
+            className="flex-1 bg-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors disabled:opacity-50"
+          >
+            {submitting ? "..." : t("tryon.save.submit")}
+          </button>
+        </div>
+      </form>
+    </ModalShell>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   CameraModal — live camera capture with countdown
+   ────────────────────────────────────────────── */
+function CameraModal({
+  onClose,
+  onCapture,
+  t,
+}: {
+  onClose: () => void;
+  onCapture: (cnv: HTMLCanvasElement) => void;
+  t: (k: string) => string;
+}) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [countdown, setCountdown] = useState<number | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  const stopStream = useCallback(() => {
+    const stream = streamRef.current;
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+      streamRef.current = null;
+    }
+  }, []);
+
+  const startStream = useCallback(async () => {
+    setError(null);
+    setPreviewUrl(null);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: "user",
+          width: { ideal: 1280 },
+          height: { ideal: 1280 },
+        },
+        audio: false,
+      });
+      streamRef.current = stream;
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        await videoRef.current.play().catch(() => {
+          // some browsers need user interaction
+        });
+      }
+    } catch (err) {
+      console.error("Camera error", err);
+      setError(t("tryon.camera.error"));
+    }
+  }, [t]);
+
+  useEffect(() => {
+    void startStream();
+    return () => {
+      stopStream();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const captureFrame = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return null;
+    const w = video.videoWidth;
+    const h = video.videoHeight;
+    if (!w || !h) return null;
+    const cnv = document.createElement("canvas");
+    cnv.width = w;
+    cnv.height = h;
+    const ctx = cnv.getContext("2d");
+    if (!ctx) return null;
+    // Mirror horizontally so what the user saw in the preview matches the photo
+    ctx.save();
+    ctx.translate(w, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(video, 0, 0, w, h);
+    ctx.restore();
+    return cnv;
+  }, []);
+
+  const startCountdown = useCallback(() => {
+    if (countdown !== null) return;
+    let n = 3;
+    setCountdown(n);
+    const tick = () => {
+      n -= 1;
+      if (n <= 0) {
+        setCountdown(null);
+        const cnv = captureFrame();
+        if (cnv) {
+          previewCanvasRef.current = cnv;
+          setPreviewUrl(cnv.toDataURL("image/png"));
+          stopStream();
+        }
+      } else {
+        setCountdown(n);
+        setTimeout(tick, 1000);
+      }
+    };
+    setTimeout(tick, 1000);
+  }, [countdown, captureFrame, stopStream]);
+
+  const handleRetake = () => {
+    setPreviewUrl(null);
+    previewCanvasRef.current = null;
+    void startStream();
+  };
+
+  const handleConfirm = () => {
+    if (previewCanvasRef.current) {
+      onCapture(previewCanvasRef.current);
+    }
+  };
+
+  const handleCancel = () => {
+    stopStream();
+    onClose();
+  };
+
+  return (
+    <ModalShell
+      onClose={handleCancel}
+      ariaLabel={t("tryon.camera.title")}
+      maxWidthClass="max-w-[520px]"
+    >
+      <div className="p-5 sm:p-6">
+        <div className="h-[2px] w-[40px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-3" />
+        <h2 className="font-serif text-xl text-charcoal">
+          {t("tryon.camera.title")}
+        </h2>
+        <p className="mt-2 text-xs text-charcoal-light">
+          {t("tryon.camera.guide")}
+        </p>
+
+        <div className="mt-4 relative aspect-square bg-charcoal rounded-sm overflow-hidden">
+          {!previewUrl ? (
+            <>
+              <video
+                ref={videoRef}
+                playsInline
+                muted
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ transform: "scaleX(-1)" }}
+              />
+              {/* Circular face guide */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none flex items-center justify-center"
+              >
+                <div
+                  className="rounded-full border-2 border-dashed border-soft-white/80"
+                  style={{
+                    width: "70%",
+                    aspectRatio: "1 / 1",
+                  }}
+                />
+              </div>
+              {countdown !== null && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                  <span className="text-soft-white font-serif text-7xl">
+                    {countdown}
+                  </span>
+                </div>
+              )}
+            </>
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={previewUrl}
+              alt={t("tryon.camera.title")}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
+        </div>
+
+        {error && (
+          <p className="mt-3 text-sm text-vermillion-dark" role="alert">
+            {error}
+          </p>
+        )}
+
+        <div className="mt-5 flex flex-col-reverse sm:flex-row gap-2">
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="flex-1 border border-charcoal/20 px-4 py-3 text-xs uppercase tracking-[0.2em] text-charcoal hover:border-vermillion hover:text-vermillion transition-colors"
+          >
+            {t("tryon.camera.cancel")}
+          </button>
+          {!previewUrl ? (
+            <button
+              type="button"
+              onClick={startCountdown}
+              disabled={!!error || countdown !== null}
+              className="flex-1 bg-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors disabled:opacity-50"
+            >
+              {countdown !== null
+                ? t("tryon.camera.countdown")
+                : t("tryon.camera.capture")}
+            </button>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={handleRetake}
+                className="flex-1 border border-vermillion text-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] hover:bg-vermillion hover:text-soft-white transition-colors"
+              >
+                {t("tryon.camera.retake")}
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirm}
+                className="flex-1 bg-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors"
+              >
+                {t("tryon.camera.capture")}
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </ModalShell>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   QuizModal — face shape quiz + recommendations
+   ────────────────────────────────────────────── */
+function QuizModal({
+  onClose,
+  onPickStyle,
+  t,
+}: {
+  onClose: () => void;
+  onPickStyle: (id: string) => void;
+  t: (k: string) => string;
+}) {
+  const [step, setStep] = useState(0);
+  // Track chosen option ids per question.
+  const [answers, setAnswers] = useState<(string | null)[]>(
+    () => FACE_SHAPE_QUIZ.map(() => null),
+  );
+  const [shape, setShape] = useState<FaceShape | null>(null);
+
+  const total = FACE_SHAPE_QUIZ.length;
+  const isResult = step >= total;
+  const current = FACE_SHAPE_QUIZ[step];
+
+  const selectOption = (qIndex: number, optionId: string) => {
+    setAnswers((prev) => {
+      const next = [...prev];
+      next[qIndex] = optionId;
+      return next;
+    });
+    // Auto-advance for snappier flow.
+    if (qIndex + 1 < total) {
+      setStep(qIndex + 1);
+    } else {
+      computeResult([
+        ...answers.slice(0, qIndex),
+        optionId,
+        ...answers.slice(qIndex + 1),
+      ]);
+    }
+  };
+
+  const computeResult = (finalAnswers: (string | null)[]) => {
+    const votes: Partial<Record<FaceShape, number>> = {};
+    FACE_SHAPE_QUIZ.forEach((q, i) => {
+      const answerId = finalAnswers[i];
+      if (!answerId) return;
+      const opt = q.options.find((o) => o.id === answerId);
+      if (!opt) return;
+      for (const [shape, weight] of Object.entries(opt.weights)) {
+        const s = shape as FaceShape;
+        votes[s] = (votes[s] ?? 0) + (weight ?? 0);
+      }
+    });
+    setShape(resolveFaceShape(votes));
+    setStep(total);
+    try {
+      localStorage.setItem(QUIZ_STORAGE_KEY, "true");
+    } catch {
+      // ignore
+    }
+  };
+
+  const handleNext = () => {
+    if (step + 1 >= total) {
+      computeResult(answers);
+    } else {
+      setStep(step + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (step > 0) setStep(step - 1);
+  };
+
+  const recommendations =
+    isResult && shape ? recommendedStylesFor(shape) : [];
+
+  return (
+    <ModalShell
+      onClose={onClose}
+      ariaLabel={t("tryon.quiz.title")}
+      maxWidthClass="max-w-[520px]"
+    >
+      <div className="p-6 sm:p-8">
+        <div className="flex items-center justify-between">
+          <p className="text-[10px] uppercase tracking-[0.3em] text-vermillion-dark">
+            {t("tryon.quiz.title")}
+          </p>
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-[10px] uppercase tracking-[0.2em] text-charcoal-light hover:text-vermillion transition-colors"
+          >
+            {t("tryon.quiz.skip")}
+          </button>
+        </div>
+
+        <div className="h-[2px] w-[40px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mt-3 mb-3" />
+
+        {!isResult && current && (
+          <>
+            <p className="text-xs text-charcoal-light">
+              {step + 1} / {total}
+            </p>
+            <h2 className="mt-2 font-serif text-xl text-charcoal">
+              {t(current.promptKey)}
+            </h2>
+            <p className="mt-1 text-xs text-charcoal-light">
+              {t("tryon.quiz.subtitle")}
+            </p>
+
+            <div className="mt-5 grid gap-2">
+              {current.options.map((opt) => {
+                const active = answers[step] === opt.id;
+                return (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() => selectOption(step, opt.id)}
+                    aria-pressed={active}
+                    className={`text-left border px-4 py-3 text-sm transition-colors ${
+                      active
+                        ? "border-vermillion bg-vermillion/5 text-vermillion-dark"
+                        : "border-charcoal/15 bg-cream/30 hover:border-vermillion/40"
+                    }`}
+                  >
+                    {t(opt.labelKey)}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-6 flex justify-between">
+              <button
+                type="button"
+                onClick={handleBack}
+                disabled={step === 0}
+                className="text-xs uppercase tracking-[0.2em] text-charcoal-light hover:text-vermillion transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                {t("tryon.quiz.back")}
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                disabled={!answers[step]}
+                className="bg-vermillion px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors disabled:opacity-50"
+              >
+                {t("tryon.quiz.next")}
+              </button>
+            </div>
+          </>
+        )}
+
+        {isResult && shape && (
+          <>
+            <h2 className="font-serif text-xl text-charcoal">
+              {t("tryon.quiz.result.title").replace(
+                "{shape}",
+                t(`tryon.quiz.shape.${shape}`),
+              )}
+            </h2>
+            <p className="mt-2 text-sm text-charcoal-light">
+              {t("tryon.quiz.result.subtitle")}
+            </p>
+
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              {recommendations.map((s) => (
+                <div
+                  key={s.id}
+                  className="border border-vermillion/20 bg-cream/30 p-3 flex flex-col"
+                >
+                  <div className="aspect-[2/1] bg-cream-dark/30 flex items-center justify-center p-1">
+                    <StylePreview style={s} />
+                  </div>
+                  <p className="mt-2 text-[11px] leading-tight text-charcoal font-medium">
+                    {t(s.nameKey)}
+                  </p>
+                  <p className="mt-1 text-[10px] text-vermillion-dark uppercase tracking-[0.1em]">
+                    {t("tryon.price.from")} S${s.priceFrom}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => onPickStyle(s.id)}
+                    className="mt-auto bg-vermillion px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors"
+                  >
+                    {t("tryon.quiz.result.try")}
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 text-right">
+              <button
+                type="button"
+                onClick={onClose}
+                className="text-xs uppercase tracking-[0.2em] text-charcoal-light hover:text-vermillion transition-colors"
+              >
+                {t("tryon.save.cancel")}
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </ModalShell>
   );
 }

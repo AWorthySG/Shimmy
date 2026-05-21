@@ -845,6 +845,33 @@ const en: Record<string, string> = {
   "tryon.style.ombre-light": "Ombre — Light",
   "tryon.style.ombre-bold": "Ombre — Bold",
   "tryon.style.embroidery-classic": "Embroidery — Classic",
+  "tryon.style.nano-soft.desc":
+    "Best for sparse brows or first-timers — looks like you've grown them yourself.",
+  "tryon.style.nano-defined.desc":
+    "Crisp, defined strokes that read clearly from across the room.",
+  "tryon.style.microblading-feathered.desc":
+    "Hair-stroke detail. Best on normal-to-dry skin.",
+  "tryon.style.ombre-light.desc":
+    "Soft makeup-look powder. Easy to live with, no upkeep.",
+  "tryon.style.ombre-bold.desc":
+    "Defined ombre — like having your brows always 'done'.",
+  "tryon.style.embroidery-classic.desc":
+    "Our signature. The midpoint between strokes and powder.",
+  "tryon.share.message":
+    "Hi Shimmy! I tried the brow visualizer and I love the {style} look — can we book a consultation?",
+  "tryon.compare.toggle": "Compare",
+  "tryon.compare.on": "On",
+  "tryon.compare.off": "Off",
+  "tryon.compare.hint":
+    "Drag the slider left or right to compare with your original.",
+  "tryon.control.independent": "Adjust brows independently",
+  "tryon.control.arch.left": "Left brow",
+  "tryon.control.arch.right": "Right brow",
+  "tryon.help.title": "How it works",
+  "tryon.help.step1": "Upload a clear, front-facing photo",
+  "tryon.help.step2": "Pick your favourite brow style",
+  "tryon.help.step3": "Adjust to taste, then save or share",
+  "tryon.help.dismiss": "Got it",
 };
 
 const zh: Record<string, string> = {
@@ -1623,4 +1650,26 @@ const zh: Record<string, string> = {
   "tryon.style.ombre-light": "雾眉 — 浅色",
   "tryon.style.ombre-bold": "雾眉 — 浓重",
   "tryon.style.embroidery-classic": "绣眉 — 经典",
+  "tryon.style.nano-soft.desc":
+    "适合稀疏眉或第一次做的人——像自己长出来的一样自然。",
+  "tryon.style.nano-defined.desc": "线条清晰立体，远远就能看出来。",
+  "tryon.style.microblading-feathered.desc":
+    "毛流感细节，最适合中性到干性肌肤。",
+  "tryon.style.ombre-light.desc": "柔和的眉粉感效果，日常戴起来轻松，不用打理。",
+  "tryon.style.ombre-bold.desc": "立体雾感眉——像每天都精心化好妆。",
+  "tryon.style.embroidery-classic.desc": "我们的招牌——线条与雾感之间的平衡。",
+  "tryon.share.message":
+    "你好 Shimmy！我用了眉毛试戴工具，很喜欢 {style} 这个风格——可以预约咨询吗？",
+  "tryon.compare.toggle": "对比",
+  "tryon.compare.on": "开",
+  "tryon.compare.off": "关",
+  "tryon.compare.hint": "左右拖动滑块，与原图对比。",
+  "tryon.control.independent": "分别调整左右眉",
+  "tryon.control.arch.left": "左眉",
+  "tryon.control.arch.right": "右眉",
+  "tryon.help.title": "如何使用",
+  "tryon.help.step1": "上传一张清晰的正面照",
+  "tryon.help.step2": "挑一个你喜欢的眉形",
+  "tryon.help.step3": "微调到你满意为止，然后保存或分享",
+  "tryon.help.dismiss": "明白了",
 };

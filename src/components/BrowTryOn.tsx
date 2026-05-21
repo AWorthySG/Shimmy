@@ -8,6 +8,7 @@ import {
   useState,
   type ChangeEvent,
   type DragEvent,
+  type PointerEvent as ReactPointerEvent,
 } from "react";
 import {
   BROW_STYLES,
@@ -31,6 +32,8 @@ const MODEL_URL =
 const WASM_BASE =
   "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/wasm";
 
+const HELP_STORAGE_KEY = "shimmy-tryon-help-shown";
+
 type LandmarkPoint = { x: number; y: number; z?: number };
 
 type LandmarkerStatus = "idle" | "loading" | "ready" | "error";
@@ -47,7 +50,8 @@ interface BrowRegion {
 interface EditorControls {
   thickness: number; // 0.5 - 2.0
   intensity: number; // 0 - 1
-  arch: number; // -10 - +10 px vertical offset
+  archLeft: number; // -10 - +10 px vertical offset for left brow
+  archRight: number; // -10 - +10 px vertical offset for right brow
 }
 
 /* ──────────────────────────────────────────────
@@ -113,6 +117,76 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
 }
 
 /* ──────────────────────────────────────────────
+   EXIF orientation handling.
+   Phones often save photos with an orientation
+   tag rather than rotating the pixel data. We
+   read it with `exifr` and pre-rotate onto a
+   fresh canvas so detection (and everything
+   downstream) sees an upright image.
+   ────────────────────────────────────────────── */
+async function readOrientation(file: File): Promise<number> {
+  try {
+    const exifr = await import("exifr");
+    const orientation = await exifr.orientation(file);
+    return typeof orientation === "number" ? orientation : 1;
+  } catch {
+    return 1;
+  }
+}
+
+function applyOrientationToImage(
+  img: HTMLImageElement,
+  orientation: number,
+): HTMLCanvasElement {
+  const w = img.naturalWidth;
+  const h = img.naturalHeight;
+  const canvas = document.createElement("canvas");
+  // Orientations 5-8 swap dimensions.
+  const swap = orientation >= 5 && orientation <= 8;
+  canvas.width = swap ? h : w;
+  canvas.height = swap ? w : h;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return canvas;
+
+  switch (orientation) {
+    case 2:
+      ctx.translate(w, 0);
+      ctx.scale(-1, 1);
+      break;
+    case 3:
+      ctx.translate(w, h);
+      ctx.rotate(Math.PI);
+      break;
+    case 4:
+      ctx.translate(0, h);
+      ctx.scale(1, -1);
+      break;
+    case 5:
+      ctx.rotate(0.5 * Math.PI);
+      ctx.scale(1, -1);
+      break;
+    case 6:
+      ctx.rotate(0.5 * Math.PI);
+      ctx.translate(0, -h);
+      break;
+    case 7:
+      ctx.rotate(0.5 * Math.PI);
+      ctx.translate(w, -h);
+      ctx.scale(-1, 1);
+      break;
+    case 8:
+      ctx.rotate(-0.5 * Math.PI);
+      ctx.translate(-w, 0);
+      break;
+    default:
+      // 1 (or unknown) — no transform.
+      break;
+  }
+  ctx.drawImage(img, 0, 0);
+  return canvas;
+}
+
+/* ──────────────────────────────────────────────
    Drawing — paints one brow into an offscreen
    canvas using the SVG path data, then composites
    it onto the main canvas with the right
@@ -122,11 +196,11 @@ function drawBrowOnto(
   ctx: CanvasRenderingContext2D,
   region: BrowRegion,
   style: BrowStyle,
-  controls: EditorControls,
+  thickness: number,
+  intensity: number,
+  arch: number,
   mirror: boolean,
 ): void {
-  const { thickness, intensity, arch } = controls;
-
   // Offscreen 100x100 (matches the style's path coordinate space)
   const off = document.createElement("canvas");
   const PATH_SIZE = 100;
@@ -192,6 +266,89 @@ function drawBrowOnto(
 }
 
 /* ──────────────────────────────────────────────
+   Renders just the photo with brows applied
+   into an offscreen canvas. Used by the live
+   preview, the compare overlay, and the
+   download flow.
+   ────────────────────────────────────────────── */
+function renderWithBrows(
+  source: HTMLImageElement | HTMLCanvasElement,
+  landmarks: LandmarkPoint[],
+  style: BrowStyle,
+  controls: EditorControls,
+): HTMLCanvasElement {
+  const out = document.createElement("canvas");
+  const w =
+    source instanceof HTMLImageElement ? source.naturalWidth : source.width;
+  const h =
+    source instanceof HTMLImageElement ? source.naturalHeight : source.height;
+  out.width = w;
+  out.height = h;
+  const ctx = out.getContext("2d");
+  if (!ctx) return out;
+  ctx.drawImage(source, 0, 0, w, h);
+
+  const leftRegion = regionFromLandmarks(landmarks, LEFT_BROW, w, h);
+  const rightRegion = regionFromLandmarks(landmarks, RIGHT_BROW, w, h);
+
+  if (leftRegion) {
+    drawBrowOnto(
+      ctx,
+      leftRegion,
+      style,
+      controls.thickness,
+      controls.intensity,
+      controls.archLeft,
+      false,
+    );
+  }
+  if (rightRegion) {
+    drawBrowOnto(
+      ctx,
+      rightRegion,
+      style,
+      controls.thickness,
+      controls.intensity,
+      controls.archRight,
+      true,
+    );
+  }
+  return out;
+}
+
+/* ──────────────────────────────────────────────
+   Watermark — only drawn on the exported PNG,
+   never on the live canvas. Bottom-right, white
+   text with a soft dark shadow for legibility.
+   ────────────────────────────────────────────── */
+function drawWatermark(ctx: CanvasRenderingContext2D, w: number, h: number) {
+  // Main text sized at ~2.5% of image height. Clamp so it stays readable
+  // on both tiny and very large images.
+  const mainSize = Math.max(14, Math.min(48, Math.round(h * 0.025)));
+  const subSize = Math.max(10, Math.round(mainSize * 0.6));
+  const padding = 16;
+
+  ctx.save();
+  ctx.globalAlpha = 0.7;
+  ctx.textAlign = "right";
+  ctx.textBaseline = "alphabetic";
+  ctx.fillStyle = "#FFFFFF";
+  ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
+  ctx.shadowBlur = Math.max(2, mainSize * 0.18);
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 1;
+
+  ctx.font = `600 ${mainSize}px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`;
+  const subY = h - padding;
+  const mainY = subY - subSize - Math.round(mainSize * 0.15);
+  ctx.fillText("Brows by Shimmyhands", w - padding, mainY);
+
+  ctx.font = `400 ${subSize}px ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`;
+  ctx.fillText("shimmyhands.com", w - padding, subY);
+  ctx.restore();
+}
+
+/* ──────────────────────────────────────────────
    StylePreview — tiny SVG card preview for the
    style picker. Uses the same path data so the
    thumbnail matches what'll get applied.
@@ -221,6 +378,74 @@ function StylePreview({ style }: { style: BrowStyle }) {
 }
 
 /* ──────────────────────────────────────────────
+   HelpOverlay — first-visit walkthrough shown
+   under the page header. Stored under
+   `shimmy-tryon-help-shown` in localStorage.
+   ────────────────────────────────────────────── */
+function HelpOverlay({
+  onDismiss,
+  t,
+}: {
+  onDismiss: () => void;
+  t: (k: string) => string;
+}) {
+  return (
+    <div className="mx-auto max-w-4xl mb-8 border border-vermillion/20 bg-cream rounded-sm px-5 py-6 sm:px-8 sm:py-7">
+      <div className="flex items-start justify-between gap-4 flex-col sm:flex-row">
+        <div className="flex-1 w-full">
+          <div className="h-[2px] w-[40px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-3" />
+          <h3 className="font-serif text-lg sm:text-xl text-vermillion-dark">
+            {t("tryon.help.title")}
+          </h3>
+          <ol className="mt-4 grid gap-3 sm:grid-cols-3">
+            <li className="flex items-start gap-3">
+              <span
+                aria-hidden="true"
+                className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full bg-vermillion/10 text-vermillion-dark text-base"
+              >
+                ↑
+              </span>
+              <span className="text-sm leading-snug text-vermillion-dark">
+                {t("tryon.help.step1")}
+              </span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span
+                aria-hidden="true"
+                className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full bg-vermillion/10 text-vermillion-dark text-base"
+              >
+                ✦
+              </span>
+              <span className="text-sm leading-snug text-vermillion-dark">
+                {t("tryon.help.step2")}
+              </span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span
+                aria-hidden="true"
+                className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full bg-vermillion/10 text-vermillion-dark text-base"
+              >
+                ⤓
+              </span>
+              <span className="text-sm leading-snug text-vermillion-dark">
+                {t("tryon.help.step3")}
+              </span>
+            </li>
+          </ol>
+        </div>
+        <button
+          type="button"
+          onClick={onDismiss}
+          className="shrink-0 bg-vermillion px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors self-end sm:self-start"
+        >
+          {t("tryon.help.dismiss")}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────
    Main Component
    ────────────────────────────────────────────── */
 export default function BrowTryOn() {
@@ -229,27 +454,37 @@ export default function BrowTryOn() {
   const [step, setStep] = useState<Step>("upload");
   const [landmarkerStatus, setLandmarkerStatus] =
     useState<LandmarkerStatus>("idle");
-  const [uploadedImage, setUploadedImage] = useState<HTMLImageElement | null>(
-    null,
-  );
+  // Source can be the original image element or a pre-rotated canvas (for
+  // photos with EXIF orientation). We treat both as drawable sources.
+  const [uploadedSource, setUploadedSource] = useState<
+    HTMLImageElement | HTMLCanvasElement | null
+  >(null);
   const [landmarks, setLandmarks] = useState<LandmarkPoint[] | null>(null);
   const [selectedStyleId, setSelectedStyleId] = useState<string>(
     BROW_STYLES[0].id,
   );
   const [thickness, setThickness] = useState(1.0);
   const [intensity, setIntensity] = useState(0.85);
-  const [arch, setArch] = useState(0);
-  const [showOriginal, setShowOriginal] = useState(false);
+  const [archSynced, setArchSynced] = useState(0);
+  const [archLeft, setArchLeft] = useState(0);
+  const [archRight, setArchRight] = useState(0);
+  const [independent, setIndependent] = useState(false);
+  const [compareOn, setCompareOn] = useState(false);
+  const [comparePos, setComparePos] = useState(50); // 0-100 %
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const compareWrapperRef = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const cameraInputRef = useRef<HTMLInputElement | null>(null);
   // FaceLandmarker is dynamically imported so we don't add it to the bundle
   // for users who never make it to the editor step.
   const faceLandmarkerRef = useRef<{
-    detect: (img: HTMLImageElement) => { faceLandmarks: LandmarkPoint[][] };
+    detect: (
+      img: HTMLImageElement | HTMLCanvasElement,
+    ) => { faceLandmarks: LandmarkPoint[][] };
   } | null>(null);
 
   const selectedStyle = useMemo(
@@ -257,6 +492,31 @@ export default function BrowTryOn() {
       BROW_STYLES.find((s) => s.id === selectedStyleId) ?? BROW_STYLES[0],
     [selectedStyleId],
   );
+
+  // Effective offsets for each brow — falls back to the synced value when
+  // independent mode is off.
+  const effectiveArchLeft = independent ? archLeft : archSynced;
+  const effectiveArchRight = independent ? archRight : archSynced;
+
+  /* ── First-visit help overlay ── */
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem(HELP_STORAGE_KEY)) {
+        setShowHelp(true);
+      }
+    } catch {
+      // localStorage may be unavailable (e.g. private browsing).
+    }
+  }, []);
+
+  const dismissHelp = useCallback(() => {
+    try {
+      localStorage.setItem(HELP_STORAGE_KEY, "true");
+    } catch {
+      // ignore
+    }
+    setShowHelp(false);
+  }, []);
 
   /* ── Load MediaPipe lazily ── */
   const loadLandmarker = useCallback(async () => {
@@ -278,7 +538,9 @@ export default function BrowTryOn() {
         },
       );
       faceLandmarkerRef.current = landmarker as unknown as {
-        detect: (img: HTMLImageElement) => {
+        detect: (
+          img: HTMLImageElement | HTMLCanvasElement,
+        ) => {
           faceLandmarks: LandmarkPoint[][];
         };
       };
@@ -292,7 +554,35 @@ export default function BrowTryOn() {
     }
   }, [t]);
 
-  /* ── Image loading + detection ── */
+  /* ── Detection ── */
+  const runDetection = useCallback(
+    async (source: HTMLImageElement | HTMLCanvasElement) => {
+      const landmarker = await loadLandmarker();
+      if (!landmarker) {
+        setStep("upload");
+        return;
+      }
+      try {
+        const result = landmarker.detect(source);
+        const faces = result.faceLandmarks;
+        if (!faces || faces.length === 0) {
+          setStep("noface");
+          return;
+        }
+        setUploadedSource(source);
+        setLandmarks(faces[0]);
+        setComparePos(50);
+        setStep("editor");
+      } catch (err) {
+        console.error("Detection failed", err);
+        setErrorMsg(t("tryon.error.model"));
+        setStep("upload");
+      }
+    },
+    [loadLandmarker, t],
+  );
+
+  /* ── Image loading + EXIF orientation handling ── */
   const processFile = useCallback(
     async (file: File) => {
       setErrorMsg(null);
@@ -302,33 +592,41 @@ export default function BrowTryOn() {
       }
 
       setStep("detecting");
+      // Read EXIF first; it's cheap and lets us pre-rotate before detection.
+      const orientation = await readOrientation(file);
       const objectUrl = URL.createObjectURL(file);
       const img = new Image();
       img.crossOrigin = "anonymous";
       img.onload = async () => {
+        URL.revokeObjectURL(objectUrl);
+
+        // Apply EXIF rotation onto a canvas (no-op for orientation 1).
+        const oriented =
+          orientation && orientation !== 1
+            ? applyOrientationToImage(img, orientation)
+            : null;
+
         // Cap large images so detection + canvas stay responsive.
         const MAX_DIM = 1600;
-        let targetW = img.naturalWidth;
-        let targetH = img.naturalHeight;
-        if (targetW > MAX_DIM || targetH > MAX_DIM) {
-          const scale = MAX_DIM / Math.max(targetW, targetH);
-          targetW = Math.round(targetW * scale);
-          targetH = Math.round(targetH * scale);
+        const srcW = oriented ? oriented.width : img.naturalWidth;
+        const srcH = oriented ? oriented.height : img.naturalHeight;
+
+        if (srcW > MAX_DIM || srcH > MAX_DIM) {
+          const scale = MAX_DIM / Math.max(srcW, srcH);
+          const targetW = Math.round(srcW * scale);
+          const targetH = Math.round(srcH * scale);
           const tmp = document.createElement("canvas");
           tmp.width = targetW;
           tmp.height = targetH;
-          tmp.getContext("2d")?.drawImage(img, 0, 0, targetW, targetH);
-          const resized = new Image();
-          resized.onload = () => {
-            URL.revokeObjectURL(objectUrl);
-            void runDetection(resized);
-          };
-          resized.src = tmp.toDataURL("image/jpeg", 0.92);
+          const ctx = tmp.getContext("2d");
+          if (ctx) {
+            ctx.drawImage(oriented ?? img, 0, 0, targetW, targetH);
+          }
+          void runDetection(tmp);
           return;
         }
 
-        URL.revokeObjectURL(objectUrl);
-        void runDetection(img);
+        void runDetection(oriented ?? img);
       };
       img.onerror = () => {
         URL.revokeObjectURL(objectUrl);
@@ -337,36 +635,7 @@ export default function BrowTryOn() {
       };
       img.src = objectUrl;
     },
-    // runDetection is stable below; safe to omit (will be re-evaluated on
-    // every render but we capture latest t).
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [t],
-  );
-
-  const runDetection = useCallback(
-    async (img: HTMLImageElement) => {
-      const landmarker = await loadLandmarker();
-      if (!landmarker) {
-        setStep("upload");
-        return;
-      }
-      try {
-        const result = landmarker.detect(img);
-        const faces = result.faceLandmarks;
-        if (!faces || faces.length === 0) {
-          setStep("noface");
-          return;
-        }
-        setUploadedImage(img);
-        setLandmarks(faces[0]);
-        setStep("editor");
-      } catch (err) {
-        console.error("Detection failed", err);
-        setErrorMsg(t("tryon.error.model"));
-        setStep("upload");
-      }
-    },
-    [loadLandmarker, t],
+    [runDetection, t],
   );
 
   /* ── File input handlers ── */
@@ -398,7 +667,7 @@ export default function BrowTryOn() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     if (step !== "editor") return;
-    if (!uploadedImage || !landmarks) return;
+    if (!uploadedSource || !landmarks) return;
 
     let rafId = 0;
 
@@ -406,34 +675,47 @@ export default function BrowTryOn() {
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      canvas.width = uploadedImage.naturalWidth;
-      canvas.height = uploadedImage.naturalHeight;
+      const w =
+        uploadedSource instanceof HTMLImageElement
+          ? uploadedSource.naturalWidth
+          : uploadedSource.width;
+      const h =
+        uploadedSource instanceof HTMLImageElement
+          ? uploadedSource.naturalHeight
+          : uploadedSource.height;
+      canvas.width = w;
+      canvas.height = h;
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(uploadedImage, 0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, w, h);
 
-      if (showOriginal) return; // just the photo, for comparison
-
-      const leftRegion = regionFromLandmarks(
-        landmarks,
-        LEFT_BROW,
-        canvas.width,
-        canvas.height,
-      );
-      const rightRegion = regionFromLandmarks(
-        landmarks,
-        RIGHT_BROW,
-        canvas.width,
-        canvas.height,
-      );
-
-      const controls: EditorControls = { thickness, intensity, arch };
-
-      if (leftRegion) {
-        drawBrowOnto(ctx, leftRegion, selectedStyle, controls, false);
-      }
-      if (rightRegion) {
-        drawBrowOnto(ctx, rightRegion, selectedStyle, controls, true);
+      // When compare is ON we paint the original first, then clip-paint
+      // the "with brows" version up to the slider position. When OFF we
+      // just paint the full "with brows" result.
+      if (compareOn) {
+        ctx.drawImage(uploadedSource, 0, 0, w, h);
+        const withBrows = renderWithBrows(uploadedSource, landmarks, selectedStyle, {
+          thickness,
+          intensity,
+          archLeft: effectiveArchLeft,
+          archRight: effectiveArchRight,
+        });
+        const clipW = Math.round((comparePos / 100) * w);
+        if (clipW > 0) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(0, 0, clipW, h);
+          ctx.clip();
+          ctx.drawImage(withBrows, 0, 0, w, h);
+          ctx.restore();
+        }
+      } else {
+        const withBrows = renderWithBrows(uploadedSource, landmarks, selectedStyle, {
+          thickness,
+          intensity,
+          archLeft: effectiveArchLeft,
+          archRight: effectiveArchRight,
+        });
+        ctx.drawImage(withBrows, 0, 0, w, h);
       }
     };
 
@@ -441,20 +723,75 @@ export default function BrowTryOn() {
     return () => cancelAnimationFrame(rafId);
   }, [
     step,
-    uploadedImage,
+    uploadedSource,
     landmarks,
     selectedStyle,
     thickness,
     intensity,
-    arch,
-    showOriginal,
+    effectiveArchLeft,
+    effectiveArchRight,
+    compareOn,
+    comparePos,
   ]);
+
+  /* ── Compare slider drag — pointer events cover mouse + touch ── */
+  const draggingRef = useRef(false);
+
+  const updateComparePos = useCallback((clientX: number) => {
+    const el = compareWrapperRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.width <= 0) return;
+    const pct = ((clientX - rect.left) / rect.width) * 100;
+    const clamped = Math.max(0, Math.min(100, pct));
+    setComparePos(clamped);
+  }, []);
+
+  const handleCompareDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (!compareOn) return;
+    draggingRef.current = true;
+    // Capture so we keep getting events even if the pointer leaves the box.
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch {
+      // Some environments may not support pointer capture; safe to ignore.
+    }
+    updateComparePos(e.clientX);
+  };
+
+  const handleCompareMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (!compareOn || !draggingRef.current) return;
+    updateComparePos(e.clientX);
+  };
+
+  const handleCompareUp = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (!draggingRef.current) return;
+    draggingRef.current = false;
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {
+      // ignore
+    }
+  };
 
   /* ── Actions ── */
   const handleDownload = () => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
-    const url = canvas.toDataURL("image/png");
+    if (!canvas || !uploadedSource || !landmarks) return;
+
+    // Build a fresh "final" render (always full, not compare-clipped) and
+    // add the watermark. We do NOT mutate the live canvas — the watermark
+    // must never appear in the preview.
+    const finalCanvas = renderWithBrows(uploadedSource, landmarks, selectedStyle, {
+      thickness,
+      intensity,
+      archLeft: effectiveArchLeft,
+      archRight: effectiveArchRight,
+    });
+    const ctx = finalCanvas.getContext("2d");
+    if (ctx) drawWatermark(ctx, finalCanvas.width, finalCanvas.height);
+
+    const url = finalCanvas.toDataURL("image/png");
     const a = document.createElement("a");
     a.href = url;
     a.download = `shimmy-brow-tryon-${selectedStyle.id}.png`;
@@ -464,18 +801,19 @@ export default function BrowTryOn() {
   };
 
   const handleShareWhatsApp = () => {
-    const message = encodeURIComponent(
-      "Hi Shimmy! I tried the brow visualizer and I love this look — can we book a consultation?",
-    );
+    const template = t("tryon.share.message");
+    const styleName = t(selectedStyle.nameKey);
+    const message = encodeURIComponent(template.replace("{style}", styleName));
     window.open(`https://wa.me/6589308973?text=${message}`, "_blank");
   };
 
   const handleReset = () => {
     setStep("upload");
-    setUploadedImage(null);
+    setUploadedSource(null);
     setLandmarks(null);
     setErrorMsg(null);
-    setShowOriginal(false);
+    setCompareOn(false);
+    setComparePos(50);
   };
 
   /* ──────────────────────────────────────────────
@@ -483,6 +821,9 @@ export default function BrowTryOn() {
      ────────────────────────────────────────────── */
   return (
     <div className="mx-auto max-w-6xl">
+      {/* ─── First-time help overlay ─── */}
+      {showHelp && <HelpOverlay onDismiss={dismissHelp} t={t} />}
+
       {/* ─── Upload Step ─── */}
       {step === "upload" && (
         <div className="mx-auto max-w-2xl">
@@ -606,13 +947,67 @@ export default function BrowTryOn() {
             <p className="text-xs text-vermillion-dark italic mb-3">
               {t("tryon.tip")}
             </p>
-            <div className="relative bg-cream-dark/40 border border-vermillion/15 overflow-hidden rounded-sm">
+            <div
+              ref={compareWrapperRef}
+              onPointerDown={handleCompareDown}
+              onPointerMove={handleCompareMove}
+              onPointerUp={handleCompareUp}
+              onPointerCancel={handleCompareUp}
+              className={`relative bg-cream-dark/40 border border-vermillion/15 overflow-hidden rounded-sm select-none ${
+                compareOn ? "touch-none cursor-ew-resize" : ""
+              }`}
+            >
               <canvas
                 ref={canvasRef}
                 aria-label={t("tryon.title")}
                 className="block w-full h-auto"
               />
+
+              {/* Drag handle + dividing line — only visible when compare is on */}
+              {compareOn && (
+                <>
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute top-0 bottom-0"
+                    style={{
+                      left: `${comparePos}%`,
+                      width: "2px",
+                      background: "rgba(255,255,255,0.9)",
+                      boxShadow: "0 0 6px rgba(0,0,0,0.45)",
+                      transform: "translateX(-1px)",
+                    }}
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute"
+                    style={{
+                      left: `${comparePos}%`,
+                      top: "50%",
+                      transform: "translate(-50%, -50%)",
+                      width: "36px",
+                      height: "36px",
+                      borderRadius: "9999px",
+                      background: "rgba(255,255,255,0.95)",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.35)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "var(--vermillion-dark)",
+                      fontSize: "14px",
+                      fontWeight: 600,
+                      letterSpacing: "-0.05em",
+                    }}
+                  >
+                    ◀▶
+                  </div>
+                </>
+              )}
             </div>
+            {compareOn && (
+              <p className="mt-2 text-[11px] text-vermillion-dark text-center">
+                {t("tryon.compare.hint")}
+              </p>
+            )}
             <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-vermillion-dark text-center">
               <span aria-hidden="true" className="mr-2">
                 ✦
@@ -637,6 +1032,7 @@ export default function BrowTryOn() {
                       type="button"
                       onClick={() => setSelectedStyleId(style.id)}
                       aria-pressed={active}
+                      title={t(style.descKey)}
                       className={`text-left p-2 border transition-all ${
                         active
                           ? "border-vermillion bg-vermillion/5"
@@ -646,8 +1042,11 @@ export default function BrowTryOn() {
                       <div className="aspect-[2/1] bg-cream-dark/30 flex items-center justify-center p-1">
                         <StylePreview style={style} />
                       </div>
-                      <p className="mt-2 text-[10px] leading-tight text-charcoal">
+                      <p className="mt-2 text-[10px] leading-tight text-charcoal font-medium">
                         {t(style.nameKey)}
+                      </p>
+                      <p className="mt-1 text-[9px] leading-snug text-charcoal-light">
+                        {t(style.descKey)}
                       </p>
                     </button>
                   );
@@ -675,31 +1074,86 @@ export default function BrowTryOn() {
                 onChange={setIntensity}
                 format={(v) => `${Math.round(v * 100)}%`}
               />
-              <SliderRow
-                label={t("tryon.control.arch")}
-                min={-10}
-                max={10}
-                step={1}
-                value={arch}
-                onChange={setArch}
-                format={(v) =>
-                  v > 0 ? `+${v}px` : v < 0 ? `${v}px` : "0px"
-                }
-              />
+
+              {/* Independent toggle */}
+              <label className="flex items-center justify-between gap-3 cursor-pointer">
+                <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal">
+                  {t("tryon.control.independent")}
+                </span>
+                <input
+                  type="checkbox"
+                  checked={independent}
+                  onChange={(e) => {
+                    const next = e.target.checked;
+                    setIndependent(next);
+                    // When turning ON, seed both sides from the synced value
+                    // so the visuals don't jump. When turning OFF, seed the
+                    // synced value from the left side as a sensible default.
+                    if (next) {
+                      setArchLeft(archSynced);
+                      setArchRight(archSynced);
+                    } else {
+                      setArchSynced(archLeft);
+                    }
+                  }}
+                  className="h-4 w-4 accent-vermillion"
+                  aria-label={t("tryon.control.independent")}
+                />
+              </label>
+
+              {independent ? (
+                <>
+                  <SliderRow
+                    label={`${t("tryon.control.arch")} · ${t("tryon.control.arch.left")}`}
+                    min={-10}
+                    max={10}
+                    step={1}
+                    value={archLeft}
+                    onChange={setArchLeft}
+                    format={(v) =>
+                      v > 0 ? `+${v}px` : v < 0 ? `${v}px` : "0px"
+                    }
+                  />
+                  <SliderRow
+                    label={`${t("tryon.control.arch")} · ${t("tryon.control.arch.right")}`}
+                    min={-10}
+                    max={10}
+                    step={1}
+                    value={archRight}
+                    onChange={setArchRight}
+                    format={(v) =>
+                      v > 0 ? `+${v}px` : v < 0 ? `${v}px` : "0px"
+                    }
+                  />
+                </>
+              ) : (
+                <SliderRow
+                  label={t("tryon.control.arch")}
+                  min={-10}
+                  max={10}
+                  step={1}
+                  value={archSynced}
+                  onChange={setArchSynced}
+                  format={(v) =>
+                    v > 0 ? `+${v}px` : v < 0 ? `${v}px` : "0px"
+                  }
+                />
+              )}
             </div>
 
-            {/* Compare toggle */}
+            {/* Compare toggle — drag-slider mode */}
             <button
               type="button"
-              onMouseDown={() => setShowOriginal(true)}
-              onMouseUp={() => setShowOriginal(false)}
-              onMouseLeave={() => setShowOriginal(false)}
-              onTouchStart={() => setShowOriginal(true)}
-              onTouchEnd={() => setShowOriginal(false)}
-              className="w-full border border-charcoal/20 px-4 py-2.5 text-xs uppercase tracking-[0.2em] text-charcoal hover:border-vermillion hover:text-vermillion transition-colors select-none"
-              aria-label={t("tryon.compare")}
+              onClick={() => setCompareOn((v) => !v)}
+              aria-pressed={compareOn}
+              className={`w-full border px-4 py-2.5 text-xs uppercase tracking-[0.2em] transition-colors select-none ${
+                compareOn
+                  ? "border-vermillion bg-vermillion/5 text-vermillion-dark"
+                  : "border-charcoal/20 text-charcoal hover:border-vermillion hover:text-vermillion"
+              }`}
             >
-              {t("tryon.compare")}
+              {t("tryon.compare.toggle")}:{" "}
+              {compareOn ? t("tryon.compare.on") : t("tryon.compare.off")}
             </button>
 
             {/* Action buttons */}

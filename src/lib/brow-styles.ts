@@ -15,6 +15,8 @@ export type BrowService =
 export interface BrowStyle {
   id: string;
   nameKey: string; // i18n key like "tryon.style.nano-soft"
+  /** i18n key for a one-sentence description shown under the style name. */
+  descKey: string;
   service: BrowService;
   /** SVG path data in a 0–100 box for ONE brow (the inner edge at x=0, tail at x=100). */
   pathData: string;
@@ -34,6 +36,7 @@ export const BROW_STYLES: BrowStyle[] = [
   {
     id: "nano-soft",
     nameKey: "tryon.style.nano-soft",
+    descKey: "tryon.style.nano-soft.desc",
     service: "nano",
     // Gentle natural arch — slight peak around 60% across, soft tail.
     pathData:
@@ -45,6 +48,7 @@ export const BROW_STYLES: BrowStyle[] = [
   {
     id: "nano-defined",
     nameKey: "tryon.style.nano-defined",
+    descKey: "tryon.style.nano-defined.desc",
     service: "nano",
     // Sharper arch peak, cleaner tail finish.
     pathData:
@@ -56,6 +60,7 @@ export const BROW_STYLES: BrowStyle[] = [
   {
     id: "microblading-feathered",
     nameKey: "tryon.style.microblading-feathered",
+    descKey: "tryon.style.microblading-feathered.desc",
     service: "microblading",
     // Softer, more horizontal feathered shape with a low arch.
     pathData:
@@ -67,6 +72,7 @@ export const BROW_STYLES: BrowStyle[] = [
   {
     id: "ombre-light",
     nameKey: "tryon.style.ombre-light",
+    descKey: "tryon.style.ombre-light.desc",
     service: "ombre",
     // Fuller body with a soft front fade — the path is the upper outline.
     pathData:
@@ -78,6 +84,7 @@ export const BROW_STYLES: BrowStyle[] = [
   {
     id: "ombre-bold",
     nameKey: "tryon.style.ombre-bold",
+    descKey: "tryon.style.ombre-bold.desc",
     service: "ombre",
     // Bold powder finish — thicker body and deeper colour.
     pathData:
@@ -89,6 +96,7 @@ export const BROW_STYLES: BrowStyle[] = [
   {
     id: "embroidery-classic",
     nameKey: "tryon.style.embroidery-classic",
+    descKey: "tryon.style.embroidery-classic.desc",
     service: "embroidery",
     // Classic embroidery — balanced arch, gentle taper at the tail.
     pathData:

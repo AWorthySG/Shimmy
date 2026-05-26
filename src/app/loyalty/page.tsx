@@ -128,7 +128,7 @@ export default function LoyaltyPage() {
                 {t('loyalty.check.phone.label')}
               </label>
               <div className="flex gap-2">
-                <span className="flex items-center border border-vermillion/20 bg-cream/50 px-3 text-sm text-charcoal-light">
+                <span className="flex items-center border border-vermillion/15 bg-cream/50 px-3 text-sm text-charcoal-light">
                   +65
                 </span>
                 <input
@@ -137,14 +137,14 @@ export default function LoyaltyPage() {
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder={t('loyalty.check.phone.placeholder')}
                   required
-                  className="flex-1 border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50"
+                  className="flex-1 border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none"
                 />
               </div>
               {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
               <button
                 type="submit"
                 disabled={loading || !phone.trim()}
-                className="mt-4 w-full bg-vermillion text-soft-white py-3 text-xs uppercase tracking-[0.2em] hover:bg-vermillion-dark transition-colors disabled:opacity-50"
+                className="mt-4 w-full bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.15em] transition-colors hover:bg-vermillion-dark disabled:opacity-50"
               >
                 {loading ? t('loyalty.check.loading') : t('loyalty.check.submit')}
               </button>
@@ -159,7 +159,7 @@ export default function LoyaltyPage() {
                 href="https://wa.me/6589308973"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-block bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.2em] hover:bg-vermillion-dark transition-colors"
+                className="mt-4 inline-block bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.15em] transition-colors hover:bg-vermillion-dark"
               >
                 {t('loyalty.book.first')}
               </a>

@@ -218,43 +218,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── About Snippet ─── */}
-      <section className="bg-cream py-16 sm:py-20 md:py-24 px-4 sm:px-6">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 sm:gap-12 md:grid-cols-2">
-          <AnimateOnScroll animation="fade-right">
-            <div className="aspect-[4/5] bg-gradient-to-br from-vermillion/10 via-cream-dark to-jade/5 flex items-center justify-center reveal-overlay">
-              <div className="text-center">
-                <span className="text-5xl sm:text-6xl text-gold/30">✦</span>
-              </div>
-            </div>
-          </AnimateOnScroll>
-
-          <AnimateOnScroll animation="fade-left" delay={150}>
-            <div className="h-[2px] w-[60px] bg-gradient-to-r from-vermillion/60 to-transparent mb-4" />
-            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
-              {t("about.tag")}
-            </p>
-            <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl sparkle">
-              {t("about.title.1")}
-              <br />
-              {t("about.title.2")}
-            </h2>
-            <p className="mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed text-charcoal-light">
-              {t("about.p1")}
-            </p>
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-charcoal-light">
-              {t("about.p2")}
-            </p>
-            <Link
-              href="/about"
-              className="underline-grow mt-6 sm:mt-8 inline-block text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
-            >
-              {t("about.link")}
-            </Link>
-          </AnimateOnScroll>
-        </div>
-      </section>
-
       {/* ─── Real Results — Before/After (Task 3) ─── */}
       <section className="bg-soft-white py-16 sm:py-20 md:py-24 px-4 sm:px-6">
         <div className="mx-auto max-w-6xl">
@@ -371,29 +334,6 @@ export default function Home() {
 
       {/* ─── Google Reviews ─── */}
       <GoogleReviews />
-
-      {/* ─── What to Expect — link to process page ─── */}
-      <section className="bg-cream-dark py-12 sm:py-14 px-4 sm:px-6">
-        <div className="mx-auto max-w-3xl text-center">
-          <AnimateOnScroll animation="fade-up">
-            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark mb-2">
-              {t("process.tag")}
-            </p>
-            <h2 className="font-serif text-2xl sm:text-3xl text-charcoal">
-              {t("process.title")}
-            </h2>
-            <p className="mt-3 mx-auto max-w-xl text-sm text-charcoal-light">
-              {t("process.timeline")}
-            </p>
-            <Link
-              href="/brows/process"
-              className="underline-grow mt-6 inline-block text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
-            >
-              See the full journey →
-            </Link>
-          </AnimateOnScroll>
-        </div>
-      </section>
 
       {/* ─── Booking Widget (Task 1) ─── */}
       <section className="bg-soft-white py-16 sm:py-20 px-4 sm:px-6">

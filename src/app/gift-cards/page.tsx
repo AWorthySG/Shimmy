@@ -193,7 +193,7 @@ export default function GiftCardsPage() {
                     value={customValue}
                     onChange={(e) => setCustomValue(e.target.value)}
                     placeholder="S$"
-                    className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 mb-4"
+                    className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4"
                   />
                 )}
 
@@ -207,7 +207,7 @@ export default function GiftCardsPage() {
                   onChange={(e) => setPurchaserName(e.target.value)}
                   placeholder={t('gift.form.your.name.placeholder')}
                   required
-                  className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 mb-4"
+                  className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4"
                 />
 
                 {/* Your email */}
@@ -220,7 +220,7 @@ export default function GiftCardsPage() {
                   onChange={(e) => setPurchaserEmail(e.target.value)}
                   placeholder={t('gift.form.your.email.placeholder')}
                   required
-                  className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 mb-4"
+                  className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4"
                 />
 
                 {/* Recipient name */}
@@ -233,7 +233,7 @@ export default function GiftCardsPage() {
                   onChange={(e) => setRecipientName(e.target.value)}
                   placeholder={t('gift.form.recipient.name.placeholder')}
                   required
-                  className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 mb-4"
+                  className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4"
                 />
 
                 {/* Recipient email (optional) */}
@@ -246,7 +246,7 @@ export default function GiftCardsPage() {
                   value={recipientEmail}
                   onChange={(e) => setRecipientEmail(e.target.value)}
                   placeholder={t('gift.form.recipient.email.placeholder')}
-                  className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 mb-4"
+                  className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4"
                 />
 
                 {/* Personal message (optional) */}
@@ -259,7 +259,7 @@ export default function GiftCardsPage() {
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={t('gift.form.message.placeholder')}
                   rows={3}
-                  className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 mb-4 resize-none"
+                  className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4 resize-none"
                 />
 
                 {purchaseError && <p className="text-xs text-red-500 mb-3">{purchaseError}</p>}
@@ -267,7 +267,7 @@ export default function GiftCardsPage() {
                 <button
                   type="submit"
                   disabled={purchaseLoading || !effectiveValue || effectiveValue <= 0}
-                  className="w-full bg-vermillion text-soft-white py-3 text-xs uppercase tracking-[0.2em] hover:bg-vermillion-dark transition-colors disabled:opacity-50"
+                  className="w-full bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.15em] transition-colors hover:bg-vermillion-dark disabled:opacity-50"
                 >
                   {purchaseLoading ? t('gift.purchase.loading') : t('gift.purchase.submit')}
                 </button>
@@ -322,13 +322,13 @@ export default function GiftCardsPage() {
                 onChange={(e) => setCheckCode(e.target.value.toUpperCase())}
                 placeholder={t('gift.check.code.placeholder')}
                 required
-                className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 uppercase tracking-widest"
+                className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none uppercase tracking-widest"
               />
               {checkError && <p className="text-xs text-red-500 mt-2">{checkError}</p>}
               <button
                 type="submit"
                 disabled={checkLoading || !checkCode.trim()}
-                className="mt-4 w-full bg-charcoal text-soft-white py-3 text-xs uppercase tracking-[0.2em] hover:bg-charcoal/80 transition-colors disabled:opacity-50"
+                className="mt-4 w-full bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.15em] transition-colors hover:bg-vermillion-dark disabled:opacity-50"
               >
                 {checkLoading ? t('gift.check.loading') : t('gift.check.submit')}
               </button>

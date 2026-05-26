@@ -70,6 +70,9 @@ export default function AdminPage() {
   const [analyticsPeriod, setAnalyticsPeriod] = useState<'7d' | '30d' | '90d'>('7d')
   const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(null)
   const [analyticsLoading, setAnalyticsLoading] = useState(false)
+  const [showAllPages, setShowAllPages] = useState(false)
+  const [showAllEvents, setShowAllEvents] = useState(false)
+  const ANALYTICS_ROWS_DEFAULT = 5
 
   const handleLogin = () => {
     if (pass === ADMIN_PASS) {
@@ -415,22 +418,32 @@ export default function AdminPage() {
                   {analyticsData.topPages.length === 0 ? (
                     <p className="text-sm text-warm-gray">No page data.</p>
                   ) : (
-                    <table className="w-full">
-                      <thead>
-                        <tr className="border-b border-vermillion/10">
-                          <th className="text-left text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Page</th>
-                          <th className="text-right text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Count</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {analyticsData.topPages.map((p) => (
-                          <tr key={p.page} className="border-b border-vermillion/5">
-                            <td className="py-2 text-sm text-charcoal">{p.page}</td>
-                            <td className="py-2 text-sm text-charcoal text-right font-medium">{p.count}</td>
+                    <>
+                      <table className="w-full">
+                        <thead>
+                          <tr className="border-b border-vermillion/10">
+                            <th className="text-left text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Page</th>
+                            <th className="text-right text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Count</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {(showAllPages ? analyticsData.topPages : analyticsData.topPages.slice(0, ANALYTICS_ROWS_DEFAULT)).map((p) => (
+                            <tr key={p.page} className="border-b border-vermillion/5">
+                              <td className="py-2 text-sm text-charcoal">{p.page}</td>
+                              <td className="py-2 text-sm text-charcoal text-right font-medium">{p.count}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      {analyticsData.topPages.length > ANALYTICS_ROWS_DEFAULT && (
+                        <button
+                          onClick={() => setShowAllPages((v) => !v)}
+                          className="mt-3 text-xs text-vermillion-dark hover:text-vermillion transition-colors uppercase tracking-[0.15em]"
+                        >
+                          {showAllPages ? 'Show less' : 'Show all'}
+                        </button>
+                      )}
+                    </>
                   )}
                 </div>
 
@@ -440,22 +453,32 @@ export default function AdminPage() {
                   {analyticsData.topEvents.length === 0 ? (
                     <p className="text-sm text-warm-gray">No event data.</p>
                   ) : (
-                    <table className="w-full">
-                      <thead>
-                        <tr className="border-b border-vermillion/10">
-                          <th className="text-left text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Event</th>
-                          <th className="text-right text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Count</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {analyticsData.topEvents.map((e) => (
-                          <tr key={e.event} className="border-b border-vermillion/5">
-                            <td className="py-2 text-sm text-charcoal">{e.event}</td>
-                            <td className="py-2 text-sm text-charcoal text-right font-medium">{e.count}</td>
+                    <>
+                      <table className="w-full">
+                        <thead>
+                          <tr className="border-b border-vermillion/10">
+                            <th className="text-left text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Event</th>
+                            <th className="text-right text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Count</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {(showAllEvents ? analyticsData.topEvents : analyticsData.topEvents.slice(0, ANALYTICS_ROWS_DEFAULT)).map((e) => (
+                            <tr key={e.event} className="border-b border-vermillion/5">
+                              <td className="py-2 text-sm text-charcoal">{e.event}</td>
+                              <td className="py-2 text-sm text-charcoal text-right font-medium">{e.count}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      {analyticsData.topEvents.length > ANALYTICS_ROWS_DEFAULT && (
+                        <button
+                          onClick={() => setShowAllEvents((v) => !v)}
+                          className="mt-3 text-xs text-vermillion-dark hover:text-vermillion transition-colors uppercase tracking-[0.15em]"
+                        >
+                          {showAllEvents ? 'Show less' : 'Show all'}
+                        </button>
+                      )}
+                    </>
                   )}
                 </div>
               </div>

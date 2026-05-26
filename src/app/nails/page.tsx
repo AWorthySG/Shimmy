@@ -186,45 +186,6 @@ export default function NailsPage() {
         </div>
       </section>
 
-      {/* ─── Divider ─── */}
-      <div className="flex items-center justify-center gap-3 my-4 sm:my-5">
-        <div className="h-[1px] w-10 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-[10px]">✦</span>
-        <div className="h-[1px] w-10 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
-
-      {/* ─── Handcrafted Quality — cinematic split with Ken Burns ─── */}
-      <section className="bg-cream py-10 sm:py-12 md:py-14 px-4 sm:px-6">
-        <div className="mx-auto grid max-w-6xl items-center gap-6 sm:gap-8 md:grid-cols-2">
-          <AnimateOnScroll animation="fade-right">
-            <div className="relative aspect-[4/5] overflow-hidden bg-cream-dark">
-              <Image
-                src="/images/nails/ingenue-lifestyle.jpg"
-                alt="Nails by Shimmyhands — press-on nails worn on hand"
-                fill
-                className="object-cover ken-burns"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              {/* Subtle vignette */}
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_50%,_rgba(46,51,40,0.15)_100%)] pointer-events-none" />
-            </div>
-          </AnimateOnScroll>
-
-          <AnimateOnScroll animation="fade-left" delay={150}>
-            <div className="h-[2px] w-[50px] bg-gradient-to-r from-vermillion/60 to-transparent mb-3" />
-            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
-              {t("shop.handcrafted.tag")}
-            </p>
-            <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl sparkle">
-              {t("shop.handcrafted.title")}
-            </h2>
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-charcoal-light">
-              {t("shop.handcrafted.desc")}
-            </p>
-          </AnimateOnScroll>
-        </div>
-      </section>
-
       {/* ─── Client Counter ─── */}
       <ClientCounter />
 

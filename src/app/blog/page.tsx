@@ -10,46 +10,18 @@ import { blogPosts } from '@/lib/blog'
 export default function BlogPage() {
   const { t } = useI18n()
   const [query, setQuery] = useState('')
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'brows' | 'nails'>('all')
 
-  // Extract all unique tags from blog posts
-  const allTags = useMemo(() => {
-    const tagSet = new Set<string>()
-    for (const post of blogPosts) {
-      for (const tag of post.tags) {
-        tagSet.add(tag)
-      }
-    }
-    return Array.from(tagSet).sort()
-  }, [])
-
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    )
-  }
-
-  // Filter posts by search query, selected tags, and category
   const filteredPosts = useMemo(() => {
     return blogPosts.filter((post) => {
-      // Category filter
       if (selectedCategory !== 'all' && post.category !== selectedCategory) return false
-
-      // Search filter
       if (query.trim()) {
         const title = t(post.titleKey).toLowerCase()
         if (!title.includes(query.toLowerCase())) return false
       }
-
-      // Tag filter (OR logic)
-      if (selectedTags.length > 0) {
-        if (!selectedTags.some((tag) => post.tags.includes(tag))) return false
-      }
-
       return true
     })
-  }, [query, selectedTags, selectedCategory, t])
+  }, [query, selectedCategory, t])
 
   return (
     <>
@@ -100,7 +72,7 @@ export default function BlogPage() {
           </div>
 
           {/* Category Filter Tabs */}
-          <div className="flex gap-2 mb-4">
+          <div className="flex gap-2 mb-8">
             {(['all', 'brows', 'nails'] as const).map((cat) => {
               const labelKey = cat === 'all' ? 'blog.filter.all' : cat === 'brows' ? 'blog.filter.brows' : 'blog.filter.nails'
               return (
@@ -117,23 +89,6 @@ export default function BlogPage() {
                 </button>
               )
             })}
-          </div>
-
-          {/* Tag Filter Chips */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {allTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
-                className={`px-3 py-1.5 text-[10px] uppercase tracking-[0.15em] border transition-colors duration-200 ${
-                  selectedTags.includes(tag)
-                    ? 'bg-vermillion text-soft-white border-vermillion'
-                    : 'bg-cream/50 text-charcoal-light border-vermillion/15 hover:border-vermillion/40'
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
           </div>
 
           {/* Posts Grid or Empty State */}

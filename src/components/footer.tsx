@@ -32,36 +32,51 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links — two sub-columns */}
           <div>
             <h4 className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">
               {t("footer.links")}
             </h4>
-            <ul className="space-y-3">
-              {[
-                { href: "/brows", label: t("nav.brows.studio") },
-                { href: "/brows/services", label: t("nav.services") },
-                { href: "/brows/process", label: t("process.title") },
-                { href: "/brows/try-on", label: t("tryon.tag") },
-                { href: "/nails", label: t("nav.nails.studio") },
-                { href: "/nails/shop", label: t("nav.shop") },
-                { href: "/about", label: t("nav.about") },
-                { href: "/blog", label: t("blog.title") },
-                { href: "/contact", label: t("nav.contact") },
-                { href: "/referral", label: t("nav.referral") },
-                { href: "/gift-cards", label: t("nav.gift.cards") },
-                { href: "/loyalty", label: t("nav.loyalty") },
-              ].map(({ href, label }) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    className="text-sm text-warm-gray transition-colors hover:text-vermillion touch-target inline-flex items-center py-1"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="grid grid-cols-2 gap-x-4">
+              <ul className="space-y-3">
+                {[
+                  { href: "/brows", label: t("nav.brows.studio") },
+                  { href: "/brows/services", label: t("nav.services") },
+                  { href: "/brows/process", label: t("process.title") },
+                  { href: "/brows/try-on", label: t("tryon.tag") },
+                  { href: "/nails", label: t("nav.nails.studio") },
+                  { href: "/nails/shop", label: t("nav.shop") },
+                ].map(({ href, label }) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className="text-sm text-warm-gray transition-colors hover:text-vermillion touch-target inline-flex items-center py-1"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ul className="space-y-3">
+                {[
+                  { href: "/about", label: t("nav.about") },
+                  { href: "/blog", label: t("blog.title") },
+                  { href: "/contact", label: t("nav.contact") },
+                  { href: "/referral", label: t("nav.referral") },
+                  { href: "/gift-cards", label: t("nav.gift.cards") },
+                  { href: "/loyalty", label: t("nav.loyalty") },
+                ].map(({ href, label }) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className="text-sm text-warm-gray transition-colors hover:text-vermillion touch-target inline-flex items-center py-1"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Contact */}

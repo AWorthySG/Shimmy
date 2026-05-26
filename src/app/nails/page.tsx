@@ -83,9 +83,6 @@ export default function NailsPage() {
       {/* ─── Seasonal Banner ─── */}
       <SeasonalBanner />
 
-      {/* ─── Client Counter ─── */}
-      <ClientCounter />
-
       {/* ─── Divider ─── */}
       <div className="flex items-center justify-center gap-3 my-4 sm:my-5">
         <div className="h-[1px] w-10 bg-gradient-to-r from-transparent to-vermillion/30" />
@@ -227,6 +224,9 @@ export default function NailsPage() {
           </AnimateOnScroll>
         </div>
       </section>
+
+      {/* ─── Client Counter ─── */}
+      <ClientCounter />
 
       {/* ─── Video Showcase — immersive gallery with hover reveals ─── */}
       <section className="bg-soft-white py-10 sm:py-12 md:py-14 px-4 sm:px-6">

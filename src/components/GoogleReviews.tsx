@@ -70,7 +70,7 @@ export default function GoogleReviews() {
   const displayReviews = reviews.length > 0 ? reviews : PLACEHOLDER_REVIEWS
 
   return (
-    <section className="bg-cream py-16 sm:py-20 px-4 sm:px-6">
+    <section className="bg-soft-white py-16 sm:py-20 px-4 sm:px-6">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-10 sm:mb-14">

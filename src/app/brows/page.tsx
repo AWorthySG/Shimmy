@@ -373,7 +373,7 @@ export default function Home() {
       <GoogleReviews />
 
       {/* ─── What to Expect — link to process page ─── */}
-      <section className="bg-cream py-12 sm:py-14 px-4 sm:px-6">
+      <section className="bg-cream-dark py-12 sm:py-14 px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">
           <AnimateOnScroll animation="fade-up">
             <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark mb-2">

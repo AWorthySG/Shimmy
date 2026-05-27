@@ -23,6 +23,21 @@ const galleryItems: GalleryItem[] = [
   { id: 9, label: "Healed Results", gradient: "from-vermillion/10 to-cream-dark" },
 ];
 
+/* ──────────────────────────────────────────────
+   "See the Process" clips. Drop web-sized brow
+   videos (~720p, under ~3 MB each) into
+   /public/videos/brows/, then set `src` on each
+   item to swap its placeholder for the real clip.
+   ────────────────────────────────────────────── */
+type ProcessClip = { label: string; src?: string };
+
+const processClips: ProcessClip[] = [
+  { label: "Consultation" /* , src: "/videos/brows/consultation.mp4" */ },
+  { label: "Brow Mapping" /* , src: "/videos/brows/brow-mapping.mp4" */ },
+  { label: "Precision Work" /* , src: "/videos/brows/precision-work.mp4" */ },
+  { label: "Final Result" /* , src: "/videos/brows/final-result.mp4" */ },
+];
+
 export default function GalleryPage() {
   const { t } = useI18n();
 
@@ -129,24 +144,28 @@ export default function GalleryPage() {
           </AnimateOnScroll>
 
           <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
-            {[
-              { src: "/videos/nail-test-1.mp4", label: "Consultation" },
-              { src: "/videos/nail-test-2.mp4", label: "Brow Mapping" },
-              { src: "/videos/nail-test-3.mp4", label: "Precision Work" },
-              { src: "/videos/nail-test-4.mp4", label: "Final Result" },
-            ].map((vid) => (
-              <AnimateOnScroll key={vid.src} animation="fade-up">
+            {processClips.map((clip, i) => (
+              <AnimateOnScroll key={clip.label} animation="fade-up" delay={i * 80}>
                 <div className="group card-lift overflow-hidden border border-vermillion/10 bg-soft-white/50">
                   <div className="relative aspect-[9/16] overflow-hidden">
-                    <video
-                      autoPlay muted loop playsInline
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    >
-                      <source src={vid.src} type="video/mp4" />
-                    </video>
+                    {clip.src ? (
+                      <video
+                        autoPlay muted loop playsInline preload="metadata"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      >
+                        <source src={clip.src} type="video/mp4" />
+                      </video>
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-cream-dark via-cream to-vermillion/5">
+                        <span className="text-3xl text-vermillion/30">✦</span>
+                        <p className="mt-2 text-[9px] uppercase tracking-[0.2em] text-warm-gray/60">
+                          Coming soon
+                        </p>
+                      </div>
+                    )}
                   </div>
                   <div className="p-3 text-center">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-warm-gray">{vid.label}</p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-warm-gray">{clip.label}</p>
                   </div>
                 </div>
               </AnimateOnScroll>

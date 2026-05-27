@@ -1,30 +1,26 @@
 "use client";
 
+import Image from "next/image";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 
 /* ──────────────────────────────────────────────
-   TODO: Replace these with your actual gallery
-   items. For each, add a real image:
-
-   1. Put images in /public/gallery/
-   2. Replace the gradient placeholder with:
-      <Image src="/gallery/brow-01.jpg" fill
-        alt="Eyebrow embroidery result"
-        className="object-cover" />
-
-   Add or remove items as needed.
+   Gallery items. Tiles with a `src` render a real
+   photo (from /public/images/brows/); the rest stay
+   as gradient placeholders until more photos are added.
    ────────────────────────────────────────────── */
-const galleryItems = [
-  { id: 1, label: "Eyebrow Embroidery", gradient: "from-vermillion/10 to-cream-dark" },
-  { id: 2, label: "Microblading", gradient: "from-cream-dark to-jade/10" },
-  { id: 3, label: "Nano Brows", gradient: "from-jade/10 to-cream-dark" },
-  { id: 4, label: "Ombre Powder Brows", gradient: "from-cream-dark to-vermillion/10" },
-  { id: 5, label: "Brow Shaping", gradient: "from-vermillion/10 to-cream-dark" },
-  { id: 6, label: "Lip Blush", gradient: "from-cream-dark to-jade/10" },
-  { id: 7, label: "Before & After", gradient: "from-jade/10 to-cream-dark" },
-  { id: 8, label: "Healed Results", gradient: "from-cream-dark to-vermillion/10" },
-  { id: 9, label: "Client Transformations", gradient: "from-vermillion/10 to-cream-dark" },
+type GalleryItem = { id: number; label: string; gradient: string; src?: string };
+
+const galleryItems: GalleryItem[] = [
+  { id: 1, label: "Before & After", gradient: "from-vermillion/10 to-cream-dark", src: "/images/brows/brow-before-after-split.jpg" },
+  { id: 2, label: "Brow Transformation", gradient: "from-cream-dark to-jade/10", src: "/images/brows/brow-before-after-1.jpg" },
+  { id: 3, label: "Before & After", gradient: "from-jade/10 to-cream-dark", src: "/images/brows/brow-before-after-closeup.jpg" },
+  { id: 4, label: "Natural Brows", gradient: "from-cream-dark to-vermillion/10", src: "/images/brows/brow-before-after-2.jpg" },
+  { id: 5, label: "Men's Brows", gradient: "from-vermillion/10 to-cream-dark", src: "/images/brows/brow-before-after-mens.jpg" },
+  { id: 6, label: "Microblading", gradient: "from-cream-dark to-jade/10" },
+  { id: 7, label: "Ombre Powder Brows", gradient: "from-jade/10 to-cream-dark" },
+  { id: 8, label: "Lip Blush", gradient: "from-cream-dark to-vermillion/10" },
+  { id: 9, label: "Healed Results", gradient: "from-vermillion/10 to-cream-dark" },
 ];
 
 export default function GalleryPage() {
@@ -60,29 +56,50 @@ export default function GalleryPage() {
               <div
                 className="group relative aspect-square overflow-hidden bg-gradient-to-br border border-vermillion/10 card-lift shine-on-hover hover:border-vermillion/30"
               >
-                {/* Gradient placeholder — TODO: Replace with <Image> */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${item.gradient}`}
-                />
+                {item.src ? (
+                  <>
+                    <Image
+                      src={item.src}
+                      alt={`${item.label} — eyebrow result by Shimmy`}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, 50vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    {/* Label revealed on hover */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-charcoal/0 opacity-0 transition-all duration-500 group-hover:bg-charcoal/40 group-hover:opacity-100 px-4">
+                      <p className="font-serif text-base sm:text-lg text-soft-white text-center drop-shadow">
+                        {item.label}
+                      </p>
+                      <div className="mt-2 h-[1px] w-8 bg-soft-white" />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* Gradient placeholder — add a `src` to show a real photo */}
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${item.gradient}`}
+                    />
 
-                {/* Overlay content */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:bg-soft-white/80">
-                  {/* Default state */}
-                  <div className="flex flex-col items-center transition-all duration-500 group-hover:opacity-0">
-                    <span className="text-3xl sm:text-4xl text-vermillion/30">✦</span>
-                    <p className="mt-2 sm:mt-3 text-[9px] sm:text-xs uppercase tracking-[0.2em] text-warm-gray px-2 text-center">
-                      {item.label}
-                    </p>
-                  </div>
+                    {/* Overlay content */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:bg-soft-white/80">
+                      {/* Default state */}
+                      <div className="flex flex-col items-center transition-all duration-500 group-hover:opacity-0">
+                        <span className="text-3xl sm:text-4xl text-vermillion/30">✦</span>
+                        <p className="mt-2 sm:mt-3 text-[9px] sm:text-xs uppercase tracking-[0.2em] text-warm-gray px-2 text-center">
+                          {item.label}
+                        </p>
+                      </div>
 
-                  {/* Hover state */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100 px-4">
-                    <p className="font-serif text-base sm:text-lg text-charcoal text-center">
-                      {item.label}
-                    </p>
-                    <div className="mt-2 h-[1px] w-8 bg-vermillion" />
-                  </div>
-                </div>
+                      {/* Hover state */}
+                      <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100 px-4">
+                        <p className="font-serif text-base sm:text-lg text-charcoal text-center">
+                          {item.label}
+                        </p>
+                        <div className="mt-2 h-[1px] w-8 bg-vermillion" />
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
               </AnimateOnScroll>
             ))}

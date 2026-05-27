@@ -32,10 +32,10 @@ const galleryItems: GalleryItem[] = [
 type ProcessClip = { label: string; src?: string };
 
 const processClips: ProcessClip[] = [
-  { label: "Consultation" /* , src: "/videos/brows/consultation.mp4" */ },
-  { label: "Brow Mapping" /* , src: "/videos/brows/brow-mapping.mp4" */ },
-  { label: "Precision Work" /* , src: "/videos/brows/precision-work.mp4" */ },
-  { label: "Final Result" /* , src: "/videos/brows/final-result.mp4" */ },
+  { label: "Brow Mapping", src: "/videos/brows/brow-mapping.mp4" },
+  { label: "Precision Work", src: "/videos/brows/precision-work.mp4" },
+  { label: "The Artistry", src: "/videos/brows/the-artistry.mp4" },
+  { label: "The Reveal", src: "/videos/brows/the-reveal.mp4" },
 ];
 
 export default function GalleryPage() {
@@ -151,6 +151,7 @@ export default function GalleryPage() {
                     {clip.src ? (
                       <video
                         autoPlay muted loop playsInline preload="metadata"
+                        poster={clip.src.replace(/\.mp4$/, ".jpg")}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       >
                         <source src={clip.src} type="video/mp4" />

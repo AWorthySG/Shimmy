@@ -19,14 +19,17 @@ export default function Home() {
     {
       title: t("services.embroidery.title"),
       description: t("services.embroidery.desc"),
+      image: "/images/brows/brow-process-hand.jpg",
     },
     {
       title: t("services.nano.title"),
       description: t("services.nano.desc"),
+      image: "/images/brows/brow-result-hairstroke-1.jpg",
     },
     {
       title: t("services.ombre.title"),
       description: t("services.ombre.desc"),
+      image: "/images/brows/brow-result-eyes-closeup.jpg",
     },
   ];
 
@@ -150,15 +153,15 @@ export default function Home() {
                   key={service.title}
                   className="group oriental-corner card-lift shine-on-hover border border-vermillion/15 bg-cream/50 overflow-hidden text-center hover:border-vermillion/40"
                 >
-                  {/* Service photo placeholder — TODO: replace with your actual photos */}
-                  <div className="relative w-full aspect-[3/2] bg-gradient-to-br from-cream-dark/50 via-cream to-vermillion/5 flex items-center justify-center">
-                    <div className="text-center px-4">
-                      <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
-                      <p className="text-[9px] uppercase tracking-[0.3em] text-warm-gray/40">
-                        {service.title}
-                      </p>
-                      <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
-                    </div>
+                  {/* Service result photo */}
+                  <div className="relative w-full aspect-[3/2] overflow-hidden bg-cream-dark">
+                    <Image
+                      src={service.image}
+                      alt={`${service.title} result by Shimmy`}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
                   </div>
                   <div className="p-6 sm:p-8">
                     <h3 className="font-serif text-lg sm:text-xl text-charcoal">

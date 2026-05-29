@@ -97,15 +97,15 @@ export default function Home() {
             <Stagger staggerMs={200} animation="fade-up">
               {/* Brows */}
               <div className="group oriental-corner card-lift shine-on-hover border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40">
-                {/* Placeholder — TODO: replace with brow studio photo */}
-                <div className="relative w-full aspect-[3/2] bg-gradient-to-br from-cream-dark/50 via-cream to-vermillion/5 flex items-center justify-center">
-                  <div className="text-center px-4">
-                    <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
-                    <p className="text-[9px] uppercase tracking-[0.3em] text-warm-gray/40">
-                      {t("home.brows.title")}
-                    </p>
-                    <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
-                  </div>
+                {/* Brow result photo */}
+                <div className="relative w-full aspect-[3/2] overflow-hidden bg-cream-dark">
+                  <Image
+                    src="/images/brows/brow-before-after-split.jpg"
+                    alt="Brow transformation by Shimmyhands"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                 </div>
                 <div className="p-6 sm:p-8 text-center">
                   <h3 className="font-serif text-xl sm:text-2xl text-charcoal">

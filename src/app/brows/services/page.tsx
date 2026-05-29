@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
@@ -22,6 +23,7 @@ export default function ServicesPage() {
   const services = [
     {
       id: "embroidery",
+      image: "/images/brows/brow-process-spoolie.jpg",
       title: t("svc.embroidery.title"),
       price: t("svc.embroidery.price"),       /* TODO: Your actual price */
       duration: t("svc.embroidery.duration"),  /* TODO: Your actual duration */
@@ -36,6 +38,7 @@ export default function ServicesPage() {
     },
     {
       id: "microblading",
+      image: "/images/brows/brow-result-hairstroke-2.jpg",
       title: t("svc.microblading.title"),
       price: t("svc.microblading.price"),
       duration: t("svc.microblading.duration"),
@@ -50,6 +53,7 @@ export default function ServicesPage() {
     },
     {
       id: "nano",
+      image: "/images/brows/brow-result-side-profile.jpg",
       title: t("svc.nano.title"),
       price: t("svc.nano.price"),
       duration: t("svc.nano.duration"),
@@ -64,6 +68,7 @@ export default function ServicesPage() {
     },
     {
       id: "ombre",
+      image: "/images/brows/brow-result-eyes-detail.jpg",
       title: t("svc.ombre.title"),
       price: t("svc.ombre.price"),
       duration: t("svc.ombre.duration"),
@@ -78,6 +83,7 @@ export default function ServicesPage() {
     },
     {
       id: "shaping",
+      image: "/images/brows/brow-result-clean-front.jpg",
       title: t("svc.shaping.title"),
       price: t("svc.shaping.price"),
       duration: t("svc.shaping.duration"),
@@ -141,15 +147,27 @@ export default function ServicesPage() {
                   {t("badge.popular")}
                 </span>
               )}
-              {/* Service photo placeholder — TODO: replace with your actual service photos */}
-              <div className="relative w-full aspect-[2/1] bg-gradient-to-br from-cream-dark/60 via-cream to-soft-white flex items-center justify-center">
-                <div className="text-center px-6">
-                  <div className="mx-auto w-16 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-3" />
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-warm-gray/50">
-                    {service.title}
-                  </p>
-                  <div className="mx-auto w-16 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-3" />
-                </div>
+              {/* Service photo — real if available, gradient placeholder otherwise */}
+              <div className="relative w-full aspect-[2/1] overflow-hidden bg-cream-dark">
+                {service.image ? (
+                  <Image
+                    src={service.image}
+                    alt={`${service.title} — Shimmy brow studio`}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-cream-dark/60 via-cream to-soft-white flex items-center justify-center">
+                    <div className="text-center px-6">
+                      <div className="mx-auto w-16 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-3" />
+                      <p className="text-[10px] uppercase tracking-[0.3em] text-warm-gray/50">
+                        {service.title}
+                      </p>
+                      <div className="mx-auto w-16 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-3" />
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="p-5 sm:p-8 md:p-10">

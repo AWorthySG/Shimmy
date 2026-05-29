@@ -17,10 +17,10 @@ const galleryItems: GalleryItem[] = [
   { id: 3, label: "Before & After", gradient: "from-jade/10 to-cream-dark", src: "/images/brows/brow-before-after-closeup.jpg" },
   { id: 4, label: "Natural Brows", gradient: "from-cream-dark to-vermillion/10", src: "/images/brows/brow-before-after-2.jpg" },
   { id: 5, label: "Men's Brows", gradient: "from-vermillion/10 to-cream-dark", src: "/images/brows/brow-before-after-mens.jpg" },
-  { id: 6, label: "Microblading", gradient: "from-cream-dark to-jade/10" },
-  { id: 7, label: "Ombre Powder Brows", gradient: "from-jade/10 to-cream-dark" },
+  { id: 6, label: "Microblading", gradient: "from-cream-dark to-jade/10", src: "/images/brows/brow-result-hairstroke-soft.jpg" },
+  { id: 7, label: "Ombre Powder Brows", gradient: "from-jade/10 to-cream-dark", src: "/images/brows/brow-result-misty-1.jpg" },
   { id: 8, label: "Lip Blush", gradient: "from-cream-dark to-vermillion/10" },
-  { id: 9, label: "Healed Results", gradient: "from-vermillion/10 to-cream-dark" },
+  { id: 9, label: "Healed Results", gradient: "from-vermillion/10 to-cream-dark", src: "/images/brows/brow-result-healed.jpg" },
 ];
 
 /* ──────────────────────────────────────────────

@@ -7,7 +7,6 @@ import { HomeWithIntro } from "@/components/home-with-intro";
 import { useI18n } from "@/lib/i18n";
 import StatsBar from "@/components/StatsBar";
 import BookingForm from "@/components/BookingForm";
-import BeforeAfterCard from "@/components/BeforeAfterCard";
 import { ParallaxLayer } from "@/components/ParallaxLayer";
 import StickyBookBar from "@/components/StickyBookBar";
 import GoogleReviews from "@/components/GoogleReviews";
@@ -218,7 +217,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Real Results — Before/After (Task 3) ─── */}
+      {/* ─── Our Work — preview of /brows/gallery ─── */}
       <section className="bg-soft-white py-16 sm:py-20 md:py-24 px-4 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <AnimateOnScroll animation="fade-up" className="text-center">
@@ -231,26 +230,73 @@ export default function Home() {
             </h2>
           </AnimateOnScroll>
 
-          <div className="mt-10 sm:mt-16 grid gap-6 sm:gap-8 md:grid-cols-3">
-            <Stagger staggerMs={150} animation="fade-up">
-              {/* TODO: Replace placeholder images with actual before/after photos in public/images/results/ */}
-              <BeforeAfterCard
-                before="/images/results/before-1.jpg"
-                after="/images/results/after-1.jpg"
-                label={t("services.nano.title")}
-              />
-              <BeforeAfterCard
-                before="/images/results/before-2.jpg"
-                after="/images/results/after-2.jpg"
-                label={t("services.ombre.title")}
-              />
-              <BeforeAfterCard
-                before="/images/results/before-3.jpg"
-                after="/images/results/after-3.jpg"
-                label={t("services.embroidery.title")}
-              />
+          {/* Photo row — 3 stills from /brows/gallery */}
+          <div className="mt-10 sm:mt-14 grid gap-3 sm:gap-4 grid-cols-3">
+            <Stagger staggerMs={120} animation="zoom-in">
+              {[
+                { src: "/images/brows/brow-before-after-split.jpg", label: "Before & After" },
+                { src: "/images/brows/brow-before-after-closeup.jpg", label: "Before & After" },
+                { src: "/images/brows/brow-before-after-mens.jpg", label: "Men's Brows" },
+              ].map((item) => (
+                <Link
+                  key={item.src}
+                  href="/brows/gallery"
+                  className="group relative aspect-square overflow-hidden border border-vermillion/10 card-lift shine-on-hover hover:border-vermillion/30"
+                >
+                  <Image
+                    src={item.src}
+                    alt={`${item.label} — eyebrow result by Shimmy`}
+                    fill
+                    sizes="33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-charcoal/0 opacity-0 transition-all duration-500 group-hover:bg-charcoal/40 group-hover:opacity-100 px-4">
+                    <p className="font-serif text-base sm:text-lg text-soft-white text-center drop-shadow">
+                      {item.label}
+                    </p>
+                  </div>
+                </Link>
+              ))}
             </Stagger>
           </div>
+
+          {/* Video row — 2 process clips */}
+          <div className="mt-3 sm:mt-4 grid gap-3 sm:gap-4 grid-cols-2 max-w-3xl mx-auto">
+            {[
+              { src: "/videos/brows/brow-mapping.mp4", label: "Brow Mapping" },
+              { src: "/videos/brows/the-reveal.mp4", label: "The Reveal" },
+            ].map((clip, i) => (
+              <AnimateOnScroll key={clip.src} animation="fade-up" delay={i * 100}>
+                <Link
+                  href="/brows/gallery"
+                  className="group block card-lift overflow-hidden border border-vermillion/10 bg-soft-white/50"
+                >
+                  <div className="relative aspect-[9/16] overflow-hidden">
+                    <video
+                      autoPlay muted loop playsInline preload="metadata"
+                      poster={clip.src.replace(/\.mp4$/, ".jpg")}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    >
+                      <source src={clip.src} type="video/mp4" />
+                    </video>
+                  </div>
+                  <div className="p-3 text-center">
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-warm-gray">{clip.label}</p>
+                  </div>
+                </Link>
+              </AnimateOnScroll>
+            ))}
+          </div>
+
+          {/* See full gallery CTA */}
+          <AnimateOnScroll animation="fade-up" delay={200} className="mt-10 sm:mt-12 text-center">
+            <Link
+              href="/brows/gallery"
+              className="underline-grow text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target inline-flex items-center py-2"
+            >
+              See the full gallery →
+            </Link>
+          </AnimateOnScroll>
         </div>
       </section>
 

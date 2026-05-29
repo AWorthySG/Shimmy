@@ -103,6 +103,7 @@ export default function Home() {
                     src="/images/brows/brow-before-after-split.jpg"
                     alt="Brow transformation by Shimmyhands"
                     fill
+                    priority
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
@@ -132,6 +133,7 @@ export default function Home() {
                     src="/images/nails/main-hero-cat-mirror.jpg"
                     alt="Nails by Shimmyhands press-on nails — nude French tips styled with florals"
                     fill
+                    priority
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />

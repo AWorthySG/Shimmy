@@ -186,6 +186,37 @@ export default function NailsPage() {
         </div>
       </section>
 
+      {/* ─── Made by Hand — editorial lifestyle band ─── */}
+      <section className="bg-cream py-10 sm:py-12 md:py-14 px-4 sm:px-6">
+        <div className="mx-auto grid max-w-6xl items-center gap-6 sm:gap-8 md:grid-cols-2">
+          <AnimateOnScroll animation="fade-right">
+            <div className="relative aspect-[3/2] overflow-hidden bg-cream-dark">
+              <Image
+                src="/images/nails/main-lifestyle-french-duo.jpg"
+                alt="Two handcrafted Nails by Shimmyhands sets styled with florals"
+                fill
+                className="object-cover ken-burns"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_55%,_rgba(46,51,40,0.15)_100%)] pointer-events-none" />
+            </div>
+          </AnimateOnScroll>
+
+          <AnimateOnScroll animation="fade-left" delay={150}>
+            <div className="h-[2px] w-[50px] bg-gradient-to-r from-vermillion/60 to-transparent mb-3" />
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+              {t("shop.handcrafted.tag")}
+            </p>
+            <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
+              {t("shop.handcrafted.title")}
+            </h2>
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-charcoal-light">
+              {t("shop.handcrafted.desc")}
+            </p>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
       {/* ─── Client Counter ─── */}
       <ClientCounter />
 

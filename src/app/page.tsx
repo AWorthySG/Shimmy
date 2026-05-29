@@ -129,8 +129,8 @@ export default function Home() {
                 {/* Product photo */}
                 <div className="relative w-full aspect-[3/2] overflow-hidden bg-cream-dark">
                   <Image
-                    src="/images/nails/ingenue-1.jpg"
-                    alt="Nails by Shimmyhands press-on nails"
+                    src="/images/nails/main-hero-cat-mirror.jpg"
+                    alt="Nails by Shimmyhands press-on nails — nude French tips styled with florals"
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"

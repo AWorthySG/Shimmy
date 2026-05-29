@@ -207,21 +207,21 @@ export default function NailsPage() {
               {/* On-hand lifestyle photos with Ken Burns */}
               <div className="group card-lift overflow-hidden border border-vermillion/10 bg-cream/30">
                 <div className="relative aspect-[3/4] overflow-hidden">
-                  <Image src="/images/nails/lifestyle-onhand-1.jpg" alt="Press-on nails — worn" fill className="object-cover ken-burns" sizes="(max-width: 768px) 50vw, 25vw" />
+                  <Image src="/images/nails/main-festive-mulled-wine.jpg" alt="Christmas Wishes — Mulled Wine festive set" fill className="object-cover ken-burns" sizes="(max-width: 768px) 50vw, 25vw" />
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
                 <div className="p-3 text-center">
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-warm-gray">Sweater Weather</p>
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-warm-gray">Christmas Wishes</p>
                 </div>
               </div>
               <div className="group card-lift overflow-hidden border border-vermillion/10 bg-cream/30">
                 <div className="relative aspect-[3/4] overflow-hidden">
-                  <Image src="/images/nails/lifestyle-onhand-3.jpg" alt="Press-on nails — detail" fill className="object-cover ken-burns" style={{ animationDirection: "reverse" }} sizes="(max-width: 768px) 50vw, 25vw" />
+                  <Image src="/images/nails/main-yule-hexagon.jpg" alt="Yule Dreams — burgundy crystal set on rose-gold compact" fill className="object-cover ken-burns" style={{ animationDirection: "reverse" }} sizes="(max-width: 768px) 50vw, 25vw" />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
                 <div className="p-3 text-center">
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-warm-gray">On Hand</p>
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-warm-gray">Yule Dreams</p>
                 </div>
               </div>
               {/* Lifestyle videos with cinematic zoom */}

@@ -27,35 +27,35 @@ export const collections: Collection[] = [
     title: "Christmas Wishes",
     description:
       "Festive sparkle meets handpainted artistry. Ultra-reflective glitter and seasonal designs in Mulled Wine or Evergreen.",
-    image: "/images/nails/xmas-flatlay-1.jpg",
+    image: "/images/nails/christmas-1-mulled-wine.jpg",
   },
   {
     handle: "yule-dreams",
     title: "Yule Dreams",
     description:
       "Dark, elegant, and crystalline. 3D nail art with crystals, mini caviar, and a luxurious matte finish.",
-    image: "/images/nails/yule-onhand-1.jpg",
+    image: "/images/nails/yule-1-burgundy.jpg",
   },
   {
     handle: "sweater-weather",
     title: "Sweater Weather",
     description:
       "Cosy 3D nail art in pastel tones — Baby Blue, Sweet Mint, and Milky Lavender. The collection that started it all.",
-    image: "/images/nails/sweater-flatlay-1.jpg",
+    image: "/images/nails/sweater-1-hero.jpg",
   },
   {
     handle: "lovers-heartbeat",
     title: "Lovers' Heartbeat",
     description:
       "Dancing illusions and magnetic cat-eye effects that shift and shimmer with every movement. Bold and mesmerizing.",
-    image: "/images/nails/lovers-flatlay-5.jpg",
+    image: "/images/nails/lovers-1-hero.jpg",
   },
   {
     handle: "ingenue",
     title: "Ingénue",
     description:
       "Delicate, feminine, and effortlessly chic. Handpainted nail art with 3D details in Blush, Nude, and Peach.",
-    image: "/images/nails/ingenue-all-variants.jpg",
+    image: "/images/nails/ingenue-1-hero.jpg",
   },
 ];
 
@@ -74,7 +74,7 @@ export const products: Product[] = [
     tags: ["festive", "green", "glitter", "handpainted"],
     features: ["3 Unique Designs", "Handpainted Nail Art", "Ultra-Reflective Glitter"],
     colours: ["Evergreen"],
-    images: ["/images/nails/xmas-flatlay-3.jpg", "/images/nails/xmas-flatlay-1.jpg"],
+    images: ["/images/nails/christmas-2-evergreen.jpg", "/images/nails/xmas-flatlay-3.jpg", "/images/nails/xmas-flatlay-1.jpg"],
   },
   {
     id: "cw-002",
@@ -89,7 +89,7 @@ export const products: Product[] = [
     tags: ["festive", "red", "glitter", "snowflake"],
     features: ["3 Unique Designs", "Handpainted Nail Art", "Ultra-Reflective Glitter"],
     colours: ["Mulled Wine"],
-    images: ["/images/nails/xmas-flatlay-2.jpg", "/images/nails/xmas-flatlay-1.jpg"],
+    images: ["/images/nails/christmas-1-mulled-wine.jpg", "/images/nails/xmas-flatlay-2.jpg", "/images/nails/xmas-flatlay-1.jpg"],
   },
 
   // ─── Yule Dreams ───
@@ -107,7 +107,7 @@ export const products: Product[] = [
     features: ["5 Unique Designs", "3D Nail Art", "Crystals & Mini Caviar", "Matte Finish"],
     colours: ["Midnight"],
     hardware: ["Silver"],
-    images: ["/images/nails/yule-onhand-2.jpg", "/images/nails/yule-onhand-1.jpg"],
+    images: ["/images/nails/yule-2-navy.jpg", "/images/nails/yule-onhand-2.jpg", "/images/nails/yule-onhand-1.jpg"],
   },
   {
     id: "yd-002",
@@ -123,7 +123,7 @@ export const products: Product[] = [
     features: ["5 Unique Designs", "3D Nail Art", "Crystals & Mini Caviar", "Matte Finish"],
     colours: ["Amethyst"],
     hardware: ["Gold"],
-    images: ["/images/nails/yule-onhand-1.jpg", "/images/nails/yule-onhand-2.jpg"],
+    images: ["/images/nails/yule-1-burgundy.jpg", "/images/nails/yule-onhand-1.jpg", "/images/nails/yule-onhand-2.jpg"],
   },
 
   // ─── Sweater Weather — Christmas Edition ───
@@ -141,7 +141,7 @@ export const products: Product[] = [
     features: ["5 Unique Designs", "3D Nail Art"],
     colours: ["Milky Lavender"],
     hardware: ["Rosé"],
-    images: ["/images/nails/xmas-flatlay-1.jpg"],
+    images: ["/images/nails/sweater-3-flatlay.jpg", "/images/nails/xmas-flatlay-1.jpg"],
   },
 
   // ─── Sweater Weather — Classic Edition ───
@@ -175,7 +175,7 @@ export const products: Product[] = [
     features: ["5 Unique Designs", "3D Nail Art"],
     colours: ["Sweet Mint"],
     hardware: ["Gold"],
-    images: ["/images/nails/sweater-flatlay-4.jpg", "/images/nails/sweater-lifestyle-2.jpg", "/images/nails/sweater-onhand-1.jpg", "/images/nails/ingenue-1.jpg"],
+    images: ["/images/nails/sweater-1-hero.jpg", "/images/nails/sweater-2-angle.jpg", "/images/nails/sweater-flatlay-4.jpg", "/images/nails/sweater-lifestyle-2.jpg", "/images/nails/sweater-onhand-1.jpg"],
   },
 
   // ─── Lovers' Heartbeat ───
@@ -192,7 +192,7 @@ export const products: Product[] = [
     tags: ["cat-eye", "dramatic", "shimmer", "illusion"],
     features: ["7 Unique Designs", "Dancing Illusions", "Cat-Eye"],
     colours: ["Cool Dawn"],
-    images: ["/images/nails/lovers-flatlay-5.jpg", "/images/nails/lovers-flatlay-6.jpg", "/images/nails/lovers-onhand-1.jpg", "/images/nails/lovers-onhand-2.jpg"],
+    images: ["/images/nails/lovers-1-hero.jpg", "/images/nails/lovers-2-galaxy.jpg", "/images/nails/lovers-flatlay-5.jpg", "/images/nails/lovers-flatlay-6.jpg", "/images/nails/lovers-onhand-1.jpg", "/images/nails/lovers-onhand-2.jpg"],
   },
   {
     id: "lh-002",
@@ -207,7 +207,7 @@ export const products: Product[] = [
     tags: ["cat-eye", "dramatic", "shimmer", "illusion", "warm"],
     features: ["7 Unique Designs", "Dancing Illusions", "Cat-Eye"],
     colours: ["Warm Sunset"],
-    images: ["/images/nails/lovers-flatlay-3.jpg", "/images/nails/lovers-flatlay-4.jpg", "/images/nails/lovers-warm-onhand-1.jpg", "/images/nails/lovers-warm-onhand-2.jpg"],
+    images: ["/images/nails/lovers-3-arrangement.jpg", "/images/nails/lovers-flatlay-3.jpg", "/images/nails/lovers-flatlay-4.jpg", "/images/nails/lovers-warm-onhand-1.jpg", "/images/nails/lovers-warm-onhand-2.jpg"],
   },
 
   // ─── Ingénue ───
@@ -225,7 +225,7 @@ export const products: Product[] = [
     features: ["3 Unique Designs", "Handpainted Nail Art", "3D Nail Art"],
     colours: ["Peach"],
     hardware: ["Gold Glitter"],
-    images: ["/images/nails/ingenue-peach-hex.jpg", "/images/nails/ingenue-flatlay-cat.jpg", "/images/nails/ingenue-lifestyle.jpg"],
+    images: ["/images/nails/ingenue-3-hexagon.jpg", "/images/nails/ingenue-peach-hex.jpg", "/images/nails/ingenue-flatlay-cat.jpg", "/images/nails/ingenue-lifestyle.jpg"],
   },
   {
     id: "in-002",
@@ -241,7 +241,7 @@ export const products: Product[] = [
     features: ["3 Unique Designs", "Handpainted Nail Art", "3D Nail Art"],
     colours: ["Nude"],
     hardware: ["Rosé Glitter"],
-    images: ["/images/nails/ingenue-2.jpg", "/images/nails/ingenue-3.jpg", "/images/nails/ingenue-all-variants.jpg"],
+    images: ["/images/nails/ingenue-1-hero.jpg", "/images/nails/ingenue-2.jpg", "/images/nails/ingenue-3.jpg", "/images/nails/ingenue-all-variants.jpg"],
   },
   {
     id: "in-003",
@@ -257,7 +257,7 @@ export const products: Product[] = [
     features: ["3 Unique Designs", "Handpainted Nail Art", "3D Nail Art"],
     colours: ["Blush"],
     hardware: ["Silver Glitter"],
-    images: ["/images/nails/ingenue-1.jpg", "/images/nails/ingenue-all-variants.jpg", "/images/nails/ingenue-flatlay-cat.jpg"],
+    images: ["/images/nails/ingenue-2-detail.jpg", "/images/nails/ingenue-1.jpg", "/images/nails/ingenue-all-variants.jpg", "/images/nails/ingenue-flatlay-cat.jpg"],
   },
 ];
 

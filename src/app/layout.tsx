@@ -84,7 +84,7 @@ export default function RootLayout({
         <Providers>
           <WelcomeBanner />
           <Navbar />
-          <main className="flex-1"><PageTransition>{children}</PageTransition></main>
+          <main className="flex-1 overflow-x-clip"><PageTransition>{children}</PageTransition></main>
           <Footer />
           <CookieConsent />
           <WhatsAppFloat />

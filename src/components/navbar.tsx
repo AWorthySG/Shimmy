@@ -33,9 +33,14 @@ export function Navbar() {
   const { cartCount, setIsCartOpen } = useCart();
   const { count: wishlistCount } = useWishlist();
   const [searchOpen, setSearchOpen] = useState(false);
+  // Offset (px) from the viewport top where the mobile menu should begin —
+  // measured from the header's bottom edge so it clears the sticky nav and the
+  // (dismissable) welcome banner regardless of scroll position.
+  const [menuTop, setMenuTop] = useState(0);
 
   const closeSearch = useCallback(() => setSearchOpen(false), []);
 
+  const headerRef = useRef<HTMLElement>(null);
   const browsRef = useRef<HTMLLIElement>(null);
   const nailsRef = useRef<HTMLLIElement>(null);
 
@@ -49,6 +54,10 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
+    if (mobileOpen && headerRef.current) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- measuring layout on open
+      setMenuTop(headerRef.current.getBoundingClientRect().bottom);
+    }
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
@@ -63,7 +72,8 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-soft-white/90 backdrop-blur-safe border-b border-gold/15 safe-top">
+    <>
+    <header ref={headerRef} className="sticky top-0 z-50 bg-soft-white/90 backdrop-blur-safe border-b border-gold/15 safe-top">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
         {/* Brand */}
         <Link href="/" className="group flex items-center gap-3">
@@ -258,22 +268,6 @@ export function Navbar() {
             </svg>
           </button>
 
-          {/* Wishlist icon */}
-          <Link
-            href="/wishlist"
-            className="relative text-charcoal-light transition-colors hover:text-vermillion touch-target p-2"
-            aria-label="Wishlist"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-            </svg>
-            {wishlistCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-vermillion text-[9px] font-medium text-soft-white">
-                {wishlistCount}
-              </span>
-            )}
-          </Link>
-
           {/* Cart icon */}
           <button
             onClick={() => setIsCartOpen(true)}
@@ -292,16 +286,6 @@ export function Navbar() {
             )}
           </button>
 
-          <DarkModeToggle />
-
-          <button
-            onClick={toggleLocale}
-            className="text-[10px] uppercase tracking-[0.1em] text-charcoal-light px-2 py-1.5 border border-vermillion/20 touch-target"
-            aria-label="Toggle language"
-          >
-            {locale === "en" ? "中文" : "EN"}
-          </button>
-
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="flex flex-col gap-1.5 p-3 touch-target"
@@ -314,26 +298,58 @@ export function Navbar() {
           </button>
         </div>
       </nav>
+    </header>
 
       {/* Mobile menu — backdrop overlay */}
       <div
-        className={`lg:hidden fixed inset-0 top-[57px] z-30 bg-charcoal/50 transition-opacity duration-300 ${
+        className={`lg:hidden fixed inset-x-0 bottom-0 z-30 bg-charcoal/50 transition-opacity duration-300 ${
           mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
+        style={{ top: menuTop }}
         onClick={() => setMobileOpen(false)}
         aria-hidden="true"
       />
 
       {/* Mobile menu — bottom sheet */}
       <div
-        className={`lg:hidden fixed inset-x-0 bottom-0 top-[57px] z-40 flex flex-col justify-end transition-transform duration-300 ease-out pointer-events-none ${
+        className={`lg:hidden fixed inset-x-0 bottom-0 z-40 flex flex-col justify-end transition-transform duration-300 ease-out pointer-events-none ${
           mobileOpen ? "translate-y-0" : "translate-y-full"
         }`}
+        style={{ top: menuTop }}
       >
         <div className="pointer-events-auto bg-soft-white overflow-y-auto max-h-full safe-bottom rounded-t-2xl shadow-2xl">
           {/* Drag handle */}
           <div className="flex justify-center pt-3 pb-2">
             <div className="w-10 h-1 rounded-full bg-warm-gray/30" />
+          </div>
+
+          {/* Utility row: wishlist, dark mode, language */}
+          <div className="flex items-center justify-between px-6 pb-3 mb-2 border-b border-gold/10">
+            <Link
+              href="/wishlist"
+              onClick={() => setMobileOpen(false)}
+              className="relative flex items-center gap-2 text-sm text-charcoal-light transition-colors hover:text-vermillion touch-target"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+              </svg>
+              {t("nav.wishlist")}
+              {wishlistCount > 0 && (
+                <span className="flex h-4 min-w-4 px-1 items-center justify-center rounded-full bg-vermillion text-[9px] font-medium text-soft-white">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+            <div className="flex items-center gap-2">
+              <DarkModeToggle />
+              <button
+                onClick={toggleLocale}
+                className="text-[10px] uppercase tracking-[0.1em] text-charcoal-light px-2 py-1.5 border border-vermillion/20 touch-target"
+                aria-label="Toggle language"
+              >
+                {locale === "en" ? "中文" : "EN"}
+              </button>
+            </div>
           </div>
 
           <div className="px-6 pb-8">
@@ -429,6 +445,6 @@ export function Navbar() {
 
       {/* Search Overlay */}
       {searchOpen && <SearchOverlay onClose={closeSearch} />}
-    </header>
+    </>
   );
 }

@@ -10,4 +10,5 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Photo-library option on the brow selfie page. A chosen photo runs through the same face checks, and any check it fails is shown before sending. Large photos are resized to stay within the upload limit.
 - Upload protection on the selfie endpoint: same-site requests only, a limit of 6 uploads per 10 minutes per visitor, full JPEG validation and a 15-second Telegram timeout.
 - Brow selfies are now sent through the customer's WhatsApp by default. On phones the share sheet opens with the photo and a summary of the checks; on computers the photo is saved and the Shimmyhands chat opens. Telegram upload stays available via `NEXT_PUBLIC_SELFIE_DELIVERY=telegram`.
+- The WhatsApp summary now includes a millimetre scale from the iris width (11.7 mm), the cheek-to-cheek face width, head tilt and turn named by the customer's side, and a warning that library photos may be mirrored.
 - `npm test` script for unit tests (`node --test`).

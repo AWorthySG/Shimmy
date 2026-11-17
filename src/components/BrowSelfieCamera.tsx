@@ -22,6 +22,7 @@ import {
   type FacePose,
   type GuideLines,
   type Tilt,
+  irisMmPerPx,
   whatsappMessage,
 } from "@/lib/selfie-guide";
 
@@ -198,6 +199,8 @@ export default function BrowSelfieCamera() {
   const landmarkerRef = useRef<FaceLandmarker | null>(null);
   const tiltRef = useRef<Tilt | null>(null);
   const poseRef = useRef<FacePose | null>(null);
+  /** Millimetres per pixel from the iris, for the current frame. */
+  const scaleRef = useRef<number | null>(null);
   const guidesRef = useRef(guides);
   const passSinceRef = useRef<number | null>(null);
   const countdownRef = useRef<number | null>(null);
@@ -328,6 +331,7 @@ export default function BrowSelfieCamera() {
     ctx.drawImage(v, 0, 0, w, h);
 
     const pose = poseRef.current;
+    const mmPerPx = scaleRef.current;
     const tilt = tiltRef.current;
     const g = guidesRef.current;
     const round = (n: number, d = 3) => Math.round(n * 10 ** d) / 10 ** d;
@@ -335,6 +339,7 @@ export default function BrowSelfieCamera() {
       takenAt: new Date().toISOString(),
       source: "camera",
       image: { width: w, height: h, mirrored: false },
+      mmPerPx: mmPerPx != null ? round(mmPerPx, 5) : null,
       checksPassed: allPass(evaluate(pose, tilt)),
       pose: pose
         ? { rollDeg: round(pose.rollDeg, 2), yaw: round(pose.yaw), centreX: round(pose.centreX), faceWidth: round(pose.faceWidth) }
@@ -383,12 +388,14 @@ export default function BrowSelfieCamera() {
         bmp.close();
 
         let pose: FacePose | null = null;
+        let mmPerPx: number | null = null;
         const lm = landmarkerRef.current;
         if (lm) {
           await lm.setOptions({ runningMode: "IMAGE" });
           try {
             const pts = lm.detect(canvas).faceLandmarks?.[0];
             pose = pts ? computePose(pts, w / h) : null;
+            mmPerPx = pts ? irisMmPerPx(pts, w, h) : null;
           } finally {
             await lm.setOptions({ runningMode: "VIDEO" });
           }
@@ -402,7 +409,9 @@ export default function BrowSelfieCamera() {
         const meta = {
           takenAt: new Date(file.lastModified || Date.now()).toISOString(),
           source: "library",
-          image: { width: w, height: h, mirrored: false },
+          // Phones often save front-camera selfies mirrored; this cannot be detected.
+          image: { width: w, height: h, mirrored: null },
+          mmPerPx: mmPerPx != null ? round(mmPerPx, 5) : null,
           checksPassed: lm ? allPass(checksNow) : null,
           pose: pose
             ? { rollDeg: round(pose.rollDeg, 2), yaw: round(pose.yaw), centreX: round(pose.centreX), faceWidth: round(pose.faceWidth) }
@@ -462,6 +471,7 @@ export default function BrowSelfieCamera() {
           const res = lm.detectForVideo(v, now);
           const pts = res.faceLandmarks?.[0];
           poseRef.current = pts ? computePose(pts, v.videoWidth / v.videoHeight) : null;
+          scaleRef.current = pts ? irisMmPerPx(pts, v.videoWidth, v.videoHeight) : null;
         } catch {
           poseRef.current = null;
         }
@@ -556,7 +566,7 @@ export default function BrowSelfieCamera() {
   const waText = () => {
     if (!shot) return "";
     const img = shot.meta.image as { width: number; height: number };
-    const pose = shot.meta.pose as { rollDeg?: number } | null;
+    const pose = shot.meta.pose as { rollDeg?: number; yaw?: number; faceWidth?: number } | null;
     return whatsappMessage(
       name,
       {
@@ -565,6 +575,9 @@ export default function BrowSelfieCamera() {
         height: img.height,
         failed: shot.checks.length ? shot.checks.filter((c) => !c.ok).map((c) => c.label) : null,
         rollDeg: pose?.rollDeg ?? null,
+        yaw: pose?.yaw ?? null,
+        faceWidth: pose?.faceWidth ?? null,
+        mmPerPx: (shot.meta.mmPerPx as number | null) ?? null,
       },
       guides,
     );

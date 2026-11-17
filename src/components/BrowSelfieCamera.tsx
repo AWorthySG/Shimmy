@@ -32,7 +32,22 @@ const WHATSAPP = "6589308973";
 const HOLD_MS = 800;
 const COUNTDOWN = 3;
 
+/** Vercel rejects request bodies over 4.5 MB; stay under it with room for the form fields. */
+const MAX_UPLOAD_BYTES = 4_000_000;
+const MAX_LIBRARY_SIDE = 3024;
+
 type Stage = "intro" | "camera" | "review" | "sent";
+type Source = "camera" | "library";
+
+/** Encode a canvas as JPEG, lowering quality until it fits the upload limit. */
+async function encodeJpeg(canvas: HTMLCanvasElement): Promise<Blob | null> {
+  let quality = 0.95;
+  for (;;) {
+    const blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, "image/jpeg", quality));
+    if (!blob || blob.size <= MAX_UPLOAD_BYTES || quality <= 0.6) return blob;
+    quality -= 0.07;
+  }
+}
 type ModelState = "loading" | "ready" | "failed";
 type Dragging = "yellow" | "redA" | "redB" | null;
 
@@ -134,7 +149,16 @@ export default function BrowSelfieCamera() {
   const [autoCapture, setAutoCapture] = useState(true);
   const [portraitWarning, setPortraitWarning] = useState(false);
 
-  const [shot, setShot] = useState<{ blob: Blob; url: string; meta: Record<string, unknown> } | null>(null);
+  const [shot, setShot] = useState<{
+    blob: Blob;
+    url: string;
+    source: Source;
+    checks: Check[];
+    meta: Record<string, unknown>;
+  } | null>(null);
+  const [libraryBusy, setLibraryBusy] = useState(false);
+  const [libraryError, setLibraryError] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [sending, setSending] = useState(false);
@@ -261,6 +285,7 @@ export default function BrowSelfieCamera() {
     const round = (n: number, d = 3) => Math.round(n * 10 ** d) / 10 ** d;
     const meta = {
       takenAt: new Date().toISOString(),
+      source: "camera",
       image: { width: w, height: h, mirrored: false },
       checksPassed: allPass(evaluate(pose, tilt)),
       pose: pose
@@ -273,17 +298,78 @@ export default function BrowSelfieCamera() {
       userAgent: navigator.userAgent,
     };
 
-    canvas.toBlob(
-      (blob) => {
-        if (!blob) return;
-        setShot({ blob, url: URL.createObjectURL(blob), meta });
-        setStage("review");
-        stopCamera();
-      },
-      "image/jpeg",
-      0.95,
-    );
+    const checksNow = evaluate(pose, tilt);
+    encodeJpeg(canvas).then((blob) => {
+      if (!blob) return;
+      setShot({ blob, url: URL.createObjectURL(blob), source: "camera", checks: checksNow, meta });
+      setStage("review");
+      stopCamera();
+    });
   }, [stopCamera]);
+
+  /* A photo picked from the library: same checks, minus phone tilt. */
+  const pickFromLibrary = useCallback(
+    async (file: File) => {
+      setLibraryError(null);
+      setLibraryBusy(true);
+      try {
+        // Applies the EXIF rotation so the pixels are upright.
+        const bmp = await createImageBitmap(file, { imageOrientation: "from-image" });
+        const scale = Math.min(1, MAX_LIBRARY_SIDE / Math.max(bmp.width, bmp.height));
+        const w = Math.round(bmp.width * scale);
+        const h = Math.round(bmp.height * scale);
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) throw new Error("no canvas");
+        ctx.drawImage(bmp, 0, 0, w, h);
+        bmp.close();
+
+        let pose: FacePose | null = null;
+        const lm = landmarkerRef.current;
+        if (lm) {
+          await lm.setOptions({ runningMode: "IMAGE" });
+          try {
+            const pts = lm.detect(canvas).faceLandmarks?.[0];
+            pose = pts ? computePose(pts, w / h) : null;
+          } finally {
+            await lm.setOptions({ runningMode: "VIDEO" });
+          }
+        }
+        const checksNow = lm ? evaluate(pose, null) : [];
+        const blob = await encodeJpeg(canvas);
+        if (!blob) throw new Error("encode failed");
+
+        const round = (n: number, d = 3) => Math.round(n * 10 ** d) / 10 ** d;
+        const g = guidesRef.current;
+        const meta = {
+          takenAt: new Date(file.lastModified || Date.now()).toISOString(),
+          source: "library",
+          image: { width: w, height: h, mirrored: false },
+          checksPassed: lm ? allPass(checksNow) : null,
+          pose: pose
+            ? { rollDeg: round(pose.rollDeg, 2), yaw: round(pose.yaw), centreX: round(pose.centreX), faceWidth: round(pose.faceWidth) }
+            : null,
+          tilt: null,
+          guides: g,
+          guidesPx: guidesInPixels(g, w, h),
+          userAgent: navigator.userAgent,
+        };
+        stopCamera();
+        setDims({ w, h });
+        setShot({ blob, url: URL.createObjectURL(blob), source: "library", checks: checksNow, meta });
+        setStage("review");
+      } catch (err) {
+        console.error(err);
+        setLibraryError("That photo could not be opened. Choose a JPEG or PNG photo, or use the camera.");
+      } finally {
+        setLibraryBusy(false);
+        if (fileRef.current) fileRef.current.value = "";
+      }
+    },
+    [stopCamera],
+  );
 
   /* Detection loop: pose → checks → auto-capture countdown. */
   useEffect(() => {
@@ -420,6 +506,20 @@ export default function BrowSelfieCamera() {
     width: `min(100%, calc((100dvh - 190px) * ${dims.w / dims.h}))`,
   };
 
+  const libraryInput = (
+    <input
+      ref={fileRef}
+      type="file"
+      accept="image/*"
+      className="hidden"
+      onChange={(e) => {
+        const f = e.target.files?.[0];
+        if (f) pickFromLibrary(f);
+      }}
+    />
+  );
+  const failedLabels = shot ? shot.checks.filter((c) => !c.ok).map((c) => c.label) : [];
+
   /* ─────────────── Screens ─────────────── */
 
   if (stage === "intro") {
@@ -448,12 +548,24 @@ export default function BrowSelfieCamera() {
             <p><span className="text-red-500 font-semibold">Red</span>: drag each one separately, e.g. to your brow line and eye line.</p>
           </div>
           {camError && <p className="mt-4 text-sm text-red-400">{camError}</p>}
+          {libraryError && <p className="mt-4 text-sm text-red-400">{libraryError}</p>}
           <button
             onClick={startCamera}
             className="mt-6 w-full rounded-full bg-green-500 py-3.5 font-semibold text-black active:scale-[0.98]"
           >
             Start camera
           </button>
+          <button
+            onClick={() => fileRef.current?.click()}
+            disabled={libraryBusy}
+            className="mt-3 w-full rounded-full border border-white/30 py-3.5 text-sm disabled:opacity-50"
+          >
+            {libraryBusy ? "Checking photo…" : "Choose from photo library"}
+          </button>
+          <p className="mt-2 text-center text-[11px] text-white/50">
+            A library photo must also be straight on, at eye level, with no filters.
+          </p>
+          {libraryInput}
           <p className="mt-3 text-center text-[11px] text-white/50">
             Your photo is only sent when you press Send. It is not stored on this website.
           </p>
@@ -485,14 +597,28 @@ export default function BrowSelfieCamera() {
           <div className="relative overflow-hidden rounded-lg bg-black" style={frameStyle}>
             {/* Shown mirrored to match the preview the customer just saw; the file itself is unmirrored. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={shot.url} alt="Your selfie" className="h-full w-full -scale-x-100 object-contain" />
+            <img
+              src={shot.url}
+              alt="Your selfie"
+              className={`h-full w-full object-contain ${shot.source === "camera" ? "-scale-x-100" : ""}`}
+            />
             <GuideGrid guides={guides} setGuides={setGuides} />
           </div>
-          {shot.meta.checksPassed === false && (
+          {shot.source === "library" && shot.checks.length > 0 && failedLabels.length === 0 && (
+            <p className="mt-3 text-xs text-green-300">This photo passed the straightness checks.</p>
+          )}
+          {failedLabels.length > 0 && (
             <p className="mt-3 text-xs text-yellow-300">
-              Taken with some checks not passed. A retake is recommended.
+              This photo did not pass: {failedLabels.join(", ")}. Measurements may be inaccurate.
+              Retaking with the camera is recommended.
             </p>
           )}
+          {shot.source === "library" && shot.checks.length === 0 && (
+            <p className="mt-3 text-xs text-yellow-300">
+              The face checker is unavailable, so this photo could not be checked.
+            </p>
+          )}
+          {libraryError && <p className="mt-3 text-xs text-red-400">{libraryError}</p>}
           <form onSubmit={send} className="mt-4 w-full space-y-3">
             <input
               required
@@ -514,7 +640,7 @@ export default function BrowSelfieCamera() {
             {sendError && <p className="text-xs text-red-400">{sendError}</p>}
             <div className="flex gap-3">
               <button type="button" onClick={retake} className="flex-1 rounded-full border border-white/30 py-3 text-sm">
-                Retake
+                {shot.source === "camera" ? "Retake" : "Use camera"}
               </button>
               <button
                 type="submit"
@@ -525,12 +651,16 @@ export default function BrowSelfieCamera() {
               </button>
             </div>
             <div className="flex justify-center gap-4 pt-1 text-xs text-white/60">
+              <button type="button" onClick={() => fileRef.current?.click()} className="underline">
+                Choose another photo
+              </button>
               <button type="button" onClick={shareOrSave} className="underline">Save photo</button>
               <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noopener noreferrer" className="underline">
                 Open WhatsApp
               </a>
             </div>
           </form>
+          {libraryInput}
         </div>
       </div>
     );
@@ -599,9 +729,15 @@ export default function BrowSelfieCamera() {
           aria-label="Take photo"
           className="h-16 w-16 rounded-full border-4 border-white bg-white/20 disabled:opacity-30 enabled:bg-green-500"
         />
-        <button onClick={() => setGuides(DEFAULT_GUIDES)} className="text-xs text-white/70 underline">
-          Reset lines
-        </button>
+        <div className="flex flex-col items-end gap-2">
+          <button onClick={() => fileRef.current?.click()} className="text-xs text-white/70 underline">
+            Library
+          </button>
+          <button onClick={() => setGuides(DEFAULT_GUIDES)} className="text-xs text-white/70 underline">
+            Reset lines
+          </button>
+        </div>
+        {libraryInput}
       </div>
     </div>
   );

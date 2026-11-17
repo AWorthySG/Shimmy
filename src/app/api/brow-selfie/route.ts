@@ -13,7 +13,8 @@ import { NextRequest, NextResponse } from "next/server";
  *   TELEGRAM_CHAT_ID    the artist's chat id with the bot
  */
 
-const MAX_BYTES = 10 * 1024 * 1024;
+// Vercel caps request bodies at 4.5 MB; the client compresses to stay under 4 MB.
+const MAX_BYTES = 4_400_000;
 
 export async function POST(request: NextRequest) {
   const token = process.env.TELEGRAM_BOT_TOKEN;

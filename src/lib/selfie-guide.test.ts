@@ -10,6 +10,7 @@ import {
   redFromY,
   yellowOffsetFromX,
   yellowPositions,
+  whatsappMessage,
   type Pt,
 } from "./selfie-guide.ts";
 
@@ -89,4 +90,27 @@ test("phone tilt blocks capture; a missing sensor does not", () => {
 
 test("no face means no capture", () => {
   assert.equal(allPass(evaluate(null, null)), false);
+});
+
+test("WhatsApp message carries name, check result and guide percentages", () => {
+  const msg = whatsappMessage(
+    " Mei Ling ",
+    { source: "camera", width: 1080, height: 1920, failed: [], rollDeg: 0.84 },
+    { yellowOffset: 0.2, redA: 0.4, redB: 0.475 },
+  );
+  assert.match(msg, /^Brow mapping selfie – Mei Ling$/m);
+  assert.match(msg, /Checks: all passed/);
+  assert.match(msg, /Head tilt: 0\.8°/);
+  assert.match(msg, /yellow 30\.0% \/ 70\.0%, red 40\.0% \/ 47\.5%/);
+});
+
+test("WhatsApp message flags failed checks for library photos", () => {
+  const msg = whatsappMessage(
+    "A",
+    { source: "library", width: 900, height: 1200, failed: ["Head level", "Facing straight"] },
+    { yellowOffset: 0.16, redA: 0.4, redB: 0.47 },
+  );
+  assert.match(msg, /photo library/);
+  assert.match(msg, /Checks NOT passed: Head level, Facing straight/);
+  assert.doesNotMatch(msg, /Head tilt/);
 });

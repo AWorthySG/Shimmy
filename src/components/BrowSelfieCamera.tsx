@@ -22,12 +22,20 @@ import {
   type FacePose,
   type GuideLines,
   type Tilt,
+  whatsappMessage,
 } from "@/lib/selfie-guide";
 
 const MODEL_URL =
   "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task";
 const WASM_BASE = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/wasm";
-const WHATSAPP = "6589308973";
+/** Shimmyhands WhatsApp number, digits only with country code. */
+const WHATSAPP = process.env.NEXT_PUBLIC_SHIMMY_WHATSAPP ?? "6589308973";
+const WHATSAPP_DISPLAY = WHATSAPP.replace(/^65(\d{4})(\d{4})$/, "+65 $1 $2");
+/**
+ * How the photo reaches the artist. "whatsapp" (default) hands the photo to
+ * the customer's WhatsApp; "telegram" uploads it to /api/brow-selfie.
+ */
+const DELIVERY = process.env.NEXT_PUBLIC_SELFIE_DELIVERY === "telegram" ? "telegram" : "whatsapp";
 /** All checks must hold this long before the countdown starts. */
 const HOLD_MS = 800;
 const COUNTDOWN = 3;
@@ -36,7 +44,7 @@ const COUNTDOWN = 3;
 const MAX_UPLOAD_BYTES = 4_000_000;
 const MAX_LIBRARY_SIDE = 3024;
 
-type Stage = "intro" | "camera" | "review" | "sent";
+type Stage = "intro" | "camera" | "review" | "sent" | "shared";
 type Source = "camera" | "library";
 
 /** Encode a canvas as JPEG, lowering quality until it fits the upload limit. */
@@ -545,6 +553,53 @@ export default function BrowSelfieCamera() {
     }
   };
 
+  const waText = () => {
+    if (!shot) return "";
+    const img = shot.meta.image as { width: number; height: number };
+    const pose = shot.meta.pose as { rollDeg?: number } | null;
+    return whatsappMessage(
+      name,
+      {
+        source: shot.source,
+        width: img.width,
+        height: img.height,
+        failed: shot.checks.length ? shot.checks.filter((c) => !c.ok).map((c) => c.label) : null,
+        rollDeg: pose?.rollDeg ?? null,
+      },
+      guides,
+    );
+  };
+  const waChatUrl = (text: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+
+  const sendWhatsApp = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!shot) return;
+    setSendError(null);
+    const text = waText();
+    const safe = name.trim().replace(/[^\w-]+/g, "_").slice(0, 40) || "client";
+    const file = new File([shot.blob], `brow-selfie_${safe}.jpg`, { type: "image/jpeg" });
+    const nav = navigator as Navigator & { canShare?: (d: ShareData) => boolean };
+    if (nav.canShare?.({ files: [file] })) {
+      try {
+        // Opens the phone's share sheet; the customer picks WhatsApp, then Shimmyhands.
+        await nav.share({ files: [file], text });
+        setStage("shared");
+      } catch (err) {
+        if ((err as DOMException)?.name !== "AbortError") {
+          setSendError("Sharing did not work on this phone. Use “Save photo” and attach it in WhatsApp.");
+        }
+      }
+      return;
+    }
+    // No file sharing (most computers): save the photo, then open the chat with the details.
+    const a = document.createElement("a");
+    a.href = shot.url;
+    a.download = file.name;
+    a.click();
+    window.open(waChatUrl(text), "_blank", "noopener,noreferrer");
+    setStage("shared");
+  };
+
   const shareOrSave = async () => {
     if (!shot) return;
     const file = new File([shot.blob], "brow-selfie.jpg", { type: "image/jpeg" });
@@ -631,8 +686,37 @@ export default function BrowSelfieCamera() {
           </p>
           {libraryInput}
           <p className="mt-3 text-center text-[11px] text-white/50">
-            Your photo is only sent when you press Send. It is not stored on this website.
+            Your photo stays on your phone until you send it. It is not stored on this website.
           </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (stage === "shared") {
+    return (
+      <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-neutral-950 px-6 text-center text-white">
+        <div className="max-w-sm">
+          <h1 className="font-serif text-3xl">Finish in WhatsApp</h1>
+          <ol className="mt-4 space-y-2 text-left text-sm text-white/80">
+            <li>1. Choose the chat with Shimmyhands ({WHATSAPP_DISPLAY}).</li>
+            <li>2. Tap <span className="font-semibold">HD</span> at the top before sending, so the photo keeps its detail.</li>
+            <li>3. Tap Send.</li>
+          </ol>
+          <p className="mt-4 text-xs text-white/60">
+            If the photo did not attach: go back, tap “Save photo”, then open the chat below and attach it from your gallery.
+          </p>
+          <a
+            href={waChatUrl(waText())}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 block rounded-full bg-green-500 py-3 text-sm font-semibold text-black"
+          >
+            Open Shimmyhands chat
+          </a>
+          <button onClick={() => setStage("review")} className="mt-3 text-xs text-white/60 underline">
+            Back to my photo
+          </button>
         </div>
       </div>
     );
@@ -683,7 +767,7 @@ export default function BrowSelfieCamera() {
             </p>
           )}
           {libraryError && <p className="mt-3 text-xs text-red-400">{libraryError}</p>}
-          <form onSubmit={send} className="mt-4 w-full space-y-3">
+          <form onSubmit={DELIVERY === "whatsapp" ? sendWhatsApp : send} className="mt-4 w-full space-y-3">
             <input
               required
               value={name}
@@ -692,6 +776,7 @@ export default function BrowSelfieCamera() {
               maxLength={100}
               className="w-full rounded-lg bg-white/10 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-500"
             />
+            {DELIVERY === "telegram" && (
             <input
               required
               value={phone}
@@ -701,6 +786,12 @@ export default function BrowSelfieCamera() {
               pattern="[+\d\s\-\(\)]{6,20}"
               className="w-full rounded-lg bg-white/10 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-500"
             />
+            )}
+            {DELIVERY === "whatsapp" && (
+              <p className="text-xs text-white/60">
+                Next, WhatsApp opens. Choose Shimmyhands ({WHATSAPP_DISPLAY}), tap HD, then Send.
+              </p>
+            )}
             {sendError && <p className="text-xs text-red-400">{sendError}</p>}
             <div className="flex gap-3">
               <button type="button" onClick={retake} className="flex-1 rounded-full border border-white/30 py-3 text-sm">
@@ -711,7 +802,7 @@ export default function BrowSelfieCamera() {
                 disabled={sending}
                 className="flex-[2] rounded-full bg-green-500 py-3 text-sm font-semibold text-black disabled:opacity-50"
               >
-                {sending ? "Sending…" : "Send to Shimmy"}
+                {DELIVERY === "whatsapp" ? "Send on WhatsApp" : sending ? "Sending…" : "Send to Shimmy"}
               </button>
             </div>
             <div className="flex justify-center gap-4 pt-1 text-xs text-white/60">
@@ -719,9 +810,11 @@ export default function BrowSelfieCamera() {
                 Choose another photo
               </button>
               <button type="button" onClick={shareOrSave} className="underline">Save photo</button>
-              <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noopener noreferrer" className="underline">
-                Open WhatsApp
-              </a>
+              {DELIVERY === "telegram" && (
+                <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noopener noreferrer" className="underline">
+                  Open WhatsApp
+                </a>
+              )}
             </div>
           </form>
           {libraryInput}

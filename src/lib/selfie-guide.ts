@@ -217,3 +217,38 @@ export function evaluate(pose: FacePose | null, tilt: Tilt | null): Check[] {
 }
 
 export const allPass = (checks: Check[]) => checks.every((c) => c.ok);
+
+/* ─────────────── WhatsApp hand-off ─────────────── */
+
+export interface ShotSummary {
+  source: "camera" | "library";
+  width: number;
+  height: number;
+  /** Labels of checks that failed; empty when all passed. null when not checked. */
+  failed: string[] | null;
+  rollDeg?: number | null;
+}
+
+/**
+ * Text sent alongside the photo on WhatsApp. Guide positions are given as
+ * percentages because WhatsApp may resize the image.
+ */
+export function whatsappMessage(name: string, s: ShotSummary, g: GuideLines): string {
+  const pct = (v: number) => `${(v * 100).toFixed(1)}%`;
+  const [yl, yr] = yellowPositions(g.yellowOffset);
+  const checks =
+    s.failed === null
+      ? "Checks: not run"
+      : s.failed.length === 0
+        ? "Checks: all passed"
+        : `Checks NOT passed: ${s.failed.join(", ")}`;
+  return [
+    `Brow mapping selfie – ${name.trim()}`,
+    `Source: ${s.source === "camera" ? "guided camera" : "photo library"} (${s.width}×${s.height}px)`,
+    checks,
+    s.rollDeg != null ? `Head tilt: ${s.rollDeg.toFixed(1)}°` : "",
+    `Guides (from left/top): yellow ${pct(yl)} / ${pct(yr)}, red ${pct(g.redA)} / ${pct(g.redB)}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+}

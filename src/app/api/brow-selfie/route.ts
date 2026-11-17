@@ -15,12 +15,56 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Vercel caps request bodies at 4.5 MB; the client compresses to stay under 4 MB.
 const MAX_BYTES = 4_400_000;
+const TELEGRAM_TIMEOUT_MS = 15_000;
+
+/*
+ * Basic abuse protection. The limit is per server instance, so it slows a
+ * flood rather than stopping it outright; add a Vercel Firewall rate-limit
+ * rule on this path for a hard limit.
+ */
+const WINDOW_MS = 10 * 60 * 1000;
+const MAX_PER_WINDOW = 6;
+const hits = new Map<string, number[]>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return recent.length > MAX_PER_WINDOW;
+}
+
+function sameOrigin(request: NextRequest): boolean {
+  const origin = request.headers.get("origin");
+  if (!origin) return false;
+  try {
+    return new URL(origin).host === request.headers.get("host");
+  } catch {
+    return false;
+  }
+}
+
+function sendDocument(token: string, body: FormData) {
+  return fetch(`https://api.telegram.org/bot${token}/sendDocument`, {
+    method: "POST",
+    body,
+    signal: AbortSignal.timeout(TELEGRAM_TIMEOUT_MS),
+  });
+}
 
 export async function POST(request: NextRequest) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) {
     return NextResponse.json({ error: "Upload is not configured" }, { status: 503 });
+  }
+  if (!sameOrigin(request)) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (rateLimited(ip)) {
+    return NextResponse.json({ error: "Too many uploads. Try again in a few minutes" }, { status: 429 });
   }
 
   let form: FormData;
@@ -39,7 +83,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Photo missing or too large" }, { status: 400 });
   }
   const head = new Uint8Array(await photo.slice(0, 3).arrayBuffer());
-  if (head[0] !== 0xff || head[1] !== 0xd8 || head[2] !== 0xff) {
+  const tail = new Uint8Array(await photo.slice(-2).arrayBuffer());
+  if (head[0] !== 0xff || head[1] !== 0xd8 || head[2] !== 0xff || tail[0] !== 0xff || tail[1] !== 0xd9) {
     return NextResponse.json({ error: "Photo must be a JPEG" }, { status: 400 });
   }
   if (!name || name.length > 100) {
@@ -81,12 +126,14 @@ export async function POST(request: NextRequest) {
   tg.append("caption", caption);
   tg.append("document", photo, `${safeName}_${stamp}.jpg`);
 
-  const res = await fetch(`https://api.telegram.org/bot${token}/sendDocument`, {
-    method: "POST",
-    body: tg,
-  });
-  if (!res.ok) {
-    console.error("brow-selfie: Telegram returned", res.status);
+  try {
+    const res = await sendDocument(token, tg);
+    if (!res.ok) {
+      console.error("brow-selfie: Telegram returned", res.status);
+      return NextResponse.json({ error: "Could not deliver photo" }, { status: 502 });
+    }
+  } catch (err) {
+    console.error("brow-selfie: Telegram request failed", err);
     return NextResponse.json({ error: "Could not deliver photo" }, { status: 502 });
   }
 
@@ -98,10 +145,7 @@ export async function POST(request: NextRequest) {
     new Blob([meta || "{}"], { type: "application/json" }),
     `${safeName}_${stamp}.json`,
   );
-  await fetch(`https://api.telegram.org/bot${token}/sendDocument`, {
-    method: "POST",
-    body: metaForm,
-  }).catch(() => undefined);
+  await sendDocument(token, metaForm).catch(() => undefined);
 
   return NextResponse.json({ success: true });
 }

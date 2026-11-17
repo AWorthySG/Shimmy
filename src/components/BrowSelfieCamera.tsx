@@ -159,6 +159,27 @@ export default function BrowSelfieCamera() {
   const [libraryBusy, setLibraryBusy] = useState(false);
   const [libraryError, setLibraryError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  /** True while a capture or library pick is being processed. */
+  const busyRef = useRef(false);
+  const startingRef = useRef(false);
+  const mountedRef = useRef(true);
+  const shotUrlRef = useRef<string | null>(null);
+
+  type Shot = NonNullable<typeof shot>;
+  /** Replace the current shot, freeing the previous image's memory. */
+  const replaceShot = useCallback((next: Shot | null) => {
+    if (shotUrlRef.current) URL.revokeObjectURL(shotUrlRef.current);
+    shotUrlRef.current = next?.url ?? null;
+    setShot(next);
+  }, []);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      if (shotUrlRef.current) URL.revokeObjectURL(shotUrlRef.current);
+    };
+  }, []);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [sending, setSending] = useState(false);
@@ -228,6 +249,8 @@ export default function BrowSelfieCamera() {
   useEffect(() => stopCamera, [stopCamera]);
 
   const startCamera = useCallback(async () => {
+    if (startingRef.current) return;
+    startingRef.current = true;
     setCamError(null);
     // iOS asks for motion permission; it must be requested from a tap.
     const DOE = (globalThis as { DeviceOrientationEvent?: { requestPermission?: () => Promise<string> } })
@@ -244,13 +267,22 @@ export default function BrowSelfieCamera() {
         audio: false,
         video: { facingMode: "user", width: { ideal: 1920 }, height: { ideal: 1920 } },
       });
+      if (!mountedRef.current) {
+        stream.getTracks().forEach((t) => t.stop());
+        return;
+      }
+      streamRef.current?.getTracks().forEach((t) => t.stop());
       streamRef.current = stream;
+      busyRef.current = false;
       setStage("camera");
     } catch (err) {
       console.error(err);
       setCamError(
         "The camera could not start. Allow camera access for this site in your browser settings, then try again.",
       );
+      setStage("intro");
+    } finally {
+      startingRef.current = false;
     }
   }, []);
 
@@ -262,20 +294,28 @@ export default function BrowSelfieCamera() {
     v.srcObject = streamRef.current;
     const onMeta = () => setDims({ w: v.videoWidth, h: v.videoHeight });
     v.addEventListener("loadedmetadata", onMeta);
+    v.addEventListener("resize", onMeta);
     v.play().catch(() => undefined);
-    return () => v.removeEventListener("loadedmetadata", onMeta);
+    return () => {
+      v.removeEventListener("loadedmetadata", onMeta);
+      v.removeEventListener("resize", onMeta);
+    };
   }, [stage]);
 
   const capture = useCallback(() => {
     const v = videoRef.current;
-    if (!v || !v.videoWidth) return;
+    if (!v || !v.videoWidth || busyRef.current) return;
+    busyRef.current = true;
     const w = v.videoWidth;
     const h = v.videoHeight;
     const canvas = document.createElement("canvas");
     canvas.width = w;
     canvas.height = h;
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) {
+      busyRef.current = false;
+      return;
+    }
     // Saved unmirrored: this is the true image the camera sees.
     ctx.drawImage(v, 0, 0, w, h);
 
@@ -299,17 +339,25 @@ export default function BrowSelfieCamera() {
     };
 
     const checksNow = evaluate(pose, tilt);
-    encodeJpeg(canvas).then((blob) => {
-      if (!blob) return;
-      setShot({ blob, url: URL.createObjectURL(blob), source: "camera", checks: checksNow, meta });
-      setStage("review");
-      stopCamera();
-    });
-  }, [stopCamera]);
+    encodeJpeg(canvas)
+      .then((blob) => {
+        if (!blob || !mountedRef.current) return;
+        replaceShot({ blob, url: URL.createObjectURL(blob), source: "camera", checks: checksNow, meta });
+        setStage("review");
+        stopCamera();
+      })
+      .finally(() => {
+        busyRef.current = false;
+      });
+  }, [stopCamera, replaceShot]);
 
   /* A photo picked from the library: same checks, minus phone tilt. */
   const pickFromLibrary = useCallback(
     async (file: File) => {
+      if (busyRef.current) return;
+      busyRef.current = true;
+      // Stop the live camera first so no countdown can fire while this runs.
+      stopCamera();
       setLibraryError(null);
       setLibraryBusy(true);
       try {
@@ -356,19 +404,22 @@ export default function BrowSelfieCamera() {
           guidesPx: guidesInPixels(g, w, h),
           userAgent: navigator.userAgent,
         };
-        stopCamera();
+        if (!mountedRef.current) return;
         setDims({ w, h });
-        setShot({ blob, url: URL.createObjectURL(blob), source: "library", checks: checksNow, meta });
+        replaceShot({ blob, url: URL.createObjectURL(blob), source: "library", checks: checksNow, meta });
         setStage("review");
       } catch (err) {
         console.error(err);
         setLibraryError("That photo could not be opened. Choose a JPEG or PNG photo, or use the camera.");
+        // The camera was stopped above; return to a screen that can show the error.
+        setStage((s) => (s === "camera" ? "intro" : s));
       } finally {
+        busyRef.current = false;
         setLibraryBusy(false);
         if (fileRef.current) fileRef.current.value = "";
       }
     },
-    [stopCamera],
+    [stopCamera, replaceShot],
   );
 
   /* Detection loop: pose → checks → auto-capture countdown. */
@@ -390,6 +441,10 @@ export default function BrowSelfieCamera() {
       raf = requestAnimationFrame(loop);
       const v = videoRef.current;
       const lm = landmarkerRef.current;
+      if (busyRef.current) {
+        if (countdownRef.current !== null) cancelCountdown();
+        return;
+      }
       if (!v || v.readyState < 2) return;
 
       const now = performance.now();
@@ -407,8 +462,12 @@ export default function BrowSelfieCamera() {
       const isPortraitDevice = window.matchMedia("(pointer: coarse)").matches;
       const landscape = isPortraitDevice && window.innerWidth > window.innerHeight;
       const tilt = landscape ? null : tiltRef.current;
-      const current = model === "failed" ? [] : evaluate(poseRef.current, tilt);
-      const pass = !landscape && model !== "loading" && allPass(current);
+      // Without the face model only the phone checks can run, and auto-capture is off.
+      const current =
+        model === "failed"
+          ? evaluate(null, tilt).filter((c) => c.id === "phoneSide" || c.id === "phonePitch")
+          : evaluate(poseRef.current, tilt);
+      const pass = !landscape && model === "ready" && allPass(current);
 
       if (now - lastCheckUpdate > 150) {
         lastCheckUpdate = now;
@@ -430,6 +489,10 @@ export default function BrowSelfieCamera() {
         countdownRef.current = COUNTDOWN;
         setCountdown(COUNTDOWN);
         tick = setInterval(() => {
+          if (!autoRef.current) {
+            cancelCountdown();
+            return;
+          }
           const next = (countdownRef.current ?? 1) - 1;
           if (next <= 0) {
             cancelCountdown();
@@ -446,12 +509,12 @@ export default function BrowSelfieCamera() {
       cancelAnimationFrame(raf);
       if (tick) clearInterval(tick);
       countdownRef.current = null;
+      setCountdown(null);
     };
   }, [stage, model, capture]);
 
   const retake = () => {
-    if (shot) URL.revokeObjectURL(shot.url);
-    setShot(null);
+    replaceShot(null);
     setSendError(null);
     passSinceRef.current = null;
     startCamera();
@@ -462,7 +525,8 @@ export default function BrowSelfieCamera() {
     if (!shot) return;
     setSending(true);
     setSendError(null);
-    const finalMeta = { ...shot.meta, guides, guidesPx: guidesInPixels(guides, dims.w, dims.h) };
+    const { width: imgW, height: imgH } = shot.meta.image as { width: number; height: number };
+    const finalMeta = { ...shot.meta, guides, guidesPx: guidesInPixels(guides, imgW, imgH) };
     const fd = new FormData();
     fd.append("photo", shot.blob, "selfie.jpg");
     fd.append("name", name);
@@ -634,7 +698,7 @@ export default function BrowSelfieCamera() {
               onChange={(e) => setPhone(e.target.value)}
               placeholder="WhatsApp number"
               inputMode="tel"
-              pattern="[+\d\s\-()]{6,20}"
+              pattern="[+\d\s\-\(\)]{6,20}"
               className="w-full rounded-lg bg-white/10 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-500"
             />
             {sendError && <p className="text-xs text-red-400">{sendError}</p>}
@@ -680,7 +744,9 @@ export default function BrowSelfieCamera() {
           ? "Loading face checker…"
           : portraitWarning
             ? "Turn the phone upright (portrait)."
-            : ready
+            : model === "failed"
+              ? "Line your face up with the grid, then tap the shutter."
+              : ready
               ? countdown
                 ? "Hold still…"
                 : "Perfect. Hold still."
@@ -725,7 +791,7 @@ export default function BrowSelfieCamera() {
         </label>
         <button
           onClick={capture}
-          disabled={!ready && model !== "failed"}
+          disabled={model === "failed" ? checks.some((c) => !c.ok) : !ready}
           aria-label="Take photo"
           className="h-16 w-16 rounded-full border-4 border-white bg-white/20 disabled:opacity-30 enabled:bg-green-500"
         />

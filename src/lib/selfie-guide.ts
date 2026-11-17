@@ -218,6 +218,38 @@ export function evaluate(pose: FacePose | null, tilt: Tilt | null): Check[] {
 
 export const allPass = (checks: Check[]) => checks.every((c) => c.ok);
 
+/* ─────────────── Real-world scale ─────────────── */
+
+/**
+ * Average adult horizontal iris diameter (HVID), about 11.7 mm with little
+ * variation between people. Used to convert pixels to millimetres.
+ */
+export const IRIS_MM = 11.7;
+
+/** FaceLandmarker iris ring points: [left edge, right edge] of each iris. */
+const IRIS_RINGS: [number, number][] = [
+  [469, 471],
+  [474, 476],
+];
+
+/**
+ * Millimetres per pixel from the iris width, or null when the iris
+ * landmarks are missing. `w`, `h` are the image size in pixels.
+ */
+export function irisMmPerPx(lm: Pt[], w: number, h: number): number | null {
+  const widths: number[] = [];
+  for (const [a, b] of IRIS_RINGS) {
+    if (!lm[a] || !lm[b]) continue;
+    const dx = (lm[a].x - lm[b].x) * w;
+    const dy = (lm[a].y - lm[b].y) * h;
+    const d = Math.hypot(dx, dy);
+    if (d > 0) widths.push(d);
+  }
+  if (!widths.length) return null;
+  const avg = widths.reduce((s, v) => s + v, 0) / widths.length;
+  return IRIS_MM / avg;
+}
+
 /* ─────────────── WhatsApp hand-off ─────────────── */
 
 export interface ShotSummary {
@@ -226,12 +258,32 @@ export interface ShotSummary {
   height: number;
   /** Labels of checks that failed; empty when all passed. null when not checked. */
   failed: string[] | null;
+  /** From computePose: positive = head tilted to the customer's right. */
   rollDeg?: number | null;
+  /** From computePose: positive = face turned to the customer's right. */
+  yaw?: number | null;
+  /** Cheek-to-cheek width as a fraction of image width. */
+  faceWidth?: number | null;
+  mmPerPx?: number | null;
+}
+
+/** Plain-language direction from the customer's point of view. */
+export function describeTilt(rollDeg: number): string {
+  if (Math.abs(rollDeg) < 0.05) return "0.0° (level)";
+  const side = rollDeg > 0 ? "right" : "left";
+  return `${Math.abs(rollDeg).toFixed(1)}° towards the customer's ${side} shoulder`;
+}
+
+export function describeTurn(yaw: number): string {
+  if (Math.abs(yaw) < 0.0005) return "0.0% (straight)";
+  const side = yaw > 0 ? "right" : "left";
+  return `nose ${(Math.abs(yaw) * 100).toFixed(1)}% of face width towards the customer's ${side}`;
 }
 
 /**
  * Text sent alongside the photo on WhatsApp. Guide positions are given as
- * percentages because WhatsApp may resize the image.
+ * percentages because WhatsApp may resize the image; the mm scale is
+ * resolution-independent once multiplied by the received image's width ratio.
  */
 export function whatsappMessage(name: string, s: ShotSummary, g: GuideLines): string {
   const pct = (v: number) => `${(v * 100).toFixed(1)}%`;
@@ -242,11 +294,25 @@ export function whatsappMessage(name: string, s: ShotSummary, g: GuideLines): st
       : s.failed.length === 0
         ? "Checks: all passed"
         : `Checks NOT passed: ${s.failed.join(", ")}`;
+  const scale =
+    s.mmPerPx != null
+      ? `Scale: ${s.mmPerPx.toFixed(4)} mm/px at ${s.width}px wide (iris = ${IRIS_MM} mm)`
+      : "Scale: not available (iris not detected)";
+  const faceMm =
+    s.mmPerPx != null && s.faceWidth != null
+      ? `Face width (cheek to cheek): ~${Math.round(s.faceWidth * s.width * s.mmPerPx)} mm`
+      : "";
   return [
     `Brow mapping selfie – ${name.trim()}`,
     `Source: ${s.source === "camera" ? "guided camera" : "photo library"} (${s.width}×${s.height}px)`,
+    s.source === "camera"
+      ? "Orientation: not mirrored (customer's right eye is on the image left)"
+      : "Orientation: UNKNOWN – library selfies are often mirrored; confirm left/right before measuring",
     checks,
-    s.rollDeg != null ? `Head tilt: ${s.rollDeg.toFixed(1)}°` : "",
+    s.rollDeg != null ? `Head tilt: ${describeTilt(s.rollDeg)}` : "",
+    s.yaw != null ? `Head turn: ${describeTurn(s.yaw)}` : "",
+    scale,
+    faceMm,
     `Guides (from left/top): yellow ${pct(yl)} / ${pct(yr)}, red ${pct(g.redA)} / ${pct(g.redB)}`,
   ]
     .filter(Boolean)

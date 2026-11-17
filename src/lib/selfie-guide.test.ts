@@ -11,6 +11,9 @@ import {
   yellowOffsetFromX,
   yellowPositions,
   whatsappMessage,
+  irisMmPerPx,
+  describeTilt,
+  describeTurn,
   type Pt,
 } from "./selfie-guide.ts";
 
@@ -92,25 +95,54 @@ test("no face means no capture", () => {
   assert.equal(allPass(evaluate(null, null)), false);
 });
 
-test("WhatsApp message carries name, check result and guide percentages", () => {
+test("iris width gives a mm-per-pixel scale", () => {
+  const lm = face();
+  // Each iris 0.02 of a 1000px-wide image = 20px wide -> 11.7 / 20 mm per px.
+  lm[469] = { x: 0.40, y: 0.45 };
+  lm[471] = { x: 0.42, y: 0.45 };
+  lm[474] = { x: 0.58, y: 0.45 };
+  lm[476] = { x: 0.60, y: 0.45 };
+  const s = irisMmPerPx(lm, 1000, 1500);
+  assert.ok(s !== null && Math.abs(s - 11.7 / 20) < 1e-9);
+});
+
+test("iris scale is null without iris landmarks", () => {
+  assert.equal(irisMmPerPx(face().slice(0, 468), 1000, 1500), null);
+});
+
+test("tilt and turn are described from the customer's side", () => {
+  // Forehead at image-right of an unmirrored frame = head leaning to the customer's left.
+  const tilted = computePose(face({ [LM.forehead]: { x: 0.56, y: 0.25 } }), 9 / 16)!;
+  assert.match(describeTilt(tilted.rollDeg), /customer's left shoulder/);
+  // Nose at image-left of an unmirrored frame = face turned to the customer's right.
+  const turned = computePose(face({ [LM.noseTip]: { x: 0.45, y: 0.5 } }), 9 / 16)!;
+  assert.match(describeTurn(turned.yaw), /customer's right/);
+});
+
+test("WhatsApp message carries name, checks, direction, scale and guides", () => {
   const msg = whatsappMessage(
     " Mei Ling ",
-    { source: "camera", width: 1080, height: 1920, failed: [], rollDeg: 0.84 },
+    { source: "camera", width: 1080, height: 1920, failed: [], rollDeg: -0.84, yaw: 0.012, faceWidth: 0.5, mmPerPx: 0.25 },
     { yellowOffset: 0.2, redA: 0.4, redB: 0.475 },
   );
   assert.match(msg, /^Brow mapping selfie – Mei Ling$/m);
+  assert.match(msg, /not mirrored/);
   assert.match(msg, /Checks: all passed/);
-  assert.match(msg, /Head tilt: 0\.8°/);
+  assert.match(msg, /Head tilt: 0\.8° towards the customer's left shoulder/);
+  assert.match(msg, /Head turn: nose 1\.2% of face width towards the customer's right/);
+  assert.match(msg, /Scale: 0\.2500 mm\/px at 1080px wide/);
+  assert.match(msg, /Face width \(cheek to cheek\): ~135 mm/);
   assert.match(msg, /yellow 30\.0% \/ 70\.0%, red 40\.0% \/ 47\.5%/);
 });
 
-test("WhatsApp message flags failed checks for library photos", () => {
+test("WhatsApp message warns that library photos may be mirrored", () => {
   const msg = whatsappMessage(
     "A",
     { source: "library", width: 900, height: 1200, failed: ["Head level", "Facing straight"] },
     { yellowOffset: 0.16, redA: 0.4, redB: 0.47 },
   );
-  assert.match(msg, /photo library/);
+  assert.match(msg, /Orientation: UNKNOWN/);
   assert.match(msg, /Checks NOT passed: Head level, Facing straight/);
-  assert.doesNotMatch(msg, /Head tilt/);
+  assert.match(msg, /Scale: not available/);
+  assert.doesNotMatch(msg, /Head tilt|Head turn|Face width/);
 });

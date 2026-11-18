@@ -141,24 +141,6 @@ export default function AboutPage() {
           <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-warm-gray">
             {t("aboutpage.certs.desc")}
           </p>
-          {/* ┌──────────────────────────────────────┐
-              │  TODO: Replace with your actual       │
-              │  certification logos / badges.         │
-              │  Use next/image for each.              │
-              └──────────────────────────────────────┘ */}
-          {/* TODO: Replace placeholder certification badges with real logos */}
-          <div className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 max-w-md sm:max-w-none mx-auto">
-            {[1, 2, 3].map(
-              (n) => (
-                <div
-                  key={n}
-                  className="flex h-16 sm:h-20 items-center justify-center border border-vermillion/15 text-[10px] sm:text-xs text-warm-gray/40"
-                >
-                  ✦
-                </div>
-              ),
-            )}
-          </div>
         </div>
       </section>
 

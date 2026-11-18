@@ -15,4 +15,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Site-wide design system (docs/DESIGN_SYSTEM.md): one style each for buttons (5 variants, 3 sizes), tags, filter chips, eyebrow labels and form fields; a three-step letter-spacing scale; semantic colour names. Every page now uses them.
 - Prices read the same everywhere: S$49.90 for products and totals, S$10 for promotions.
 - Nails hero text is readable on phones; the dark-mode toggle and all buttons meet the 44 px tap-target size; dark-mode labels have stronger contrast.
+- Search and sharing: one canonical www address on every page, robots.txt, llms.txt, a complete sitemap, unique titles and descriptions for every blog post, collection and product, share images on all pages, BeautySalon structured data, and no more doubled brand names in titles.
+- The contact calendar now loads closed dates; the brow try-on gallery shows real client results instead of empty placeholders.
+- All prices and offers use the S$ prefix.
 - `npm test` script for unit tests (`node --test`).

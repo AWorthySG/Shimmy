@@ -97,16 +97,16 @@ export default function ExitIntentPopup() {
               Check your inbox!
             </p>
             <p className="mt-2 text-sm text-charcoal-light">
-              Your $10 discount code is on its way.
+              Your S$10 discount code is on its way.
             </p>
           </div>
         ) : (
           <>
             <h2 className="font-serif text-2xl text-charcoal text-center">
-              Wait &mdash; here&rsquo;s $10 off
+              Wait &mdash; here&rsquo;s S$10 off
             </h2>
             <p className="mt-3 text-sm text-charcoal-light text-center leading-relaxed">
-              Enter your email and we&rsquo;ll send you a $10 discount code for
+              Enter your email and we&rsquo;ll send you a S$10 discount code for
               your first purchase.
             </p>
 
@@ -128,7 +128,7 @@ export default function ExitIntentPopup() {
                 onClick={handleSubmit}
                 className="btn btn-primary btn-sm w-full"
               >
-                Claim My $10
+                Claim My S$10
               </button>
             </div>
 

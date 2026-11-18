@@ -10,12 +10,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const decodedTag = decodeURIComponent(tag)
 
   return {
-    title: `Articles tagged: ${decodedTag} | Shimmyhands`,
+    alternates: { canonical: `/blog/tag/${tag}` },
+    title: `Articles tagged: ${decodedTag}`,
     description: `Browse all Shimmyhands articles tagged with "${decodedTag}" — expert tips on eyebrow embroidery, press-on nails, and more.`,
     openGraph: {
       title: `Articles tagged: ${decodedTag} | Shimmyhands`,
       description: `Browse all Shimmyhands articles tagged with "${decodedTag}".`,
-      url: `https://shimmyhands.com/blog/tag/${tag}`,
+      url: `https://www.shimmyhands.com/blog/tag/${tag}`,
       siteName: 'Shimmy',
       locale: 'en_SG',
       type: 'website',

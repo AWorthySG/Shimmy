@@ -55,7 +55,7 @@ export default function ProductDetailPage() {
     "@type": "Product",
     name: product.title,
     description: product.description,
-    image: product.images.length > 0 ? `https://shimmyhands.com${product.images[0]}` : undefined,
+    image: product.images.length > 0 ? `https://www.shimmyhands.com${product.images[0]}` : undefined,
     brand: {
       "@type": "Brand",
       name: "Shimmyhands",

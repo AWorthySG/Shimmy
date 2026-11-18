@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       code,
-      link: `https://shimmyhands.com/ref/${code}`,
+      link: `https://www.shimmyhands.com/ref/${code}`,
     })
   }
 
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
   return NextResponse.json({
     success: true,
     code,
-    link: `https://shimmyhands.com/ref/${code}`,
+    link: `https://www.shimmyhands.com/ref/${code}`,
   })
 }
 

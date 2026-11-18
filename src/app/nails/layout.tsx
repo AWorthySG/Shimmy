@@ -1,17 +1,20 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Handcrafted Press-On Nails Singapore | Shimmyhands',
+  alternates: { canonical: '/nails' },
+  title: { absolute: 'Handcrafted Press-On Nails Singapore | Shimmyhands' },
   description:
     'Handcrafted press-on nails in Singapore by Shimmyhands. Shop unique collections featuring 3D nail art, cat-eye effects, and hand-painted designs.',
   keywords: ['press on nails Singapore', 'handcrafted nails Singapore', '3D nail art Singapore', 'Shimmyhands'],
   openGraph: {
     title: 'Handcrafted Press-On Nails Singapore | Shimmyhands',
     description: 'Handcrafted press-on nails — every set made by hand in Singapore.',
-    url: 'https://shimmyhands.com/nails',
+    url: 'https://www.shimmyhands.com/nails',
     siteName: 'Shimmy',
     locale: 'en_SG',
     type: 'website',
+
+    images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
   },
 }
 

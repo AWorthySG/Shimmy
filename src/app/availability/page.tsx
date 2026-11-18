@@ -35,7 +35,7 @@ export default function AvailabilityPage() {
             {t("nav.availability")}
           </h1>
           <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-charcoal-light">
-            {t("contact.book.desc")}
+            {t("availability.desc")}
           </p>
         </AnimateOnScroll>
       </section>

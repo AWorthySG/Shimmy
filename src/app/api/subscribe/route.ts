@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
                 <p style="margin: 0; font-size: 14px; color: #536442;"><strong>WELCOME10</strong></p>
                 <p style="margin: 4px 0 0; font-size: 12px; color: #999;">S$10 off your first purchase</p>
               </div>
-              <p style="line-height: 1.6; color: #666;">Browse our latest collections at <a href="https://shimmyhands.com/nails/shop" style="color: #536442;">shimmyhands.com</a></p>
+              <p style="line-height: 1.6; color: #666;">Browse our latest collections at <a href="https://www.shimmyhands.com/nails/shop" style="color: #536442;">shimmyhands.com</a></p>
               <p style="margin-top: 24px; font-size: 12px; color: #999;">— The Shimmyhands Team</p>
             </div>
           `,

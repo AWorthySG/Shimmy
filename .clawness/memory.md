@@ -11,3 +11,4 @@
 - npm test runs node --test with type stripping: imports in *.test.ts need the .ts extension (allowImportingTsExtensions)
 - Site pop-ups (WelcomeBanner, cookies, SpinWheel) sit at z-[9999]; full-screen tools like BrowSelfieCamera need z-[10000]
 - globals.css: unlayered rules beat @layer components in Tailwind v4; keep .btn/.field etc. free of global a/button overrides
+- Bulk $N -> S$N rewrites also hit regex replacement tokens ("$1 $2" in BrowSelfieCamera WHATSAPP_DISPLAY); review diffs

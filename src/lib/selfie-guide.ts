@@ -63,6 +63,37 @@ export function guidesInPixels(g: GuideLines, w: number, h: number) {
   };
 }
 
+/* ─────────────── Automatic line placement ─────────────── */
+
+/** FaceLandmarker points used to place the guide lines. */
+export const GUIDE_LM = {
+  innerEyeRight: 133, // subject's right eye, inner corner
+  innerEyeLeft: 362, // subject's left eye, inner corner
+  // Upper and lower contours of both eyebrows.
+  brows: [70, 63, 105, 66, 107, 55, 65, 52, 53, 46, 336, 296, 334, 293, 300, 285, 295, 282, 283, 276],
+  // Subnasale and the two alar bases: the base of the nostrils.
+  nostrilBase: [2, 98, 327],
+} as const;
+
+/**
+ * Starting positions for the lines, from landmarks of an unmirrored image:
+ * yellow on the inner eye corners (mirrored about the centre, so their mean
+ * distance from it), top red through the middle of the brows, bottom red
+ * along the base of the nostrils. Returns null if a landmark is missing.
+ */
+export function suggestGuides(lm: Pt[]): GuideLines | null {
+  const all = [GUIDE_LM.innerEyeRight, GUIDE_LM.innerEyeLeft, ...GUIDE_LM.brows, ...GUIDE_LM.nostrilBase];
+  if (all.some((i) => !lm[i])) return null;
+  const meanY = (ids: readonly number[]) => ids.reduce((s, i) => s + lm[i].y, 0) / ids.length;
+  const offset =
+    (Math.abs(lm[GUIDE_LM.innerEyeRight].x - 0.5) + Math.abs(lm[GUIDE_LM.innerEyeLeft].x - 0.5)) / 2;
+  return {
+    yellowOffset: yellowOffsetFromX(0.5 + offset),
+    redA: redFromY(meanY(GUIDE_LM.brows)),
+    redB: redFromY(meanY(GUIDE_LM.nostrilBase)),
+  };
+}
+
 /* ─────────────── Face pose ─────────────── */
 
 /** MediaPipe FaceLandmarker (478-point) indices used by the checks. */
@@ -280,6 +311,27 @@ export function describeTurn(yaw: number): string {
   return `nose ${(Math.abs(yaw) * 100).toFixed(1)}% of face width towards the customer's ${side}`;
 }
 
+/** Guide-line section of the WhatsApp summary, labelled by what each line marks. */
+function guideLines(
+  s: ShotSummary,
+  g: GuideLines,
+  pct: (v: number) => string,
+  yl: number,
+  yr: number,
+): string[] {
+  const brow = Math.min(g.redA, g.redB);
+  const nostril = Math.max(g.redA, g.redB);
+  const mm = (frac: number, side: number) =>
+    s.mmPerPx != null ? ` (~${(frac * side * s.mmPerPx).toFixed(1)} mm)` : "";
+  return [
+    "Lines placed by the customer:",
+    `• Inner eye corners (yellow): ${pct(yl)} and ${pct(yr)} from left; gap ${pct(yr - yl)} of width${mm(yr - yl, s.width)}`,
+    `• Brow line (top red): ${pct(brow)} from top`,
+    `• Nostril base (bottom red): ${pct(nostril)} from top`,
+    `• Brow line to nostril base: ${pct(nostril - brow)} of height${mm(nostril - brow, s.height)}`,
+  ];
+}
+
 /**
  * Text sent alongside the photo on WhatsApp. Guide positions are given as
  * percentages because WhatsApp may resize the image; the mm scale is
@@ -313,7 +365,7 @@ export function whatsappMessage(name: string, s: ShotSummary, g: GuideLines): st
     s.yaw != null ? `Head turn: ${describeTurn(s.yaw)}` : "",
     scale,
     faceMm,
-    `Guides (from left/top): yellow ${pct(yl)} / ${pct(yr)}, red ${pct(g.redA)} / ${pct(g.redB)}`,
+    ...guideLines(s, g, pct, yl, yr),
   ]
     .filter(Boolean)
     .join("\n");

@@ -12,6 +12,8 @@ import {
   yellowPositions,
   whatsappMessage,
   irisMmPerPx,
+  suggestGuides,
+  GUIDE_LM,
   describeTilt,
   describeTurn,
   type Pt,
@@ -132,7 +134,10 @@ test("WhatsApp message carries name, checks, direction, scale and guides", () =>
   assert.match(msg, /Head turn: nose 1\.2% of face width towards the customer's right/);
   assert.match(msg, /Scale: 0\.2500 mm\/px at 1080px wide/);
   assert.match(msg, /Face width \(cheek to cheek\): ~135 mm/);
-  assert.match(msg, /yellow 30\.0% \/ 70\.0%, red 40\.0% \/ 47\.5%/);
+  assert.match(msg, /Inner eye corners \(yellow\): 30\.0% and 70\.0% from left; gap 40\.0% of width \(~108\.0 mm\)/);
+  assert.match(msg, /Brow line \(top red\): 40\.0% from top/);
+  assert.match(msg, /Nostril base \(bottom red\): 47\.5% from top/);
+  assert.match(msg, /Brow line to nostril base: 7\.5% of height \(~36\.0 mm\)/);
 });
 
 test("WhatsApp message warns that library photos may be mirrored", () => {
@@ -145,4 +150,31 @@ test("WhatsApp message warns that library photos may be mirrored", () => {
   assert.match(msg, /Checks NOT passed: Head level, Facing straight/);
   assert.match(msg, /Scale: not available/);
   assert.doesNotMatch(msg, /Head tilt|Head turn|Face width/);
+});
+
+test("lines are placed on the inner eye corners, brows and nostril base", () => {
+  const lm = face();
+  lm[GUIDE_LM.innerEyeRight] = { x: 0.44, y: 0.42 };
+  lm[GUIDE_LM.innerEyeLeft] = { x: 0.57, y: 0.42 }; // slightly off-centre face
+  for (const i of GUIDE_LM.brows) lm[i] = { x: 0.5, y: 0.35 };
+  for (const i of GUIDE_LM.nostrilBase) lm[i] = { x: 0.5, y: 0.55 };
+  const g = suggestGuides(lm)!;
+  assert.ok(Math.abs(g.yellowOffset - 0.065) < 1e-9); // mean of 0.06 and 0.07
+  assert.ok(Math.abs(g.redA - 0.35) < 1e-9);
+  assert.ok(Math.abs(g.redB - 0.55) < 1e-9);
+});
+
+test("no line placement without landmarks", () => {
+  assert.equal(suggestGuides(face().slice(0, 300)), null);
+});
+
+test("brow and nostril lines are labelled by position, whichever red line is which", () => {
+  const msg = whatsappMessage(
+    "A",
+    { source: "camera", width: 1000, height: 1000, failed: [] },
+    { yellowOffset: 0.1, redA: 0.6, redB: 0.3 },
+  );
+  assert.match(msg, /Brow line \(top red\): 30\.0% from top/);
+  assert.match(msg, /Nostril base \(bottom red\): 60\.0% from top/);
+  assert.doesNotMatch(msg, / mm\)/);
 });

@@ -52,7 +52,7 @@ export default function ReferralPage() {
       const data = await res.json()
       if (data.success) {
         setGeneratedCode(data.code)
-        setGeneratedLink(`https://shimmyhands.com/referral?code=${data.code}`)
+        setGeneratedLink(`https://www.shimmyhands.com/referral?code=${data.code}`)
       } else {
         setError(data.error || t('referral.error'))
       }

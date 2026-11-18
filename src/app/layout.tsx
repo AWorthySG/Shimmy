@@ -1,3 +1,4 @@
+import { SITE_URL, SITE_NAME } from "@/lib/seo";
 import type { Metadata, Viewport } from "next";
 import { Italiana, Lora } from "next/font/google";
 import "./globals.css";
@@ -40,6 +41,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/' },
   title: {
     default: "Shimmy Beauty Studio Singapore | Brows & Press-On Nails",
     template: "%s | Shimmy",
@@ -51,13 +53,13 @@ export const metadata: Metadata = {
     title: "Shimmy — Beauty Studio Singapore",
     description:
       "Brows shaped for your face. Nails made by hand.",
-    url: "https://shimmyhands.com",
+    url: "https://www.shimmyhands.com",
     type: "website",
     siteName: "Shimmy",
     locale: "en_SG",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
-  metadataBase: new URL("https://shimmyhands.com"),
+  metadataBase: new URL(SITE_URL),
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -67,6 +69,25 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+};
+
+// Local-business data for search engines. Add "address" (PostalAddress) and
+// "geo" once the studio's public address is confirmed.
+const businessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  name: "Shimmy Beauty Studio",
+  alternateName: SITE_NAME,
+  url: SITE_URL,
+  image: `${SITE_URL}/opengraph-image`,
+  telephone: "+65 8930 8973",
+  priceRange: "$$",
+  areaServed: { "@type": "City", name: "Singapore" },
+  sameAs: ["https://instagram.com/shimmyhands.shop"],
+  openingHoursSpecification: [
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "10:00", closes: "20:00" },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "10:00", closes: "18:00" },
+  ],
 };
 
 export default function RootLayout({
@@ -80,6 +101,10 @@ export default function RootLayout({
       className={`${italiana.variable} ${lora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col safe-bottom">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }}
+        />
         <GoogleAnalytics />
         <Providers>
           <WelcomeBanner />

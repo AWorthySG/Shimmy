@@ -137,7 +137,7 @@ export async function PATCH(
                   <p style="margin: 0 0 8px; font-size: 14px; color: #2E3328;"><strong>Date:</strong> ${formattedDate}</p>
                   <p style="margin: 0; font-size: 14px; color: #2E3328;"><strong>Time:</strong> ${formattedTime}</p>
                 </div>
-                <p style="line-height: 1.6; color: #666;">If this was a mistake, feel free to rebook at <a href="https://shimmyhands.com/nails/book" style="color: #536442;">shimmyhands.com</a> or reach out via WhatsApp.</p>
+                <p style="line-height: 1.6; color: #666;">If this was a mistake, feel free to rebook at <a href="https://www.shimmyhands.com/nails/book" style="color: #536442;">shimmyhands.com</a> or reach out via WhatsApp.</p>
                 <p style="margin-top: 24px; font-size: 12px; color: #999;">&mdash; The Shimmyhands Team</p>
               </div>
             `,

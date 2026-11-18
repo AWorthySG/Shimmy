@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Shimmy",
+  alternates: { canonical: '/privacy' },
+  title: { absolute: "Privacy Policy | Shimmy" },
   robots: { index: false, follow: false },
 };
 

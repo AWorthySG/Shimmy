@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Admin | Shimmy',
+  alternates: { canonical: '/admin' },
+  title: { absolute: 'Admin | Shimmy' },
   robots: { index: false, follow: false },
 }
 

@@ -22,7 +22,7 @@ export default function WelcomeBanner() {
     <div className="sticky top-0 z-[200] flex items-center justify-center bg-vermillion text-soft-white px-4 py-2 text-xs text-center min-h-[36px]">
       <p className="flex-1">
         First time here? Use code{" "}
-        <span className="font-bold tracking-wider">WELCOME10</span> for $10 off
+        <span className="font-bold tracking-wider">WELCOME10</span> for S$10 off
         your first purchase
       </p>
       <button

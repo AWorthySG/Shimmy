@@ -72,7 +72,7 @@ function MiniBookingCalendar() {
               {slotsCount !== null && slotsCount > 0 && (
                 <Link
                   href="/brows"
-                  className="mt-3 inline-block px-5 py-2.5 text-[10px] uppercase tracking-[0.2em] bg-vermillion text-soft-white hover:bg-vermillion-dark transition-colors touch-target"
+                  className="btn btn-primary btn-sm mt-3 touch-target"
                 >
                   Book This Date
                 </Link>
@@ -94,7 +94,7 @@ export default function ContactPage() {
       <section className="bg-gradient-to-b from-cream-dark to-cream rice-paper py-14 sm:py-20 px-4 sm:px-6 text-center">
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
+          <p className="eyebrow">
             {t("contact.tag")}
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
@@ -197,7 +197,7 @@ export default function ContactPage() {
 
             {/* TODO: Update your operating hours */}
             <div className="mt-8 sm:mt-10 border-t border-vermillion/10 pt-6 sm:pt-8">
-              <h3 className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">
+              <h3 className="text-[10px] sm:text-xs uppercase tracking-label text-vermillion-dark mb-4">
                 {t("contact.hours.tag")}
               </h3>
               <ul className="space-y-2 text-sm text-charcoal-light">
@@ -231,7 +231,7 @@ export default function ContactPage() {
 
             {/* Mini booking calendar */}
             <div className="mt-6 sm:mt-8">
-              <h3 className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">
+              <h3 className="text-[10px] sm:text-xs uppercase tracking-label text-vermillion-dark mb-4">
                 Check Availability
               </h3>
               <MiniBookingCalendar />
@@ -239,7 +239,7 @@ export default function ContactPage() {
 
             {/* Pre-visit info */}
             <div className="mt-6 sm:mt-8 oriental-corner border border-vermillion/15 bg-cream/30 p-5 sm:p-6 border-glow">
-              <h3 className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-3">
+              <h3 className="text-[10px] sm:text-xs uppercase tracking-label text-vermillion-dark mb-3">
                 {t("contact.prep.tag")}
               </h3>
               {/* TODO: Update pre-visit instructions */}

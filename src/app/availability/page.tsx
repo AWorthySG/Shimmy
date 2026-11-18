@@ -28,7 +28,7 @@ export default function AvailabilityPage() {
       {/* ─── Header ─── */}
       <section className="bg-gradient-to-b from-cream-dark via-cream to-soft-white rice-paper py-16 sm:py-20 md:py-24 px-4 sm:px-6 text-center">
         <AnimateOnScroll animation="fade-up">
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+          <p className="eyebrow">
             ✦ {t("nav.availability")} ✦
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal shimmer-text">
@@ -44,7 +44,7 @@ export default function AvailabilityPage() {
       <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-2xl">
           <AnimateOnScroll animation="fade-up">
-            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark text-center">
+            <p className="eyebrow text-center">
               {t("contact.hours.tag")}
             </p>
             <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal text-center sparkle">
@@ -60,7 +60,7 @@ export default function AvailabilityPage() {
                     <p className="font-serif text-lg text-charcoal">{item.day}</p>
                     <p className="mt-1 text-sm text-warm-gray">{item.time}</p>
                   </div>
-                  <span className={`text-[10px] uppercase tracking-[0.2em] px-3 py-1 border ${
+                  <span className={`text-[10px] uppercase tracking-label px-3 py-1 border ${
                     item.available
                       ? "text-jade border-jade/30 bg-jade/5"
                       : "text-warm-gray border-warm-gray/20 bg-warm-gray/5"
@@ -78,7 +78,7 @@ export default function AvailabilityPage() {
       <section className="bg-cream py-14 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-3xl">
           <AnimateOnScroll animation="fade-up">
-            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark text-center">
+            <p className="eyebrow text-center">
               This Week
             </p>
             <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal text-center sparkle">
@@ -105,7 +105,7 @@ export default function AvailabilityPage() {
                     {day.slots.map((slot) => (
                       <span
                         key={slot}
-                        className="text-[10px] uppercase tracking-[0.1em] px-3 py-1.5 border border-vermillion/20 text-vermillion-dark bg-vermillion/5 hover:bg-vermillion hover:text-soft-white transition-colors cursor-pointer"
+                        className="text-[10px] uppercase tracking-button px-3 py-1.5 border border-vermillion/20 text-vermillion-dark bg-vermillion/5 hover:bg-vermillion hover:text-soft-white transition-colors cursor-pointer"
                       >
                         {slot}
                       </span>
@@ -140,7 +140,7 @@ export default function AvailabilityPage() {
               href="https://wa.me/6589308973"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-vermillion bg-vermillion px-6 py-3 text-xs uppercase tracking-[0.2em] text-soft-white transition-all duration-300 hover:bg-vermillion-dark btn-vermillion touch-target glow-pulse shine-on-hover"
+              className="btn btn-primary btn-vermillion touch-target glow-pulse shine-on-hover"
             >
               {t("cta.whatsapp")}
             </a>
@@ -148,7 +148,7 @@ export default function AvailabilityPage() {
               href="https://instagram.com/shimmyhands.shop"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-vermillion/30 bg-vermillion/5 px-6 py-3 text-xs uppercase tracking-[0.2em] text-vermillion-dark transition-all duration-300 hover:bg-vermillion/10 hover:border-vermillion btn-vermillion touch-target glow-pulse shine-on-hover"
+              className="btn btn-secondary btn-vermillion touch-target glow-pulse shine-on-hover"
             >
               {t("cta.instagram")}
             </a>

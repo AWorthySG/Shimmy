@@ -77,8 +77,30 @@ body.links-page footer {
   --color-ink: var(--ink);
   --color-plum: var(--plum);
   --color-rosewood: var(--rosewood);
-  --font-serif: var(--font-playfair);
-  --font-sans: var(--font-jost);
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
+
+  /* ─── Design system: semantic aliases ───
+     Legacy names above stay for existing markup. New code uses these.
+     "vermillion" is historically named: it is the brand sage green. */
+  --color-primary: var(--vermillion);
+  --color-primary-hover: var(--vermillion-dark);
+  --color-primary-soft: var(--vermillion-light);
+  --color-accent: var(--gold);
+  --color-surface: var(--soft-white);
+  --color-surface-muted: var(--cream);
+  --color-text: var(--charcoal);
+  --color-text-muted: var(--charcoal-light);
+  --color-text-subtle: var(--warm-gray);
+  --color-success: var(--jade);
+  --color-whatsapp: #25d366;
+}
+
+/* Design system: letter-spacing scale (generates tracking-button, tracking-label, tracking-eyebrow). */
+@theme {
+  --tracking-button: 0.15em;
+  --tracking-label: 0.2em;
+  --tracking-eyebrow: 0.3em;
 }
 
 /* ─── Base / Cross-browser ─── */
@@ -91,7 +113,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-jost), "Lora", ui-serif, Georgia, serif;
+  font-family: var(--font-body), "Lora", ui-serif, Georgia, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior-y: none;
@@ -803,5 +825,187 @@ a, button {
   }
   .safe-top {
     padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM COMPONENTS
+   One definition per element. Pages add layout utilities only
+   (width, margin, position); colour, type, spacing and states
+   come from here. Documented in docs/DESIGN_SYSTEM.md.
+   ═══════════════════════════════════════════════════════════════ */
+@layer components {
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-button);
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--vermillion);
+    outline-offset: 2px;
+  }
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background-color: var(--vermillion);
+    color: var(--soft-white);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--vermillion-dark);
+  }
+  .btn-secondary {
+    border-color: color-mix(in srgb, var(--vermillion) 30%, transparent);
+    color: var(--vermillion-dark);
+    background-color: transparent;
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--vermillion);
+    border-color: var(--vermillion);
+    color: var(--soft-white);
+  }
+  .btn-outline {
+    border-color: color-mix(in srgb, var(--charcoal) 20%, transparent);
+    color: var(--charcoal);
+    background-color: transparent;
+  }
+  .btn-outline:hover:not(:disabled) {
+    border-color: var(--vermillion);
+    color: var(--vermillion-dark);
+  }
+  .btn-dark {
+    background-color: var(--charcoal);
+    color: var(--soft-white);
+  }
+  .btn-dark:hover:not(:disabled) {
+    background-color: var(--vermillion-dark);
+  }
+  .btn-light {
+    background-color: var(--soft-white);
+    color: var(--vermillion-dark);
+  }
+  .btn-light:hover:not(:disabled) {
+    background-color: var(--cream);
+  }
+  .btn-sm {
+    min-height: 36px;
+    padding: 0.5rem 1rem;
+    font-size: 0.6875rem;
+  }
+  .btn-lg {
+    padding: 0.875rem 2rem;
+    letter-spacing: var(--tracking-label);
+  }
+
+  /* Small category / status label */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.625rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    border: 1px solid color-mix(in srgb, var(--vermillion) 20%, transparent);
+    background-color: color-mix(in srgb, var(--vermillion) 5%, transparent);
+    color: var(--vermillion-dark);
+  }
+  .tag-jade {
+    border-color: color-mix(in srgb, var(--jade) 20%, transparent);
+    background-color: color-mix(in srgb, var(--jade) 5%, transparent);
+    color: var(--jade);
+  }
+  .tag-gold {
+    border-color: color-mix(in srgb, var(--gold) 20%, transparent);
+    background-color: color-mix(in srgb, var(--gold) 5%, transparent);
+    color: var(--charcoal-light);
+  }
+
+  /* Filter pills (shop collections, blog categories) */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 0.5rem 1rem;
+    font-size: 0.625rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-button);
+    color: var(--charcoal-light);
+    background-color: transparent;
+    border: 1px solid color-mix(in srgb, var(--vermillion) 20%, transparent);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .chip:hover {
+    border-color: var(--vermillion);
+    color: var(--vermillion);
+  }
+  .chip-active,
+  .chip-active:hover {
+    background-color: var(--vermillion);
+    border-color: var(--vermillion);
+    color: var(--soft-white);
+  }
+
+  /* Small uppercase line above headings */
+  .eyebrow {
+    font-size: 0.625rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    color: var(--vermillion-dark);
+  }
+  @media (min-width: 640px) {
+    .eyebrow {
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Dark mode: the dark sage fails contrast on charcoal, so lift text to light sage. */
+  .dark .btn-secondary,
+  .dark .tag,
+  .dark .eyebrow,
+  .dark .btn-light {
+    color: var(--vermillion-light);
+  }
+  .dark .btn-secondary:hover:not(:disabled) {
+    color: var(--soft-white);
+  }
+
+  /* Text inputs, selects and textareas */
+  .field {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: var(--charcoal);
+    background-color: var(--soft-white);
+    border: 1px solid color-mix(in srgb, var(--vermillion) 20%, transparent);
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .field::placeholder {
+    color: color-mix(in srgb, var(--warm-gray) 70%, transparent);
+  }
+  .field:focus {
+    border-color: var(--vermillion);
   }
 }

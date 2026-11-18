@@ -8,6 +8,7 @@ import { useI18n } from "@/lib/i18n";
 import { products, type Product } from "@/lib/products";
 import { useState } from "react";
 
+import { formatPrice } from "@/lib/format";
 function WishlistCard({ product }: { product: Product }) {
   const { toggleItem } = useWishlist();
   const { addItem } = useCart();
@@ -47,7 +48,7 @@ function WishlistCard({ product }: { product: Product }) {
           <div className="w-full h-full flex items-center justify-center">
             <div className="text-center px-4">
               <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
-              <p className="text-[9px] uppercase tracking-[0.3em] text-warm-gray/40">
+              <p className="text-[9px] uppercase tracking-eyebrow text-warm-gray/40">
                 {product.title}
               </p>
               <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
@@ -77,7 +78,7 @@ function WishlistCard({ product }: { product: Product }) {
       </div>
 
       <div className="p-4 sm:p-5">
-        <p className="text-[9px] uppercase tracking-[0.2em] text-warm-gray">
+        <p className="text-[9px] uppercase tracking-label text-warm-gray">
           {product.collection}
         </p>
         <h3 className="mt-1 font-serif text-base sm:text-lg text-charcoal">
@@ -85,22 +86,18 @@ function WishlistCard({ product }: { product: Product }) {
         </h3>
         <div className="mt-2 flex items-center gap-2">
           <span className="text-sm font-medium text-vermillion-dark">
-            ${product.price}
+            {formatPrice(product.price)}
           </span>
           {product.compareAtPrice && (
             <span className="text-xs text-warm-gray line-through">
-              ${product.compareAtPrice}
+              {formatPrice(product.compareAtPrice)}
             </span>
           )}
         </div>
 
         <button
           onClick={handleAdd}
-          className={`mt-3 w-full py-2.5 text-[10px] uppercase tracking-[0.2em] transition-all duration-300 touch-target ${
-            added
-              ? "bg-jade/20 text-jade border border-jade/30"
-              : "bg-vermillion/10 text-vermillion-dark border border-vermillion/20 hover:bg-vermillion hover:text-soft-white hover:border-vermillion"
-          }`}
+          className={`btn btn-sm mt-3 w-full ${added ? "border-jade/30 bg-jade/20 text-jade" : "btn-secondary"}`}
         >
           {added ? t("shop.added") : t("shop.add")}
         </button>
@@ -122,7 +119,7 @@ export default function WishlistPage() {
       <section className="bg-gradient-to-b from-cream-dark via-cream to-soft-white rice-paper px-4 sm:px-6 py-16 sm:py-20 text-center">
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
+          <p className="eyebrow">
             Saved Items
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal tracking-wide">
@@ -150,7 +147,7 @@ export default function WishlistPage() {
               <p className="text-warm-gray text-sm mb-6">Your wishlist is empty</p>
               <Link
                 href="/nails/shop"
-                className="inline-block px-6 py-3 text-[10px] uppercase tracking-[0.2em] bg-vermillion/10 text-vermillion-dark border border-vermillion/20 hover:bg-vermillion hover:text-soft-white hover:border-vermillion transition-all duration-300"
+                className="btn btn-secondary btn-sm"
               >
                 Continue Shopping
               </Link>

@@ -24,7 +24,7 @@ export function Footer() {
                 美
               </span>
             </div>
-            <p className="mt-1 text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-vermillion-dark">
+            <p className="mt-1 text-[9px] sm:text-[10px] uppercase tracking-eyebrow text-vermillion-dark">
               Beauty Studio
             </p>
             <p className="mt-4 text-sm leading-relaxed text-warm-gray">
@@ -34,7 +34,7 @@ export function Footer() {
 
           {/* Quick Links — two sub-columns */}
           <div>
-            <h4 className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">
+            <h4 className="text-[10px] sm:text-xs uppercase tracking-label text-vermillion-dark mb-4">
               {t("footer.links")}
             </h4>
             <div className="grid grid-cols-2 gap-x-4">
@@ -81,7 +81,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">
+            <h4 className="text-[10px] sm:text-xs uppercase tracking-label text-vermillion-dark mb-4">
               {t("footer.contact")}
             </h4>
             <ul className="space-y-3 text-sm text-warm-gray">

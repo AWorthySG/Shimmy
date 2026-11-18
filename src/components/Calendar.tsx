@@ -77,7 +77,7 @@ export default function Calendar({
       {/* Day headers */}
       <div className="grid grid-cols-7 gap-1 mb-2">
         {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((d) => (
-          <div key={d} className="text-center text-[10px] uppercase tracking-[0.1em] text-warm-gray py-1">
+          <div key={d} className="text-center text-[10px] uppercase tracking-button text-warm-gray py-1">
             {d}
           </div>
         ))}

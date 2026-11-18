@@ -11,6 +11,7 @@ import { collections, products, type Product } from "@/lib/products";
 import EmailCapture from "@/components/EmailCapture";
 import RestockNotify from "@/components/RestockNotify";
 
+import { formatPrice } from "@/lib/format";
 function ProductCard({ product }: { product: Product }) {
   const { t } = useI18n();
   const { addItem } = useCart();
@@ -51,7 +52,7 @@ function ProductCard({ product }: { product: Product }) {
           <div className="w-full h-full flex items-center justify-center">
             <div className="text-center px-4">
               <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
-              <p className="text-[9px] uppercase tracking-[0.3em] text-warm-gray/40">
+              <p className="text-[9px] uppercase tracking-eyebrow text-warm-gray/40">
                 {product.title}
               </p>
               <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
@@ -82,7 +83,7 @@ function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className="p-4 sm:p-5">
-        <p className="text-[9px] uppercase tracking-[0.2em] text-warm-gray">
+        <p className="text-[9px] uppercase tracking-label text-warm-gray">
           {product.collection}
         </p>
         <h3 className="mt-1 font-serif text-base sm:text-lg text-charcoal">
@@ -90,11 +91,11 @@ function ProductCard({ product }: { product: Product }) {
         </h3>
         <div className="mt-2 flex items-center gap-2">
           <span className="text-sm font-medium text-vermillion-dark">
-            ${product.price}
+            {formatPrice(product.price)}
           </span>
           {product.compareAtPrice && (
             <span className="text-xs text-warm-gray line-through">
-              ${product.compareAtPrice}
+              {formatPrice(product.compareAtPrice)}
             </span>
           )}
         </div>
@@ -110,11 +111,7 @@ function ProductCard({ product }: { product: Product }) {
 
         <button
           onClick={handleAdd}
-          className={`mt-3 w-full py-2.5 text-[10px] uppercase tracking-[0.2em] transition-all duration-300 touch-target ${
-            added
-              ? "bg-jade/20 text-jade border border-jade/30"
-              : "bg-vermillion/10 text-vermillion-dark border border-vermillion/20 hover:bg-vermillion hover:text-soft-white hover:border-vermillion"
-          }`}
+          className={`btn btn-sm mt-3 w-full ${added ? "border-jade/30 bg-jade/20 text-jade" : "btn-secondary"}`}
         >
           {added ? t("shop.added") : t("shop.add")}
         </button>
@@ -200,7 +197,7 @@ export default function ShopPage() {
       <section className="bg-gradient-to-b from-cream-dark via-cream to-soft-white rice-paper px-4 sm:px-6 py-16 sm:py-20 text-center">
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
+          <p className="eyebrow">
             {t("nails.shop.tag")}
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal tracking-wide">
@@ -217,11 +214,7 @@ export default function ShopPage() {
             <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 -mx-1 px-1 flex-1">
               <button
                 onClick={() => setActiveFilter("all")}
-                className={`shrink-0 px-4 py-2 text-[10px] uppercase tracking-[0.15em] transition-all duration-300 touch-target ${
-                  activeFilter === "all"
-                    ? "bg-vermillion text-soft-white"
-                    : "border border-vermillion/20 text-charcoal-light hover:border-vermillion hover:text-vermillion"
-                }`}
+                className={`chip shrink-0 touch-target ${activeFilter === "all" ? "chip-active" : ""}`}
               >
                 {t("shop.all")}
               </button>
@@ -229,11 +222,7 @@ export default function ShopPage() {
                 <button
                   key={c.handle}
                   onClick={() => setActiveFilter(c.handle)}
-                  className={`shrink-0 px-4 py-2 text-[10px] uppercase tracking-[0.15em] transition-all duration-300 whitespace-nowrap touch-target ${
-                    activeFilter === c.handle
-                      ? "bg-vermillion text-soft-white"
-                      : "border border-vermillion/20 text-charcoal-light hover:border-vermillion hover:text-vermillion"
-                  }`}
+                  className={`chip shrink-0 whitespace-nowrap touch-target ${activeFilter === c.handle ? "chip-active" : ""}`}
                 >
                   {c.title}
                   {collectionMinPrices[c.handle] && (
@@ -250,7 +239,7 @@ export default function ShopPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="px-3 py-2 text-[10px] uppercase tracking-[0.15em] border border-vermillion/20 bg-soft-white text-charcoal-light hover:border-vermillion hover:text-vermillion transition-all duration-300 cursor-pointer focus:outline-none focus:border-vermillion/50 appearance-none pr-7"
+                className="px-3 py-2 text-[10px] uppercase tracking-button border border-vermillion/20 bg-soft-white text-charcoal-light hover:border-vermillion hover:text-vermillion transition-all duration-300 cursor-pointer focus:outline-none focus:border-vermillion/50 appearance-none pr-7"
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23999' stroke-width='1.2'/%3E%3C/svg%3E")`,
                   backgroundRepeat: 'no-repeat',
@@ -270,11 +259,7 @@ export default function ShopPage() {
               <button
                 key={colour}
                 onClick={() => toggleColour(colour)}
-                className={`shrink-0 px-3 py-1.5 text-[9px] uppercase tracking-[0.12em] transition-all duration-300 whitespace-nowrap touch-target ${
-                  selectedColours.includes(colour)
-                    ? "bg-vermillion text-soft-white"
-                    : "border border-vermillion/15 text-charcoal-light hover:border-vermillion/40 hover:text-vermillion"
-                }`}
+                className={`chip shrink-0 whitespace-nowrap touch-target ${selectedColours.includes(colour) ? "chip-active" : ""}`}
               >
                 {colour}
               </button>
@@ -282,7 +267,7 @@ export default function ShopPage() {
             {selectedColours.length > 0 && (
               <button
                 onClick={() => setSelectedColours([])}
-                className="shrink-0 px-3 py-1.5 text-[9px] uppercase tracking-[0.12em] text-warm-gray hover:text-vermillion transition-colors touch-target"
+                className="shrink-0 px-3 py-1.5 text-[9px] uppercase tracking-button text-warm-gray hover:text-vermillion transition-colors touch-target"
               >
                 Clear
               </button>

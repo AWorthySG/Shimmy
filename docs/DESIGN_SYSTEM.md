@@ -1,0 +1,127 @@
+# Shimmyhands design system
+
+Extracted from the live site in November 2026. It is the single reference for how
+every element looks. Tokens and component classes live in
+[`src/app/globals.css`](../src/app/globals.css); prices use
+[`src/lib/format.ts`](../src/lib/format.ts).
+
+**Rule for new markup:** use a component class for the element (`btn`, `tag`,
+`chip`, `eyebrow`, `field`) and add only layout utilities (width, margin,
+position). Never re-specify its colour, type size, letter-spacing or padding.
+
+## 1. Colour
+
+The legacy token names are kept so existing markup keeps working. `vermillion`
+is historically named: it is the brand **sage green**. New code should use the
+semantic names.
+
+| Semantic name (Tailwind) | Legacy name | Light | Dark | Use |
+|---|---|---|---|---|
+| `primary` | `vermillion` | `#536442` | `#6E8058` | Primary buttons, links, active states |
+| `primary-hover` | `vermillion-dark` | `#3E4D31` | `#5A6C46` | Hover and pressed; eyebrow text |
+| `primary-soft` | `vermillion-light` | `#6E8058` | `#8A9C72` | Decorative accents |
+| `accent` | `gold` | `#A89279` | `#C4A882` | Hairlines, ornaments, badges |
+| `surface` | `soft-white` | `#FDF7F4` | `#222018` | Cards, inputs, text on dark |
+| `surface-muted` | `cream` | `#F1E3DC` | `#2A2420` | Section bands, hero backgrounds |
+| `background` | — | `#F9F2EE` | `#1A1816` | Page background |
+| `text` | `charcoal` | `#2E3328` | `#F0E8E2` | Headings, body text |
+| `text-muted` | `charcoal-light` | `#4A5240` | `#C8BEB5` | Secondary text |
+| `text-subtle` | `warm-gray` | `#7A7670` | `#8A7E74` | Captions, meta, placeholders |
+| `success` | `jade` | `#7A8E6A` | `#8A9C72` | Confirmations, nails category |
+| `whatsapp` | — | `#25D366` | `#25D366` | WhatsApp button only |
+
+Do not use raw hex values or Tailwind's default palette (`red-500`, `green-400`)
+in page markup. The colour illustrations in the size guide are the only exception.
+
+## 2. Typography
+
+| Role | Font | Token | Notes |
+|---|---|---|---|
+| Display (h1–h3) | Italiana | `font-serif` / `--font-display` | Light, high-contrast; never bold |
+| Body and UI | Lora | `font-sans` / `--font-body` | Default on `body` |
+
+Type sizes in use: `text-xs` (labels, buttons), `text-sm` (body on phones),
+`text-base` (body on desktop), `text-xl`–`text-3xl` (section headings),
+`text-3xl`–`text-7xl` (page heroes, scaling up by breakpoint).
+
+### Letter-spacing scale
+
+Every uppercase label uses one of three values. Arbitrary values such as
+`tracking-[0.25em]` are not allowed.
+
+| Utility | Value | Use |
+|---|---|---|
+| `tracking-button` | 0.15em | Buttons, chips, small UI labels |
+| `tracking-label` | 0.2em | Tags, large buttons, captions |
+| `tracking-eyebrow` | 0.3em | Eyebrow lines above headings |
+
+## 3. Components
+
+### Buttons — `btn` + one variant + optional size
+
+| Class | Look | Use |
+|---|---|---|
+| `btn btn-primary` | Sage fill, white text | The main action on a screen |
+| `btn btn-secondary` | Sage outline, fills on hover | Secondary actions; Add to bag |
+| `btn btn-outline` | Neutral outline, turns sage on hover | Alternative path next to a primary |
+| `btn btn-dark` | Charcoal fill | On light imagery where sage lacks contrast |
+| `btn btn-light` | White fill, sage text | On dark or sage sections |
+| `btn-sm` | 36 px tall | Inside cards and dense lists |
+| `btn-lg` | 44 px+, wider padding | Hero and page-level calls to action |
+
+All buttons are square-cornered, uppercase, 12 px text, at least 44 px tall
+(except `btn-sm`), show a sage focus ring for keyboard users, and dim to 50%
+when disabled. Effect classes (`btn-magnetic`, `shine-on-hover`, `glow-pulse`)
+may be added on top.
+
+```tsx
+<Link href="/brows" className="btn btn-primary btn-lg w-full sm:w-auto">Book now</Link>
+```
+
+### Tags — `tag`, `tag tag-jade`, `tag tag-gold`
+Small bordered labels for categories and status: brows posts use `tag`, nails
+posts `tag-jade`, featured badges `tag-gold`.
+
+### Filter chips — `chip`, plus `chip-active` for the selected one
+Used for shop collection, colour and blog category filters.
+
+### Eyebrow — `eyebrow`
+The small uppercase line above section and page headings, in `primary-hover`
+at 10 px (12 px from 640 px up).
+
+### Form fields — `field`
+Text inputs, emails, phone numbers and textareas: surface background, sage
+hairline border that darkens on focus, 44 px minimum height, square corners.
+Exceptions: the transparent search-overlay input and inputs on charcoal
+backgrounds.
+
+## 4. Shape, spacing and touch
+
+- **Corners:** square for buttons, fields, tags, chips and cards. `rounded-full`
+  only for circular icon buttons, avatars and dots.
+- **Section padding:** `py-14 sm:py-20` for standard bands, `py-16 sm:py-20 md:py-24`
+  for feature sections; horizontal `px-4 sm:px-6`.
+- **Touch targets:** every tappable control is at least 44 × 44 px (`touch-target`,
+  `min-h-11 min-w-11`, or a `btn`).
+
+## 5. Content conventions
+
+- **Money:** `formatPrice()` for product prices and totals (`S$49.90`, `S$45.00`);
+  `formatAmount()` for promotions (`S$10 off`). Always the `S$` prefix.
+- **Text over images or video:** put a `soft-white` veil of at least 55% behind
+  the text on phones.
+
+## 6. How the site was standardised
+
+`scripts/standardize-classes.mjs` and `scripts/standardize-fields.mjs` rewrote
+existing markup onto these classes. Re-running them is safe: elements already
+using a component class are skipped.
+
+| Element | Before | After |
+|---|---|---|
+| Buttons | 85 different class combinations across 107 buttons | 5 variants × 3 sizes |
+| Letter-spacing | 13 values | 3 (+ Tailwind's `wide`/`wider`) |
+| Form fields | 14 styles | 1 (`field`) + 2 documented exceptions |
+| Filter pills | 3 sizes, 3 border strengths | 1 (`chip`) |
+| Eyebrow labels | 43 copies of 4 near-identical class strings | 1 (`eyebrow`) |
+| Prices | `$49.9`, `$45`, `S$388` mixed | `S$49.90` everywhere |

@@ -49,7 +49,7 @@ export default function InstagramFeed() {
       <div className="mx-auto max-w-6xl">
         <div className="text-center mb-8">
           <div className="mx-auto h-[2px] w-[50px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-3" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+          <p className="eyebrow">
             {t('instagram.tag')}
           </p>
           <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal">
@@ -78,7 +78,7 @@ export default function InstagramFeed() {
               {/* Center content */}
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
                 <InstagramIcon />
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-charcoal/60 px-2 text-center">
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-label text-charcoal/60 px-2 text-center">
                   {t(post.labelKey)}
                 </span>
               </div>
@@ -93,7 +93,7 @@ export default function InstagramFeed() {
             href="https://instagram.com/shimmyhands.shop"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors touch-target py-2"
+            className="inline-flex items-center gap-2 text-sm uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors touch-target py-2"
           >
             {t('instagram.follow')} →
           </a>

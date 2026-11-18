@@ -8,7 +8,7 @@ export default function PressBanner() {
   return (
     <section className="bg-cream/50 py-10 sm:py-14 px-4 sm:px-6">
       <div className="mx-auto max-w-4xl text-center">
-        <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-warm-gray mb-6 sm:mb-8">
+        <p className="text-[10px] sm:text-xs uppercase tracking-eyebrow text-warm-gray mb-6 sm:mb-8">
           {t("press.title")}
         </p>
         <div className="flex items-center justify-center gap-6 sm:gap-10 md:gap-14 flex-wrap">

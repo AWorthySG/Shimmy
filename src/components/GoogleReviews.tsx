@@ -75,7 +75,7 @@ export default function GoogleReviews() {
         {/* Header */}
         <div className="text-center mb-10 sm:mb-14">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+          <p className="eyebrow">
             {t('reviews.tag')}
           </p>
           <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
@@ -105,11 +105,11 @@ export default function GoogleReviews() {
                 &ldquo;{review.text}&rdquo;
               </p>
               <div className="mt-5 border-t border-vermillion/15 pt-4 flex items-center justify-between">
-                <p className="text-xs uppercase tracking-[0.15em] text-vermillion-dark font-medium">
+                <p className="text-xs uppercase tracking-button text-vermillion-dark font-medium">
                   {review.author_name}
                 </p>
                 {review.service_type && (
-                  <span className="text-[10px] uppercase tracking-[0.15em] text-vermillion-dark border border-vermillion/20 bg-vermillion/5 px-2 py-0.5">
+                  <span className="tag">
                     {review.service_type}
                   </span>
                 )}
@@ -124,7 +124,7 @@ export default function GoogleReviews() {
             href="https://g.page/shimmyhands/review"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors touch-target py-2"
+            className="inline-flex items-center gap-2 text-sm uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors touch-target py-2"
           >
             {t('reviews.leave')} →
           </a>

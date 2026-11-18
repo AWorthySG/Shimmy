@@ -32,17 +32,13 @@ export default function BlogArticlePage() {
         <div className="mx-auto max-w-3xl">
           <Link
             href="/blog"
-            className="inline-block text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors mb-6"
+            className="inline-block text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors mb-6"
           >
             {t('blog.back')}
           </Link>
 
           <div className="flex items-center gap-3 mb-4">
-            <span className={`text-[9px] uppercase tracking-[0.2em] px-2 py-1 border ${
-              post.category === 'brows'
-                ? 'text-vermillion-dark border-vermillion/20 bg-vermillion/5'
-                : 'text-jade border-jade/20 bg-jade/5'
-            }`}>
+            <span className={`tag ${post.category === 'brows' ? '' : 'tag-jade'}`}>
               {t(post.categoryKey)}
             </span>
             <span className="text-[10px] text-warm-gray">
@@ -101,13 +97,13 @@ export default function BlogArticlePage() {
             href="https://wa.me/6589308973"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-magnetic glow-pulse w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vermillion px-6 sm:px-8 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark touch-target"
+            className="btn btn-primary btn-lg btn-magnetic glow-pulse w-full sm:w-auto touch-target"
           >
             {t('cta.whatsapp')}
           </a>
           <Link
             href="/contact"
-            className="text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
+            className="text-sm uppercase tracking-button text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
           >
             {t('nav.contact')} →
           </Link>
@@ -131,7 +127,7 @@ export default function BlogArticlePage() {
                   href={`/blog/${rel.slug}`}
                   className="group border border-vermillion/15 bg-cream/50 p-5 hover:border-vermillion/40 transition-all duration-300 shine-on-hover"
                 >
-                  <span className={`text-[9px] uppercase tracking-[0.2em] px-2 py-0.5 border ${
+                  <span className={`text-[9px] uppercase tracking-label px-2 py-0.5 border ${
                     rel.category === 'brows'
                       ? 'text-vermillion-dark border-vermillion/20'
                       : 'text-jade border-jade/20'

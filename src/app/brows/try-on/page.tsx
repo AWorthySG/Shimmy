@@ -16,7 +16,7 @@ export default function BrowTryOnPage() {
         <div className="mx-auto max-w-3xl">
           <AnimateOnScroll animation="fade-up">
             <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-            <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
+            <p className="eyebrow">
               {t("tryon.tag")}
             </p>
             <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
@@ -25,7 +25,7 @@ export default function BrowTryOnPage() {
             <p className="mt-3 sm:mt-4 text-sm sm:text-base text-charcoal-light">
               {t("tryon.desc")}
             </p>
-            <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-vermillion-dark">
+            <p className="mt-4 text-[11px] uppercase tracking-label text-vermillion-dark">
               <span aria-hidden="true" className="mr-2">
                 ✦
               </span>
@@ -54,7 +54,7 @@ export default function BrowTryOnPage() {
       <section className="bg-cream py-14 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-4xl">
           <AnimateOnScroll animation="fade-up" className="text-center">
-            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+            <p className="eyebrow">
               How It Works
             </p>
             <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal">
@@ -82,7 +82,7 @@ export default function BrowTryOnPage() {
             ].map((s, i) => (
               <AnimateOnScroll key={s.step} animation="fade-up" delay={i * 100}>
                 <div className="border border-vermillion/15 bg-cream/40 p-6 sm:p-8 h-full">
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-vermillion-dark">
+                  <p className="eyebrow">
                     {s.step}
                   </p>
                   <h3 className="mt-3 font-serif text-lg text-charcoal">
@@ -111,13 +111,13 @@ export default function BrowTryOnPage() {
           <div className="mt-6 sm:mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/contact"
-              className="w-full sm:w-auto inline-block bg-vermillion px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors"
+              className="btn btn-primary btn-lg w-full sm:w-auto"
             >
               {t("tryon.cta.book")}
             </Link>
             <Link
               href="/brows/services"
-              className="w-full sm:w-auto inline-block border border-charcoal/20 px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-charcoal hover:border-vermillion hover:text-vermillion transition-colors"
+              className="btn btn-outline btn-lg w-full sm:w-auto"
             >
               {t("services.viewall")}
             </Link>

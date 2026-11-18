@@ -13,6 +13,7 @@ import {
   type Product,
 } from "@/lib/products";
 
+import { formatPrice } from "@/lib/format";
 function ProductCard({ product }: { product: Product }) {
   const { t } = useI18n();
   const { addItem } = useCart();
@@ -45,7 +46,7 @@ function ProductCard({ product }: { product: Product }) {
           <div className="w-full h-full flex items-center justify-center">
             <div className="text-center px-4">
               <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
-              <p className="text-[9px] uppercase tracking-[0.3em] text-warm-gray/40">
+              <p className="text-[9px] uppercase tracking-eyebrow text-warm-gray/40">
                 {product.title}
               </p>
               <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
@@ -60,22 +61,18 @@ function ProductCard({ product }: { product: Product }) {
         </h3>
         <div className="mt-2 flex items-center gap-2">
           <span className="text-sm font-medium text-vermillion-dark">
-            ${product.price}
+            {formatPrice(product.price)}
           </span>
           {product.compareAtPrice && (
             <span className="text-xs text-warm-gray line-through">
-              ${product.compareAtPrice}
+              {formatPrice(product.compareAtPrice)}
             </span>
           )}
         </div>
 
         <button
           onClick={handleAdd}
-          className={`mt-3 w-full py-2.5 text-[10px] uppercase tracking-[0.2em] transition-all duration-300 touch-target ${
-            added
-              ? "bg-jade/20 text-jade border border-jade/30"
-              : "bg-vermillion/10 text-vermillion-dark border border-vermillion/20 hover:bg-vermillion hover:text-soft-white hover:border-vermillion"
-          }`}
+          className={`btn btn-sm mt-3 w-full ${added ? "border-jade/30 bg-jade/20 text-jade" : "btn-secondary"}`}
         >
           {added ? t("shop.added") : t("shop.add")}
         </button>
@@ -113,7 +110,7 @@ export default function CollectionPage() {
         <div className="mx-auto max-w-3xl text-center">
           <Link
             href="/nails/shop"
-            className="inline-block text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors mb-6"
+            className="inline-block text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors mb-6"
           >
             {t("shop.back.shop")}
           </Link>

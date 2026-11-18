@@ -63,7 +63,7 @@ export default function LaunchPage() {
     <>
       {/* ─── Hero + Countdown ─── */}
       <section className="relative flex min-h-[70vh] flex-col items-center justify-center bg-charcoal px-4 py-20 text-center">
-        <p className="text-xs uppercase tracking-[0.3em] text-vermillion mb-4">
+        <p className="text-xs uppercase tracking-eyebrow text-vermillion mb-4">
           {t('launch.tag')}
         </p>
         <h1 className="font-serif text-3xl sm:text-5xl text-gold mb-4">
@@ -80,7 +80,7 @@ export default function LaunchPage() {
               <span className="font-serif text-4xl sm:text-6xl text-gold tabular-nums">
                 {String(block.value).padStart(2, '0')}
               </span>
-              <span className="mt-1 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-warm-gray/50">
+              <span className="mt-1 text-[10px] sm:text-xs uppercase tracking-label text-warm-gray/50">
                 {block.label}
               </span>
             </div>
@@ -104,7 +104,7 @@ export default function LaunchPage() {
               />
               <button
                 onClick={handleSubmit}
-                className="bg-vermillion text-soft-white px-6 py-2.5 text-xs uppercase tracking-[0.2em] font-medium hover:bg-vermillion-dark transition-colors"
+                className="btn btn-primary btn-sm"
               >
                 {t('launch.notify')}
               </button>
@@ -117,7 +117,7 @@ export default function LaunchPage() {
       {/* ─── First Look Gallery ─── */}
       <section className="bg-cream px-4 py-16 sm:py-20">
         <div className="mx-auto max-w-4xl">
-          <p className="text-center text-xs uppercase tracking-[0.3em] text-vermillion mb-2">
+          <p className="text-center text-xs uppercase tracking-eyebrow text-vermillion mb-2">
             {t('launch.gallery')}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
@@ -128,7 +128,7 @@ export default function LaunchPage() {
               >
                 <div className="text-center px-4">
                   <div className="mx-auto w-10 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
-                  <p className="text-[9px] uppercase tracking-[0.3em] text-warm-gray/40">
+                  <p className="text-[9px] uppercase tracking-eyebrow text-warm-gray/40">
                     Coming Soon
                   </p>
                   <div className="mx-auto w-10 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
@@ -145,7 +145,7 @@ export default function LaunchPage() {
           href="https://wa.me/6589308973"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-jade text-soft-white px-8 py-3 text-xs uppercase tracking-[0.2em] font-medium hover:bg-jade/90 transition-colors"
+          className="btn btn-primary btn-lg"
         >
           {t('launch.wa')}
         </a>

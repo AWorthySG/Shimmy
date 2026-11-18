@@ -20,7 +20,7 @@ export default function TagPage() {
         <div className="mx-auto max-w-3xl">
           <Link
             href="/blog"
-            className="inline-block text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors mb-6"
+            className="inline-block text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors mb-6"
           >
             {t('blog.tag.page.back')}
           </Link>
@@ -67,11 +67,7 @@ export default function TagPage() {
 
                     {/* Category badge + read time */}
                     <div className="px-5 sm:px-6 pt-5 sm:pt-6 flex items-center justify-between">
-                      <span className={`text-[9px] uppercase tracking-[0.2em] px-2 py-1 border ${
-                        post.category === 'brows'
-                          ? 'text-vermillion-dark border-vermillion/20 bg-vermillion/5'
-                          : 'text-jade border-jade/20 bg-jade/5'
-                      }`}>
+                      <span className={`tag ${post.category === 'brows' ? '' : 'tag-jade'}`}>
                         {t(post.categoryKey)}
                       </span>
                       <span className="text-[10px] text-warm-gray">
@@ -87,7 +83,7 @@ export default function TagPage() {
                       <p className="mt-3 text-sm leading-relaxed text-charcoal-light line-clamp-3">
                         {t(post.descKey)}
                       </p>
-                      <p className="mt-4 text-xs uppercase tracking-[0.15em] text-vermillion-dark group-hover:text-vermillion transition-colors">
+                      <p className="mt-4 text-xs uppercase tracking-button text-vermillion-dark group-hover:text-vermillion transition-colors">
                         {t('blog.readmore')}
                       </p>
                       <div className="mt-3 h-[1px] w-6 bg-vermillion/30 transition-all duration-500 group-hover:w-10 group-hover:bg-vermillion" />

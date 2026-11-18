@@ -59,7 +59,7 @@ function CounterItem({ stat, active }: { stat: CounterStat; active: boolean }) {
       <p className="font-serif text-3xl sm:text-4xl text-vermillion">
         {value.toLocaleString()}{stat.suffix}
       </p>
-      <p className="mt-2 text-xs sm:text-sm uppercase tracking-[0.15em] text-charcoal-light">
+      <p className="mt-2 text-xs sm:text-sm uppercase tracking-button text-charcoal-light">
         {t(stat.labelKey)}
       </p>
     </div>

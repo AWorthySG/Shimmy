@@ -118,7 +118,7 @@ export default function ServicesPage() {
       <section className="bg-gradient-to-b from-cream-dark to-cream rice-paper py-14 sm:py-20 px-4 sm:px-6 text-center">
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
+          <p className="eyebrow">
             {t("svcpage.tag")}
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
@@ -143,7 +143,7 @@ export default function ServicesPage() {
             >
               {/* Most Popular badge (Task 5) */}
               {service.popular && (
-                <span className="absolute top-0 right-0 z-20 bg-gold text-soft-white text-[10px] uppercase tracking-[0.15em] font-bold px-3 py-1.5">
+                <span className="absolute top-0 right-0 z-20 bg-gold text-soft-white text-[10px] uppercase tracking-button font-bold px-3 py-1.5">
                   {t("badge.popular")}
                 </span>
               )}
@@ -161,7 +161,7 @@ export default function ServicesPage() {
                   <div className="absolute inset-0 bg-gradient-to-br from-cream-dark/60 via-cream to-soft-white flex items-center justify-center">
                     <div className="text-center px-6">
                       <div className="mx-auto w-16 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-3" />
-                      <p className="text-[10px] uppercase tracking-[0.3em] text-warm-gray/50">
+                      <p className="text-[10px] uppercase tracking-eyebrow text-warm-gray/50">
                         {service.title}
                       </p>
                       <div className="mx-auto w-16 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-3" />
@@ -187,7 +187,7 @@ export default function ServicesPage() {
                   <p className="font-serif text-lg sm:text-xl text-vermillion">
                     {service.price}
                   </p>
-                  <p className="text-[10px] sm:text-xs uppercase tracking-[0.15em] text-warm-gray">
+                  <p className="text-[10px] sm:text-xs uppercase tracking-button text-warm-gray">
                     {service.duration}
                   </p>
                 </div>
@@ -195,7 +195,7 @@ export default function ServicesPage() {
 
               {/* Includes */}
               <div className="mt-4 sm:mt-6 border-t border-vermillion/10 pt-4 sm:pt-6">
-                <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-3">
+                <p className="text-[10px] sm:text-xs uppercase tracking-label text-vermillion-dark mb-3">
                   {t("svcpage.includes")}
                 </p>
                 <ul className="grid gap-2 sm:grid-cols-2">
@@ -250,13 +250,13 @@ export default function ServicesPage() {
               href="https://wa.me/6589308973"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-magnetic glow-pulse shine-on-hover w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vermillion px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark touch-target"
+              className="btn btn-primary btn-lg btn-magnetic glow-pulse shine-on-hover w-full sm:w-auto touch-target"
             >
               {t("cta.whatsapp")}
             </a>
             <Link
               href="/contact"
-              className="text-sm uppercase tracking-[0.15em] text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
+              className="text-sm uppercase tracking-button text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
             >
               {t("nav.contact")} →
             </Link>
@@ -269,7 +269,7 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-3xl">
           <div className="text-center mb-8 sm:mb-12">
             <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+            <p className="eyebrow">
               {t("faq.tag")}
             </p>
             <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
@@ -310,7 +310,7 @@ export default function ServicesPage() {
             href="https://wa.me/6589308973?text=Hi%2C%20I'd%20like%20the%20Full%20Shimmy%20bundle"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-gold text-soft-white font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] hover:bg-gold/90 transition-colors touch-target"
+            className="btn btn-primary btn-lg touch-target"
           >
             {t("bundle.cta")}
           </a>

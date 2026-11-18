@@ -351,10 +351,10 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
           <div className={`h-[0.5px] bg-gradient-to-l from-transparent to-vermillion/30 transition-all duration-800 ease-out ${phase === "branding" || phase === "fading" ? "w-12" : "w-0"}`} />
         </div>
 
-        <p className="font-serif text-2xl sm:text-3xl md:text-4xl tracking-[0.08em] text-charcoal">
+        <p className="font-serif text-2xl sm:text-3xl md:text-4xl tracking-wide text-charcoal">
           Brows by Shimmyhands
         </p>
-        <p className="mt-2 text-[8px] sm:text-[9px] uppercase tracking-[0.5em] text-warm-gray">
+        <p className="mt-2 text-[8px] sm:text-[9px] uppercase tracking-eyebrow text-warm-gray">
           Brow Artistry
         </p>
 

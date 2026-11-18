@@ -11,7 +11,7 @@ function PhaseDivider({ label }: { label: string }) {
   return (
     <div className="flex items-center justify-center gap-4 my-4">
       <div className="h-[1px] flex-1 max-w-[80px] bg-gradient-to-r from-transparent to-vermillion/30" />
-      <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">{label}</span>
+      <span className="eyebrow">{label}</span>
       <div className="h-[1px] flex-1 max-w-[80px] bg-gradient-to-l from-transparent to-vermillion/30" />
     </div>
   );
@@ -44,7 +44,7 @@ function TimelineItem({
         <div className="flex items-baseline gap-3 flex-wrap">
           <h3 className="font-serif text-lg sm:text-xl text-charcoal">{title}</h3>
           {time && (
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.15em] text-warm-gray">
+            <span className="text-[10px] sm:text-xs uppercase tracking-button text-warm-gray">
               {time}
             </span>
           )}
@@ -64,7 +64,7 @@ export default function ProcessPage() {
       <section className="bg-gradient-to-b from-cream-dark to-cream rice-paper py-14 sm:py-20 px-4 sm:px-6 text-center">
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
+          <p className="eyebrow">
             {t("process.tag")}
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
@@ -187,7 +187,7 @@ export default function ProcessPage() {
                 <h2 className="font-serif text-xl sm:text-2xl text-charcoal">
                   {t("process.touchup.title")}
                 </h2>
-                <span className="text-[10px] sm:text-xs uppercase tracking-[0.15em] text-warm-gray">
+                <span className="text-[10px] sm:text-xs uppercase tracking-button text-warm-gray">
                   {t("process.touchup.time")}
                 </span>
               </div>
@@ -257,7 +257,7 @@ export default function ProcessPage() {
               href="https://wa.me/6589308973"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-magnetic glow-pulse shine-on-hover inline-flex items-center justify-center gap-2 bg-vermillion px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark touch-target"
+              className="btn btn-primary btn-lg btn-magnetic glow-pulse shine-on-hover touch-target"
             >
               <svg
                 width="16"

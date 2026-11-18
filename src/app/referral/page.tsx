@@ -95,7 +95,7 @@ export default function ReferralPage() {
       <section className="bg-gradient-to-b from-cream-dark to-cream rice-paper py-14 sm:py-20 px-4 sm:px-6 text-center">
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
+          <p className="eyebrow">
             {t('referral.tag')}
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl">
@@ -140,7 +140,7 @@ export default function ReferralPage() {
                 {t('referral.form.title')}
               </h2>
               <form onSubmit={handleGenerate}>
-                <label className="block text-xs uppercase tracking-[0.15em] text-vermillion-dark mb-2">
+                <label className="block text-xs uppercase tracking-button text-vermillion-dark mb-2">
                   {t('referral.form.name')}
                 </label>
                 <input
@@ -149,13 +149,13 @@ export default function ReferralPage() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder={t('referral.form.name.placeholder')}
                   required
-                  className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none"
+                  className="field w-full"
                 />
                 {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
                 <button
                   type="submit"
                   disabled={loading || !name.trim()}
-                  className="mt-4 w-full bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.15em] transition-colors hover:bg-vermillion-dark disabled:opacity-50"
+                  className="btn btn-primary mt-4 w-full"
                 >
                   {loading ? t('referral.form.loading') : t('referral.form.submit')}
                 </button>
@@ -170,7 +170,7 @@ export default function ReferralPage() {
 
               {/* Code display */}
               <div className="bg-cream border border-vermillion/20 px-6 py-4 mb-4">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-vermillion-dark mb-1">
+                <p className="text-[10px] uppercase tracking-label text-vermillion-dark mb-1">
                   {t('referral.success.code')}
                 </p>
                 <p className="font-serif text-2xl sm:text-3xl text-charcoal tracking-wider">
@@ -187,7 +187,7 @@ export default function ReferralPage() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={handleCopy}
-                  className="flex-1 border border-vermillion/20 text-charcoal py-3 text-xs uppercase tracking-[0.2em] hover:border-vermillion/50 transition-colors"
+                  className="flex-1 border border-vermillion/20 text-charcoal py-3 text-xs uppercase tracking-label hover:border-vermillion/50 transition-colors"
                 >
                   {copied ? t('referral.copied') : t('referral.copy')}
                 </button>
@@ -195,7 +195,7 @@ export default function ReferralPage() {
                   href={whatsappShareUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 bg-jade text-soft-white py-3 text-xs uppercase tracking-[0.2em] hover:bg-jade/80 transition-colors text-center"
+                  className="flex-1 bg-jade text-soft-white py-3 text-xs uppercase tracking-label hover:bg-jade/80 transition-colors text-center"
                 >
                   {t('referral.share.whatsapp')}
                 </a>

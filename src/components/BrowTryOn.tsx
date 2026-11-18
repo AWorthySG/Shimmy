@@ -554,7 +554,7 @@ function HelpOverlay({
         <button
           type="button"
           onClick={onDismiss}
-          className="shrink-0 bg-vermillion px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors self-end sm:self-start"
+          className="btn btn-primary btn-sm shrink-0 self-end sm:self-start"
         >
           {t("tryon.help.dismiss")}
         </button>
@@ -1193,14 +1193,14 @@ export default function BrowTryOn() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full sm:w-auto inline-block bg-vermillion px-6 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors"
+                className="btn btn-primary w-full sm:w-auto"
               >
                 {t("tryon.upload.choose")}
               </button>
               <button
                 type="button"
                 onClick={() => setShowCameraModal(true)}
-                className="w-full sm:w-auto inline-block border border-charcoal/20 px-6 py-3 text-xs uppercase tracking-[0.2em] text-charcoal hover:border-vermillion hover:text-vermillion transition-colors"
+                className="btn btn-outline w-full sm:w-auto"
               >
                 {t("tryon.camera.start")}
               </button>
@@ -1216,7 +1216,7 @@ export default function BrowTryOn() {
             />
 
             <div className="mt-8 mx-auto max-w-md border-t border-vermillion/15 pt-5">
-              <p className="text-[11px] uppercase tracking-[0.2em] text-vermillion-dark">
+              <p className="text-[11px] uppercase tracking-label text-vermillion-dark">
                 <span aria-hidden="true" className="mr-2">
                   ✦
                 </span>
@@ -1274,7 +1274,7 @@ export default function BrowTryOn() {
           <button
             type="button"
             onClick={handleReset}
-            className="mt-6 inline-block bg-vermillion px-6 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors"
+            className="btn btn-primary mt-6"
           >
             {t("tryon.retry")}
           </button>
@@ -1361,7 +1361,7 @@ export default function BrowTryOn() {
                 {abMode && (
                   <>
                     <div className="pointer-events-none absolute inset-y-0 left-0 w-1/2 flex flex-col">
-                      <div className="m-2 self-start bg-charcoal/70 text-soft-white text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-sm">
+                      <div className="m-2 self-start bg-charcoal/70 text-soft-white text-[10px] uppercase tracking-label px-2 py-1 rounded-sm">
                         {t("tryon.ab.left")}
                         {styleA && (
                           <span className="ml-2 normal-case tracking-normal">
@@ -1375,7 +1375,7 @@ export default function BrowTryOn() {
                           <button
                             type="button"
                             onClick={() => pickWinner(styleA)}
-                            className="bg-vermillion text-soft-white text-[10px] uppercase tracking-[0.2em] px-3 py-2 rounded-sm hover:bg-vermillion-dark transition-colors"
+                            className="bg-vermillion text-soft-white text-[10px] uppercase tracking-label px-3 py-2 rounded-sm hover:bg-vermillion-dark transition-colors"
                           >
                             {t("tryon.ab.winner")}
                           </button>
@@ -1383,7 +1383,7 @@ export default function BrowTryOn() {
                       )}
                     </div>
                     <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 flex flex-col">
-                      <div className="m-2 self-end bg-charcoal/70 text-soft-white text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded-sm">
+                      <div className="m-2 self-end bg-charcoal/70 text-soft-white text-[10px] uppercase tracking-label px-2 py-1 rounded-sm">
                         {t("tryon.ab.right")}
                         {styleB && (
                           <span className="ml-2 normal-case tracking-normal">
@@ -1397,7 +1397,7 @@ export default function BrowTryOn() {
                           <button
                             type="button"
                             onClick={() => pickWinner(styleB)}
-                            className="bg-vermillion text-soft-white text-[10px] uppercase tracking-[0.2em] px-3 py-2 rounded-sm hover:bg-vermillion-dark transition-colors"
+                            className="bg-vermillion text-soft-white text-[10px] uppercase tracking-label px-3 py-2 rounded-sm hover:bg-vermillion-dark transition-colors"
                           >
                             {t("tryon.ab.winner")}
                           </button>
@@ -1419,7 +1419,7 @@ export default function BrowTryOn() {
                     : t("tryon.ab.pick")}
                 </p>
               )}
-              <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-vermillion-dark text-center">
+              <p className="mt-3 text-[11px] uppercase tracking-label text-vermillion-dark text-center">
                 <span aria-hidden="true" className="mr-2">
                   ✦
                 </span>
@@ -1434,7 +1434,7 @@ export default function BrowTryOn() {
                 type="button"
                 onClick={abMode ? exitAbMode : enterAbMode}
                 aria-pressed={abMode}
-                className={`w-full border px-4 py-2.5 text-xs uppercase tracking-[0.2em] transition-colors select-none ${
+                className={`w-full border px-4 py-2.5 text-xs uppercase tracking-label transition-colors select-none ${
                   abMode
                     ? "border-vermillion bg-vermillion/5 text-vermillion-dark"
                     : "border-charcoal/20 text-charcoal hover:border-vermillion hover:text-vermillion"
@@ -1445,7 +1445,7 @@ export default function BrowTryOn() {
 
               {/* Style picker */}
               <div>
-                <h3 className="text-[10px] uppercase tracking-[0.3em] text-vermillion-dark mb-3">
+                <h3 className="eyebrow mb-3">
                   {abMode
                     ? `${t("tryon.ab.pick")}${abPicking ? ` · ${abPicking === "A" ? t("tryon.ab.left") : t("tryon.ab.right")}` : ""}`
                     : t("tryon.styles.title")}
@@ -1476,12 +1476,12 @@ export default function BrowTryOn() {
                         }`}
                       >
                         {style.isPopular && (
-                          <span className="absolute top-1 right-1 bg-vermillion text-soft-white text-[8px] uppercase tracking-[0.1em] px-1.5 py-0.5 rounded-sm z-10">
+                          <span className="absolute top-1 right-1 bg-vermillion text-soft-white text-[8px] uppercase tracking-button px-1.5 py-0.5 rounded-sm z-10">
                             {t("tryon.popular.badge")}
                           </span>
                         )}
                         {slot && (
-                          <span className="absolute top-1 left-1 bg-charcoal text-soft-white text-[8px] uppercase tracking-[0.1em] px-1.5 py-0.5 rounded-sm z-10">
+                          <span className="absolute top-1 left-1 bg-charcoal text-soft-white text-[8px] uppercase tracking-button px-1.5 py-0.5 rounded-sm z-10">
                             {slot}
                           </span>
                         )}
@@ -1494,7 +1494,7 @@ export default function BrowTryOn() {
                         <p className="mt-1 text-[9px] leading-snug text-charcoal-light">
                           {t(style.descKey)}
                         </p>
-                        <p className="mt-1.5 text-[10px] uppercase tracking-[0.1em] text-vermillion-dark font-medium">
+                        <p className="mt-1.5 text-[10px] uppercase tracking-button text-vermillion-dark font-medium">
                           {t("tryon.price.from")} S${style.priceFrom}
                         </p>
                         <p className="text-[9px] leading-tight text-warm-gray">
@@ -1511,7 +1511,7 @@ export default function BrowTryOn() {
 
               {/* Brow colour picker */}
               <div>
-                <h3 className="text-[10px] uppercase tracking-[0.3em] text-vermillion-dark mb-3">
+                <h3 className="eyebrow mb-3">
                   {t("tryon.color.title")}
                 </h3>
                 <div className="flex flex-wrap items-center gap-3">
@@ -1561,7 +1561,7 @@ export default function BrowTryOn() {
                 />
 
                 <label className="flex items-center justify-between gap-3 cursor-pointer">
-                  <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal">
+                  <span className="text-[11px] uppercase tracking-label text-charcoal">
                     {t("tryon.control.independent")}
                   </span>
                   <input
@@ -1631,7 +1631,7 @@ export default function BrowTryOn() {
                 }}
                 aria-pressed={compareOn}
                 disabled={abMode}
-                className={`w-full border px-4 py-2.5 text-xs uppercase tracking-[0.2em] transition-colors select-none ${
+                className={`w-full border px-4 py-2.5 text-xs uppercase tracking-label transition-colors select-none ${
                   abMode
                     ? "border-charcoal/10 text-charcoal/30 cursor-not-allowed"
                     : compareOn
@@ -1648,14 +1648,14 @@ export default function BrowTryOn() {
                 <button
                   type="button"
                   onClick={handleDownload}
-                  className="inline-block bg-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors"
+                  className="btn btn-primary"
                 >
                   {t("tryon.download")}
                 </button>
                 <button
                   type="button"
                   onClick={handleShareWhatsApp}
-                  className="inline-block bg-jade px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:opacity-90 transition-opacity"
+                  className="btn btn-primary"
                 >
                   {t("tryon.share")}
                 </button>
@@ -1665,14 +1665,14 @@ export default function BrowTryOn() {
                 <button
                   type="button"
                   onClick={() => setShowSaveModal(true)}
-                  className="inline-block border border-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-vermillion hover:bg-vermillion hover:text-soft-white transition-colors"
+                  className="btn btn-secondary"
                 >
                   {t("tryon.save.title")}
                 </button>
                 <button
                   type="button"
                   onClick={handleDownloadStoryCard}
-                  className="inline-block border border-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-vermillion hover:bg-vermillion hover:text-soft-white transition-colors"
+                  className="btn btn-secondary"
                 >
                   {t("tryon.card.download")}
                 </button>
@@ -1681,7 +1681,7 @@ export default function BrowTryOn() {
               <button
                 type="button"
                 onClick={handleReset}
-                className="w-full text-xs uppercase tracking-[0.2em] text-charcoal-light hover:text-vermillion transition-colors py-2"
+                className="w-full text-xs uppercase tracking-label text-charcoal-light hover:text-vermillion transition-colors py-2"
               >
                 {t("tryon.retry")}
               </button>
@@ -1695,7 +1695,7 @@ export default function BrowTryOn() {
         <button
           type="button"
           onClick={handleBookThisLook}
-          className="fixed bottom-20 sm:bottom-4 left-1/2 -translate-x-1/2 bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.2em] shadow-lg z-40 hover:bg-vermillion-dark transition-colors rounded-sm"
+          className="btn btn-primary fixed bottom-20 sm:bottom-4 left-1/2 -translate-x-1/2 shadow-lg z-40"
         >
           {t("tryon.book.this.look")}
         </button>
@@ -1765,7 +1765,7 @@ function SliderRow({
 }) {
   return (
     <label className="block">
-      <span className="flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-charcoal">
+      <span className="flex items-center justify-between text-[11px] uppercase tracking-label text-charcoal">
         {label}
         <span className="text-vermillion-dark normal-case tracking-normal">
           {format(value)}
@@ -1852,7 +1852,7 @@ function SaveLookModal({
 
         <div className="mt-5 space-y-4">
           <label className="block">
-            <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal">
+            <span className="text-[11px] uppercase tracking-label text-charcoal">
               {t("tryon.save.name")} *
             </span>
             <input
@@ -1865,7 +1865,7 @@ function SaveLookModal({
             />
           </label>
           <label className="block">
-            <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal">
+            <span className="text-[11px] uppercase tracking-label text-charcoal">
               {t("tryon.save.phone")} *
             </span>
             <input
@@ -1878,7 +1878,7 @@ function SaveLookModal({
             />
           </label>
           <label className="block">
-            <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal">
+            <span className="text-[11px] uppercase tracking-label text-charcoal">
               {t("tryon.save.email")}
             </span>
             <input
@@ -1905,14 +1905,14 @@ function SaveLookModal({
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 border border-charcoal/20 px-4 py-3 text-xs uppercase tracking-[0.2em] text-charcoal hover:border-vermillion hover:text-vermillion transition-colors"
+            className="btn btn-outline flex-1"
           >
             {t("tryon.save.cancel")}
           </button>
           <button
             type="submit"
             disabled={submitting}
-            className="flex-1 bg-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors disabled:opacity-50"
+            className="btn btn-primary flex-1"
           >
             {submitting ? "..." : t("tryon.save.submit")}
           </button>
@@ -2107,7 +2107,7 @@ function CameraModal({
           <button
             type="button"
             onClick={handleCancel}
-            className="flex-1 border border-charcoal/20 px-4 py-3 text-xs uppercase tracking-[0.2em] text-charcoal hover:border-vermillion hover:text-vermillion transition-colors"
+            className="btn btn-outline flex-1"
           >
             {t("tryon.camera.cancel")}
           </button>
@@ -2116,7 +2116,7 @@ function CameraModal({
               type="button"
               onClick={startCountdown}
               disabled={!!error || countdown !== null}
-              className="flex-1 bg-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors disabled:opacity-50"
+              className="btn btn-primary flex-1"
             >
               {countdown !== null
                 ? t("tryon.camera.countdown")
@@ -2127,14 +2127,14 @@ function CameraModal({
               <button
                 type="button"
                 onClick={handleRetake}
-                className="flex-1 border border-vermillion text-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] hover:bg-vermillion hover:text-soft-white transition-colors"
+                className="btn btn-secondary flex-1"
               >
                 {t("tryon.camera.retake")}
               </button>
               <button
                 type="button"
                 onClick={handleConfirm}
-                className="flex-1 bg-vermillion px-4 py-3 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors"
+                className="btn btn-primary flex-1"
               >
                 {t("tryon.camera.capture")}
               </button>
@@ -2231,13 +2231,13 @@ function QuizModal({
     >
       <div className="p-6 sm:p-8">
         <div className="flex items-center justify-between">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-vermillion-dark">
+          <p className="eyebrow">
             {t("tryon.quiz.title")}
           </p>
           <button
             type="button"
             onClick={onClose}
-            className="text-[10px] uppercase tracking-[0.2em] text-charcoal-light hover:text-vermillion transition-colors"
+            className="text-[10px] uppercase tracking-label text-charcoal-light hover:text-vermillion transition-colors"
           >
             {t("tryon.quiz.skip")}
           </button>
@@ -2283,7 +2283,7 @@ function QuizModal({
                 type="button"
                 onClick={handleBack}
                 disabled={step === 0}
-                className="text-xs uppercase tracking-[0.2em] text-charcoal-light hover:text-vermillion transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                className="text-xs uppercase tracking-label text-charcoal-light hover:text-vermillion transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 {t("tryon.quiz.back")}
               </button>
@@ -2291,7 +2291,7 @@ function QuizModal({
                 type="button"
                 onClick={handleNext}
                 disabled={!answers[step]}
-                className="bg-vermillion px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors disabled:opacity-50"
+                className="btn btn-primary btn-sm"
               >
                 {t("tryon.quiz.next")}
               </button>
@@ -2323,13 +2323,13 @@ function QuizModal({
                   <p className="mt-2 text-[11px] leading-tight text-charcoal font-medium">
                     {t(s.nameKey)}
                   </p>
-                  <p className="mt-1 text-[10px] text-vermillion-dark uppercase tracking-[0.1em]">
+                  <p className="mt-1 text-[10px] text-vermillion-dark uppercase tracking-button">
                     {t("tryon.price.from")} S${s.priceFrom}
                   </p>
                   <button
                     type="button"
                     onClick={() => onPickStyle(s.id)}
-                    className="mt-auto bg-vermillion px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-soft-white hover:bg-vermillion-dark transition-colors"
+                    className="mt-auto bg-vermillion px-3 py-2 text-[10px] uppercase tracking-label text-soft-white hover:bg-vermillion-dark transition-colors"
                   >
                     {t("tryon.quiz.result.try")}
                   </button>
@@ -2341,7 +2341,7 @@ function QuizModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="text-xs uppercase tracking-[0.2em] text-charcoal-light hover:text-vermillion transition-colors"
+                className="text-xs uppercase tracking-label text-charcoal-light hover:text-vermillion transition-colors"
               >
                 {t("tryon.save.cancel")}
               </button>

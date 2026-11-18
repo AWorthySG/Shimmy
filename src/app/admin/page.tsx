@@ -194,12 +194,12 @@ export default function AdminPage() {
             value={pass}
             onChange={(e) => { setPass(e.target.value); setPassError(false) }}
             onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
-            className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50"
+            className="field w-full"
           />
           {passError && <p className="text-xs text-red-500 mt-2">Incorrect password</p>}
           <button
             onClick={handleLogin}
-            className="mt-4 w-full bg-vermillion text-soft-white py-3 text-xs uppercase tracking-[0.2em] hover:bg-vermillion-dark transition-colors"
+            className="mt-4 w-full bg-vermillion text-soft-white py-3 text-xs uppercase tracking-label hover:bg-vermillion-dark transition-colors"
           >
             Log In
           </button>
@@ -227,7 +227,7 @@ export default function AdminPage() {
             <button
               key={key}
               onClick={() => setActiveTab(key)}
-              className={`px-5 py-2.5 text-xs uppercase tracking-[0.2em] transition-colors border-b-2 -mb-px ${
+              className={`px-5 py-2.5 text-xs uppercase tracking-label transition-colors border-b-2 -mb-px ${
                 activeTab === key
                   ? 'border-vermillion text-vermillion'
                   : 'border-transparent text-warm-gray hover:text-charcoal'
@@ -251,11 +251,11 @@ export default function AdminPage() {
               type="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="border border-vermillion/20 bg-soft-white px-3 py-2 text-sm text-charcoal focus:outline-none focus:border-vermillion/50"
+              className="field"
             />
             <button
               onClick={fetchBookings}
-              className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors"
+              className="text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors"
             >
               Refresh
             </button>
@@ -283,10 +283,10 @@ export default function AdminPage() {
                     </div>
                   </div>
                   <div className="mt-3 flex items-center gap-2">
-                    <span className="text-[10px] uppercase tracking-[0.15em] text-vermillion-dark border border-vermillion/20 bg-vermillion/5 px-2 py-0.5">
+                    <span className="tag">
                       {b.service_name}
                     </span>
-                    <span className={`text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 border ${
+                    <span className={`text-[10px] uppercase tracking-button px-2 py-0.5 border ${
                       b.status === 'confirmed' ? 'text-jade border-jade/20 bg-jade/5' :
                       b.status === 'cancelled' ? 'text-red-500 border-red-200 bg-red-50' :
                       'text-gold border-gold/20 bg-gold/5'
@@ -300,14 +300,14 @@ export default function AdminPage() {
                       <button
                         onClick={() => handleStatusChange(b.id, 'confirmed')}
                         disabled={updatingId === b.id}
-                        className="text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 bg-jade text-soft-white hover:bg-jade/80 transition-colors disabled:opacity-50"
+                        className="text-[11px] uppercase tracking-button px-3 py-1.5 bg-jade text-soft-white hover:bg-jade/80 transition-colors disabled:opacity-50"
                       >
                         {updatingId === b.id ? '...' : 'Confirm'}
                       </button>
                       <button
                         onClick={() => handleStatusChange(b.id, 'cancelled')}
                         disabled={updatingId === b.id}
-                        className="text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 bg-red-500 text-soft-white hover:bg-red-600 transition-colors disabled:opacity-50"
+                        className="text-[11px] uppercase tracking-button px-3 py-1.5 bg-red-500 text-soft-white hover:bg-red-600 transition-colors disabled:opacity-50"
                       >
                         {updatingId === b.id ? '...' : 'Cancel'}
                       </button>
@@ -323,23 +323,23 @@ export default function AdminPage() {
         <div className="space-y-6">
           {/* Block date */}
           <div className="border border-vermillion/15 bg-soft-white p-5">
-            <h3 className="text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">Block a Date</h3>
+            <h3 className="text-xs uppercase tracking-label text-vermillion-dark mb-4">Block a Date</h3>
             <input
               type="date"
               value={blockDate}
               onChange={(e) => setBlockDate(e.target.value)}
-              className="w-full border border-vermillion/20 bg-soft-white px-3 py-2 text-sm text-charcoal mb-2 focus:outline-none focus:border-vermillion/50"
+              className="field w-full mb-2"
             />
             <input
               type="text"
               placeholder="Reason (optional)"
               value={blockReason}
               onChange={(e) => setBlockReason(e.target.value)}
-              className="w-full border border-vermillion/20 bg-soft-white px-3 py-2 text-sm text-charcoal mb-3 placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50"
+              className="field w-full mb-3"
             />
             <button
               onClick={handleBlockDate}
-              className="w-full bg-charcoal text-soft-white py-2.5 text-xs uppercase tracking-[0.2em] hover:bg-charcoal/80 transition-colors"
+              className="w-full bg-charcoal text-soft-white py-2.5 text-xs uppercase tracking-label hover:bg-charcoal/80 transition-colors"
             >
               Block Date
             </button>
@@ -348,7 +348,7 @@ export default function AdminPage() {
 
           {/* Quick stats */}
           <div className="border border-vermillion/15 bg-soft-white p-5">
-            <h3 className="text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">Today&apos;s Summary</h3>
+            <h3 className="text-xs uppercase tracking-label text-vermillion-dark mb-4">Today&apos;s Summary</h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-warm-gray">Total bookings</span>
@@ -376,7 +376,7 @@ export default function AdminPage() {
                 <button
                   key={p}
                   onClick={() => setAnalyticsPeriod(p)}
-                  className={`px-3 py-1.5 text-xs uppercase tracking-[0.15em] border transition-colors ${
+                  className={`px-3 py-1.5 text-xs uppercase tracking-button border transition-colors ${
                     analyticsPeriod === p
                       ? 'border-vermillion bg-vermillion text-soft-white'
                       : 'border-vermillion/20 text-charcoal hover:border-vermillion/50'
@@ -406,7 +406,7 @@ export default function AdminPage() {
                 ].map((card) => (
                   <div key={card.label} className="border border-vermillion/15 bg-soft-white p-5 text-center">
                     <p className="font-serif text-2xl text-vermillion">{card.value}</p>
-                    <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-warm-gray">{card.label}</p>
+                    <p className="mt-1 text-[10px] uppercase tracking-label text-warm-gray">{card.label}</p>
                   </div>
                 ))}
               </div>
@@ -414,7 +414,7 @@ export default function AdminPage() {
               {/* Top Pages */}
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="border border-vermillion/15 bg-soft-white p-5">
-                  <h3 className="text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">Top Pages</h3>
+                  <h3 className="text-xs uppercase tracking-label text-vermillion-dark mb-4">Top Pages</h3>
                   {analyticsData.topPages.length === 0 ? (
                     <p className="text-sm text-warm-gray">No page data.</p>
                   ) : (
@@ -422,8 +422,8 @@ export default function AdminPage() {
                       <table className="w-full">
                         <thead>
                           <tr className="border-b border-vermillion/10">
-                            <th className="text-left text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Page</th>
-                            <th className="text-right text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Count</th>
+                            <th className="text-left text-[10px] uppercase tracking-button text-warm-gray py-2">Page</th>
+                            <th className="text-right text-[10px] uppercase tracking-button text-warm-gray py-2">Count</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -438,7 +438,7 @@ export default function AdminPage() {
                       {analyticsData.topPages.length > ANALYTICS_ROWS_DEFAULT && (
                         <button
                           onClick={() => setShowAllPages((v) => !v)}
-                          className="mt-3 text-xs text-vermillion-dark hover:text-vermillion transition-colors uppercase tracking-[0.15em]"
+                          className="mt-3 text-xs text-vermillion-dark hover:text-vermillion transition-colors uppercase tracking-button"
                         >
                           {showAllPages ? 'Show less' : 'Show all'}
                         </button>
@@ -449,7 +449,7 @@ export default function AdminPage() {
 
                 {/* Top Events */}
                 <div className="border border-vermillion/15 bg-soft-white p-5">
-                  <h3 className="text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">Top Events</h3>
+                  <h3 className="text-xs uppercase tracking-label text-vermillion-dark mb-4">Top Events</h3>
                   {analyticsData.topEvents.length === 0 ? (
                     <p className="text-sm text-warm-gray">No event data.</p>
                   ) : (
@@ -457,8 +457,8 @@ export default function AdminPage() {
                       <table className="w-full">
                         <thead>
                           <tr className="border-b border-vermillion/10">
-                            <th className="text-left text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Event</th>
-                            <th className="text-right text-[10px] uppercase tracking-[0.15em] text-warm-gray py-2">Count</th>
+                            <th className="text-left text-[10px] uppercase tracking-button text-warm-gray py-2">Event</th>
+                            <th className="text-right text-[10px] uppercase tracking-button text-warm-gray py-2">Count</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -473,7 +473,7 @@ export default function AdminPage() {
                       {analyticsData.topEvents.length > ANALYTICS_ROWS_DEFAULT && (
                         <button
                           onClick={() => setShowAllEvents((v) => !v)}
-                          className="mt-3 text-xs text-vermillion-dark hover:text-vermillion transition-colors uppercase tracking-[0.15em]"
+                          className="mt-3 text-xs text-vermillion-dark hover:text-vermillion transition-colors uppercase tracking-button"
                         >
                           {showAllEvents ? 'Show less' : 'Show all'}
                         </button>
@@ -495,7 +495,7 @@ export default function AdminPage() {
             </h2>
             <button
               onClick={() => fetchLeads(leadsPage)}
-              className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors"
+              className="text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors"
             >
               Refresh
             </button>
@@ -513,12 +513,12 @@ export default function AdminPage() {
                 <table className="w-full border-collapse">
                   <thead>
                     <tr className="border-b border-vermillion/15">
-                      <th className="text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3 pr-4">Name</th>
-                      <th className="text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3 pr-4">WhatsApp</th>
-                      <th className="text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3 pr-4">Email</th>
-                      <th className="text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3 pr-4">Style</th>
-                      <th className="text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3 pr-4">Date</th>
-                      <th className="text-right text-[10px] uppercase tracking-[0.2em] text-vermillion-dark py-3">Action</th>
+                      <th className="text-left text-[10px] uppercase tracking-label text-vermillion-dark py-3 pr-4">Name</th>
+                      <th className="text-left text-[10px] uppercase tracking-label text-vermillion-dark py-3 pr-4">WhatsApp</th>
+                      <th className="text-left text-[10px] uppercase tracking-label text-vermillion-dark py-3 pr-4">Email</th>
+                      <th className="text-left text-[10px] uppercase tracking-label text-vermillion-dark py-3 pr-4">Style</th>
+                      <th className="text-left text-[10px] uppercase tracking-label text-vermillion-dark py-3 pr-4">Date</th>
+                      <th className="text-right text-[10px] uppercase tracking-label text-vermillion-dark py-3">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -541,7 +541,7 @@ export default function AdminPage() {
                           <p className="text-sm text-charcoal-light">{lead.email || '—'}</p>
                         </td>
                         <td className="py-3 pr-4">
-                          <span className="text-[10px] uppercase tracking-[0.15em] text-vermillion-dark border border-vermillion/20 bg-vermillion/5 px-2 py-0.5">
+                          <span className="tag">
                             {lead.style_name}
                           </span>
                         </td>
@@ -558,7 +558,7 @@ export default function AdminPage() {
                             href={`https://wa.me/${lead.phone.replace(/[^+\d]/g, '')}?text=${encodeURIComponent(`Hi ${lead.name}! You recently tried the ${lead.style_name} look on our brow visualizer — shall we book a consultation?`)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block text-[11px] uppercase tracking-[0.15em] px-3 py-1.5 bg-jade text-soft-white hover:bg-jade/80 transition-colors"
+                            className="inline-block text-[11px] uppercase tracking-button px-3 py-1.5 bg-jade text-soft-white hover:bg-jade/80 transition-colors"
                           >
                             Follow up
                           </a>
@@ -579,14 +579,14 @@ export default function AdminPage() {
                     <button
                       onClick={() => setLeadsPage((p) => Math.max(0, p - 1))}
                       disabled={leadsPage === 0}
-                      className="text-xs uppercase tracking-[0.15em] px-3 py-1.5 border border-vermillion/20 text-charcoal hover:border-vermillion/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="text-xs uppercase tracking-button px-3 py-1.5 border border-vermillion/20 text-charcoal hover:border-vermillion/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       Previous
                     </button>
                     <button
                       onClick={() => setLeadsPage((p) => p + 1)}
                       disabled={(leadsPage + 1) * LEADS_PER_PAGE >= leadsTotal}
-                      className="text-xs uppercase tracking-[0.15em] px-3 py-1.5 border border-vermillion/20 text-charcoal hover:border-vermillion/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="text-xs uppercase tracking-button px-3 py-1.5 border border-vermillion/20 text-charcoal hover:border-vermillion/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       Next
                     </button>

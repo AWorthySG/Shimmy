@@ -38,7 +38,7 @@ export function DarkModeToggle() {
   return (
     <button
       onClick={toggle}
-      className="text-warm-gray hover:text-vermillion transition-colors text-sm"
+      className="inline-flex min-h-11 min-w-11 items-center justify-center text-warm-gray hover:text-vermillion transition-colors text-sm"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDark ? "☀" : "☾"}

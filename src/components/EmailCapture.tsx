@@ -41,11 +41,11 @@ export default function EmailCapture() {
           placeholder={t('email.placeholder')}
           value={email}
           onChange={(e) => { setEmail(e.target.value); setError('') }}
-          className="border border-vermillion/20 bg-soft-white px-4 py-2.5 flex-1 text-sm text-charcoal placeholder:text-warm-gray/60 focus:outline-none focus:border-vermillion/50 transition-colors"
+          className="field flex-1"
         />
         <button
           onClick={handleSubmit}
-          className="btn-magnetic shine-on-hover bg-vermillion text-soft-white px-6 py-2.5 text-xs uppercase tracking-[0.2em] font-medium hover:bg-vermillion-dark transition-colors touch-target"
+          className="btn btn-primary btn-sm btn-magnetic shine-on-hover touch-target"
         >
           {t('email.cta')}
         </button>

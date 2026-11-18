@@ -80,7 +80,7 @@ export default function LoyaltyPage() {
       <section className="bg-gradient-to-b from-cream-dark to-cream rice-paper py-14 sm:py-20 px-4 sm:px-6 text-center">
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
+          <p className="eyebrow">
             {t('loyalty.tag')}
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl">
@@ -104,7 +104,7 @@ export default function LoyaltyPage() {
                 <div className="mx-auto w-12 h-12 border-2 border-gold/40 flex items-center justify-center mb-4">
                   <span className="font-serif text-xl text-gold">{visits}</span>
                 </div>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-vermillion-dark mb-2">
+                <p className="text-[10px] uppercase tracking-label text-vermillion-dark mb-2">
                   {visits} {t('loyalty.tier.visits')}
                 </p>
                 <p className="font-serif text-lg text-charcoal">
@@ -124,7 +124,7 @@ export default function LoyaltyPage() {
               {t('loyalty.check.title')}
             </h2>
             <form onSubmit={handleLookup}>
-              <label className="block text-xs uppercase tracking-[0.15em] text-vermillion-dark mb-2">
+              <label className="block text-xs uppercase tracking-button text-vermillion-dark mb-2">
                 {t('loyalty.check.phone.label')}
               </label>
               <div className="flex gap-2">
@@ -137,14 +137,14 @@ export default function LoyaltyPage() {
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder={t('loyalty.check.phone.placeholder')}
                   required
-                  className="flex-1 border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none"
+                  className="field flex-1"
                 />
               </div>
               {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
               <button
                 type="submit"
                 disabled={loading || !phone.trim()}
-                className="mt-4 w-full bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.15em] transition-colors hover:bg-vermillion-dark disabled:opacity-50"
+                className="btn btn-primary mt-4 w-full"
               >
                 {loading ? t('loyalty.check.loading') : t('loyalty.check.submit')}
               </button>
@@ -159,7 +159,7 @@ export default function LoyaltyPage() {
                 href="https://wa.me/6589308973"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-block bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.15em] transition-colors hover:bg-vermillion-dark"
+                className="btn btn-primary mt-4"
               >
                 {t('loyalty.book.first')}
               </a>
@@ -171,7 +171,7 @@ export default function LoyaltyPage() {
               {/* Stats */}
               <div className="border border-vermillion/15 bg-soft-white p-6">
                 <div className="text-center mb-6">
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-vermillion-dark mb-1">
+                  <p className="text-[10px] uppercase tracking-label text-vermillion-dark mb-1">
                     {t('loyalty.total.visits')}
                   </p>
                   <p className="font-serif text-4xl text-charcoal">{result.total}</p>
@@ -179,7 +179,7 @@ export default function LoyaltyPage() {
 
                 {/* Progress bar */}
                 <div className="mb-4">
-                  <div className="flex justify-between text-[10px] uppercase tracking-[0.15em] text-warm-gray mb-2">
+                  <div className="flex justify-between text-[10px] uppercase tracking-button text-warm-gray mb-2">
                     <span>{t('loyalty.progress.current')}</span>
                     <span>
                       {result.visitsToNext} {t('loyalty.progress.to.next')}
@@ -199,7 +199,7 @@ export default function LoyaltyPage() {
 
               {/* Visit history */}
               <div className="border border-vermillion/15 bg-soft-white p-6">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-4">
+                <h3 className="text-xs uppercase tracking-label text-vermillion-dark mb-4">
                   {t('loyalty.history.title')}
                 </h3>
                 <div className="space-y-3">
@@ -208,7 +208,7 @@ export default function LoyaltyPage() {
                       <div>
                         <p className="text-sm text-charcoal">{visit.client_name}</p>
                         {visit.service && (
-                          <span className="text-[10px] uppercase tracking-[0.15em] text-vermillion-dark border border-vermillion/20 bg-vermillion/5 px-2 py-0.5 mt-1 inline-block">
+                          <span className="tag mt-1 inline-block">
                             {visit.service}
                           </span>
                         )}

@@ -14,6 +14,7 @@ import {
 } from "@/lib/products";
 import SizeGuide from "@/components/SizeGuide";
 
+import { formatPrice } from "@/lib/format";
 export default function ProductDetailPage() {
   const { t } = useI18n();
   const { addItem } = useCart();
@@ -79,7 +80,7 @@ export default function ProductDetailPage() {
         <div className="mx-auto max-w-6xl">
           <Link
             href={`/nails/shop/${product.collectionHandle}`}
-            className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors"
+            className="text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors"
           >
             {t("shop.back.collection")}
           </Link>
@@ -162,7 +163,7 @@ export default function ProductDetailPage() {
           {/* Product info */}
           <AnimateOnScroll animation="fade-left" delay={150}>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.25em] text-warm-gray">
+              <p className="text-[10px] uppercase tracking-label text-warm-gray">
                 {product.collection}
               </p>
               <h1 className="mt-2 font-serif text-3xl sm:text-4xl text-charcoal tracking-wide">
@@ -171,11 +172,11 @@ export default function ProductDetailPage() {
 
               <div className="mt-4 flex items-center gap-3">
                 <span className="font-serif text-2xl text-vermillion-dark">
-                  ${product.price}
+                  {formatPrice(product.price)}
                 </span>
                 {product.compareAtPrice && (
                   <span className="text-base text-warm-gray line-through">
-                    ${product.compareAtPrice}
+                    {formatPrice(product.compareAtPrice)}
                   </span>
                 )}
               </div>
@@ -187,7 +188,7 @@ export default function ProductDetailPage() {
               {/* Add to Bag */}
               <button
                 onClick={handleAdd}
-                className={`mt-8 w-full sm:w-auto px-10 py-4 text-xs uppercase tracking-[0.2em] transition-all duration-300 touch-target ${
+                className={`mt-8 w-full sm:w-auto px-10 py-4 text-xs uppercase tracking-label transition-all duration-300 touch-target ${
                   added
                     ? "bg-jade/20 text-jade border border-jade/30"
                     : "bg-vermillion text-soft-white hover:bg-vermillion-dark btn-magnetic shine-on-hover glow-pulse"
@@ -202,17 +203,17 @@ export default function ProductDetailPage() {
               {(product.features.length > 0 || product.colours || product.hardware) && (
                 <div className="mt-8 flex flex-wrap gap-2">
                   {product.features.map((f) => (
-                    <span key={f} className="text-[10px] uppercase tracking-[0.1em] text-vermillion-dark border border-vermillion/20 bg-vermillion/5 px-3 py-1.5">
+                    <span key={f} className="tag">
                       {f}
                     </span>
                   ))}
                   {product.colours?.map((c) => (
-                    <span key={c} className="text-[10px] uppercase tracking-[0.1em] text-charcoal-light border border-gold/20 bg-gold/5 px-3 py-1.5">
+                    <span key={c} className="tag tag-gold">
                       {c}
                     </span>
                   ))}
                   {product.hardware?.map((h) => (
-                    <span key={h} className="text-[10px] uppercase tracking-[0.1em] text-charcoal-light border border-gold/20 bg-gold/5 px-3 py-1.5">
+                    <span key={h} className="tag tag-gold">
                       {h}
                     </span>
                   ))}
@@ -221,7 +222,7 @@ export default function ProductDetailPage() {
 
               {/* Product details */}
               <div className="mt-8 border-t border-gold/15 pt-6">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-3">
+                <h3 className="text-xs uppercase tracking-label text-vermillion-dark mb-3">
                   What&apos;s Included
                 </h3>
                 <ul className="space-y-2 text-sm text-charcoal-light">
@@ -250,7 +251,7 @@ export default function ProductDetailPage() {
                   {product.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[9px] uppercase tracking-[0.15em] text-warm-gray border border-gold/15 px-2.5 py-1"
+                      className="text-[9px] uppercase tracking-button text-warm-gray border border-gold/15 px-2.5 py-1"
                     >
                       {tag}
                     </span>
@@ -300,7 +301,7 @@ export default function ProductDetailPage() {
                           <div className="w-full h-full flex items-center justify-center">
                             <div className="text-center px-4">
                               <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
-                              <p className="text-[9px] uppercase tracking-[0.3em] text-warm-gray/40">
+                              <p className="text-[9px] uppercase tracking-eyebrow text-warm-gray/40">
                                 {relProduct.title}
                               </p>
                               <div className="mx-auto w-12 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
@@ -313,7 +314,7 @@ export default function ProductDetailPage() {
                           {relProduct.title}
                         </h3>
                         <span className="mt-2 block text-sm font-medium text-vermillion-dark">
-                          ${relProduct.price}
+                          {formatPrice(relProduct.price)}
                         </span>
                       </div>
                     </Link>

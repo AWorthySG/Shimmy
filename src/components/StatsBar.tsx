@@ -98,7 +98,7 @@ export default function StatsBar() {
           <p className="text-2xl sm:text-3xl font-serif font-bold text-charcoal">
             <AnimatedNumber target={s.target} decimals={s.decimals} suffix={s.suffix} run={hasAnimated} />
           </p>
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.15em] text-warm-gray mt-1">{t(s.labelKey)}</p>
+          <p className="text-[10px] sm:text-xs uppercase tracking-button text-warm-gray mt-1">{t(s.labelKey)}</p>
         </div>
       ))}
     </div>

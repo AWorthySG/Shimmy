@@ -19,25 +19,25 @@ export default function NotFound() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             href="/brows"
-            className="px-6 py-3 text-xs uppercase tracking-[0.15em] border border-vermillion/30 text-vermillion-dark hover:bg-vermillion hover:text-soft-white transition-colors"
+            className="btn btn-secondary"
           >
             {t("notfound.brows")}
           </Link>
           <Link
             href="/nails"
-            className="px-6 py-3 text-xs uppercase tracking-[0.15em] border border-vermillion/30 text-vermillion-dark hover:bg-vermillion hover:text-soft-white transition-colors"
+            className="btn btn-secondary"
           >
             {t("notfound.nails")}
           </Link>
           <Link
             href="/nails/shop"
-            className="px-6 py-3 text-xs uppercase tracking-[0.15em] border border-vermillion/30 text-vermillion-dark hover:bg-vermillion hover:text-soft-white transition-colors"
+            className="btn btn-secondary"
           >
             {t("notfound.shop")}
           </Link>
           <Link
             href="/contact"
-            className="px-6 py-3 text-xs uppercase tracking-[0.15em] border border-vermillion/30 text-vermillion-dark hover:bg-vermillion hover:text-soft-white transition-colors"
+            className="btn btn-secondary"
           >
             {t("notfound.contact")}
           </Link>

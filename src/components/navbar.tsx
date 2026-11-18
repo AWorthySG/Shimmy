@@ -85,7 +85,7 @@ export function Navbar() {
             <span className="font-serif text-xl sm:text-2xl tracking-wide text-charcoal">
               Shimmy
             </span>
-            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-warm-gray">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-eyebrow text-warm-gray">
               Beauty Studio
             </span>
           </div>
@@ -104,7 +104,7 @@ export function Navbar() {
               }}
               aria-haspopup="true"
               aria-expanded={browsOpen}
-              className={`flex items-center gap-1 text-sm uppercase tracking-[0.15em] transition-colors duration-300 underline-grow hover:text-vermillion ${
+              className={`flex items-center gap-1 text-sm uppercase tracking-button transition-colors duration-300 underline-grow hover:text-vermillion ${
                 pathname.startsWith("/brows") ? "text-vermillion font-medium" : "text-charcoal-light"
               }`}
             >
@@ -120,7 +120,7 @@ export function Navbar() {
                     key={href}
                     href={href}
                     role="menuitem"
-                    className={`block px-4 py-2.5 text-xs uppercase tracking-[0.12em] transition-colors hover:text-vermillion hover:bg-vermillion/5 ${
+                    className={`block px-4 py-2.5 text-xs uppercase tracking-button transition-colors hover:text-vermillion hover:bg-vermillion/5 ${
                       pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
                     }`}
                   >
@@ -142,7 +142,7 @@ export function Navbar() {
               }}
               aria-haspopup="true"
               aria-expanded={nailsOpen}
-              className={`flex items-center gap-1 text-sm uppercase tracking-[0.15em] transition-colors duration-300 underline-grow hover:text-vermillion ${
+              className={`flex items-center gap-1 text-sm uppercase tracking-button transition-colors duration-300 underline-grow hover:text-vermillion ${
                 pathname.startsWith("/nails") ? "text-vermillion font-medium" : "text-charcoal-light"
               }`}
             >
@@ -158,7 +158,7 @@ export function Navbar() {
                     key={href}
                     href={href}
                     role="menuitem"
-                    className={`block px-4 py-2.5 text-xs uppercase tracking-[0.12em] transition-colors hover:text-vermillion hover:bg-vermillion/5 ${
+                    className={`block px-4 py-2.5 text-xs uppercase tracking-button transition-colors hover:text-vermillion hover:bg-vermillion/5 ${
                       pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
                     }`}
                   >
@@ -173,7 +173,7 @@ export function Navbar() {
           <li>
             <Link
               href="/about"
-              className={`text-sm uppercase tracking-[0.15em] transition-colors duration-300 underline-grow hover:text-vermillion ${
+              className={`text-sm uppercase tracking-button transition-colors duration-300 underline-grow hover:text-vermillion ${
                 pathname === "/about" ? "text-vermillion font-medium" : "text-charcoal-light"
               }`}
             >
@@ -185,7 +185,7 @@ export function Navbar() {
           <li>
             <Link
               href="/contact"
-              className={`text-sm uppercase tracking-[0.15em] transition-colors duration-300 underline-grow hover:text-vermillion ${
+              className={`text-sm uppercase tracking-button transition-colors duration-300 underline-grow hover:text-vermillion ${
                 pathname === "/contact" ? "text-vermillion font-medium" : "text-charcoal-light"
               }`}
             >
@@ -247,7 +247,7 @@ export function Navbar() {
           {/* Language toggle */}
           <button
             onClick={toggleLocale}
-            className="text-xs uppercase tracking-[0.15em] text-charcoal-light transition-colors hover:text-vermillion touch-target px-2 py-1 border border-vermillion/20 hover:border-vermillion/50"
+            className="text-xs uppercase tracking-button text-charcoal-light transition-colors hover:text-vermillion touch-target px-2 py-1 border border-vermillion/20 hover:border-vermillion/50"
             aria-label="Toggle language"
           >
             {locale === "en" ? "中文" : "EN"}
@@ -344,7 +344,7 @@ export function Navbar() {
               <DarkModeToggle />
               <button
                 onClick={toggleLocale}
-                className="text-[10px] uppercase tracking-[0.1em] text-charcoal-light px-2 py-1.5 border border-vermillion/20 touch-target"
+                className="text-[10px] uppercase tracking-button text-charcoal-light px-2 py-1.5 border border-vermillion/20 touch-target"
                 aria-label="Toggle language"
               >
                 {locale === "en" ? "中文" : "EN"}
@@ -355,7 +355,7 @@ export function Navbar() {
           <div className="px-6 pb-8">
             {/* Brows group */}
             <div className="mb-5">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-warm-gray mb-2">{t("nav.brows")}</p>
+              <p className="text-[10px] uppercase tracking-label text-warm-gray mb-2">{t("nav.brows")}</p>
               <ul className="space-y-1">
                 {browsLinks.map(({ href, key }) => (
                   <li key={href}>
@@ -375,7 +375,7 @@ export function Navbar() {
 
             {/* Nails group */}
             <div className="mb-5">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-warm-gray mb-2">{t("nav.nails")}</p>
+              <p className="text-[10px] uppercase tracking-label text-warm-gray mb-2">{t("nav.nails")}</p>
               <ul className="space-y-1">
                 {nailsLinks.map(({ href, key }) => (
                   <li key={href}>
@@ -395,7 +395,7 @@ export function Navbar() {
 
             {/* Info group */}
             <div className="mb-6">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-warm-gray mb-2">{t("nav.mobile.info")}</p>
+              <p className="text-[10px] uppercase tracking-label text-warm-gray mb-2">{t("nav.mobile.info")}</p>
               <ul className="space-y-1">
                 {[
                   { href: "/about", key: "nav.about" },
@@ -424,14 +424,14 @@ export function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center gap-2 border border-vermillion bg-vermillion/5 px-5 py-4 text-xs uppercase tracking-[0.2em] text-vermillion-dark touch-target"
+                className="btn btn-secondary btn-lg flex touch-target"
               >
                 {t("cta.whatsapp")}
               </a>
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center bg-vermillion px-5 py-4 text-xs uppercase tracking-[0.2em] text-soft-white touch-target"
+                className="btn btn-primary btn-lg flex touch-target"
               >
                 {t("nav.book")}
               </Link>

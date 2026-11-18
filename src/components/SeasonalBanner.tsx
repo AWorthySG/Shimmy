@@ -57,7 +57,7 @@ export default function SeasonalBanner() {
             href="https://wa.me/6589308973"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] sm:text-xs uppercase tracking-[0.15em] font-bold text-vermillion hover:text-vermillion-dark transition-colors whitespace-nowrap"
+            className="text-[10px] sm:text-xs uppercase tracking-button font-bold text-vermillion hover:text-vermillion-dark transition-colors whitespace-nowrap"
           >
             {t(`seasonal.cta.${season}`)}
           </a>

@@ -37,7 +37,7 @@ export default function AboutPage() {
       <section className="bg-gradient-to-b from-cream-dark to-cream rice-paper py-14 sm:py-20 px-4 sm:px-6 text-center">
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
+          <p className="eyebrow">
             {t("aboutpage.tag")}
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
@@ -100,7 +100,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
             <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-            <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion-dark">
+            <p className="eyebrow">
               {t("aboutpage.values.tag")}
             </p>
             <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
@@ -131,7 +131,7 @@ export default function AboutPage() {
       <section className="bg-cream-dark py-16 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-4xl text-center">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-vermillion">
+          <p className="text-[10px] sm:text-xs uppercase tracking-eyebrow text-vermillion">
             {t("aboutpage.certs.tag")}
           </p>
           <h2 className="mt-4 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
@@ -172,7 +172,7 @@ export default function AboutPage() {
         </p>
         <Link
           href="/contact"
-          className="mt-6 sm:mt-8 inline-block bg-vermillion px-6 sm:px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-soft-white transition-all duration-300 hover:bg-vermillion-dark touch-target glow-pulse shine-on-hover"
+          className="btn btn-primary btn-lg mt-6 sm:mt-8 touch-target glow-pulse shine-on-hover"
         >
           {t("aboutpage.cta.btn")}
         </Link>

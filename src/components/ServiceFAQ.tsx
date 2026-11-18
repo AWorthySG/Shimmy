@@ -70,7 +70,7 @@ export default function ServiceFAQ({ serviceId }: { serviceId: string }) {
 
   return (
     <div className="mt-4 sm:mt-6 border-t border-vermillion/10 pt-4 sm:pt-6">
-      <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-vermillion-dark mb-3">
+      <p className="text-[10px] sm:text-xs uppercase tracking-label text-vermillion-dark mb-3">
         {t("faq.tag")}
       </p>
       <div>

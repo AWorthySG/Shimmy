@@ -16,7 +16,7 @@ export default function StickyBookBar({ serviceName, href }: StickyBookBarProps)
       </span>
       <a
         href={href}
-        className="shrink-0 bg-vermillion text-soft-white px-5 py-2 text-xs uppercase tracking-[0.15em] font-medium hover:bg-vermillion-dark transition-colors"
+        className="btn btn-primary btn-sm shrink-0"
       >
         {t("nav.book")}
       </a>

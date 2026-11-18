@@ -31,11 +31,11 @@ export default function RestockNotify() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="email@example.com"
-        className="flex-1 min-w-0 border border-vermillion/20 bg-soft-white px-3 py-2 text-xs text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors"
+        className="field flex-1 min-w-0"
       />
       <button
         type="submit"
-        className="shrink-0 px-4 py-2 text-[10px] uppercase tracking-[0.15em] bg-vermillion/10 text-vermillion-dark border border-vermillion/20 hover:bg-vermillion hover:text-soft-white hover:border-vermillion transition-all touch-target"
+        className="btn btn-secondary btn-sm shrink-0 touch-target"
       >
         {t("shop.restock.btn")}
       </button>

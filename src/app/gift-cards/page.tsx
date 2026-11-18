@@ -109,7 +109,7 @@ export default function GiftCardsPage() {
       <section className="bg-gradient-to-b from-cream-dark to-cream rice-paper py-14 sm:py-20 px-4 sm:px-6 text-center">
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
+          <p className="eyebrow">
             {t('gift.tag')}
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl">
@@ -133,13 +133,13 @@ export default function GiftCardsPage() {
             <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-vermillion/40" />
 
             <div>
-              <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-vermillion/80">
+              <p className="text-[9px] sm:text-[10px] uppercase tracking-eyebrow text-vermillion/80">
                 {t('gift.card.label')}
               </p>
               <h3 className="font-serif text-xl sm:text-2xl text-soft-white mt-1 tracking-wide">Shimmy</h3>
             </div>
             <div className="text-right">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-soft-white/50">{t('gift.card.value')}</p>
+              <p className="text-[10px] uppercase tracking-label text-soft-white/50">{t('gift.card.value')}</p>
               <p className="font-serif text-3xl sm:text-4xl text-gold">S${effectiveValue || '—'}</p>
             </div>
           </div>
@@ -156,7 +156,7 @@ export default function GiftCardsPage() {
               </h2>
               <form onSubmit={handlePurchase}>
                 {/* Value selector */}
-                <label className="block text-xs uppercase tracking-[0.15em] text-vermillion-dark mb-2">
+                <label className="block text-xs uppercase tracking-button text-vermillion-dark mb-2">
                   {t('gift.value.label')}
                 </label>
                 <div className="grid grid-cols-4 gap-2 mb-4">
@@ -165,7 +165,7 @@ export default function GiftCardsPage() {
                       key={v}
                       type="button"
                       onClick={() => { setSelectedValue(v); setIsCustom(false) }}
-                      className={`py-2.5 text-xs uppercase tracking-[0.1em] border transition-colors ${
+                      className={`py-2.5 text-xs uppercase tracking-button border transition-colors ${
                         !isCustom && selectedValue === v
                           ? 'border-vermillion bg-vermillion/5 text-vermillion'
                           : 'border-vermillion/20 text-charcoal hover:border-vermillion/40'
@@ -177,7 +177,7 @@ export default function GiftCardsPage() {
                   <button
                     type="button"
                     onClick={() => setIsCustom(true)}
-                    className={`py-2.5 text-xs uppercase tracking-[0.1em] border transition-colors ${
+                    className={`py-2.5 text-xs uppercase tracking-button border transition-colors ${
                       isCustom
                         ? 'border-vermillion bg-vermillion/5 text-vermillion'
                         : 'border-vermillion/20 text-charcoal hover:border-vermillion/40'
@@ -193,12 +193,12 @@ export default function GiftCardsPage() {
                     value={customValue}
                     onChange={(e) => setCustomValue(e.target.value)}
                     placeholder="S$"
-                    className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4"
+                    className="field w-full mb-4"
                   />
                 )}
 
                 {/* Your name */}
-                <label className="block text-xs uppercase tracking-[0.15em] text-vermillion-dark mb-2 mt-2">
+                <label className="block text-xs uppercase tracking-button text-vermillion-dark mb-2 mt-2">
                   {t('gift.form.your.name')}
                 </label>
                 <input
@@ -207,11 +207,11 @@ export default function GiftCardsPage() {
                   onChange={(e) => setPurchaserName(e.target.value)}
                   placeholder={t('gift.form.your.name.placeholder')}
                   required
-                  className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4"
+                  className="field w-full mb-4"
                 />
 
                 {/* Your email */}
-                <label className="block text-xs uppercase tracking-[0.15em] text-vermillion-dark mb-2">
+                <label className="block text-xs uppercase tracking-button text-vermillion-dark mb-2">
                   {t('gift.form.your.email')}
                 </label>
                 <input
@@ -220,11 +220,11 @@ export default function GiftCardsPage() {
                   onChange={(e) => setPurchaserEmail(e.target.value)}
                   placeholder={t('gift.form.your.email.placeholder')}
                   required
-                  className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4"
+                  className="field w-full mb-4"
                 />
 
                 {/* Recipient name */}
-                <label className="block text-xs uppercase tracking-[0.15em] text-vermillion-dark mb-2">
+                <label className="block text-xs uppercase tracking-button text-vermillion-dark mb-2">
                   {t('gift.form.recipient.name')}
                 </label>
                 <input
@@ -233,11 +233,11 @@ export default function GiftCardsPage() {
                   onChange={(e) => setRecipientName(e.target.value)}
                   placeholder={t('gift.form.recipient.name.placeholder')}
                   required
-                  className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4"
+                  className="field w-full mb-4"
                 />
 
                 {/* Recipient email (optional) */}
-                <label className="block text-xs uppercase tracking-[0.15em] text-vermillion-dark mb-2">
+                <label className="block text-xs uppercase tracking-button text-vermillion-dark mb-2">
                   {t('gift.form.recipient.email')}{' '}
                   <span className="text-warm-gray/60 normal-case tracking-normal">({t('gift.form.optional')})</span>
                 </label>
@@ -246,11 +246,11 @@ export default function GiftCardsPage() {
                   value={recipientEmail}
                   onChange={(e) => setRecipientEmail(e.target.value)}
                   placeholder={t('gift.form.recipient.email.placeholder')}
-                  className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4"
+                  className="field w-full mb-4"
                 />
 
                 {/* Personal message (optional) */}
-                <label className="block text-xs uppercase tracking-[0.15em] text-vermillion-dark mb-2">
+                <label className="block text-xs uppercase tracking-button text-vermillion-dark mb-2">
                   {t('gift.form.message')}{' '}
                   <span className="text-warm-gray/60 normal-case tracking-normal">({t('gift.form.optional')})</span>
                 </label>
@@ -259,7 +259,7 @@ export default function GiftCardsPage() {
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={t('gift.form.message.placeholder')}
                   rows={3}
-                  className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none mb-4 resize-none"
+                  className="field w-full mb-4 resize-none"
                 />
 
                 {purchaseError && <p className="text-xs text-red-500 mb-3">{purchaseError}</p>}
@@ -267,7 +267,7 @@ export default function GiftCardsPage() {
                 <button
                   type="submit"
                   disabled={purchaseLoading || !effectiveValue || effectiveValue <= 0}
-                  className="w-full bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.15em] transition-colors hover:bg-vermillion-dark disabled:opacity-50"
+                  className="btn btn-primary w-full"
                 >
                   {purchaseLoading ? t('gift.purchase.loading') : t('gift.purchase.submit')}
                 </button>
@@ -281,7 +281,7 @@ export default function GiftCardsPage() {
               <p className="text-sm text-warm-gray mb-6">{t('gift.purchase.success.desc')}</p>
 
               <div className="bg-cream border border-vermillion/20 px-6 py-4 mb-4">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-vermillion-dark mb-1">
+                <p className="text-[10px] uppercase tracking-label text-vermillion-dark mb-1">
                   {t('gift.purchase.success.code')}
                 </p>
                 <p className="font-serif text-2xl sm:text-3xl text-charcoal tracking-wider">
@@ -296,7 +296,7 @@ export default function GiftCardsPage() {
                 href={whatsappGiftUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block w-full bg-jade text-soft-white py-3 text-xs uppercase tracking-[0.2em] hover:bg-jade/80 transition-colors text-center"
+                className="inline-block w-full bg-jade text-soft-white py-3 text-xs uppercase tracking-label hover:bg-jade/80 transition-colors text-center"
               >
                 {t('gift.share.whatsapp')}
               </a>
@@ -313,7 +313,7 @@ export default function GiftCardsPage() {
               {t('gift.check.title')}
             </h2>
             <form onSubmit={handleCheckBalance}>
-              <label className="block text-xs uppercase tracking-[0.15em] text-vermillion-dark mb-2">
+              <label className="block text-xs uppercase tracking-button text-vermillion-dark mb-2">
                 {t('gift.check.code.label')}
               </label>
               <input
@@ -322,13 +322,13 @@ export default function GiftCardsPage() {
                 onChange={(e) => setCheckCode(e.target.value.toUpperCase())}
                 placeholder={t('gift.check.code.placeholder')}
                 required
-                className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-4 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none uppercase tracking-widest"
+                className="field w-full uppercase tracking-widest"
               />
               {checkError && <p className="text-xs text-red-500 mt-2">{checkError}</p>}
               <button
                 type="submit"
                 disabled={checkLoading || !checkCode.trim()}
-                className="mt-4 w-full bg-vermillion text-soft-white px-6 py-3 text-xs uppercase tracking-[0.15em] transition-colors hover:bg-vermillion-dark disabled:opacity-50"
+                className="btn btn-primary mt-4 w-full"
               >
                 {checkLoading ? t('gift.check.loading') : t('gift.check.submit')}
               </button>
@@ -336,7 +336,7 @@ export default function GiftCardsPage() {
 
             {checkResult && (
               <div className="mt-6 border-t border-vermillion/10 pt-6 text-center">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-vermillion-dark mb-1">
+                <p className="text-[10px] uppercase tracking-label text-vermillion-dark mb-1">
                   {t('gift.check.balance')}
                 </p>
                 <p className="font-serif text-3xl text-charcoal">
@@ -347,7 +347,7 @@ export default function GiftCardsPage() {
                   <span className="text-charcoal">{checkResult.recipient_name}</span>
                 </p>
                 <span
-                  className={`inline-block mt-2 text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 border ${
+                  className={`inline-block mt-2 text-[10px] uppercase tracking-button px-2 py-0.5 border ${
                     checkResult.is_active
                       ? 'text-jade border-jade/20 bg-jade/5'
                       : 'text-red-500 border-red-200 bg-red-50'

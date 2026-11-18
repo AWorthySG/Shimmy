@@ -20,7 +20,7 @@ export default function SizeGuide() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="mt-3 text-xs uppercase tracking-[0.15em] text-vermillion-dark underline underline-offset-4 decoration-vermillion/30 hover:decoration-vermillion transition-colors"
+        className="mt-3 text-xs uppercase tracking-button text-vermillion-dark underline underline-offset-4 decoration-vermillion/30 hover:decoration-vermillion transition-colors"
       >
         {t("shop.sizeguide")}
       </button>
@@ -37,7 +37,7 @@ export default function SizeGuide() {
             {/* Close button */}
             <button
               onClick={() => setOpen(false)}
-              className="absolute top-3 right-3 text-xs uppercase tracking-[0.15em] text-warm-gray hover:text-vermillion transition-colors"
+              className="absolute top-3 right-3 text-xs uppercase tracking-button text-warm-gray hover:text-vermillion transition-colors"
               aria-label={t("shop.sizeguide.close")}
             >
               {t("shop.sizeguide.close")}
@@ -51,10 +51,10 @@ export default function SizeGuide() {
             <table className="w-full text-sm mb-6">
               <thead>
                 <tr className="border-b border-vermillion/20">
-                  <th className="text-left text-[10px] uppercase tracking-[0.15em] text-vermillion-dark py-2">
+                  <th className="text-left text-[10px] uppercase tracking-button text-vermillion-dark py-2">
                     Size
                   </th>
-                  <th className="text-left text-[10px] uppercase tracking-[0.15em] text-vermillion-dark py-2">
+                  <th className="text-left text-[10px] uppercase tracking-button text-vermillion-dark py-2">
                     Width (mm)
                   </th>
                 </tr>
@@ -77,7 +77,7 @@ export default function SizeGuide() {
             {/* Blog link */}
             <Link
               href="/blog/how-to-choose-nail-size"
-              className="inline-block text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors"
+              className="inline-block text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors"
               onClick={() => setOpen(false)}
             >
               {t("shop.sizeguide.blog")}

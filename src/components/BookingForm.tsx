@@ -182,7 +182,7 @@ export default function BookingForm() {
         <div>
           <button
             onClick={() => setStep('service')}
-            className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
+            className="text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
           >
             {t('shop.back')}
           </button>
@@ -212,7 +212,7 @@ export default function BookingForm() {
         <div>
           <button
             onClick={() => setStep('date')}
-            className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
+            className="text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
           >
             {t('shop.back')}
           </button>
@@ -233,7 +233,7 @@ export default function BookingForm() {
               <p className="text-sm text-charcoal-light">{slotsMessage}</p>
               <button
                 onClick={() => setStep('date')}
-                className="mt-4 text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors touch-target"
+                className="mt-4 text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors touch-target"
               >
                 {t('book.step.time.another')}
               </button>
@@ -266,7 +266,7 @@ export default function BookingForm() {
         <div>
           <button
             onClick={() => setStep('time')}
-            className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
+            className="text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
           >
             {t('shop.back')}
           </button>
@@ -279,7 +279,7 @@ export default function BookingForm() {
 
           <div className="space-y-4">
             <div>
-              <label htmlFor="booking-name" className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
+              <label htmlFor="booking-name" className="block text-[10px] uppercase tracking-button text-vermillion-dark mb-1.5">
                 Name <span className="text-red-400">*</span>
               </label>
               <input
@@ -289,11 +289,11 @@ export default function BookingForm() {
                 onChange={(e) => setClientName(e.target.value)}
                 placeholder={t("book.placeholder.name")}
                 maxLength={100}
-                className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors"
+                className="field w-full"
               />
             </div>
             <div>
-              <label htmlFor="booking-phone" className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
+              <label htmlFor="booking-phone" className="block text-[10px] uppercase tracking-button text-vermillion-dark mb-1.5">
                 Phone <span className="text-red-400">*</span>
               </label>
               <input
@@ -303,11 +303,11 @@ export default function BookingForm() {
                 onChange={(e) => setClientPhone(e.target.value)}
                 placeholder={t("book.placeholder.phone")}
                 maxLength={20}
-                className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors"
+                className="field w-full"
               />
             </div>
             <div>
-              <label htmlFor="booking-email" className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
+              <label htmlFor="booking-email" className="block text-[10px] uppercase tracking-button text-vermillion-dark mb-1.5">
                 Email <span className="text-warm-gray text-[9px]">(optional)</span>
               </label>
               <input
@@ -317,11 +317,11 @@ export default function BookingForm() {
                 onChange={(e) => setClientEmail(e.target.value)}
                 placeholder={t("book.placeholder.email")}
                 maxLength={254}
-                className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors"
+                className="field w-full"
               />
             </div>
             <div>
-              <label htmlFor="booking-notes" className="block text-[10px] uppercase tracking-[0.15em] text-vermillion-dark mb-1.5">
+              <label htmlFor="booking-notes" className="block text-[10px] uppercase tracking-button text-vermillion-dark mb-1.5">
                 Notes <span className="text-warm-gray text-[9px]">(optional)</span>
               </label>
               <textarea
@@ -331,7 +331,7 @@ export default function BookingForm() {
                 placeholder={t("book.placeholder.notes")}
                 rows={3}
                 maxLength={500}
-                className="w-full border border-vermillion/20 bg-soft-white px-4 py-3 text-sm text-charcoal placeholder:text-warm-gray/50 focus:outline-none focus:border-vermillion/50 transition-colors resize-none"
+                className="field w-full resize-none"
               />
             </div>
           </div>
@@ -345,7 +345,7 @@ export default function BookingForm() {
               setError('')
               setStep('confirm')
             }}
-            className="mt-6 w-full bg-vermillion text-soft-white py-3.5 text-xs uppercase tracking-[0.2em] hover:bg-vermillion-dark transition-colors touch-target"
+            className="mt-6 w-full bg-vermillion text-soft-white py-3.5 text-xs uppercase tracking-label hover:bg-vermillion-dark transition-colors touch-target"
           >
             {t('book.review')}
           </button>
@@ -358,7 +358,7 @@ export default function BookingForm() {
         <div>
           <button
             onClick={() => setStep('details')}
-            className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
+            className="text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors mb-6 touch-target"
           >
             {t('shop.back')}
           </button>
@@ -371,38 +371,38 @@ export default function BookingForm() {
 
           <div className="border border-vermillion/15 bg-cream/30 p-5 sm:p-6 space-y-4">
             <div className="flex justify-between items-start">
-              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t("book.label.service")}</span>
+              <span className="text-[10px] uppercase tracking-button text-warm-gray">{t("book.label.service")}</span>
               <span className="text-sm text-charcoal text-right">{selectedService?.name}</span>
             </div>
             <div className="h-[1px] bg-vermillion/10" />
             <div className="flex justify-between items-start">
-              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t("book.label.date")}</span>
+              <span className="text-[10px] uppercase tracking-button text-warm-gray">{t("book.label.date")}</span>
               <span className="text-sm text-charcoal text-right">
                 {selectedDate && formatDisplayDate(selectedDate)}
               </span>
             </div>
             <div className="h-[1px] bg-vermillion/10" />
             <div className="flex justify-between items-start">
-              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t("book.label.time")}</span>
+              <span className="text-[10px] uppercase tracking-button text-warm-gray">{t("book.label.time")}</span>
               <span className="text-sm text-charcoal text-right">
                 {selectedTime && formatTime(selectedTime)} ({selectedService?.duration} min)
               </span>
             </div>
             <div className="h-[1px] bg-vermillion/10" />
             <div className="flex justify-between items-start">
-              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t('book.label.name')}</span>
+              <span className="text-[10px] uppercase tracking-button text-warm-gray">{t('book.label.name')}</span>
               <span className="text-sm text-charcoal text-right">{clientName}</span>
             </div>
             <div className="h-[1px] bg-vermillion/10" />
             <div className="flex justify-between items-start">
-              <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t('book.label.phone')}</span>
+              <span className="text-[10px] uppercase tracking-button text-warm-gray">{t('book.label.phone')}</span>
               <span className="text-sm text-charcoal text-right">{clientPhone}</span>
             </div>
             {clientEmail && (
               <>
                 <div className="h-[1px] bg-vermillion/10" />
                 <div className="flex justify-between items-start">
-                  <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t('book.label.email')}</span>
+                  <span className="text-[10px] uppercase tracking-button text-warm-gray">{t('book.label.email')}</span>
                   <span className="text-sm text-charcoal text-right">{clientEmail}</span>
                 </div>
               </>
@@ -411,7 +411,7 @@ export default function BookingForm() {
               <>
                 <div className="h-[1px] bg-vermillion/10" />
                 <div className="flex justify-between items-start">
-                  <span className="text-[10px] uppercase tracking-[0.15em] text-warm-gray">{t('book.label.notes')}</span>
+                  <span className="text-[10px] uppercase tracking-button text-warm-gray">{t('book.label.notes')}</span>
                   <span className="text-sm text-charcoal text-right max-w-[200px]">{notes}</span>
                 </div>
               </>
@@ -421,7 +421,7 @@ export default function BookingForm() {
           <button
             onClick={handleSubmit}
             disabled={submitting}
-            className="mt-6 w-full bg-vermillion text-soft-white py-3.5 text-xs uppercase tracking-[0.2em] hover:bg-vermillion-dark transition-colors touch-target disabled:opacity-50"
+            className="mt-6 w-full bg-vermillion text-soft-white py-3.5 text-xs uppercase tracking-label hover:bg-vermillion-dark transition-colors touch-target disabled:opacity-50"
           >
             {submitting ? t('book.submitting') : t('book.confirm.btn')}
           </button>
@@ -442,7 +442,7 @@ export default function BookingForm() {
             {bookingResult.message}
           </p>
           <div className="mt-6 border border-vermillion/15 bg-cream/30 p-4 inline-block">
-            <p className="text-[10px] uppercase tracking-[0.15em] text-warm-gray mb-1">
+            <p className="text-[10px] uppercase tracking-button text-warm-gray mb-1">
               {t("book.done.ref")}
             </p>
             <p className="text-sm font-medium text-charcoal">{bookingResult.id.slice(0, 8).toUpperCase()}</p>
@@ -450,7 +450,7 @@ export default function BookingForm() {
           <div className="mt-8">
             <button
               onClick={resetBooking}
-              className="text-xs uppercase tracking-[0.15em] text-vermillion-dark hover:text-vermillion transition-colors touch-target"
+              className="text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors touch-target"
             >
               {t('book.done.another')}
             </button>

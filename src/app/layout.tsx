@@ -17,14 +17,14 @@ import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import PageViewTracker from "@/components/PageViewTracker";
 
 const italiana = Italiana({
-  variable: "--font-playfair",
+  variable: "--font-display",
   subsets: ["latin"],
   weight: ["400"],
   display: "swap",
 });
 
 const lora = Lora({
-  variable: "--font-jost",
+  variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],

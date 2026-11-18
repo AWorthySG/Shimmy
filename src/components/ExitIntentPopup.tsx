@@ -119,14 +119,14 @@ export default function ExitIntentPopup() {
                   setEmail(e.target.value);
                   setError("");
                 }}
-                className="border border-vermillion/20 bg-soft-white px-4 py-2.5 text-sm text-charcoal placeholder:text-warm-gray/60 focus:outline-none focus:border-vermillion/50 transition-colors w-full"
+                className="field w-full"
               />
               {error && (
                 <p className="text-xs text-red-500">{error}</p>
               )}
               <button
                 onClick={handleSubmit}
-                className="bg-vermillion text-soft-white px-6 py-2.5 text-xs uppercase tracking-[0.2em] font-medium hover:bg-vermillion-dark transition-colors w-full"
+                className="btn btn-primary btn-sm w-full"
               >
                 Claim My $10
               </button>

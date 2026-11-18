@@ -70,19 +70,19 @@ export default function ServiceComparison() {
           <table className="w-full min-w-[600px] border-collapse">
             <thead>
               <tr className="border-b-2 border-vermillion/20">
-                <th className="py-3 px-3 text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark font-medium">
+                <th className="py-3 px-3 text-left text-[10px] uppercase tracking-label text-vermillion-dark font-medium">
                   {t('compare.title')}
                 </th>
-                <th className="py-3 px-3 text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark font-medium">
+                <th className="py-3 px-3 text-left text-[10px] uppercase tracking-label text-vermillion-dark font-medium">
                   {t('compare.duration')}
                 </th>
-                <th className="py-3 px-3 text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark font-medium">
+                <th className="py-3 px-3 text-left text-[10px] uppercase tracking-label text-vermillion-dark font-medium">
                   {t('compare.longevity')}
                 </th>
-                <th className="py-3 px-3 text-left text-[10px] uppercase tracking-[0.2em] text-vermillion-dark font-medium">
+                <th className="py-3 px-3 text-left text-[10px] uppercase tracking-label text-vermillion-dark font-medium">
                   {t('compare.skintype')}
                 </th>
-                <th className="py-3 px-3 text-right text-[10px] uppercase tracking-[0.2em] text-vermillion-dark font-medium">
+                <th className="py-3 px-3 text-right text-[10px] uppercase tracking-label text-vermillion-dark font-medium">
                   {t('compare.price')}
                 </th>
               </tr>
@@ -102,7 +102,7 @@ export default function ServiceComparison() {
                       {t(svc.titleKey)}
                     </span>
                     {svc.popular && (
-                      <span className="ml-2 inline-block bg-vermillion text-soft-white text-[9px] uppercase tracking-[0.1em] px-1.5 py-0.5">
+                      <span className="ml-2 inline-block bg-vermillion text-soft-white text-[9px] uppercase tracking-button px-1.5 py-0.5">
                         {t('badge.popular')}
                       </span>
                     )}

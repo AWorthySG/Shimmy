@@ -12,11 +12,11 @@ export default function LinksPage() {
   }, [])
 
   const links = [
-    { key: 'links.book', href: '/brows', colour: 'bg-vermillion hover:bg-vermillion-dark' },
-    { key: 'links.shop', href: '/nails/shop', colour: 'bg-vermillion hover:bg-vermillion-dark' },
-    { key: 'links.services', href: '/brows/services', colour: 'bg-charcoal/80 hover:bg-charcoal' },
-    { key: 'links.whatsapp', href: 'https://wa.me/6589308973', colour: 'bg-jade hover:bg-jade/90' },
-    { key: 'links.instagram', href: 'https://instagram.com/shimmyhands.shop', colour: 'bg-vermillion-dark hover:bg-vermillion' },
+    { key: 'links.book', href: '/brows' },
+    { key: 'links.shop', href: '/nails/shop' },
+    { key: 'links.services', href: '/brows/services' },
+    { key: 'links.whatsapp', href: 'https://wa.me/6589308973' },
+    { key: 'links.instagram', href: 'https://instagram.com/shimmyhands.shop' },
   ]
 
   return (
@@ -27,7 +27,7 @@ export default function LinksPage() {
         <a
           key={l.key}
           href={l.href}
-          className={`${l.colour} text-soft-white text-center w-full max-w-sm py-4 text-xs uppercase tracking-[0.2em] font-medium transition-colors touch-target`}
+          className="btn btn-primary btn-lg w-full max-w-sm"
         >
           {t(l.key)}
         </a>

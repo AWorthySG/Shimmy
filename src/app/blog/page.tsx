@@ -29,7 +29,7 @@ export default function BlogPage() {
       <section className="bg-gradient-to-b from-cream-dark to-cream rice-paper py-14 sm:py-20 px-4 sm:px-6 text-center">
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-vermillion-dark">
+          <p className="eyebrow">
             {t('blog.tag')}
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
@@ -67,7 +67,7 @@ export default function BlogPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t('blog.search.placeholder')}
-              className="w-full border border-vermillion/15 bg-cream/50 py-3 pl-10 pr-4 text-sm text-charcoal placeholder:text-warm-gray/60 focus:border-vermillion/40 focus:outline-none"
+              className="field w-full pl-10"
             />
           </div>
 
@@ -79,11 +79,7 @@ export default function BlogPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 text-xs uppercase tracking-[0.15em] border transition-colors duration-200 ${
-                    selectedCategory === cat
-                      ? 'bg-vermillion text-soft-white border-vermillion'
-                      : 'bg-cream/50 text-charcoal-light border-vermillion/15 hover:border-vermillion/40'
-                  }`}
+                  className={`chip ${selectedCategory === cat ? "chip-active" : ""}`}
                 >
                   {t(labelKey)}
                 </button>
@@ -118,11 +114,7 @@ export default function BlogPage() {
 
                     {/* Category badge + read time */}
                     <div className="px-5 sm:px-6 pt-5 sm:pt-6 flex items-center justify-between">
-                      <span className={`text-[9px] uppercase tracking-[0.2em] px-2 py-1 border ${
-                        post.category === 'brows'
-                          ? 'text-vermillion-dark border-vermillion/20 bg-vermillion/5'
-                          : 'text-jade border-jade/20 bg-jade/5'
-                      }`}>
+                      <span className={`tag ${post.category === 'brows' ? '' : 'tag-jade'}`}>
                         {t(post.categoryKey)}
                       </span>
                       <span className="text-[10px] text-warm-gray">
@@ -144,14 +136,14 @@ export default function BlogPage() {
                         {post.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="text-[9px] uppercase tracking-[0.1em] px-1.5 py-0.5 bg-charcoal/5 text-warm-gray"
+                            className="text-[9px] uppercase tracking-button px-1.5 py-0.5 bg-charcoal/5 text-warm-gray"
                           >
                             {tag}
                           </span>
                         ))}
                       </div>
 
-                      <p className="mt-4 text-xs uppercase tracking-[0.15em] text-vermillion-dark group-hover:text-vermillion transition-colors">
+                      <p className="mt-4 text-xs uppercase tracking-button text-vermillion-dark group-hover:text-vermillion transition-colors">
                         {t('blog.readmore')}
                       </p>
                       <div className="mt-3 h-[1px] w-6 bg-vermillion/30 transition-all duration-500 group-hover:w-10 group-hover:bg-vermillion" />

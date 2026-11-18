@@ -23,6 +23,7 @@ import {
   type GuideLines,
   type Tilt,
   irisMmPerPx,
+  suggestGuides,
   whatsappMessage,
 } from "@/lib/selfie-guide";
 
@@ -201,6 +202,8 @@ export default function BrowSelfieCamera() {
   const poseRef = useRef<FacePose | null>(null);
   /** Millimetres per pixel from the iris, for the current frame. */
   const scaleRef = useRef<number | null>(null);
+  /** Line positions found on the face in the current frame. */
+  const suggestedRef = useRef<GuideLines | null>(null);
   const guidesRef = useRef(guides);
   const passSinceRef = useRef<number | null>(null);
   const countdownRef = useRef<number | null>(null);
@@ -333,7 +336,8 @@ export default function BrowSelfieCamera() {
     const pose = poseRef.current;
     const mmPerPx = scaleRef.current;
     const tilt = tiltRef.current;
-    const g = guidesRef.current;
+    // Start the lines on the face; the customer fine-tunes them on the review screen.
+    const g = suggestedRef.current ?? guidesRef.current;
     const round = (n: number, d = 3) => Math.round(n * 10 ** d) / 10 ** d;
     const meta = {
       takenAt: new Date().toISOString(),
@@ -355,6 +359,7 @@ export default function BrowSelfieCamera() {
     encodeJpeg(canvas)
       .then((blob) => {
         if (!blob || !mountedRef.current) return;
+        setGuides(g);
         replaceShot({ blob, url: URL.createObjectURL(blob), source: "camera", checks: checksNow, meta });
         setStage("review");
         stopCamera();
@@ -389,6 +394,7 @@ export default function BrowSelfieCamera() {
 
         let pose: FacePose | null = null;
         let mmPerPx: number | null = null;
+        let placed: GuideLines | null = null;
         const lm = landmarkerRef.current;
         if (lm) {
           await lm.setOptions({ runningMode: "IMAGE" });
@@ -396,6 +402,7 @@ export default function BrowSelfieCamera() {
             const pts = lm.detect(canvas).faceLandmarks?.[0];
             pose = pts ? computePose(pts, w / h) : null;
             mmPerPx = pts ? irisMmPerPx(pts, w, h) : null;
+            placed = pts ? suggestGuides(pts) : null;
           } finally {
             await lm.setOptions({ runningMode: "VIDEO" });
           }
@@ -405,7 +412,7 @@ export default function BrowSelfieCamera() {
         if (!blob) throw new Error("encode failed");
 
         const round = (n: number, d = 3) => Math.round(n * 10 ** d) / 10 ** d;
-        const g = guidesRef.current;
+        const g = placed ?? guidesRef.current;
         const meta = {
           takenAt: new Date(file.lastModified || Date.now()).toISOString(),
           source: "library",
@@ -423,6 +430,7 @@ export default function BrowSelfieCamera() {
         };
         if (!mountedRef.current) return;
         setDims({ w, h });
+        setGuides(g);
         replaceShot({ blob, url: URL.createObjectURL(blob), source: "library", checks: checksNow, meta });
         setStage("review");
       } catch (err) {
@@ -472,6 +480,7 @@ export default function BrowSelfieCamera() {
           const pts = res.faceLandmarks?.[0];
           poseRef.current = pts ? computePose(pts, v.videoWidth / v.videoHeight) : null;
           scaleRef.current = pts ? irisMmPerPx(pts, v.videoWidth, v.videoHeight) : null;
+          suggestedRef.current = pts ? suggestGuides(pts) : null;
         } catch {
           poseRef.current = null;
         }
@@ -675,9 +684,11 @@ export default function BrowSelfieCamera() {
             ))}
           </ol>
           <div className="mt-6 rounded-lg border border-white/10 p-4 text-xs text-white/70 space-y-1.5">
-            <p><span className="text-green-400 font-semibold">Green</span>: centre of your face. Fixed.</p>
-            <p><span className="text-yellow-300 font-semibold">Yellow</span>: drag either one; both move together, mirror-image.</p>
-            <p><span className="text-red-500 font-semibold">Red</span>: drag each one separately, e.g. to your brow line and eye line.</p>
+            <p><span className="text-green-400 font-semibold">Green</span>: the centre of your face. It does not move.</p>
+            <p><span className="text-yellow-300 font-semibold">Yellow</span>: move the yellow lines until they are just touching the inner corners of your eyes. Both lines move together.</p>
+            <p><span className="text-red-500 font-semibold">Top red</span>: move it until it runs horizontally through your natural brows.</p>
+            <p><span className="text-red-500 font-semibold">Bottom red</span>: move it until it is parallel to the base of your nostrils.</p>
+            <p className="text-white/50">After the photo is taken, the lines are placed for you. Check them and adjust if needed.</p>
           </div>
           {camError && <p className="mt-4 text-sm text-red-400">{camError}</p>}
           {libraryError && <p className="mt-4 text-sm text-red-400">{libraryError}</p>}
@@ -764,6 +775,12 @@ export default function BrowSelfieCamera() {
               className={`h-full w-full object-contain ${shot.source === "camera" ? "-scale-x-100" : ""}`}
             />
             <GuideGrid guides={guides} setGuides={setGuides} />
+          </div>
+          <div className="mt-3 w-full rounded-lg border border-white/10 p-3 text-xs text-white/80 space-y-1">
+            <p className="font-semibold text-white">Check the lines before sending. Drag to adjust:</p>
+            <p><span className="text-yellow-300 font-semibold">Yellow</span>: just touching the inner corners of your eyes.</p>
+            <p><span className="text-red-500 font-semibold">Top red</span>: running horizontally through your natural brows.</p>
+            <p><span className="text-red-500 font-semibold">Bottom red</span>: parallel to the base of your nostrils.</p>
           </div>
           {shot.source === "library" && shot.checks.length > 0 && failedLabels.length === 0 && (
             <p className="mt-3 text-xs text-green-300">This photo passed the straightness checks.</p>

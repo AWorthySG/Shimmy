@@ -2,36 +2,30 @@
 
 import { useState, useEffect } from 'react'
 import { useI18n } from '@/lib/i18n'
+import { getTimeLeft, parseLaunchDate, type TimeLeft } from '@/lib/countdown'
 
-function getTimeLeft(target: Date) {
-  const now = new Date().getTime()
-  const diff = target.getTime() - now
-
-  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }
-
-  return {
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((diff / (1000 * 60)) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
-  }
-}
-
-// Demo: 30 days from now
-const LAUNCH_DATE = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+// The countdown shows only when NEXT_PUBLIC_LAUNCH_DATE is set in Vercel (e.g. 2026-12-01T10:00:00+08:00),
+// so visitors never see a deadline that keeps moving.
+const LAUNCH_DATE = parseLaunchDate(process.env.NEXT_PUBLIC_LAUNCH_DATE)
 
 export default function LaunchPage() {
   const { t } = useI18n()
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft(LAUNCH_DATE))
+  // Computed after mount: the server and the browser render at different times,
+  // so a server-rendered countdown would never match the first client render.
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null)
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft(getTimeLeft(LAUNCH_DATE))
-    }, 1000)
-    return () => clearInterval(interval)
+    if (!LAUNCH_DATE) return
+    const tick = () => setTimeLeft(getTimeLeft(LAUNCH_DATE))
+    const first = setTimeout(tick, 0)
+    const interval = setInterval(tick, 1000)
+    return () => {
+      clearTimeout(first)
+      clearInterval(interval)
+    }
   }, [])
 
   const handleSubmit = async () => {
@@ -52,12 +46,14 @@ export default function LaunchPage() {
     setSubmitted(true)
   }
 
-  const timerBlocks: { value: number; label: string }[] = [
-    { value: timeLeft.days, label: t('launch.days') },
-    { value: timeLeft.hours, label: t('launch.hours') },
-    { value: timeLeft.minutes, label: t('launch.minutes') },
-    { value: timeLeft.seconds, label: t('launch.seconds') },
-  ]
+  const timerBlocks: { value: number; label: string }[] = timeLeft
+    ? [
+        { value: timeLeft.days, label: t('launch.days') },
+        { value: timeLeft.hours, label: t('launch.hours') },
+        { value: timeLeft.minutes, label: t('launch.minutes') },
+        { value: timeLeft.seconds, label: t('launch.seconds') },
+      ]
+    : []
 
   return (
     <>
@@ -73,8 +69,9 @@ export default function LaunchPage() {
           {t('launch.desc')}
         </p>
 
-        {/* Countdown Timer */}
-        <div className="flex gap-4 sm:gap-8 mb-12">
+        {/* Countdown Timer: reserve its height while it loads so the page doesn't jump */}
+        {LAUNCH_DATE && (
+        <div className="flex gap-4 sm:gap-8 mb-12 min-h-[4.5rem] sm:min-h-[6rem]">
           {timerBlocks.map((block) => (
             <div key={block.label} className="flex flex-col items-center">
               <span className="font-serif text-4xl sm:text-6xl text-gold tabular-nums">
@@ -86,6 +83,7 @@ export default function LaunchPage() {
             </div>
           ))}
         </div>
+        )}
 
         {/* Email Waitlist */}
         {submitted ? (

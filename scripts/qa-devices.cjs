@@ -143,6 +143,7 @@ const IGNORE_CONSOLE = /googletagmanager|favicon|Download the React DevTools|\[F
   }
 
   await browser.close();
+  fs.mkdirSync(S, { recursive: true });
   fs.writeFileSync(S + "/qa-issues.json", JSON.stringify(issues, null, 1));
   const real = issues.filter(([, r, m]) => !(r === "/this-page-does-not-exist" && /404/.test(m)));
   process.exitCode = real.length ? 1 : 0;

@@ -182,6 +182,7 @@ const zh: Record<string, string> = {
   "shop.restock.title": "补货时通知我",
   "shop.restock.btn": "通知我",
   "shop.restock.success": "补货时会通知你！",
+  "shop.restock.error": "无法保存你的邮箱，请重试或通过 WhatsApp 联系我们。",
 
   // ─── Services Page ───
   "svcpage.tag": "我们的服务",

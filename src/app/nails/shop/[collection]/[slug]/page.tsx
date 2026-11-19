@@ -148,7 +148,7 @@ export default function ProductDetailPage() {
                     >
                       <Image
                         src={img}
-                        alt={`${product.title} — view ${i + 1}`}
+                        alt={`${product.title}, view ${i + 1}`}
                         fill
                         className="object-cover"
                         sizes="80px"
@@ -223,7 +223,7 @@ export default function ProductDetailPage() {
               {/* Product details */}
               <div className="mt-8 border-t border-gold/15 pt-6">
                 <h3 className="text-xs uppercase tracking-label text-vermillion-dark mb-3">
-                  What&apos;s Included
+                  What&apos;s included
                 </h3>
                 <ul className="space-y-2 text-sm text-charcoal-light">
                   <li className="flex items-start gap-2">
@@ -232,11 +232,11 @@ export default function ProductDetailPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-vermillion/60 mt-0.5">✦</span>
-                    Nail glue &amp; adhesive tabs
+                    Nail glue and adhesive tabs
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-vermillion/60 mt-0.5">✦</span>
-                    Mini nail file &amp; prep pad
+                    Mini nail file and prep pad
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-vermillion/60 mt-0.5">✦</span>

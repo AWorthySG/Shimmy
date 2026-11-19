@@ -67,7 +67,7 @@ const STEPS = [
   "Hold the phone upright at eye level, arm straight out in front of you.",
   "Line the green line down the middle of your face, from forehead to chin.",
   "Look straight into the camera lens, not at the screen.",
-  "Hold still. The photo is taken automatically when every check turns green.",
+  "Hold still. The camera takes the photo by itself when every check turns green.",
 ];
 
 /* ─────────────── Guide grid overlay ─────────────── */
@@ -688,7 +688,7 @@ export default function BrowSelfieCamera() {
             <p><span className="text-yellow-300 font-semibold">Yellow</span>: move the yellow lines until they are just touching the inner corners of your eyes. Both lines move together.</p>
             <p><span className="text-red-500 font-semibold">Top red</span>: move it until it runs horizontally through your natural brows.</p>
             <p><span className="text-red-500 font-semibold">Bottom red</span>: move it until it is parallel to the base of your nostrils.</p>
-            <p className="text-white/50">After the photo is taken, the lines are placed for you. Check them and adjust if needed.</p>
+            <p className="text-white/50">After you take the photo, we place the lines for you. Check them and adjust if needed.</p>
           </div>
           {camError && <p className="mt-4 text-sm text-red-400">{camError}</p>}
           {libraryError && <p className="mt-4 text-sm text-red-400">{libraryError}</p>}
@@ -788,7 +788,7 @@ export default function BrowSelfieCamera() {
           {failedLabels.length > 0 && (
             <p className="mt-3 text-xs text-yellow-300">
               This photo did not pass: {failedLabels.join(", ")}. Measurements may be inaccurate.
-              Retaking with the camera is recommended.
+              We recommend retaking it with the camera.
             </p>
           )}
           {shot.source === "library" && shot.checks.length === 0 && (
@@ -872,7 +872,7 @@ export default function BrowSelfieCamera() {
               : ready
               ? countdown
                 ? "Hold still…"
-                : "Perfect. Hold still."
+                : "Good. Hold still."
               : (failing?.fix ?? "Position your face in the frame.")}
       </div>
 

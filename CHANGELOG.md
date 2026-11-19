@@ -21,3 +21,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `npm test` script for unit tests (`node --test`).
 - The referral reward reads S$10 on every page (one banner said S$20), and the contact page now states the studio is appointment-only with no walk-ins.
 - The contact page and Google search data now show the studio address: 37 Grace Walk, Verdana Villas, Singapore.
+- Admin sign-in is checked on the server. The password now comes only from the `ADMIN_SECRET` setting in Vercel and is no longer in the page code; a successful sign-in sets a 12-hour httpOnly session cookie. Five wrong attempts lock that address out for 15 minutes. If `ADMIN_SECRET` is not set, admin access is refused.
+- Removed the "someone just booked" pop-ups, which showed invented bookings.
+- The "Notify me when restocked" form now saves the email (one sign-up per email and product) and shows an error if saving fails. It needs the `restock_notifications` table from `supabase-schema.sql`.
+- Removed the spin-the-wheel and exit pop-ups. The S$10 welcome banner and the cookie notice remain.
+- Videos load only when scrolled near, pause when off screen, and show a still image for visitors who ask for reduced motion or data saving. Video files are 40% smaller (7.5 MB to 4.5 MB) with no visible quality change.
+- Rewrote the English copy across the site in plainer, more direct language: sentence-case headings and buttons, British spelling, and no stock marketing phrases. Prices, durations, aftercare instructions and client reviews are unchanged.
+- Nail collection prices now read "From S$45.00" instead of "From $45", matching the rest of the site.
+- Facts that disagreed across pages now match: brow longevity (microblading and embroidery 12 to 18 months, nano 18 to 24 months, ombre 2 to 3 years), lip blush true colour at week 3 to 4, avoiding caffeine and alcohol for 48 hours before, a 2 to 2.5 hour first session and a 60 to 90 minute touch-up. The booking page no longer promises an automatic deposit link.
+- The booking form shows real prices instead of "From $XXX", and try-on prices match the services page (embroidery from S$388, microblading from S$488).
+- Booking slots now match the stated session lengths (2.5 hours for most brow services, 3 hours for nano), so appointments can't overlap.

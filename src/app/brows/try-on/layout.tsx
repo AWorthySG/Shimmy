@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: '/brows/try-on' },
-  title: { absolute: "Brow Try-On | See Your Future Brows | Shimmy" },
+  title: { absolute: "Brow try-on | See your future brows | Shimmy" },
   description:
     "See how embroidery, nano, microblading or ombre powder brows would look on you. Free and instant; your photo never leaves your device.",
   openGraph: {
-    title: "Brow Try-On | See Your Future Brows | Shimmy",
+    title: "Brow try-on | See your future brows | Shimmy",
     description:
-      "Upload a photo and see how your brows would look. Free, instant, private.",
+      "Upload a photo to see how new brows would look on you. It's free and instant, and your photo stays private.",
     url: "https://www.shimmyhands.com/brows/try-on",
     siteName: "Shimmy",
     locale: "en_SG",

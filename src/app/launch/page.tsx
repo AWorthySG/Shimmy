@@ -36,7 +36,7 @@ export default function LaunchPage() {
 
   const handleSubmit = async () => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError('Please enter a valid email')
+      setError('Please enter a valid email address')
       return
     }
     setError('')
@@ -129,7 +129,7 @@ export default function LaunchPage() {
                 <div className="text-center px-4">
                   <div className="mx-auto w-10 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mb-2" />
                   <p className="text-[9px] uppercase tracking-eyebrow text-warm-gray/40">
-                    Coming Soon
+                    Coming soon
                   </p>
                   <div className="mx-auto w-10 h-[0.5px] bg-gradient-to-r from-transparent via-vermillion/20 to-transparent mt-2" />
                 </div>

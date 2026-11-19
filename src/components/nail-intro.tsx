@@ -411,7 +411,7 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
             opacity: 0, animation: isBranding ? "fadeInUp 0.3s ease-out 0.1s forwards" : "none",
           }}
         >
-          NAIL ARTISTRY
+          HANDMADE NAILS
         </text>
 
         {/* Decorative line below text */}

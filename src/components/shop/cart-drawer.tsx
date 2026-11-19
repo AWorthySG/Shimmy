@@ -21,7 +21,7 @@ export function CartDrawer() {
   // Build WhatsApp checkout message with cart contents
   const handleCheckout = () => {
     const lines = items.map(
-      (item) => `• ${item.product.title} (${item.product.collection}) × ${item.quantity} — ${formatPrice(item.product.price * item.quantity)}`
+      (item) => `• ${item.product.title} (${item.product.collection}) × ${item.quantity}: ${formatPrice(item.product.price * item.quantity)}`
     );
     const message = [
       "Hi! I'd like to order from Nails by Shimmyhands 💅",
@@ -176,7 +176,7 @@ export function CartDrawer() {
               onClick={clearCart}
               className="w-full text-[10px] uppercase tracking-label text-warm-gray hover:text-vermillion transition-colors py-2"
             >
-              Clear Bag
+              Clear bag
             </button>
           </div>
         )}

@@ -1,7 +1,7 @@
 'use client'
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react'
 
-type OverlayId = 'exit-intent' | 'spin-wheel' | 'search' | 'stories' | 'size-guide' | 'cart' | 'mobile-nav' | null
+type OverlayId = 'search' | 'stories' | 'size-guide' | 'cart' | 'mobile-nav' | null
 
 const OverlayContext = createContext<{
   activeOverlay: OverlayId

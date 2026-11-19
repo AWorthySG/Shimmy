@@ -74,7 +74,7 @@ function MiniBookingCalendar() {
                   href="/brows"
                   className="btn btn-primary btn-sm mt-3 touch-target"
                 >
-                  Book This Date
+                  Book this date
                 </Link>
               )}
             </>
@@ -232,7 +232,7 @@ export default function ContactPage() {
             {/* Mini booking calendar */}
             <div className="mt-6 sm:mt-8">
               <h3 className="text-[10px] sm:text-xs uppercase tracking-label text-vermillion-dark mb-4">
-                Check Availability
+                Check availability
               </h3>
               <MiniBookingCalendar />
             </div>

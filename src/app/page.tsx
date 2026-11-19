@@ -101,7 +101,7 @@ export default function Home() {
                 <div className="relative w-full aspect-[3/2] overflow-hidden bg-cream-dark">
                   <Image
                     src="/images/brows/brow-before-after-split.jpg"
-                    alt="Brow transformation by Shimmyhands"
+                    alt="Brows before and after a session at Shimmyhands"
                     fill
                     priority
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -131,7 +131,7 @@ export default function Home() {
                 <div className="relative w-full aspect-[3/2] overflow-hidden bg-cream-dark">
                   <Image
                     src="/images/nails/main-hero-cat-mirror.jpg"
-                    alt="Nails by Shimmyhands press-on nails — nude French tips styled with florals"
+                    alt="Nails by Shimmyhands press-on nails: nude French tips styled with florals"
                     fill
                     priority
                     className="object-cover transition-transform duration-700 group-hover:scale-105"

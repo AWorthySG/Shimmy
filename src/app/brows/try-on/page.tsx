@@ -55,10 +55,10 @@ export default function BrowTryOnPage() {
         <div className="mx-auto max-w-4xl">
           <AnimateOnScroll animation="fade-up" className="text-center">
             <p className="eyebrow">
-              How It Works
+              How it works
             </p>
             <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal">
-              Three Steps
+              Three steps
             </h2>
           </AnimateOnScroll>
 
@@ -67,17 +67,17 @@ export default function BrowTryOnPage() {
               {
                 step: "01",
                 title: "Upload",
-                desc: "Pick a clear, front-facing photo from your gallery or take a fresh one with your camera.",
+                desc: "Pick a clear, front-facing photo from your gallery, or take a new one with your camera.",
               },
               {
                 step: "02",
-                title: "Choose a Style",
-                desc: "Try nano, microblading, ombre, or embroidery — adjust thickness, colour depth, and arch position to taste.",
+                title: "Choose a style",
+                desc: "Try nano, microblading, ombre or embroidery. Adjust the thickness, colour depth and arch position until you like it.",
               },
               {
                 step: "03",
-                title: "See & Share",
-                desc: "Download your preview or send it straight to us on WhatsApp to start a consultation.",
+                title: "See and share",
+                desc: "Download your preview, or send it to us on WhatsApp to start a consultation.",
               },
             ].map((s, i) => (
               <AnimateOnScroll key={s.step} animation="fade-up" delay={i * 100}>

@@ -105,7 +105,7 @@ function ProductCard({ product }: { product: Product }) {
             <span className="inline-block text-[10px] text-red-500 font-medium mt-1">
               {t("urgency.nails")}
             </span>
-            <RestockNotify />
+            <RestockNotify productHandle={product.handle} />
           </>
         )}
 
@@ -227,7 +227,7 @@ export default function ShopPage() {
                   {c.title}
                   {collectionMinPrices[c.handle] && (
                     <span className="ml-1.5 text-[9px] opacity-70">
-                      From ${collectionMinPrices[c.handle]}
+                      From {formatPrice(collectionMinPrices[c.handle])}
                     </span>
                   )}
                 </button>
@@ -247,8 +247,8 @@ export default function ShopPage() {
                 }}
               >
                 <option value="newest">Newest</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
               </select>
             </div>
           </div>

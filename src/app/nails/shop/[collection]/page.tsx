@@ -122,7 +122,7 @@ export default function CollectionPage() {
           {/* Collection price range (Task 2) */}
           {collectionProducts.length > 0 && (
             <p className="mt-2 text-sm font-medium text-gold">
-              From ${Math.min(...collectionProducts.map(p => p.price))}
+              From {formatPrice(Math.min(...collectionProducts.map(p => p.price)))}
             </p>
           )}
           <p className="mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed text-charcoal-light max-w-lg mx-auto">

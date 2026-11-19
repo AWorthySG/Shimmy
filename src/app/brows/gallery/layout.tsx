@@ -1,7 +1,7 @@
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Brow Gallery — Real Client Results",
+  title: "Brow gallery: real client results",
   description:
     "Before-and-after photos of real Shimmy clients: nano brows, ombre powder brows and brow embroidery, each designed for the face it is on.",
   path: "/brows/gallery",

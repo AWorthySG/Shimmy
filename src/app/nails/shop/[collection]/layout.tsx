@@ -9,13 +9,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const c = getCollectionByHandle(collection);
   if (!c) return { title: "Collection not found", robots: { index: false } };
   const meta = pageMeta({
-    title: `${c.title} Press-On Nails`,
+    title: `${c.title} press-on nails`,
     description: c.description,
     path: `/nails/shop/${c.handle}`,
     image: c.image,
   });
   // Keep the section's brand suffix flowing down to product pages.
-  return { ...meta, title: { absolute: `${c.title} Press-On Nails | Shimmyhands`, template: "%s | Shimmyhands" } };
+  return { ...meta, title: { absolute: `${c.title} press-on nails | Shimmyhands`, template: "%s | Shimmyhands" } };
 }
 
 export function generateStaticParams() {

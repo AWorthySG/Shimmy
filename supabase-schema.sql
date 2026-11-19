@@ -50,3 +50,22 @@ CREATE POLICY "Anyone can read blocked dates"
   ON blocked_dates FOR SELECT
   TO anon
   USING (true);
+
+-- Restock alerts: emails waiting for a product to come back in stock.
+-- Run this block in the Supabase SQL editor before using the restock form.
+CREATE TABLE IF NOT EXISTS restock_notifications (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  email text NOT NULL CHECK (char_length(email) <= 254),
+  product_handle text NOT NULL CHECK (char_length(product_handle) <= 100),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  notified_at timestamptz,
+  UNIQUE (email, product_handle)
+);
+
+ALTER TABLE restock_notifications ENABLE ROW LEVEL SECURITY;
+
+-- Public can sign up; no public read, so the email list stays private.
+CREATE POLICY "Anyone can sign up for restock alerts"
+  ON restock_notifications FOR INSERT
+  TO anon
+  WITH CHECK (true);

@@ -1,7 +1,7 @@
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Your Wishlist",
+  title: "Your wishlist",
   description: "Press-on nail sets you have saved at Shimmyhands.",
   path: "/wishlist",
   noindex: true,

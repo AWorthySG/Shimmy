@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = getProductBySlug(slug);
   if (!p) return { title: "Product not found", robots: { index: false } };
   return pageMeta({
-    title: `${p.title} — ${formatPrice(p.price)}`,
+    title: `${p.title} (${formatPrice(p.price)})`,
     description: p.description,
     path: `/nails/shop/${p.collectionHandle}/${p.handle}`,
     image: p.images[0],

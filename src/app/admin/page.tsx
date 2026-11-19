@@ -2,9 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react'
 
-// Simple password gate — not production auth, just a basic barrier
-const ADMIN_PASS = 'shimmy2024' // TODO: Move to env var for production
-const ADMIN_HEADERS = { 'x-admin-key': ADMIN_PASS }
+// Sign-in is checked on the server (/api/admin/login), which sets an httpOnly
+// session cookie. API calls below send that cookie automatically (same origin).
 
 interface Booking {
   id: string
@@ -53,7 +52,9 @@ function formatTime(time: string): string {
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false)
   const [pass, setPass] = useState('')
-  const [passError, setPassError] = useState(false)
+  const [passError, setPassError] = useState('')
+  const [checkingSession, setCheckingSession] = useState(true)
+  const [loggingIn, setLoggingIn] = useState(false)
   const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().split('T')[0])
   const [bookings, setBookings] = useState<Booking[]>([])
   const [loading, setLoading] = useState(false)
@@ -74,22 +75,49 @@ export default function AdminPage() {
   const [showAllEvents, setShowAllEvents] = useState(false)
   const ANALYTICS_ROWS_DEFAULT = 5
 
-  const handleLogin = () => {
-    if (pass === ADMIN_PASS) {
-      setAuthed(true)
-      setPassError(false)
-    } else {
-      setPassError(true)
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/admin/login')
+      .then((res) => res.json())
+      .then((data) => { if (!cancelled) setAuthed(Boolean(data.authed)) })
+      .catch(() => {})
+      .finally(() => { if (!cancelled) setCheckingSession(false) })
+    return () => { cancelled = true }
+  }, [])
+
+  const handleLogin = async () => {
+    if (!pass || loggingIn) return
+    setLoggingIn(true)
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pass }),
+      })
+      if (res.ok) {
+        setAuthed(true)
+        setPass('')
+        setPassError('')
+      } else {
+        const data = await res.json().catch(() => ({}))
+        setPassError(data.error || 'Incorrect password')
+      }
+    } catch {
+      setPassError('Network error')
     }
+    setLoggingIn(false)
+  }
+
+  const handleLogout = async () => {
+    await fetch('/api/admin/login', { method: 'DELETE' }).catch(() => {})
+    setAuthed(false)
   }
 
   const fetchBookings = useCallback(async () => {
     if (!selectedDate) return
     setLoading(true)
     try {
-      const res = await fetch(`/api/bookings?date=${selectedDate}`, {
-        headers: ADMIN_HEADERS,
-      })
+      const res = await fetch(`/api/bookings?date=${selectedDate}`)
       const data = await res.json()
       setBookings(data.bookings || [])
     } catch {
@@ -101,9 +129,7 @@ export default function AdminPage() {
   const fetchLeads = useCallback(async (page = 0) => {
     setLeadsLoading(true)
     try {
-      const res = await fetch(`/api/admin/leads?limit=${LEADS_PER_PAGE}&offset=${page * LEADS_PER_PAGE}`, {
-        headers: ADMIN_HEADERS,
-      })
+      const res = await fetch(`/api/admin/leads?limit=${LEADS_PER_PAGE}&offset=${page * LEADS_PER_PAGE}`)
       const data = await res.json()
       setLeads(data.leads || [])
       setLeadsTotal(data.total || 0)
@@ -116,9 +142,7 @@ export default function AdminPage() {
   const fetchAnalytics = useCallback(async (period: '7d' | '30d' | '90d') => {
     setAnalyticsLoading(true)
     try {
-      const res = await fetch(`/api/analytics?period=${period}`, {
-        headers: ADMIN_HEADERS,
-      })
+      const res = await fetch(`/api/analytics?period=${period}`)
       const data = await res.json()
       setAnalyticsData(data)
     } catch {
@@ -144,7 +168,7 @@ export default function AdminPage() {
     try {
       const res = await fetch(`/api/bookings/${bookingId}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json', ...ADMIN_HEADERS },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus }),
       })
       if (res.ok) {
@@ -166,7 +190,7 @@ export default function AdminPage() {
     try {
       const res = await fetch('/api/admin/block-date', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...ADMIN_HEADERS },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ date: blockDate, reason: blockReason || null }),
       })
       if (res.ok) {
@@ -183,6 +207,10 @@ export default function AdminPage() {
     setTimeout(() => setActionMsg(''), 3000)
   }
 
+  if (checkingSession) {
+    return <div className="min-h-screen bg-cream" />
+  }
+
   if (!authed) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-cream px-4">
@@ -192,13 +220,14 @@ export default function AdminPage() {
             type="password"
             placeholder="Password"
             value={pass}
-            onChange={(e) => { setPass(e.target.value); setPassError(false) }}
+            onChange={(e) => { setPass(e.target.value); setPassError('') }}
             onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
             className="field w-full"
           />
-          {passError && <p className="text-xs text-red-500 mt-2">Incorrect password</p>}
+          {passError && <p className="text-xs text-red-500 mt-2">{passError}</p>}
           <button
             onClick={handleLogin}
+            disabled={loggingIn}
             className="mt-4 w-full bg-vermillion text-soft-white py-3 text-xs uppercase tracking-label hover:bg-vermillion-dark transition-colors"
           >
             Log In
@@ -214,7 +243,7 @@ export default function AdminPage() {
       <div className="bg-charcoal text-soft-white px-4 sm:px-6 py-4">
         <div className="mx-auto max-w-5xl flex items-center justify-between">
           <h1 className="font-serif text-xl tracking-wide">Shimmy Admin</h1>
-          <button onClick={() => setAuthed(false)} className="text-xs text-soft-white/60 hover:text-soft-white">
+          <button onClick={handleLogout} className="text-xs text-soft-white/60 hover:text-soft-white">
             Log Out
           </button>
         </div>

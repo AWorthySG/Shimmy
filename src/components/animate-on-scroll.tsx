@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 
 type Animation =
   | "fade-up"
@@ -47,6 +47,16 @@ const animationStyles: Record<Animation, { from: string; to: string }> = {
   },
 };
 
+const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
+function subscribeReducedMotion(onChange: () => void) {
+  const mq = window.matchMedia(REDUCED_MOTION);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
+function readReducedMotion() {
+  return window.matchMedia(REDUCED_MOTION).matches;
+}
+
 export function AnimateOnScroll({
   children,
   animation = "fade-up",
@@ -57,25 +67,24 @@ export function AnimateOnScroll({
   once = true,
 }: AnimateOnScrollProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  });
+  // Read reduced motion after hydration, not in a useState initialiser: the server renders
+  // "hidden", and a client-only initial value of "visible" left the hidden classes in the DOM
+  // with no observer to reveal them, so reduced-motion visitors saw blank sections.
+  const reducedMotion = useSyncExternalStore(subscribeReducedMotion, readReducedMotion, () => false);
+  const [inView, setInView] = useState(false);
+  const isVisible = reducedMotion || inView;
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-
-    // Already visible (reduced motion)
-    if (isVisible) return;
+    if (!el || reducedMotion) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setInView(true);
           if (once) observer.unobserve(el);
         } else if (!once) {
-          setIsVisible(false);
+          setInView(false);
         }
       },
       { threshold, rootMargin: "0px 0px -40px 0px" },
@@ -83,18 +92,15 @@ export function AnimateOnScroll({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [threshold, once, isVisible]);
+  }, [threshold, once, reducedMotion]);
 
   const { from, to } = animationStyles[animation];
 
   return (
     <div
       ref={ref}
-      className={`transition-all ease-out ${isVisible ? to : from} ${className}`}
-      style={{
-        transitionDuration: `${duration}ms`,
-        transitionDelay: `${delay}ms`,
-      }}
+      className={`${reducedMotion ? "" : "transition-all ease-out "}${isVisible ? to : from} ${className}`}
+      style={reducedMotion ? undefined : { transitionDuration: `${duration}ms`, transitionDelay: `${delay}ms` }}
     >
       {children}
     </div>

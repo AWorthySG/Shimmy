@@ -26,6 +26,7 @@ import {
   suggestGuides,
   whatsappMessage,
 } from "@/lib/selfie-guide";
+import { Check as CheckIcon, Close } from "@/components/icons";
 
 const MODEL_URL =
   "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task";
@@ -897,7 +898,8 @@ export default function BrowSelfieCamera() {
             key={c.id}
             className={`rounded-full px-2.5 py-1 text-[10px] ${c.ok ?"bg-green-500/20 text-green-300":"bg-red-500/20 text-red-300"}`}
           >
-            {c.ok ? "✓" : "✕"} {c.label}
+            {c.ok ? <CheckIcon className="mr-1 inline-block h-3 w-3 align-[-0.15em]" /> : <Close className="mr-1 inline-block h-3 w-3 align-[-0.15em]" />}
+            {c.label}
           </span>
         ))}
         {model === "failed" && (

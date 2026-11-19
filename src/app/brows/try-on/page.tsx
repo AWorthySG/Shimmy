@@ -5,6 +5,7 @@ import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import BrowTryOn from "@/components/BrowTryOn";
 import TryOnGallery from "@/components/TryOnGallery";
 import { useI18n } from "@/lib/i18n";
+import { Sparkle, TrailingArrow } from "@/components/icons";
 
 export default function BrowTryOnPage() {
   const { t } = useI18n();
@@ -26,9 +27,7 @@ export default function BrowTryOnPage() {
               {t("tryon.desc")}
             </p>
             <p className="mt-4 text-[11px] uppercase tracking-label text-vermillion-dark">
-              <span aria-hidden="true" className="mr-2">
-                ✦
-              </span>
+              <Sparkle className="mr-2 inline-block h-3 w-3 align-[-0.1em]" />
               {t("tryon.upload.privacy")}
             </p>
           </AnimateOnScroll>
@@ -36,11 +35,7 @@ export default function BrowTryOnPage() {
       </section>
 
       {/* Oriental divider */}
-      <div className="flex items-center justify-center gap-3 my-8">
-        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-xs">✦</span>
-        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
+      <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
       {/* ─── Visualizer ─── */}
       <section className="bg-soft-white py-10 sm:py-14 px-4 sm:px-6">
@@ -85,7 +80,7 @@ export default function BrowTryOnPage() {
                   <p className="eyebrow">
                     {s.step}
                   </p>
-                  <h3 className="mt-3 font-serif text-lg text-charcoal">
+                  <h3 className="mt-3 font-sans font-medium text-lg text-charcoal">
                     {s.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-charcoal-light">
@@ -119,7 +114,7 @@ export default function BrowTryOnPage() {
               href="/brows/services"
               className="btn btn-outline btn-lg w-full sm:w-auto"
             >
-              {t("services.viewall")}
+              {t("services.viewall")}<TrailingArrow />
             </Link>
           </div>
         </AnimateOnScroll>

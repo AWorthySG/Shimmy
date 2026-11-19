@@ -47,7 +47,6 @@ export default function SeasonalBanner() {
     <div className="bg-cream-dark text-vermillion px-4 sm:px-6 py-3 sm:py-4">
       <div className="mx-auto max-w-4xl flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
-          <span className="text-vermillion/40 text-xs shrink-0">✦</span>
           <p className="text-xs sm:text-sm font-medium truncate">
             {t(`seasonal.${season}`)}
           </p>

@@ -102,12 +102,12 @@ export default function LoyaltyPage() {
             {REWARD_TIERS.map(({ visits }, i) => (
               <div key={visits} className="border border-vermillion/15 bg-cream/30 p-6 text-center">
                 <div className="mx-auto w-12 h-12 border-2 border-gold/40 flex items-center justify-center mb-4">
-                  <span className="font-serif text-xl text-gold">{visits}</span>
+                  <span className="font-sans font-medium text-xl text-gold">{visits}</span>
                 </div>
                 <p className="text-[10px] uppercase tracking-label text-vermillion-dark mb-2">
                   {visits} {t('loyalty.tier.visits')}
                 </p>
-                <p className="font-serif text-lg text-charcoal">
+                <p className="font-sans font-medium text-lg text-charcoal">
                   {i === 0 ? t('loyalty.tier1.reward') : i === 1 ? t('loyalty.tier2.reward') : t('loyalty.tier3.reward')}
                 </p>
               </div>
@@ -120,7 +120,7 @@ export default function LoyaltyPage() {
       <section className="bg-cream py-14 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-md">
           <div className="border border-vermillion/15 bg-soft-white p-6 sm:p-8">
-            <h2 className="font-serif text-xl text-charcoal text-center mb-6">
+            <h2 className="font-sans font-medium text-xl text-charcoal text-center mb-6">
               {t('loyalty.check.title')}
             </h2>
             <form onSubmit={handleLookup}>

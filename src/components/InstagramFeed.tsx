@@ -1,6 +1,7 @@
 'use client'
 
 import { useI18n } from '@/lib/i18n'
+import { ArrowRight } from "@/components/icons";
 
 const FEED_POSTS = [
   {
@@ -95,7 +96,8 @@ export default function InstagramFeed() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors touch-target py-2"
           >
-            {t('instagram.follow')} →
+            {t('instagram.follow')}
+            <ArrowRight className="h-3.5 w-3.5" />
           </a>
         </div>
       </div>

@@ -21,7 +21,7 @@ export default function TermsPage() {
 
           {/* 1. Introduction */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">1. Introduction</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">1. Introduction</h2>
             <p>
               Welcome to Shimmy Beauty Studio. By accessing or using our website and
               services, you agree to be bound by these Terms of Service. If you do not
@@ -31,7 +31,7 @@ export default function TermsPage() {
 
           {/* 2. Services */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">2. Services</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">2. Services</h2>
             <p>
               Shimmy Beauty Studio offers eyebrow embroidery, nano brows, ombre powder
               brows, and related beauty services, as well as handcrafted press-on nails.
@@ -54,7 +54,7 @@ export default function TermsPage() {
 
           {/* 3. Products */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">3. Products</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">3. Products</h2>
             <p>
               Our press-on nail collections are handcrafted and made to order. Due to the
               nature of these products:
@@ -74,7 +74,7 @@ export default function TermsPage() {
 
           {/* 4. Booking & Payment */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">4. Booking &amp; Payment</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">4. Booking &amp; Payment</h2>
             <p>
               All bookings are confirmed via WhatsApp. Payment details will be shared
               during the booking process. Deposits may be required to secure your
@@ -85,7 +85,7 @@ export default function TermsPage() {
 
           {/* 5. Intellectual Property */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">5. Intellectual Property</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">5. Intellectual Property</h2>
             <p>
               All content on this website (including but not limited to text, images,
               graphics, logos, nail designs, and photographs) is the property of Shimmy
@@ -97,7 +97,7 @@ export default function TermsPage() {
 
           {/* 6. Limitation of Liability */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">6. Limitation of Liability</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">6. Limitation of Liability</h2>
             <p>
               Shimmy Beauty Studio provides all services with reasonable care and skill.
               However, individual results may vary due to factors such as skin type,
@@ -110,7 +110,7 @@ export default function TermsPage() {
 
           {/* 7. Changes to Terms */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">7. Changes to Terms</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">7. Changes to Terms</h2>
             <p>
               We reserve the right to update or modify these Terms of Service at any time
               without prior notice. Changes will be effective immediately upon posting to
@@ -121,7 +121,7 @@ export default function TermsPage() {
 
           {/* 8. Contact */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">8. Contact</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">8. Contact</h2>
             <p>
               If you have any questions about these Terms of Service, please reach out to
               us via WhatsApp at{" "}

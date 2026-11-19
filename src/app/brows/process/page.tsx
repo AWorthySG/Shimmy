@@ -1,8 +1,10 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
+import { Sparkle } from "@/components/icons";
 
 const appointmentSteps = [1, 2, 3, 4, 5, 6] as const;
 const healingStages = [1, 2, 3, 4] as const;
@@ -24,7 +26,7 @@ function TimelineItem({
   desc,
   isLast,
 }: {
-  number: string | number;
+  number: ReactNode;
   title: string;
   time?: string;
   desc: string;
@@ -33,7 +35,7 @@ function TimelineItem({
   return (
     <div className="relative flex gap-5 sm:gap-8">
       <div className="flex flex-col items-center shrink-0">
-        <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-vermillion/30 bg-cream text-vermillion font-serif text-base sm:text-lg">
+        <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-vermillion/30 bg-cream text-vermillion font-sans font-medium text-base sm:text-lg">
           {number}
         </div>
         {!isLast && (
@@ -42,7 +44,7 @@ function TimelineItem({
       </div>
       <div className={`pb-8 sm:pb-12 ${isLast ?"pb-0 sm:pb-0":""}`}>
         <div className="flex items-baseline gap-3 flex-wrap">
-          <h3 className="font-serif text-lg sm:text-xl text-charcoal">{title}</h3>
+          <h3 className="font-sans font-medium text-lg sm:text-xl text-charcoal">{title}</h3>
           {time && (
             <span className="text-[10px] sm:text-xs uppercase tracking-button text-warm-gray">
               {time}
@@ -163,7 +165,7 @@ export default function ProcessPage() {
                 delay={i * 80}
               >
                 <TimelineItem
-                  number="✦"
+                  number={<Sparkle className="h-4 w-4" />}
                   title={t(`process.heal.${stage}.title`)}
                   desc={t(`process.heal.${stage}.desc`)}
                   isLast={i === healingStages.length - 1}
@@ -209,7 +211,7 @@ export default function ProcessPage() {
           <div className="mt-10 grid gap-6 sm:gap-8">
             <AnimateOnScroll animation="fade-up" delay={50}>
               <div>
-                <h3 className="font-serif text-lg sm:text-xl text-charcoal">
+                <h3 className="font-sans font-medium text-lg sm:text-xl text-charcoal">
                   {t("process.longterm.title")}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-charcoal-light">
@@ -220,7 +222,7 @@ export default function ProcessPage() {
 
             <AnimateOnScroll animation="fade-up" delay={100}>
               <div>
-                <h3 className="font-serif text-lg sm:text-xl text-charcoal">
+                <h3 className="font-sans font-medium text-lg sm:text-xl text-charcoal">
                   {t("process.longterm.maintain.title")}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-charcoal-light">

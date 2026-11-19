@@ -37,7 +37,7 @@ export const en: Record<string, string> = {
   "services.ombre.title": "Ombre Powder Brows",
   "services.ombre.desc":
     "The soft, powdered look that usually takes 15 minutes to draw on each morning. Ours lasts 2 to 3 years.",
-  "services.viewall": "View all services →",
+  "services.viewall": "View all services",
 
   // ─── About Snippet (Home) ───
   "about.tag": "Why Shimmy",
@@ -47,7 +47,7 @@ export const en: Record<string, string> = {
     "We take our time. Most consultations last a few minutes. Ours can take much longer, as getting the shape right is the most important part of the process.",
   "about.p2":
     "We'll help you find the brow shape that suits your own face.",
-  "about.link": "Our story →",
+  "about.link": "Our story",
 
   // ─── Testimonials ───
   "testimonials.tag": "Kind words",
@@ -80,10 +80,10 @@ export const en: Record<string, string> = {
   "home.desc": "Brows and nails, made with the same care. We shape every detail around you, from brows that frame your face to nails that suit your style.",
   "home.brows.title": "Brows by Shimmyhands",
   "home.brows.desc": "Eyebrow embroidery designed for your face. We don't use templates. We work in fine strokes with a steady hand, so your brows still look like you.",
-  "home.brows.cta": "Explore brows →",
+  "home.brows.cta": "Explore brows",
   "home.nails.title": "Nails by Shimmyhands",
   "home.nails.desc": "Press-on nails that feel like jewellery for your fingertips. We design every set and paint every detail by hand.",
-  "home.nails.cta": "Shop nails →",
+  "home.nails.cta": "Shop nails",
   "home.cta.title.1": "Ready to",
   "home.cta.title.2": "Shimmy",
   "home.cta.desc": "Brows or nails, we'd love to hear from you.",
@@ -108,8 +108,8 @@ export const en: Record<string, string> = {
   "shop.add": "Add to bag",
   "shop.added": "Added!",
   "shop.back": "\u2190 Back",
-  "shop.back.shop": "← Back to shop",
-  "shop.back.collection": "← Back to collection",
+  "shop.back.shop": "Back to shop",
+  "shop.back.collection": "Back to collection",
   "shop.also.like": "You may also like",
   "shop.filter": "Filter by collection",
   "shop.handcrafted.tag": "Handcrafted",
@@ -132,14 +132,14 @@ export const en: Record<string, string> = {
     "Every session starts with a conversation. Before we do anything else, we take the time to work out what suits you.",
   "svcpage.includes": "What's included",
   "svcpage.detail.book": "Book online",
-  "svcpage.detail.more": "More about this service →",
-  "svcpage.detail.back": "← All brow services",
+  "svcpage.detail.more": "More about this service",
+  "svcpage.detail.back": "All brow services",
   "svcpage.detail.other": "Other services",
-  "svcpage.detail.tryon": "Try the look on your own photo first →",
+  "svcpage.detail.tryon": "Try the look on your own photo first",
   "svcpage.detail.suits": "Is it right for you?",
   "svcpage.detail.steps": "How your appointment runs",
   "svcpage.detail.aftercare": "Aftercare",
-  "svcpage.detail.aftercare.more": "Read the full aftercare guide →",
+  "svcpage.detail.aftercare.more": "Read the full aftercare guide",
   "svcpage.detail.reading": "Further reading",
   "svcpage.unsure.title": "Not sure where to start?",
   "svcpage.unsure.desc":
@@ -247,7 +247,7 @@ export const en: Record<string, string> = {
   "gallery.title": "Gallery",
   "gallery.desc":
     "Real clients and real brows, with no filters. We design every pair from scratch for the person wearing them.",
-  "gallery.ig": "See more on Instagram →",
+  "gallery.ig": "See more on Instagram",
   "gallery.ig.desc":
     "We share our latest work and behind-the-scenes moments on Instagram.",
 
@@ -292,6 +292,12 @@ export const en: Record<string, string> = {
   "footer.contact": "Get in touch",
   "footer.rights": "All rights reserved.",
   "footer.location": "Singapore",
+  "footer.visit": "Visit the studio",
+  "footer.directions": "Get directions",
+  "footer.appointment": "By appointment only. No walk-ins.",
+  "footer.hours": "Hours",
+  "footer.explore": "Explore",
+  "footer.more": "More",
 
   // ─── Cookie Consent ───
   "cookie.text": "We use cookies so the site works properly and remembers your preferences. If you stay on the site, you agree to this.",
@@ -534,21 +540,21 @@ export const en: Record<string, string> = {
   // ─── Nails Page Hardcoded ───
   "nails.bts.tag": "Behind the scenes",
   "nails.bts.title": "See how they're made",
-  "nails.collection.view": "View collection →",
+  "nails.collection.view": "View collection",
 
   // ─── Blog ───
   "blog.tag": "Care tips and guides",
   "blog.title": "Beauty journal",
   "blog.desc": "Honest guides to brow aftercare, press-on nails and the questions we get asked.",
-  "blog.readmore": "Read more →",
+  "blog.readmore": "Read more",
   "blog.readtime": "min read",
   "blog.related": "You might also like",
-  "blog.back": "← Back to journal",
+  "blog.back": "Back to journal",
   "blog.cat.brows": "Brow care",
   "blog.cat.nails": "Nail tips",
   "blog.cta": "Still have questions? Send us a message and we'll help.",
   "blog.cta.service.tag": "The service in this article",
-  "blog.cta.service.more": "Prices and details →",
+  "blog.cta.service.more": "Prices and details",
   "blog.cta.shop": "Shop press-on nails",
 
   // Article 1: Eyebrow Embroidery Aftercare
@@ -815,7 +821,7 @@ export const en: Record<string, string> = {
   "tryon.discover.title": "Try before you book",
   "tryon.discover.desc":
     "Upload a photo to see how each brow style suits you. It's free and private, and the preview is instant.",
-  "tryon.discover.cta": "Try on brow styles →",
+  "tryon.discover.cta": "Try on brow styles",
   "tryon.style.nano-soft": "Nano (soft natural)",
   "tryon.style.nano-defined": "Nano (defined)",
   "tryon.style.microblading-feathered": "Microblading (feathered)",
@@ -911,7 +917,7 @@ export const en: Record<string, string> = {
   "tryon.book.note.prefix": "Tried in visualiser:",
 
   // ─── Face shape quiz ───
-  "tryon.quiz.open": "Not sure which style? Take the 30-sec quiz →",
+  "tryon.quiz.open": "Not sure which style? Take the 30-sec quiz",
   "tryon.quiz.title": "Find your best brows",
   "tryon.quiz.subtitle":
     "Answer three quick questions and we'll suggest the styles that suit you best.",
@@ -1089,7 +1095,7 @@ export const en: Record<string, string> = {
   "blog.filter.brows": "Brows",
   "blog.filter.nails": "Nails",
   "blog.tag.page.title": "Articles tagged: {tag}",
-  "blog.tag.page.back": "← All articles",
+  "blog.tag.page.back": "All articles",
   "blog.no.results": "No articles found",
 
   // ─── FAQ Schema — Nails ───

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
+import { ImageIcon, Sparkle } from "@/components/icons";
 
 /* ──────────────────────────────────────────────
    TODO: Update these values to reflect your
@@ -58,7 +59,7 @@ export default function AboutPage() {
               └──────────────────────────────────────┘ */}
           <AnimateOnScroll animation="fade-right">
           <div className="aspect-[3/4] bg-gradient-to-br from-vermillion/10 via-cream-dark to-jade/5 flex items-center justify-center reveal-overlay">
-            <span className="text-5xl sm:text-7xl text-gold/20 animate-petal-slow">✦</span>
+            <ImageIcon className="h-12 w-12 text-gold/40" />
           </div>
           </AnimateOnScroll>
 
@@ -93,7 +94,7 @@ export default function AboutPage() {
       </section>
 
       {/* Oriental divider */}
-      <div className="flex items-center justify-center gap-3 my-8"><div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" /><span className="text-vermillion/40 text-xs">✦</span><div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" /></div>
+      <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
       {/* Values */}
       <section className="bg-cream py-16 sm:py-20 md:py-24 px-4 sm:px-6">
@@ -114,7 +115,7 @@ export default function AboutPage() {
               <div
                 className="border-l-2 border-jade/30 pl-5 sm:pl-6 py-2 transition-all duration-300 hover:border-jade"
               >
-                <h3 className="font-serif text-lg sm:text-xl text-charcoal">
+                <h3 className="font-sans font-medium text-lg sm:text-xl text-charcoal">
                   {value.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-charcoal-light">
@@ -154,7 +155,7 @@ export default function AboutPage() {
                   key={n}
                   className="flex h-16 sm:h-20 items-center justify-center border border-vermillion/15 text-[10px] sm:text-xs text-warm-gray/40"
                 >
-                  ✦
+                  <Sparkle className="h-4 w-4" />
                 </div>
               ),
             )}

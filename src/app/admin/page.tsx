@@ -242,7 +242,7 @@ export default function AdminPage() {
       {/* Header */}
       <div className="bg-charcoal text-soft-white px-4 sm:px-6 py-4">
         <div className="mx-auto max-w-5xl flex items-center justify-between">
-          <h1 className="font-serif text-xl tracking-wide">Shimmy Admin</h1>
+          <h1 className="font-sans font-medium text-xl">Shimmy Admin</h1>
           <button onClick={handleLogout} className="text-xs text-soft-white/60 hover:text-soft-white">
             Log Out
           </button>
@@ -275,7 +275,7 @@ export default function AdminPage() {
         {/* Left: Bookings view */}
         {activeTab === 'bookings' && <><div className="lg:col-span-2">
           <div className="flex items-center gap-4 mb-6">
-            <h2 className="font-serif text-xl text-charcoal">Bookings</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal">Bookings</h2>
             <input
               type="date"
               value={selectedDate}
@@ -302,7 +302,7 @@ export default function AdminPage() {
                 <div key={b.id} className="border border-vermillion/15 bg-soft-white p-4 sm:p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="font-serif text-base text-charcoal">{b.client_name}</p>
+                      <p className="font-sans font-medium text-base text-charcoal">{b.client_name}</p>
                       <p className="text-xs text-warm-gray mt-1">{b.client_phone}</p>
                       {b.client_email && <p className="text-xs text-warm-gray">{b.client_email}</p>}
                     </div>
@@ -399,7 +399,7 @@ export default function AdminPage() {
         {/* ─── Analytics tab ─── */}
         {activeTab === 'analytics' && <div className="lg:col-span-3">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-serif text-xl text-charcoal">Analytics</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal">Analytics</h2>
             <div className="flex gap-2">
               {(['7d', '30d', '90d'] as const).map((p) => (
                 <button
@@ -518,7 +518,7 @@ export default function AdminPage() {
         {/* ─── Leads tab ─── */}
         {activeTab === 'leads' && <div className="lg:col-span-3">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-serif text-xl text-charcoal">
+            <h2 className="font-sans font-medium text-xl text-charcoal">
               Try-On Leads
               {leadsTotal > 0 && <span className="ml-2 text-sm font-normal text-warm-gray">({leadsTotal} total)</span>}
             </h2>

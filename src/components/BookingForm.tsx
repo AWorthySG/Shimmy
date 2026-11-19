@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { BOOKING_SERVICES, type BookingService } from '@/lib/booking'
 import { useI18n } from '@/lib/i18n'
 import Calendar from '@/components/Calendar'
+import { ArrowRight, Check } from "@/components/icons";
 
 type Step = 'service' | 'date' | 'time' | 'details' | 'confirm' | 'done'
 
@@ -142,7 +143,7 @@ export default function BookingForm() {
       {/* Sticky service price summary */}
       {step !== 'service' && step !== 'done' && selectedService && (
         <div className="mb-6 flex items-center justify-between bg-cream/50 border border-vermillion/15 px-4 py-3 text-sm">
-          <span className="font-serif text-charcoal">{selectedService.name}</span>
+          <span className="font-sans font-medium text-charcoal">{selectedService.name}</span>
           <span className="text-xs text-warm-gray">{selectedService.duration} min · {selectedService.price}</span>
         </div>
       )}
@@ -167,12 +168,12 @@ export default function BookingForm() {
                 className="w-full flex items-center justify-between border border-vermillion/15 bg-cream/30 px-5 sm:px-6 py-4 sm:py-5 text-left transition-all duration-300 hover:border-vermillion/40 hover:shadow-md hover:shadow-vermillion/5 touch-target"
               >
                 <div>
-                  <p className="font-serif text-base sm:text-lg text-charcoal">{service.name}</p>
+                  <p className="font-sans font-medium text-base sm:text-lg text-charcoal">{service.name}</p>
                   <p className="mt-1 text-xs text-warm-gray">
                     {service.duration} min · {service.price}
                   </p>
                 </div>
-                <span className="text-vermillion text-sm">→</span>
+                <ArrowRight className="h-4 w-4 shrink-0 text-vermillion" />
               </button>
             ))}
           </div>
@@ -435,7 +436,7 @@ export default function BookingForm() {
       {step === 'done' && bookingResult && (
         <div className="text-center py-8">
           <div className="mx-auto w-14 h-14 rounded-full bg-jade/10 flex items-center justify-center mb-4">
-            <span className="text-jade text-2xl">✓</span>
+            <Check className="h-7 w-7 text-jade" />
           </div>
           <h3 className="font-serif text-xl sm:text-2xl text-charcoal mb-2">
             {t('book.done.title')}

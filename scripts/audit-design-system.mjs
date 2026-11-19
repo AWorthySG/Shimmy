@@ -49,6 +49,19 @@ const RULES = [
     re: /<(?:button|a|Link)\b(?=(?:=>|[^>])*className="(?![^"]*\b(?:btn|chip|tag)\b)[^"]*\buppercase\b[^"]*\bpx-\d)(?=(?:=>|[^>])*className="[^"]*\bpy-\d)(?:=>|[^>])*>/g,
   },
   {
+    id: "small-display-font",
+    why: "Italiana is for headings of text-2xl and up; use Lora (font-sans font-medium) for smaller headings",
+    re: /className=(?:"|\{`)(?=[^"`]*(?<![\w-])font-serif(?![\w-]))(?![^"`]*(?<![\w-])(?:\w+:)?text-[2-9]xl(?=[\s"`]))[^"`]*/g,
+    // Brand marks (the Shimmy wordmark and seal) and the intro animations.
+    exempt: ["src/components/navbar.tsx", "src/components/footer.tsx", "src/components/brow-intro.tsx", "src/components/nail-intro.tsx"],
+  },
+  {
+    id: "text-glyph-icon",
+    why: "text character used as an icon; use a component from src/components/icons.tsx",
+    re: /[✦✧◆❖✿★☆✓✕⤓]|(?:[>}]\s*[←→↑])|(?:[←→↑]\s*[<{])/g,
+    exempt: ["src/components/brow-intro.tsx", "src/components/nail-intro.tsx"],
+  },
+  {
     id: "unstyled-field",
     why: "text input or textarea without the field class",
     re: /<(?:input|textarea)\b(?!(?:=>|[^>])*type="(?:checkbox|radio|range|file|hidden|color|submit)")(?!(?:=>|[^>])*className=(?:"[^"]*|\{`[^`]*)\b(?:field|bg-charcoal[\w/-]*|bg-transparent|bg-white\/\d+)(?=[\s"`]))(?:=>|[^>])*>/g,
@@ -73,6 +86,7 @@ for (const dir of DIRS) {
     const src = fs.readFileSync(file, "utf8");
     for (const rule of RULES) {
       if (rule.colour && COLOUR_EXEMPT.includes(rel)) continue;
+      if (rule.exempt?.includes(rel)) continue;
       for (const m of src.matchAll(rule.re)) {
         const line = src.slice(0, m.index).split("\n").length;
         counts[rule.id] = (counts[rule.id] ?? 0) + 1;

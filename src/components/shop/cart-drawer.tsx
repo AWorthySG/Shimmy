@@ -6,6 +6,7 @@ import { useCart } from "@/lib/cart";
 import { useI18n } from "@/lib/i18n";
 
 import { formatPrice } from "@/lib/format";
+import { Bag } from "@/components/icons";
 export function CartDrawer() {
   const { items, removeItem, updateQuantity, clearCart, cartTotal, isCartOpen, setIsCartOpen } = useCart();
   const { t } = useI18n();
@@ -51,7 +52,7 @@ export function CartDrawer() {
       <div className="fixed top-0 right-0 z-[70] h-full w-full max-w-md bg-soft-white shadow-2xl flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-gold/15 px-6 py-4">
-          <h2 className="font-serif text-xl text-charcoal">{t("cart.title")}</h2>
+          <h2 className="font-sans font-medium text-xl text-charcoal">{t("cart.title")}</h2>
           <button
             onClick={() => setIsCartOpen(false)}
             className="text-charcoal-light hover:text-vermillion transition-colors touch-target p-2"
@@ -67,7 +68,7 @@ export function CartDrawer() {
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
-              <div className="text-4xl text-vermillion/20 mb-4">✦</div>
+              <Bag className="mb-4 h-10 w-10 text-vermillion/30" />
               <p className="text-sm text-warm-gray">{t("cart.empty")}</p>
             </div>
           ) : (
@@ -155,7 +156,7 @@ export function CartDrawer() {
               <span className="text-sm uppercase tracking-button text-charcoal-light">
                 {t("cart.subtotal")}
               </span>
-              <span className="font-serif text-lg text-charcoal">
+              <span className="font-sans font-medium text-lg text-charcoal">
                 {formatPrice(cartTotal)}
               </span>
             </div>

@@ -45,8 +45,13 @@ draws.
 
 | Role | Font | Token | Notes |
 |---|---|---|---|
-| Display (h1–h3) | Italiana | `font-serif` / `--font-display` | Light, high-contrast; never bold |
+| Display | Italiana | `font-serif` / `--font-display` | Page titles and section headings at `text-2xl` and up; never bold |
+| Small headings, card titles | Lora 500 | `font-sans font-medium` | Any heading below `text-2xl` |
 | Body and UI | Lora | `font-sans` / `--font-body` | Default on `body` |
+
+Italiana is thin and loses legibility below about 24px, so it is kept for large type. The
+audit rule `small-display-font` flags `font-serif` without a `text-2xl` or larger size. The
+Shimmy wordmark, the seal and the intro animations are exempt.
 
 Type sizes in use: `text-xs` (labels, buttons), `text-sm` (body on phones),
 `text-base` (body on desktop), `text-xl`–`text-3xl` (section headings),
@@ -100,6 +105,13 @@ Used for shop collection, colour and blog category filters.
 The small uppercase line above section and page headings, in `primary-hover`
 at 10 px (12 px from 640 px up).
 
+### Icons — `src/components/icons.tsx`
+
+One line-icon set: 24px grid, 1.5px stroke, square caps, sized to the text (`1em`) and
+coloured by `currentColor`. Use `TrailingArrow` after link text and `LeadingArrow` before
+back links. Do not use text characters (✦ ◆ ★ ✓ → ↑) as icons, and do not put arrows in
+translation strings. Brand logos (WhatsApp, Instagram) keep their own filled marks.
+
 ### Form fields — `field`
 Text inputs, emails, phone numbers and textareas: surface background, sage
 hairline border that darkens on focus, 44 px minimum height, square corners.
@@ -126,7 +138,8 @@ Exceptions: the transparent search-overlay input and inputs on dark backgrounds
 
 `npm run audit:design` scans every page and component for default-palette colours, raw
 hex values, off-scale letter-spacing, rounded corners on square components, hand-styled
-buttons and text inputs without `field`. `npm test` runs the same scan, so a pull
+buttons, text inputs without `field`, Italiana below `text-2xl` and text characters used
+as icons. `npm test` runs the same scan, so a pull
 request that breaks a rule fails its tests. The exceptions above are listed in
 `scripts/audit-design-system.mjs`.
 

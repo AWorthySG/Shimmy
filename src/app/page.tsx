@@ -7,6 +7,7 @@ import { useI18n } from "@/lib/i18n";
 import StatsBar from "@/components/StatsBar";
 import EmailCapture from "@/components/EmailCapture";
 import Stories from "@/components/Stories";
+import { Star, TrailingArrow } from "@/components/icons";
 
 export default function Home() {
   const { t } = useI18n();
@@ -19,14 +20,6 @@ export default function Home() {
         <div className="pointer-events-none absolute -top-32 -right-32 h-64 w-64 sm:h-96 sm:w-96 rounded-full bg-vermillion/5 animate-float" />
         <div className="pointer-events-none absolute -bottom-48 -left-48 h-80 w-80 sm:h-[500px] sm:w-[500px] rounded-full bg-jade/5 animate-float-reverse" />
 
-        {/* Spinning decorative star — top right */}
-        <div className="pointer-events-none absolute top-20 right-8 sm:right-20 text-vermillion/10 text-4xl sm:text-5xl animate-spin-slow animate-petal">
-          ✦
-        </div>
-        {/* Breathing decorative star — bottom left */}
-        <div className="pointer-events-none absolute bottom-24 left-6 sm:left-16 text-vermillion/10 text-3xl animate-breathe animate-petal-slow">
-          ✦
-        </div>
 
         <div className="relative z-10 max-w-3xl">
           {/* Animated ink-stroke divider */}
@@ -81,12 +74,8 @@ export default function Home() {
         <Stories />
       </section>
 
-      {/* ─── Oriental divider ─── */}
-      <div className="flex items-center justify-center gap-3 my-8">
-        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-xs">✦</span>
-        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
+      {/* Divider */}
+      <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
       {/* ─── Two Sub-Brands ─── */}
       <section className="bg-soft-white py-16 sm:py-20 md:py-24 px-4 sm:px-6">
@@ -117,7 +106,7 @@ export default function Home() {
                     href="/brows"
                     className="underline-grow mt-6 inline-block text-sm uppercase tracking-button text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
                   >
-                    {t("home.brows.cta")}
+                    {t("home.brows.cta")}<TrailingArrow />
                   </Link>
                   <div className="mx-auto mt-4 h-[1px] w-8 bg-vermillion/30 transition-all duration-500 group-hover:w-12 group-hover:bg-vermillion" />
                 </div>
@@ -147,7 +136,7 @@ export default function Home() {
                     href="/nails"
                     className="underline-grow mt-6 inline-block text-sm uppercase tracking-button text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
                   >
-                    {t("home.nails.cta")}
+                    {t("home.nails.cta")}<TrailingArrow />
                   </Link>
                   <div className="mx-auto mt-4 h-[1px] w-8 bg-vermillion/30 transition-all duration-500 group-hover:w-12 group-hover:bg-vermillion" />
                 </div>
@@ -157,12 +146,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Oriental divider ─── */}
-      <div className="flex items-center justify-center gap-3 my-8">
-        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-xs">✦</span>
-        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
+      {/* Divider */}
+      <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
       {/* ─── Testimonials ─── */}
       <section className="bg-cream py-16 sm:py-20 md:py-24 px-4 sm:px-6">
@@ -207,9 +192,7 @@ export default function Home() {
                     {/* Stars */}
                     <div className="flex gap-1 text-gold">
                       {Array.from({ length: item.rating }).map((_, i) => (
-                        <span key={i} className="text-sm transition-transform duration-300 hover:scale-125">
-                          ★
-                        </span>
+                        <Star key={i} className="h-3.5 w-3.5" />
                       ))}
                     </div>
 
@@ -238,9 +221,6 @@ export default function Home() {
       {/* ─── CTA Banner ─── */}
       <section className="relative overflow-hidden bg-gradient-to-r from-cream-dark via-cream to-cream-dark py-16 sm:py-20 px-4 sm:px-6 text-center">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--vermillion)_0%,_transparent_70%)] opacity-5" />
-        {/* Animated background stars */}
-        <div className="pointer-events-none absolute top-8 left-[15%] text-vermillion/8 text-2xl animate-spin-slow animate-petal">✦</div>
-        <div className="pointer-events-none absolute bottom-12 right-[20%] text-vermillion/8 text-3xl animate-spin-slow animate-petal-slow" style={{ animationDirection: "reverse" }}>✦</div>
 
         <AnimateOnScroll animation="zoom-in" className="relative z-10 mx-auto max-w-2xl">
           <h2 className="font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
@@ -285,7 +265,7 @@ export default function Home() {
       {/* ─── Email Capture (Task 7) ─── */}
       <section className="bg-cream py-12 sm:py-16 px-4 sm:px-6">
         <div className="mx-auto max-w-xl text-center">
-          <h3 className="font-serif text-lg sm:text-xl text-charcoal">
+          <h3 className="font-sans font-medium text-lg sm:text-xl text-charcoal">
             {t("email.heading")}
           </h3>
           <div className="mt-6">

@@ -29,7 +29,7 @@ export default function AvailabilityPage() {
       <section className="bg-gradient-to-b from-cream-dark via-cream to-soft-white rice-paper py-16 sm:py-20 md:py-24 px-4 sm:px-6 text-center">
         <AnimateOnScroll animation="fade-up">
           <p className="eyebrow">
-            ✦ {t("nav.availability")} ✦
+            {t("nav.availability")}
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal">
             {t("nav.availability")}
@@ -57,7 +57,7 @@ export default function AvailabilityPage() {
               <AnimateOnScroll key={item.day} animation="fade-up" delay={i * 100}>
                 <div className="flex items-center justify-between border border-vermillion/15 bg-cream/30 px-6 py-5 oriental-corner">
                   <div>
-                    <p className="font-serif text-lg text-charcoal">{item.day}</p>
+                    <p className="font-sans font-medium text-lg text-charcoal">{item.day}</p>
                     <p className="mt-1 text-sm text-warm-gray">{item.time}</p>
                   </div>
                   <span className={`text-[10px] uppercase tracking-label px-3 py-1 border ${
@@ -90,17 +90,13 @@ export default function AvailabilityPage() {
           </AnimateOnScroll>
 
           {/* ─── Decorative divider ─── */}
-          <div className="flex items-center justify-center gap-3 my-8">
-            <div className="h-[0.5px] w-12 bg-gradient-to-r from-transparent to-vermillion/20" />
-            <span className="text-vermillion/30 text-[8px] animate-petal-slow">✿</span>
-            <div className="h-[0.5px] w-12 bg-gradient-to-l from-transparent to-vermillion/20" />
-          </div>
+          <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {upcomingSlots.map((day, i) => (
               <AnimateOnScroll key={day.date} animation="fade-up" delay={i * 80}>
                 <div className="border border-vermillion/15 bg-soft-white/80 p-5 oriental-corner border-glow">
-                  <p className="font-serif text-base text-charcoal">{day.date}</p>
+                  <p className="font-sans font-medium text-base text-charcoal">{day.date}</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {day.slots.map((slot) => (
                       <span
@@ -121,11 +117,7 @@ export default function AvailabilityPage() {
       {/* ─── CTA ─── */}
       <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6 text-center">
         <AnimateOnScroll animation="fade-up">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-[0.5px] w-12 bg-gradient-to-r from-transparent to-vermillion/20" />
-            <span className="text-vermillion/30 text-[8px] animate-petal">✿</span>
-            <div className="h-[0.5px] w-12 bg-gradient-to-l from-transparent to-vermillion/20" />
-          </div>
+          <div className="mx-auto mb-6 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
           <h2 className="font-serif text-2xl sm:text-3xl text-charcoal">
             {t("cta.title.1")}{" "}

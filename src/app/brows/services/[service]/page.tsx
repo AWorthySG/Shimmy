@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { useI18n } from "@/lib/i18n";
 import { BROW_SERVICES, getBrowService, serviceKeys, tagForService } from "@/lib/brow-services";
 import { blogPosts } from "@/lib/blog";
+import { Check, LeadingArrow, TrailingArrow } from "@/components/icons";
 
 const WHATSAPP = "6589308973";
 
@@ -27,7 +28,7 @@ export default function ServicePage({ params }: { params: Promise<{ service: str
       <section className="bg-gradient-to-b from-cream-dark to-cream rice-paper py-12 sm:py-16 px-4 sm:px-6">
         <div className="mx-auto max-w-3xl">
           <Link href="/brows/services" className="text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion">
-            {t("svcpage.detail.back")}
+            <LeadingArrow />{t("svcpage.detail.back")}
           </Link>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal">{title}</h1>
           <p className="mt-4 text-sm sm:text-base text-charcoal-light leading-relaxed">{t(k.desc)}</p>
@@ -74,7 +75,7 @@ export default function ServicePage({ params }: { params: Promise<{ service: str
             <ul className="mt-4 space-y-2 text-sm sm:text-base text-charcoal-light">
               {k.includes.map((key) => (
                 <li key={key} className="flex gap-2">
-                  <span className="text-vermillion" aria-hidden="true">✦</span>
+                  <Check className="mt-1 h-4 w-4 shrink-0 text-vermillion" />
                   {t(key)}
                 </li>
               ))}
@@ -114,7 +115,7 @@ export default function ServicePage({ params }: { params: Promise<{ service: str
               <h2 className="font-serif text-2xl text-charcoal">{t("svcpage.detail.aftercare")}</h2>
               <p className="mt-4 text-sm sm:text-base text-charcoal-light leading-relaxed">{t(s.aftercare.key)}</p>
               <Link href={`/blog/${s.aftercare.slug}`} className="mt-3 inline-block text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion touch-target py-2">
-                {t("svcpage.detail.aftercare.more")}
+                {t("svcpage.detail.aftercare.more")}<TrailingArrow />
               </Link>
             </div>
           )}
@@ -136,7 +137,7 @@ export default function ServicePage({ params }: { params: Promise<{ service: str
 
           {s.id !== "lip" && s.id !== "shaping" && (
             <Link href="/brows/try-on" className="inline-block text-sm uppercase tracking-button text-vermillion-dark hover:text-vermillion">
-              {t("svcpage.detail.tryon")}
+              {t("svcpage.detail.tryon")}<TrailingArrow />
             </Link>
           )}
 

@@ -5,6 +5,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- The footer now shows the studio address with a directions link, opening hours, a booking button and six main links. Secondary links (gift cards, referral, loyalty, wishlist, terms, privacy) sit in the bottom bar.
+- Small headings and card titles use Lora instead of Italiana, which is kept for large headings only.
+- Text characters used as icons (✦ ◆ ★ ✓ → ↑ ⤓) are replaced by one line-icon set. Decorative floating stars and star dividers are removed.
+- The brows page is reorganised into six sections and is about 45% shorter on phones: hero with a result photo, services as photo-and-text rows linking to each service page, results and try-on side by side, swipeable testimonials, and booking with the FAQ beside it. The duplicate client counter, Google reviews block and closing banner are removed from this page.
+- The hero "Book now" button on the brows page now goes to the booking form on the same page instead of the contact page.
+- The stats row shows its real figures straight away instead of counting up from zero.
+
 ### Added
 - Brow-mapping selfie camera at `/brows/selfie`. It has a fixed green centre line, a mirrored pair of draggable yellow lines and two independent red lines. Head-pose and phone-level checks lock the shutter until the photo is straight. Accepted photos are sent to the artist's Telegram with a measurements file.
 - Photo-library option on the brow selfie page. A chosen photo runs through the same face checks, and any check it fails is shown before sending. Large photos are resized to stay within the upload limit.

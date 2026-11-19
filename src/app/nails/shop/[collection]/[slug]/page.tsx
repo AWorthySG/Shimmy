@@ -15,6 +15,7 @@ import {
 import SizeGuide from "@/components/SizeGuide";
 
 import { formatPrice } from "@/lib/format";
+import { ArrowLeft, ArrowRight, Check, ImageIcon, LeadingArrow } from "@/components/icons";
 export default function ProductDetailPage() {
   const { t } = useI18n();
   const { addItem } = useCart();
@@ -33,7 +34,7 @@ export default function ProductDetailPage() {
           href="/nails/shop"
           className="mt-4 inline-block text-sm text-vermillion-dark underline-grow"
         >
-          {t("shop.back.shop")}
+          <LeadingArrow />{t("shop.back.shop")}
         </Link>
       </section>
     );
@@ -82,7 +83,7 @@ export default function ProductDetailPage() {
             href={`/nails/shop/${product.collectionHandle}`}
             className="text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors"
           >
-            {t("shop.back.collection")}
+            <LeadingArrow />{t("shop.back.collection")}
           </Link>
         </div>
       </div>
@@ -106,7 +107,7 @@ export default function ProductDetailPage() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-4xl sm:text-5xl text-gold/20">✦</span>
+                    <ImageIcon className="h-10 w-10 text-gold/40" />
                   </div>
                 )}
                 {/* Arrow navigation */}
@@ -117,14 +118,14 @@ export default function ProductDetailPage() {
                       className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-soft-white/80 text-charcoal hover:bg-soft-white transition-all opacity-0 group-hover/gallery:opacity-100 touch-target"
                       aria-label="Previous image"
                     >
-                      ←
+                      <ArrowLeft className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => setActiveImage((prev) => (prev === product.images.length - 1 ? 0 : prev + 1))}
                       className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-soft-white/80 text-charcoal hover:bg-soft-white transition-all opacity-0 group-hover/gallery:opacity-100 touch-target"
                       aria-label="Next image"
                     >
-                      →
+                      <ArrowRight className="h-4 w-4" />
                     </button>
                     {/* Image counter */}
                     <div className="absolute bottom-2 right-2 bg-charcoal/60 text-soft-white text-[10px] px-2 py-1">
@@ -227,19 +228,19 @@ export default function ProductDetailPage() {
                 </h3>
                 <ul className="space-y-2 text-sm text-charcoal-light">
                   <li className="flex items-start gap-2">
-                    <span className="text-vermillion/60 mt-0.5">✦</span>
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-vermillion" />
                     1 set of 10 handcrafted press-on nails
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-vermillion/60 mt-0.5">✦</span>
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-vermillion" />
                     Nail glue and adhesive tabs
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-vermillion/60 mt-0.5">✦</span>
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-vermillion" />
                     Mini nail file and prep pad
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-vermillion/60 mt-0.5">✦</span>
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-vermillion" />
                     Application guide card
                   </li>
                 </ul>
@@ -266,11 +267,7 @@ export default function ProductDetailPage() {
       {/* ─── You May Also Like ─── */}
       {related.length > 0 && (
         <>
-          <div className="flex items-center justify-center gap-3 my-8">
-            <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
-            <span className="text-vermillion/40 text-xs">✦</span>
-            <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
-          </div>
+          <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
           <section className="bg-cream py-12 sm:py-16 px-4 sm:px-6">
             <div className="mx-auto max-w-6xl">
@@ -310,7 +307,7 @@ export default function ProductDetailPage() {
                         )}
                       </div>
                       <div className="p-4 sm:p-5">
-                        <h3 className="font-serif text-base sm:text-lg text-charcoal">
+                        <h3 className="font-sans font-medium text-base sm:text-lg text-charcoal">
                           {relProduct.title}
                         </h3>
                         <span className="mt-2 block text-sm font-medium text-vermillion-dark">

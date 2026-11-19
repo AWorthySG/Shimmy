@@ -21,7 +21,7 @@ export default function PrivacyPage() {
 
           {/* 1. Introduction */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">1. Introduction</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">1. Introduction</h2>
             <p>
               Shimmy Beauty Studio (&quot;we&quot;, &quot;our&quot;, &quot;us&quot;) is
               committed to protecting your privacy. This Privacy Policy explains what
@@ -32,7 +32,7 @@ export default function PrivacyPage() {
 
           {/* 2. Information We Collect */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">2. Information We Collect</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">2. Information We Collect</h2>
             <p>We may collect the following types of information:</p>
             <ul className="mt-3 list-disc pl-5 space-y-2">
               <li>
@@ -48,7 +48,7 @@ export default function PrivacyPage() {
 
           {/* 3. How We Use Your Information */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">3. How We Use Your Information</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">3. How We Use Your Information</h2>
             <p>We use the information we collect to:</p>
             <ul className="mt-3 list-disc pl-5 space-y-2">
               <li>Process and manage your bookings</li>
@@ -61,7 +61,7 @@ export default function PrivacyPage() {
 
           {/* 4. Cookies */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">4. Cookies</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">4. Cookies</h2>
             <p>
               Our website uses cookies and similar technologies to enhance your browsing
               experience. Specifically:
@@ -85,7 +85,7 @@ export default function PrivacyPage() {
 
           {/* 5. Third-Party Services */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">5. Third-Party Services</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">5. Third-Party Services</h2>
             <p>We use the following third-party services to operate our website:</p>
             <ul className="mt-3 list-disc pl-5 space-y-2">
               <li>
@@ -108,7 +108,7 @@ export default function PrivacyPage() {
 
           {/* 6. Data Retention */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">6. Data Retention</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">6. Data Retention</h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>
                 <strong>Booking data:</strong> Retained for up to 2 years after your last
@@ -127,7 +127,7 @@ export default function PrivacyPage() {
 
           {/* 7. Your Rights */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">7. Your Rights</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">7. Your Rights</h2>
             <p>You have the right to:</p>
             <ul className="mt-3 list-disc pl-5 space-y-2">
               <li>Request access to the personal data we hold about you</li>
@@ -142,7 +142,7 @@ export default function PrivacyPage() {
 
           {/* 8. Contact */}
           <div>
-            <h2 className="font-serif text-xl text-charcoal mb-3">8. Contact</h2>
+            <h2 className="font-sans font-medium text-xl text-charcoal mb-3">8. Contact</h2>
             <p>
               If you have any questions about this Privacy Policy or wish to exercise your
               data rights, please contact us:

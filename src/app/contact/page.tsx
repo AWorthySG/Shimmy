@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 import Calendar from "@/components/Calendar";
+import { ArrowRight, Check } from "@/components/icons";
 
 function MiniBookingCalendar() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -142,9 +143,7 @@ export default function ContactPage() {
                     {t("contact.wa.desc")}
                   </p>
                 </div>
-                <span className="ml-auto text-vermillion opacity-0 transition-opacity group-hover:opacity-100 shrink-0">
-                  →
-                </span>
+                <span className="ml-auto text-vermillion opacity-0 transition-opacity group-hover:opacity-100 shrink-0"><ArrowRight className="h-4 w-4" /></span>
               </a>
 
               {/* TODO: Replace with your Instagram handle */}
@@ -166,9 +165,7 @@ export default function ContactPage() {
                     {t("contact.ig.desc")}
                   </p>
                 </div>
-                <span className="ml-auto text-vermillion opacity-0 transition-opacity group-hover:opacity-100 shrink-0">
-                  →
-                </span>
+                <span className="ml-auto text-vermillion opacity-0 transition-opacity group-hover:opacity-100 shrink-0"><ArrowRight className="h-4 w-4" /></span>
               </a>
 
               {/* TODO: Replace with real Google Business review link */}
@@ -189,9 +186,7 @@ export default function ContactPage() {
                     {t("contact.google.desc")}
                   </p>
                 </div>
-                <span className="ml-auto text-vermillion opacity-0 transition-opacity group-hover:opacity-100 shrink-0">
-                  →
-                </span>
+                <span className="ml-auto text-vermillion opacity-0 transition-opacity group-hover:opacity-100 shrink-0"><ArrowRight className="h-4 w-4" /></span>
               </a>
             </div>
 
@@ -245,19 +240,19 @@ export default function ContactPage() {
               {/* TODO: Update pre-visit instructions */}
               <ul className="space-y-2 text-sm text-charcoal-light">
                 <li className="flex items-start gap-2">
-                  <span className="mt-0.5 text-vermillion text-xs shrink-0">◆</span>
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-vermillion" />
                   {t("contact.prep.1")}
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-0.5 text-vermillion text-xs shrink-0">◆</span>
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-vermillion" />
                   {t("contact.prep.2")}
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-0.5 text-vermillion text-xs shrink-0">◆</span>
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-vermillion" />
                   {t("contact.prep.3")}
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-0.5 text-vermillion text-xs shrink-0">◆</span>
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-vermillion" />
                   {t("contact.prep.4")}
                 </li>
               </ul>

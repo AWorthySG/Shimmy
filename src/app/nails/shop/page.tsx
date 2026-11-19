@@ -86,7 +86,7 @@ function ProductCard({ product }: { product: Product }) {
         <p className="text-[9px] uppercase tracking-label text-warm-gray">
           {product.collection}
         </p>
-        <h3 className="mt-1 font-serif text-base sm:text-lg text-charcoal">
+        <h3 className="mt-1 font-sans font-medium text-base sm:text-lg text-charcoal">
           {product.title}
         </h3>
         <div className="mt-2 flex items-center gap-2">
@@ -298,7 +298,7 @@ export default function ShopPage() {
       {/* ─── Email Capture (Task 7) ─── */}
       <section className="bg-cream py-12 sm:py-16 px-4 sm:px-6">
         <div className="mx-auto max-w-xl text-center">
-          <h3 className="font-serif text-lg sm:text-xl text-charcoal">
+          <h3 className="font-sans font-medium text-lg sm:text-xl text-charcoal">
             {t("email.heading")}
           </h3>
           <div className="mt-6">

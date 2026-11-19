@@ -10,6 +10,7 @@ import ServiceComparison from "@/components/ServiceComparison";
 import ServiceFAQ from "@/components/ServiceFAQ";
 import Glossary from "@/components/Glossary";
 import { BROW_SERVICES } from "@/lib/brow-services";
+import { Check, TrailingArrow } from "@/components/icons";
 
 const serviceSlug = (id: string) => BROW_SERVICES.find((b) => b.id === id)?.slug;
 
@@ -130,7 +131,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Oriental divider */}
-      <div className="flex items-center justify-center gap-3 my-8"><div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" /><span className="text-vermillion/40 text-xs">✦</span><div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" /></div>
+      <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
       {/* Services list */}
       <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
@@ -173,7 +174,6 @@ export default function ServicesPage() {
               <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-start md:justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3">
-                    <span className="text-vermillion text-lg">✦</span>
                     <h2 className="font-serif text-xl sm:text-2xl text-charcoal">
                       {service.title}
                     </h2>
@@ -183,7 +183,7 @@ export default function ServicesPage() {
                   </p>
                 </div>
                 <div className="flex flex-row gap-4 sm:gap-6 md:flex-col md:items-end md:text-right shrink-0">
-                  <p className="font-serif text-lg sm:text-xl text-vermillion">
+                  <p className="font-sans font-medium text-lg sm:text-xl text-vermillion">
                     {service.price}
                   </p>
                   <p className="text-[10px] sm:text-xs uppercase tracking-button text-warm-gray">
@@ -203,9 +203,7 @@ export default function ServicesPage() {
                       key={item}
                       className="flex items-start gap-2 text-sm text-charcoal-light"
                     >
-                      <span className="mt-0.5 text-vermillion text-xs shrink-0">
-                        ◆
-                      </span>
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-vermillion" />
                       {/* Wrap "Numbing" with glossary tooltip for embroidery inc.2 */}
                       {service.id === "embroidery" && idx === 1 ? (
                         <span>
@@ -227,7 +225,7 @@ export default function ServicesPage() {
                   href={`/brows/services/${serviceSlug(service.id)}`}
                   className="mt-4 inline-block text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion touch-target py-2"
                 >
-                  {t("svcpage.detail.more")}
+                  {t("svcpage.detail.more")}<TrailingArrow />
                 </Link>
               )}
               </div>{/* end padding wrapper */}
@@ -266,7 +264,7 @@ export default function ServicesPage() {
               href="/contact"
               className="text-sm uppercase tracking-button text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
             >
-              {t("nav.contact")} →
+              {t("nav.contact")}<TrailingArrow />
             </Link>
           </div>
         </div>

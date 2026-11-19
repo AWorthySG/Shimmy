@@ -65,7 +65,7 @@ export default function Calendar({
         >
           &larr;
         </button>
-        <span className="font-serif text-base text-charcoal">{monthLabel}</span>
+        <span className="font-sans font-medium text-base text-charcoal">{monthLabel}</span>
         <button
           onClick={nextMonth}
           className="p-2 text-charcoal-light hover:text-vermillion transition-colors touch-target"

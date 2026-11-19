@@ -121,9 +121,9 @@ export default function ReferralPage() {
             ].map(({ step, title, desc }) => (
               <div key={step} className="text-center">
                 <div className="mx-auto w-12 h-12 border-2 border-vermillion/30 flex items-center justify-center mb-4">
-                  <span className="font-serif text-xl text-vermillion">{step}</span>
+                  <span className="font-sans font-medium text-xl text-vermillion">{step}</span>
                 </div>
-                <h3 className="font-serif text-lg text-charcoal mb-2">{title}</h3>
+                <h3 className="font-sans font-medium text-lg text-charcoal mb-2">{title}</h3>
                 <p className="text-sm text-warm-gray leading-relaxed">{desc}</p>
               </div>
             ))}
@@ -136,7 +136,7 @@ export default function ReferralPage() {
         <div className="mx-auto max-w-md">
           {!generatedCode ? (
             <div className="border border-vermillion/15 bg-soft-white p-6 sm:p-8">
-              <h2 className="font-serif text-xl text-charcoal text-center mb-6">
+              <h2 className="font-sans font-medium text-xl text-charcoal text-center mb-6">
                 {t('referral.form.title')}
               </h2>
               <form onSubmit={handleGenerate}>
@@ -163,7 +163,7 @@ export default function ReferralPage() {
             </div>
           ) : (
             <div className="border border-vermillion/15 bg-soft-white p-6 sm:p-8 text-center">
-              <h2 className="font-serif text-xl text-charcoal mb-2">
+              <h2 className="font-sans font-medium text-xl text-charcoal mb-2">
                 {t('referral.success.title')}
               </h2>
               <p className="text-sm text-warm-gray mb-6">{t('referral.success.desc')}</p>

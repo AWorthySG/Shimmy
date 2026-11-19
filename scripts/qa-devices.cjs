@@ -88,10 +88,21 @@ const IGNORE_CONSOLE = /googletagmanager|favicon|Download the React DevTools|\[F
             const broken = [...document.images]
               .filter((i) => i.complete && i.naturalWidth === 0 && i.getAttribute("src") && !i.src.startsWith("data:"))
               .map((i) => i.getAttribute("src").slice(0, 80));
-            return { overflow, culprits, broken };
+            // Profiles run with reduced motion, so every scroll-reveal block must be visible.
+            const hiddenText = [...document.querySelectorAll("main p, main h1, main h2, main h3")].filter((e) => {
+              if (!e.textContent.trim()) return false;
+              for (let n = e; n && n !== document.body; n = n.parentElement) {
+                // Hover-only overlays are hidden by design.
+                if (/group-hover:opacity-100/.test(String(n.className))) return false;
+                if (+getComputedStyle(n).opacity === 0) return true;
+              }
+              return false;
+            }).length;
+            return { overflow, culprits, broken, hiddenText };
           });
           if (r.overflow > 1) issues.push([name, route, `horizontal overflow ${r.overflow}px: ${r.culprits.join(" | ")}`]);
           for (const b of r.broken) issues.push([name, route, `broken image ${b}`]);
+          if (r.hiddenText) issues.push([name, route, `${r.hiddenText} text blocks invisible with reduced motion`]);
           for (const e of [...new Set(errs)]) issues.push([name, route, e]);
         } catch (e) {
           issues.push([name, route, "load failed: " + e.message.slice(0, 120)]);

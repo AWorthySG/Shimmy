@@ -45,3 +45,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Removed the placeholder Instagram grid and the empty "As seen in" press row.
 - Phones: the scroll hint no longer overlaps the second hero button, and the back-to-top button no longer stacks over text above the WhatsApp button.
 - The brow try-on page no longer jumps when the first-visit tips appear; the tips now sit below the upload box.
+- Fixed: with the device's reduce-motion setting on (common on iPhones), every section that fades in on scroll stayed invisible, leaving large blank areas. Those sections now appear straight away with no animation. `npm run qa:devices` now checks for hidden text.

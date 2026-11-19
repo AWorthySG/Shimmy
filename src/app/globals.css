@@ -29,6 +29,7 @@ body.links-page footer {
   --ink: #2E3328;              /* Matches foreground */
   --plum: #8A7A6E;             /* Warm umber — earthy depth */
   --rosewood: #6E5A4E;         /* Deep clay */
+  --error: #A3432F;            /* Brick: form errors and destructive actions (5.8:1 on soft-white) */
 }
 
 .dark {
@@ -51,6 +52,7 @@ body.links-page footer {
   --ink: #f0e8e2;
   --plum: #B0A090;
   --rosewood: #C0A898;
+  --error: #E08A74;
 }
 
 .dark .rice-paper {
@@ -93,6 +95,7 @@ body.links-page footer {
   --color-text-muted: var(--charcoal-light);
   --color-text-subtle: var(--warm-gray);
   --color-success: var(--jade);
+  --color-error: var(--error);
   --color-whatsapp: #25d366;
 }
 
@@ -887,6 +890,15 @@ a, button {
   .btn-outline:hover:not(:disabled) {
     border-color: var(--vermillion);
     color: var(--vermillion-dark);
+  }
+  .btn-danger {
+    border-color: var(--error);
+    color: var(--error);
+    background-color: transparent;
+  }
+  .btn-danger:hover:not(:disabled) {
+    background-color: var(--error);
+    color: var(--soft-white);
   }
   .btn-dark {
     background-color: var(--charcoal);

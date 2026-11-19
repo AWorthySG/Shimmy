@@ -151,7 +151,7 @@ export default function ReferralPage() {
                   required
                   className="field w-full"
                 />
-                {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
+                {error && <p className="text-xs text-error mt-2">{error}</p>}
                 <button
                   type="submit"
                   disabled={loading || !name.trim()}

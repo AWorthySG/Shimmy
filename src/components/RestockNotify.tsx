@@ -57,7 +57,7 @@ export default function RestockNotify({ productHandle }: { productHandle: string
       </button>
     </form>
     {failed && (
-      <p role="alert" className="text-xs text-red-500 mt-1">
+      <p role="alert" className="text-xs text-error mt-1">
         {t("shop.restock.error")}
       </p>
     )}

@@ -262,7 +262,7 @@ export default function GiftCardsPage() {
                   className="field w-full mb-4 resize-none"
                 />
 
-                {purchaseError && <p className="text-xs text-red-500 mb-3">{purchaseError}</p>}
+                {purchaseError && <p className="text-xs text-error mb-3">{purchaseError}</p>}
 
                 <button
                   type="submit"
@@ -322,9 +322,9 @@ export default function GiftCardsPage() {
                 onChange={(e) => setCheckCode(e.target.value.toUpperCase())}
                 placeholder={t('gift.check.code.placeholder')}
                 required
-                className="field w-full uppercase tracking-widest"
+                className="field w-full uppercase tracking-label"
               />
-              {checkError && <p className="text-xs text-red-500 mt-2">{checkError}</p>}
+              {checkError && <p className="text-xs text-error mt-2">{checkError}</p>}
               <button
                 type="submit"
                 disabled={checkLoading || !checkCode.trim()}
@@ -350,7 +350,7 @@ export default function GiftCardsPage() {
                   className={`inline-block mt-2 text-[10px] uppercase tracking-button px-2 py-0.5 border ${
                     checkResult.is_active
                       ? 'text-jade border-jade/20 bg-jade/5'
-                      : 'text-red-500 border-red-200 bg-red-50'
+                      : 'text-error border-error/30 bg-error/5'
                   }`}
                 >
                   {checkResult.is_active ? t('gift.check.active') : t('gift.check.redeemed')}

@@ -28,10 +28,18 @@ semantic names.
 | `text-muted` | `charcoal-light` | `#4A5240` | `#C8BEB5` | Secondary text |
 | `text-subtle` | `warm-gray` | `#7A7670` | `#8A7E74` | Captions, meta, placeholders |
 | `success` | `jade` | `#7A8E6A` | `#8A9C72` | Confirmations, nails category |
+| `error` | — | `#A3432F` | `#E08A74` | Form errors and destructive actions (at least 4.9:1 on every surface) |
 | `whatsapp` | — | `#25D366` | `#25D366` | WhatsApp button only |
 
 Do not use raw hex values or Tailwind's default palette (`red-500`, `green-400`)
-in page markup. The colour illustrations in the size guide are the only exception.
+in page markup. Error text uses `text-error`; a notice that isn't an error (such as
+low stock) uses `text-primary-hover`.
+
+Exceptions, where the colour is the content: the size guide and brow try-on (real nail
+and pigment colours), `brow-placeholders.tsx` (skin-tone illustrations), the share
+image (`opengraph-image.tsx`, drawn outside the CSS), and the brow selfie camera, a
+full-screen black camera view whose green, yellow and red text matches the guide lines it
+draws.
 
 ## 2. Typography
 
@@ -66,6 +74,7 @@ Every uppercase label uses one of three values. Arbitrary values such as
 | `btn btn-outline` | Neutral outline, turns sage on hover | Alternative path next to a primary |
 | `btn btn-dark` | Charcoal fill | On light imagery where sage lacks contrast |
 | `btn btn-light` | White fill, sage text | On dark or sage sections |
+| `btn btn-danger` | Brick outline, fills on hover | Destructive actions such as cancelling a booking |
 | `btn-sm` | 36 px tall | Inside cards and dense lists |
 | `btn-lg` | 44 px+, wider padding | Hero and page-level calls to action |
 
@@ -92,8 +101,8 @@ at 10 px (12 px from 640 px up).
 ### Form fields — `field`
 Text inputs, emails, phone numbers and textareas: surface background, sage
 hairline border that darkens on focus, 44 px minimum height, square corners.
-Exceptions: the transparent search-overlay input and inputs on charcoal
-backgrounds.
+Exceptions: the transparent search-overlay input and inputs on dark backgrounds
+(the launch page and the selfie camera).
 
 ## 4. Shape, spacing and touch
 
@@ -111,7 +120,15 @@ backgrounds.
 - **Text over images or video:** put a `soft-white` veil of at least 55% behind
   the text on phones.
 
-## 6. How the site was standardised
+## 6. Checking the rules
+
+`npm run audit:design` scans every page and component for default-palette colours, raw
+hex values, off-scale letter-spacing, rounded corners on square components, hand-styled
+buttons and text inputs without `field`. `npm test` runs the same scan, so a pull
+request that breaks a rule fails its tests. The exceptions above are listed in
+`scripts/audit-design-system.mjs`.
+
+## 7. How the site was standardised
 
 `scripts/standardize-classes.mjs` and `scripts/standardize-fields.mjs` rewrote
 existing markup onto these classes. Re-running them is safe: elements already

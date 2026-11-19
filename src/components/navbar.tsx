@@ -247,7 +247,7 @@ export function Navbar() {
           {/* Language toggle */}
           <button
             onClick={toggleLocale}
-            className="text-xs uppercase tracking-button text-charcoal-light transition-colors hover:text-vermillion touch-target px-2 py-1 border border-vermillion/20 hover:border-vermillion/50"
+            className="chip touch-target"
             aria-label="Toggle language"
           >
             {locale === "en" ? "中文" : "EN"}
@@ -344,7 +344,7 @@ export function Navbar() {
               <DarkModeToggle />
               <button
                 onClick={toggleLocale}
-                className="text-[10px] uppercase tracking-button text-charcoal-light px-2 py-1.5 border border-vermillion/20 touch-target"
+                className="chip touch-target"
                 aria-label="Toggle language"
               >
                 {locale === "en" ? "中文" : "EN"}

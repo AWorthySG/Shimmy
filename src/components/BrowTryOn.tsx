@@ -509,7 +509,7 @@ function HelpOverlay({
   t: (k: string) => string;
 }) {
   return (
-    <div className="mx-auto max-w-4xl mb-8 border border-vermillion/20 bg-cream rounded-sm px-5 py-6 sm:px-8 sm:py-7">
+    <div className="mx-auto max-w-4xl mb-8 border border-vermillion/20 bg-cream px-5 py-6 sm:px-8 sm:py-7">
       <div className="flex items-start justify-between gap-4 flex-col sm:flex-row">
         <div className="flex-1 w-full">
           <div className="h-[2px] w-[40px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-3" />
@@ -596,7 +596,7 @@ function ModalShell({
       onClick={onClose}
     >
       <div
-        className={`relative w-full ${maxWidthClass} max-h-[90vh] overflow-y-auto bg-cream border border-vermillion/20 rounded-sm shadow-2xl`}
+        className={`relative w-full ${maxWidthClass} max-h-[90vh] overflow-y-auto bg-cream border border-vermillion/20 shadow-2xl`}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
@@ -1174,7 +1174,7 @@ export default function BrowTryOn() {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
-            className={`relative border-2 border-dashed transition-all rounded-sm px-6 py-12 sm:py-16 text-center bg-cream/40 ${
+            className={`relative border-2 border-dashed transition-all px-6 py-12 sm:py-16 text-center bg-cream/40 ${
               isDragging
                 ? "border-vermillion bg-vermillion/5"
                 : "border-vermillion/30 hover:border-vermillion/60"
@@ -1309,7 +1309,7 @@ export default function BrowTryOn() {
                 onPointerMove={handleCompareMove}
                 onPointerUp={handleCompareUp}
                 onPointerCancel={handleCompareUp}
-                className={`relative bg-cream-dark/40 border border-vermillion/15 overflow-hidden rounded-sm select-none ${
+                className={`relative bg-cream-dark/40 border border-vermillion/15 overflow-hidden select-none ${
                   compareOn ? "touch-none cursor-ew-resize" : ""
                 }`}
               >
@@ -1363,7 +1363,7 @@ export default function BrowTryOn() {
                 {abMode && (
                   <>
                     <div className="pointer-events-none absolute inset-y-0 left-0 w-1/2 flex flex-col">
-                      <div className="m-2 self-start bg-charcoal/70 text-soft-white text-[10px] uppercase tracking-label px-2 py-1 rounded-sm">
+                      <div className="m-2 self-start bg-charcoal/70 text-soft-white text-[10px] uppercase tracking-label px-2 py-1">
                         {t("tryon.ab.left")}
                         {styleA && (
                           <span className="ml-2 normal-case tracking-normal">
@@ -1377,7 +1377,7 @@ export default function BrowTryOn() {
                           <button
                             type="button"
                             onClick={() => pickWinner(styleA)}
-                            className="bg-vermillion text-soft-white text-[10px] uppercase tracking-label px-3 py-2 rounded-sm hover:bg-vermillion-dark transition-colors"
+                            className="btn btn-primary btn-sm"
                           >
                             {t("tryon.ab.winner")}
                           </button>
@@ -1385,7 +1385,7 @@ export default function BrowTryOn() {
                       )}
                     </div>
                     <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 flex flex-col">
-                      <div className="m-2 self-end bg-charcoal/70 text-soft-white text-[10px] uppercase tracking-label px-2 py-1 rounded-sm">
+                      <div className="m-2 self-end bg-charcoal/70 text-soft-white text-[10px] uppercase tracking-label px-2 py-1">
                         {t("tryon.ab.right")}
                         {styleB && (
                           <span className="ml-2 normal-case tracking-normal">
@@ -1399,7 +1399,7 @@ export default function BrowTryOn() {
                           <button
                             type="button"
                             onClick={() => pickWinner(styleB)}
-                            className="bg-vermillion text-soft-white text-[10px] uppercase tracking-label px-3 py-2 rounded-sm hover:bg-vermillion-dark transition-colors"
+                            className="btn btn-primary btn-sm"
                           >
                             {t("tryon.ab.winner")}
                           </button>
@@ -1478,12 +1478,12 @@ export default function BrowTryOn() {
                         }`}
                       >
                         {style.isPopular && (
-                          <span className="absolute top-1 right-1 bg-vermillion text-soft-white text-[8px] uppercase tracking-button px-1.5 py-0.5 rounded-sm z-10">
+                          <span className="absolute top-1 right-1 bg-vermillion text-soft-white text-[8px] uppercase tracking-button px-1.5 py-0.5 z-10">
                             {t("tryon.popular.badge")}
                           </span>
                         )}
                         {slot && (
-                          <span className="absolute top-1 left-1 bg-charcoal text-soft-white text-[8px] uppercase tracking-button px-1.5 py-0.5 rounded-sm z-10">
+                          <span className="absolute top-1 left-1 bg-charcoal text-soft-white text-[8px] uppercase tracking-button px-1.5 py-0.5 z-10">
                             {slot}
                           </span>
                         )}
@@ -1864,7 +1864,7 @@ function SaveLookModal({
               maxLength={100}
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-2 w-full border border-charcoal/20 px-3 py-2 text-sm bg-soft-white focus:border-vermillion focus:outline-none"
+              className="field mt-2 w-full"
             />
           </label>
           <label className="block">
@@ -1877,7 +1877,7 @@ function SaveLookModal({
               pattern="[+\d\s\-()]{6,20}"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="mt-2 w-full border border-charcoal/20 px-3 py-2 text-sm bg-soft-white focus:border-vermillion focus:outline-none"
+              className="field mt-2 w-full"
             />
           </label>
           <label className="block">
@@ -1888,7 +1888,7 @@ function SaveLookModal({
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-2 w-full border border-charcoal/20 px-3 py-2 text-sm bg-soft-white focus:border-vermillion focus:outline-none"
+              className="field mt-2 w-full"
             />
           </label>
         </div>
@@ -2059,7 +2059,7 @@ function CameraModal({
           {t("tryon.camera.guide")}
         </p>
 
-        <div className="mt-4 relative aspect-square bg-charcoal rounded-sm overflow-hidden">
+        <div className="mt-4 relative aspect-square bg-charcoal overflow-hidden">
           {!previewUrl ? (
             <>
               <video

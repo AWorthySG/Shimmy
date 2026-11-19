@@ -211,7 +211,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
                   <Link
                     href={r.href}
                     onClick={onClose}
-                    className="flex items-center gap-3 px-3 py-3 hover:bg-cream/70 transition-colors rounded-sm"
+                    className="flex items-center gap-3 px-3 py-3 hover:bg-cream/70 transition-colors"
                   >
                     <span className={`shrink-0 px-2 py-0.5 text-[9px] uppercase tracking-button font-medium ${typeBadgeColor(r.type)}`}>
                       {r.type}

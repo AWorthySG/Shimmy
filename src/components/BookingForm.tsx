@@ -282,7 +282,7 @@ export default function BookingForm() {
           <div className="space-y-4">
             <div>
               <label htmlFor="booking-name" className="block text-[10px] uppercase tracking-button text-vermillion-dark mb-1.5">
-                Name <span className="text-red-400">*</span>
+                Name <span className="text-error">*</span>
               </label>
               <input
                 id="booking-name"
@@ -296,7 +296,7 @@ export default function BookingForm() {
             </div>
             <div>
               <label htmlFor="booking-phone" className="block text-[10px] uppercase tracking-button text-vermillion-dark mb-1.5">
-                Phone <span className="text-red-400">*</span>
+                Phone <span className="text-error">*</span>
               </label>
               <input
                 id="booking-phone"
@@ -351,7 +351,7 @@ export default function BookingForm() {
           >
             {t('book.review')}
           </button>
-          {error && <p className="text-xs text-red-500 mt-2 text-center">{error}</p>}
+          {error && <p className="text-xs text-error mt-2 text-center">{error}</p>}
         </div>
       )}
 
@@ -427,7 +427,7 @@ export default function BookingForm() {
           >
             {submitting ? t('book.submitting') : t('book.confirm.btn')}
           </button>
-          {error && <p className="text-xs text-red-500 mt-3 text-center">{error}</p>}
+          {error && <p className="text-xs text-error mt-3 text-center">{error}</p>}
         </div>
       )}
 

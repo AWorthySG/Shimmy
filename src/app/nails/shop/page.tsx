@@ -102,7 +102,7 @@ function ProductCard({ product }: { product: Product }) {
         {/* Limited stock badge (Task 6) */}
         {limitedStockCollections[product.collectionHandle] && (
           <>
-            <span className="inline-block text-[10px] text-red-500 font-medium mt-1">
+            <span className="inline-block text-[10px] text-vermillion-dark font-medium mt-1">
               {t("urgency.nails")}
             </span>
             <RestockNotify productHandle={product.handle} />

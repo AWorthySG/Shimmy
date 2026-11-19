@@ -228,6 +228,30 @@ export const blogPosts: BlogPost[] = [
     image: '/images/testimonials/nurul-portrait.jpg',
     tags: ['skin-types', 'embroidery', 'nano-brows', 'ombre'],
   },
+  {
+    slug: 'eyebrow-embroidery-price-singapore',
+    titleKey: 'blog.19.title',
+    descKey: 'blog.19.desc',
+    category: 'brows',
+    categoryKey: 'blog.cat.brows',
+    readTime: 4,
+    contentKeys: ['blog.19.p1', 'blog.19.p2', 'blog.19.p3', 'blog.19.p4', 'blog.19.p5', 'blog.19.p6'],
+    relatedSlugs: ['choose-embroidery-nano-ombre', 'eyebrow-embroidery-touch-up'],
+    image: '/images/brows/brow-result-hairstroke-soft.jpg',
+    tags: ['pricing', 'embroidery', 'first-time'],
+  },
+  {
+    slug: 'is-eyebrow-embroidery-safe',
+    titleKey: 'blog.20.title',
+    descKey: 'blog.20.desc',
+    category: 'brows',
+    categoryKey: 'blog.cat.brows',
+    readTime: 5,
+    contentKeys: ['blog.20.p1', 'blog.20.p2', 'blog.20.p3', 'blog.20.p4', 'blog.20.p5', 'blog.20.p6'],
+    relatedSlugs: ['eyebrow-embroidery-aftercare-guide', 'brow-embroidery-during-pregnancy'],
+    image: '/images/brows/brow-process-hand.jpg',
+    tags: ['safety', 'embroidery', 'first-time'],
+  },
 ]
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

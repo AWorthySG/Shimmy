@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
+import { buildReviewEmail, isSafeReviewUrl, reviewRequestDate } from '@/lib/review-request'
 
 /**
  * GET /api/cron/care-reminders
@@ -74,7 +75,45 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ reminders_logged: remindersLogged })
+    // Google review request, 14 days after the appointment, by email.
+    // Runs only when both RESEND_API_KEY and GOOGLE_REVIEW_URL are set.
+    let reviewRequestsSent = 0
+    const resendKey = process.env.RESEND_API_KEY
+    const reviewUrl = process.env.GOOGLE_REVIEW_URL
+    if (resendKey && isSafeReviewUrl(reviewUrl)) {
+      const { data: bookings, error } = await supabase
+        .from('bookings')
+        .select('id, client_name, client_email, service_name')
+        .eq('status', 'confirmed')
+        .eq('date', reviewRequestDate(today))
+        .not('client_email', 'is', null)
+
+      if (error) console.error('Failed to query bookings for review requests:', error.message)
+
+      for (const booking of bookings ?? []) {
+        const email = buildReviewEmail({ name: booking.client_name, service: booking.service_name, reviewUrl })
+        const res = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${resendKey}`,
+            'Content-Type': 'application/json',
+            // A retried cron run on the same day won't email the client twice.
+            'Idempotency-Key': `review-request-${booking.id}`,
+          },
+          body: JSON.stringify({
+            from: 'Shimmyhands <hello@shimmyhands.com>',
+            to: booking.client_email,
+            subject: email.subject,
+            html: email.html,
+            text: email.text,
+          }),
+        }).catch(() => null)
+        if (res?.ok) reviewRequestsSent++
+        else console.error('Review request email failed for booking', booking.id)
+      }
+    }
+
+    return NextResponse.json({ reminders_logged: remindersLogged, review_requests_sent: reviewRequestsSent })
   } catch {
     return NextResponse.json({ error: 'Internal error' }, { status: 500 })
   }

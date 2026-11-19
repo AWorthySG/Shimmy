@@ -10,12 +10,8 @@ import ServiceComparison from "@/components/ServiceComparison";
 import ServiceFAQ from "@/components/ServiceFAQ";
 import Glossary from "@/components/Glossary";
 
-/* ──────────────────────────────────────────────
-   TODO: Update each service below with your
-   actual offerings. Edit titles, prices,
-   durations, descriptions, and included items.
-   Add or remove services as needed.
-   ────────────────────────────────────────────── */
+/* Service text lives in i18n (svc.*). Prices were confirmed by the owner
+   in Nov 2026; durations and inclusions have not been reviewed yet. */
 
 export default function ServicesPage() {
   const { t } = useI18n();
@@ -25,8 +21,8 @@ export default function ServicesPage() {
       id: "embroidery",
       image: "/images/brows/brow-process-spoolie.jpg",
       title: t("svc.embroidery.title"),
-      price: t("svc.embroidery.price"),       /* TODO: Your actual price */
-      duration: t("svc.embroidery.duration"),  /* TODO: Your actual duration */
+      price: t("svc.embroidery.price"),
+      duration: t("svc.embroidery.duration"),
       description: t("svc.embroidery.desc"),
       popular: false,
       includes: [

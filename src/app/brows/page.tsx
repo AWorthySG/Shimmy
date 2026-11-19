@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import LazyVideo from "@/components/LazyVideo";
 import Link from "next/link";
 import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
 import { HomeWithIntro } from "@/components/home-with-intro";
@@ -275,13 +276,11 @@ export default function Home() {
                   className="group block card-lift overflow-hidden border border-vermillion/10 bg-soft-white/50"
                 >
                   <div className="relative aspect-[9/16] overflow-hidden">
-                    <video
-                      autoPlay muted loop playsInline preload="metadata"
+                    <LazyVideo
+                      src={clip.src}
                       poster={clip.src.replace(/\.mp4$/, ".jpg")}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    >
-                      <source src={clip.src} type="video/mp4" />
-                    </video>
+                    />
                   </div>
                   <div className="p-3 text-center">
                     <p className="text-[10px] uppercase tracking-label text-warm-gray">{clip.label}</p>

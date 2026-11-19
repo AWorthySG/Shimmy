@@ -7,8 +7,6 @@ import { Footer } from "@/components/footer";
 import { Providers } from "@/components/providers";
 import { PageTransition } from "@/components/PageTransition";
 import WelcomeBanner from "@/components/WelcomeBanner";
-import ExitIntentPopup from "@/components/ExitIntentPopup";
-import SpinWheel from "@/components/SpinWheel";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -119,8 +117,6 @@ export default function RootLayout({
           <CookieConsent />
           <WhatsAppFloat />
           <ScrollToTop />
-          <ExitIntentPopup />
-          <SpinWheel />
           <PageViewTracker />
           <ServiceWorkerRegister />
         </Providers>

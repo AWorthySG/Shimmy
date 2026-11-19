@@ -24,3 +24,5 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Admin sign-in is checked on the server. The password now comes only from the `ADMIN_SECRET` setting in Vercel and is no longer in the page code; a successful sign-in sets a 12-hour httpOnly session cookie. Five wrong attempts lock that address out for 15 minutes. If `ADMIN_SECRET` is not set, admin access is refused.
 - Removed the "someone just booked" pop-ups, which showed invented bookings.
 - The "Notify me when restocked" form now saves the email (one sign-up per email and product) and shows an error if saving fails. It needs the `restock_notifications` table from `supabase-schema.sql`.
+- Removed the spin-the-wheel and exit pop-ups. The S$10 welcome banner and the cookie notice remain.
+- Videos load only when scrolled near, pause when off screen, and show a still image for visitors who ask for reduced motion or data saving. Video files are 40% smaller (7.5 MB to 4.5 MB) with no visible quality change.

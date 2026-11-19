@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import LazyVideo from "@/components/LazyVideo";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 
@@ -149,13 +150,11 @@ export default function GalleryPage() {
                 <div className="group card-lift overflow-hidden border border-vermillion/10 bg-soft-white/50">
                   <div className="relative aspect-[9/16] overflow-hidden">
                     {clip.src ? (
-                      <video
-                        autoPlay muted loop playsInline preload="metadata"
+                      <LazyVideo
+                        src={clip.src}
                         poster={clip.src.replace(/\.mp4$/, ".jpg")}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      >
-                        <source src={clip.src} type="video/mp4" />
-                      </video>
+                      />
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-cream-dark via-cream to-vermillion/5">
                         <span className="text-3xl text-vermillion/30">✦</span>

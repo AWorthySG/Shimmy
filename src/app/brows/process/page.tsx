@@ -40,7 +40,7 @@ function TimelineItem({
           <div className="w-[2px] flex-1 bg-gradient-to-b from-vermillion/20 to-vermillion/5 my-2" />
         )}
       </div>
-      <div className={`pb-8 sm:pb-12 ${isLast ? "pb-0 sm:pb-0" : ""}`}>
+      <div className={`pb-8 sm:pb-12 ${isLast ?"pb-0 sm:pb-0":""}`}>
         <div className="flex items-baseline gap-3 flex-wrap">
           <h3 className="font-serif text-lg sm:text-xl text-charcoal">{title}</h3>
           {time && (
@@ -67,7 +67,7 @@ export default function ProcessPage() {
           <p className="eyebrow">
             {t("process.tag")}
           </p>
-          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
+          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl">
             {t("process.title")}
           </h1>
         </div>
@@ -257,7 +257,7 @@ export default function ProcessPage() {
               href="https://wa.me/6589308973"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary btn-lg btn-magnetic glow-pulse shine-on-hover touch-target"
+              className="btn btn-primary btn-lg touch-target"
             >
               <svg
                 width="16"

@@ -772,7 +772,7 @@ export default function BrowSelfieCamera() {
             <img
               src={shot.url}
               alt="Your selfie"
-              className={`h-full w-full object-contain ${shot.source === "camera" ? "-scale-x-100" : ""}`}
+              className={`h-full w-full object-contain ${shot.source ==="camera"?"-scale-x-100":""}`}
             />
             <GuideGrid guides={guides} setGuides={setGuides} />
           </div>
@@ -858,8 +858,8 @@ export default function BrowSelfieCamera() {
     <div className="fixed inset-0 z-[10000] flex flex-col items-center bg-black text-white">
       <div
         className={`mt-2 mx-4 rounded-full px-4 py-2 text-center text-sm font-medium transition-colors ${
-          ready ? "bg-green-500 text-black" : "bg-white/10"
-        }`}
+ ready ?"bg-green-500 text-black":"bg-white/10"
+ }`}
         role="status"
         aria-live="polite"
       >
@@ -895,7 +895,7 @@ export default function BrowSelfieCamera() {
         {checks.map((c) => (
           <span
             key={c.id}
-            className={`rounded-full px-2.5 py-1 text-[10px] ${c.ok ? "bg-green-500/20 text-green-300" : "bg-red-500/20 text-red-300"}`}
+            className={`rounded-full px-2.5 py-1 text-[10px] ${c.ok ?"bg-green-500/20 text-green-300":"bg-red-500/20 text-red-300"}`}
           >
             {c.ok ? "✓" : "✕"} {c.label}
           </span>

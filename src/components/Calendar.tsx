@@ -107,16 +107,16 @@ export default function Calendar({
               onClick={() => !isDisabled && !(readOnly && isPast) && onSelect(dateStr)}
               disabled={readOnly ? isPast || isTooFar : isDisabled}
               className={`aspect-square flex items-center justify-center text-sm transition-all duration-200 relative ${
-                isSelected
-                  ? 'bg-vermillion text-soft-white'
-                  : isPast || isTooFar
-                    ? 'text-warm-gray/30 cursor-not-allowed'
-                    : isBlocked
-                      ? 'text-warm-gray/50 bg-vermillion/5 cursor-pointer'
-                      : isSunday && !readOnly
-                        ? 'text-warm-gray/30 cursor-not-allowed'
-                        : 'text-charcoal hover:bg-vermillion/10 hover:text-vermillion cursor-pointer'
-              }`}
+ isSelected
+ ? 'bg-vermillion text-soft-white'
+ : isPast || isTooFar
+ ? 'text-warm-gray/30 cursor-not-allowed'
+ : isBlocked
+ ? 'text-warm-gray/50 bg-vermillion/5 cursor-pointer'
+ : isSunday && !readOnly
+ ? 'text-warm-gray/30 cursor-not-allowed'
+ : 'text-charcoal hover:bg-vermillion/10 hover:text-vermillion cursor-pointer'
+ }`}
             >
               {day}
               {isBlocked && !isPast && !isTooFar && (

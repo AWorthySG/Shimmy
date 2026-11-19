@@ -125,13 +125,13 @@ export default function BookingForm() {
             <div key={s} className="flex items-center gap-2">
               <div
                 className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                  s === step
-                    ? 'bg-vermillion scale-125'
-                    : ['service', 'date', 'time', 'details', 'confirm'].indexOf(s) <
-                        ['service', 'date', 'time', 'details', 'confirm'].indexOf(step)
-                      ? 'bg-vermillion/40'
-                      : 'bg-vermillion/15'
-                }`}
+ s === step
+ ? 'bg-vermillion scale-125'
+ : ['service', 'date', 'time', 'details', 'confirm'].indexOf(s) <
+ ['service', 'date', 'time', 'details', 'confirm'].indexOf(step)
+ ? 'bg-vermillion/40'
+ : 'bg-vermillion/15'
+ }`}
               />
               {i < 4 && <div className="w-6 h-[1px] bg-vermillion/15" />}
             </div>
@@ -164,7 +164,7 @@ export default function BookingForm() {
                   setSelectedService(service)
                   setStep('date')
                 }}
-                className="w-full flex items-center justify-between border border-vermillion/15 bg-cream/30 px-5 sm:px-6 py-4 sm:py-5 text-left transition-all duration-300 hover:border-vermillion/40 hover:shadow-md hover:shadow-vermillion/5 touch-target shine-on-hover"
+                className="w-full flex items-center justify-between border border-vermillion/15 bg-cream/30 px-5 sm:px-6 py-4 sm:py-5 text-left transition-all duration-300 hover:border-vermillion/40 hover:shadow-md hover:shadow-vermillion/5 touch-target"
               >
                 <div>
                   <p className="font-serif text-base sm:text-lg text-charcoal">{service.name}</p>
@@ -250,10 +250,10 @@ export default function BookingForm() {
                     setStep('details')
                   }}
                   className={`py-3 text-sm text-center border transition-all duration-200 touch-target ${
-                    selectedTime === slot
-                      ? 'bg-vermillion text-soft-white border-vermillion'
-                      : 'border-vermillion/20 text-charcoal hover:border-vermillion hover:text-vermillion'
-                  }`}
+ selectedTime === slot
+ ? 'bg-vermillion text-soft-white border-vermillion'
+ : 'border-vermillion/20 text-charcoal hover:border-vermillion hover:text-vermillion'
+ }`}
                 >
                   {formatTime(slot)}
                 </button>

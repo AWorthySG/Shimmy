@@ -47,7 +47,7 @@ export default function EmailCapture() {
         />
         <button
           onClick={handleSubmit}
-          className="btn btn-primary btn-sm btn-magnetic shine-on-hover touch-target"
+          className="btn btn-primary btn-sm touch-target"
         >
           {t('email.cta')}
         </button>

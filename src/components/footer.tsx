@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useI18n } from "@/lib/i18n";
+import { DarkModeToggle } from "@/components/DarkModeToggle";
 
 export function Footer() {
   const { t } = useI18n();
@@ -16,7 +17,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3">
-              <h3 className="font-serif text-xl sm:text-2xl text-charcoal tracking-wide sparkle">
+              <h3 className="font-serif text-xl sm:text-2xl text-charcoal tracking-wide">
                 Shimmy
               </h3>
               {/* Vermillion seal mark */}
@@ -65,6 +66,7 @@ export function Footer() {
                   { href: "/referral", label: t("nav.referral") },
                   { href: "/gift-cards", label: t("nav.gift.cards") },
                   { href: "/loyalty", label: t("nav.loyalty") },
+                  { href: "/wishlist", label: t("nav.wishlist") },
                 ].map(({ href, label }) => (
                   <li key={href}>
                     <Link
@@ -128,7 +130,8 @@ export function Footer() {
             {" · "}
             <Link href="/privacy" className="underline underline-offset-2 transition-colors hover:text-vermillion">Privacy</Link>
           </p>
-          <div className="flex gap-6">
+          <div className="flex items-center gap-6">
+            <DarkModeToggle />
             <a
               href="https://wa.me/6589308973"
               target="_blank"

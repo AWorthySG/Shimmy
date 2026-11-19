@@ -120,7 +120,7 @@ export default function ServicesPage() {
           <p className="eyebrow">
             {t("svcpage.tag")}
           </p>
-          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
+          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl">
             {t("svcpage.title")}
           </h1>
           <p className="mt-3 sm:mt-4 text-sm sm:text-base text-charcoal-light">
@@ -138,7 +138,7 @@ export default function ServicesPage() {
           {services.map((service, i) => (
             <AnimateOnScroll key={service.title} animation="fade-up" delay={i * 80}>
             <div
-              className="relative group oriental-corner card-lift shine-on-hover border border-vermillion/15 bg-cream/30 overflow-hidden hover:border-vermillion/40"
+              className="relative group oriental-corner card-lift border border-vermillion/15 bg-cream/30 overflow-hidden hover:border-vermillion/40"
             >
               {/* Most Popular badge (Task 5) */}
               {service.popular && (
@@ -173,7 +173,7 @@ export default function ServicesPage() {
               <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-start md:justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3">
-                    <span className="star-spin sparkle text-vermillion text-lg">✦</span>
+                    <span className="text-vermillion text-lg">✦</span>
                     <h2 className="font-serif text-xl sm:text-2xl text-charcoal">
                       {service.title}
                     </h2>
@@ -258,7 +258,7 @@ export default function ServicesPage() {
               href="https://wa.me/6589308973"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary btn-lg btn-magnetic glow-pulse shine-on-hover w-full sm:w-auto touch-target"
+              className="btn btn-primary btn-lg w-full sm:w-auto touch-target"
             >
               {t("cta.whatsapp")}
             </a>

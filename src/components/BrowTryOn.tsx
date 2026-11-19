@@ -1172,10 +1172,10 @@ export default function BrowTryOn() {
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             className={`relative border-2 border-dashed transition-all px-6 py-12 sm:py-16 text-center bg-cream/40 ${
-              isDragging
-                ? "border-vermillion bg-vermillion/5"
-                : "border-vermillion/30 hover:border-vermillion/60"
-            }`}
+ isDragging
+ ?"border-vermillion bg-vermillion/5"
+ :"border-vermillion/30 hover:border-vermillion/60"
+ }`}
           >
             <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
             <h2 className="font-serif text-2xl sm:text-3xl text-charcoal">
@@ -1315,8 +1315,8 @@ export default function BrowTryOn() {
                 onPointerUp={handleCompareUp}
                 onPointerCancel={handleCompareUp}
                 className={`relative bg-cream-dark/40 border border-vermillion/15 overflow-hidden select-none ${
-                  compareOn ? "touch-none cursor-ew-resize" : ""
-                }`}
+ compareOn ?"touch-none cursor-ew-resize":""
+ }`}
               >
                 <canvas
                   ref={canvasRef}
@@ -1442,10 +1442,10 @@ export default function BrowTryOn() {
                 onClick={abMode ? exitAbMode : enterAbMode}
                 aria-pressed={abMode}
                 className={`w-full border px-4 py-2.5 text-xs uppercase tracking-label transition-colors select-none ${
-                  abMode
-                    ? "border-vermillion bg-vermillion/5 text-vermillion-dark"
-                    : "border-charcoal/20 text-charcoal hover:border-vermillion hover:text-vermillion"
-                }`}
+ abMode
+ ?"border-vermillion bg-vermillion/5 text-vermillion-dark"
+ :"border-charcoal/20 text-charcoal hover:border-vermillion hover:text-vermillion"
+ }`}
               >
                 {abMode ? t("tryon.ab.exit") : t("tryon.ab.toggle")}
               </button>
@@ -1477,10 +1477,10 @@ export default function BrowTryOn() {
                         aria-pressed={active}
                         title={t(style.descKey)}
                         className={`relative text-left p-2 border transition-all ${
-                          active
-                            ? "border-vermillion bg-vermillion/5"
-                            : "border-vermillion/15 bg-cream/30 hover:border-vermillion/40"
-                        }`}
+ active
+ ?"border-vermillion bg-vermillion/5"
+ :"border-vermillion/15 bg-cream/30 hover:border-vermillion/40"
+ }`}
                       >
                         {style.isPopular && (
                           <span className="absolute top-1 right-1 bg-vermillion text-soft-white text-[8px] uppercase tracking-button px-1.5 py-0.5 z-10">
@@ -1535,10 +1535,10 @@ export default function BrowTryOn() {
                         aria-label={t(c.nameKey)}
                         title={t(c.nameKey)}
                         className={`h-8 w-8 rounded-full transition-all ${
-                          active
-                            ? "ring-2 ring-vermillion ring-offset-2 ring-offset-cream"
-                            : "ring-1 ring-charcoal/15 hover:ring-vermillion/40"
-                        }`}
+ active
+ ?"ring-2 ring-vermillion ring-offset-2 ring-offset-cream"
+ :"ring-1 ring-charcoal/15 hover:ring-vermillion/40"
+ }`}
                         style={{ backgroundColor: c.color }}
                       />
                     );
@@ -1639,12 +1639,12 @@ export default function BrowTryOn() {
                 aria-pressed={compareOn}
                 disabled={abMode}
                 className={`w-full border px-4 py-2.5 text-xs uppercase tracking-label transition-colors select-none ${
-                  abMode
-                    ? "border-charcoal/10 text-charcoal/30 cursor-not-allowed"
-                    : compareOn
-                      ? "border-vermillion bg-vermillion/5 text-vermillion-dark"
-                      : "border-charcoal/20 text-charcoal hover:border-vermillion hover:text-vermillion"
-                }`}
+ abMode
+ ?"border-charcoal/10 text-charcoal/30 cursor-not-allowed"
+ : compareOn
+ ?"border-vermillion bg-vermillion/5 text-vermillion-dark"
+ :"border-charcoal/20 text-charcoal hover:border-vermillion hover:text-vermillion"
+ }`}
               >
                 {t("tryon.compare.toggle")}:{" "}
                 {compareOn ? t("tryon.compare.on") : t("tryon.compare.off")}
@@ -2275,10 +2275,10 @@ function QuizModal({
                     onClick={() => selectOption(step, opt.id)}
                     aria-pressed={active}
                     className={`text-left border px-4 py-3 text-sm transition-colors ${
-                      active
-                        ? "border-vermillion bg-vermillion/5 text-vermillion-dark"
-                        : "border-charcoal/15 bg-cream/30 hover:border-vermillion/40"
-                    }`}
+ active
+ ?"border-vermillion bg-vermillion/5 text-vermillion-dark"
+ :"border-charcoal/15 bg-cream/30 hover:border-vermillion/40"
+ }`}
                   >
                     {t(opt.labelKey)}
                   </button>

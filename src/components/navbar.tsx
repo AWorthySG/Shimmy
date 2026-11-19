@@ -105,11 +105,11 @@ export function Navbar() {
               aria-haspopup="true"
               aria-expanded={browsOpen}
               className={`flex items-center gap-1 text-sm uppercase tracking-button transition-colors duration-300 underline-grow hover:text-vermillion ${
-                pathname.startsWith("/brows") ? "text-vermillion font-medium" : "text-charcoal-light"
-              }`}
+ pathname.startsWith("/brows") ?"text-vermillion font-medium":"text-charcoal-light"
+ }`}
             >
               {t("nav.brows")}
-              <svg className={`w-3 h-3 transition-transform duration-200 ${browsOpen ? "rotate-180" : ""}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <svg className={`w-3 h-3 transition-transform duration-200 ${browsOpen ?"rotate-180":""}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M3 5l3 3 3-3" />
               </svg>
             </button>
@@ -121,8 +121,8 @@ export function Navbar() {
                     href={href}
                     role="menuitem"
                     className={`block px-4 py-2.5 text-xs uppercase tracking-button transition-colors hover:text-vermillion hover:bg-vermillion/5 ${
-                      pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
-                    }`}
+ pathname === href ?"text-vermillion font-medium":"text-charcoal-light"
+ }`}
                   >
                     {t(key)}
                   </Link>
@@ -143,11 +143,11 @@ export function Navbar() {
               aria-haspopup="true"
               aria-expanded={nailsOpen}
               className={`flex items-center gap-1 text-sm uppercase tracking-button transition-colors duration-300 underline-grow hover:text-vermillion ${
-                pathname.startsWith("/nails") ? "text-vermillion font-medium" : "text-charcoal-light"
-              }`}
+ pathname.startsWith("/nails") ?"text-vermillion font-medium":"text-charcoal-light"
+ }`}
             >
               {t("nav.nails")}
-              <svg className={`w-3 h-3 transition-transform duration-200 ${nailsOpen ? "rotate-180" : ""}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <svg className={`w-3 h-3 transition-transform duration-200 ${nailsOpen ?"rotate-180":""}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M3 5l3 3 3-3" />
               </svg>
             </button>
@@ -159,8 +159,8 @@ export function Navbar() {
                     href={href}
                     role="menuitem"
                     className={`block px-4 py-2.5 text-xs uppercase tracking-button transition-colors hover:text-vermillion hover:bg-vermillion/5 ${
-                      pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
-                    }`}
+ pathname === href ?"text-vermillion font-medium":"text-charcoal-light"
+ }`}
                   >
                     {t(key)}
                   </Link>
@@ -174,8 +174,8 @@ export function Navbar() {
             <Link
               href="/about"
               className={`text-sm uppercase tracking-button transition-colors duration-300 underline-grow hover:text-vermillion ${
-                pathname === "/about" ? "text-vermillion font-medium" : "text-charcoal-light"
-              }`}
+ pathname ==="/about"?"text-vermillion font-medium":"text-charcoal-light"
+ }`}
             >
               {t("nav.about")}
             </Link>
@@ -186,8 +186,8 @@ export function Navbar() {
             <Link
               href="/contact"
               className={`text-sm uppercase tracking-button transition-colors duration-300 underline-grow hover:text-vermillion ${
-                pathname === "/contact" ? "text-vermillion font-medium" : "text-charcoal-light"
-              }`}
+ pathname ==="/contact"?"text-vermillion font-medium":"text-charcoal-light"
+ }`}
             >
               {t("nav.contact")}
             </Link>
@@ -210,21 +210,6 @@ export function Navbar() {
             </svg>
           </button>
 
-          {/* Wishlist icon */}
-          <Link
-            href="/wishlist"
-            className="relative text-charcoal-light transition-colors hover:text-vermillion touch-target p-2"
-            aria-label="Wishlist"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-            </svg>
-            {wishlistCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-vermillion text-[9px] font-medium text-soft-white">
-                {wishlistCount}
-              </span>
-            )}
-          </Link>
 
           {/* Cart icon */}
           <button
@@ -243,9 +228,6 @@ export function Navbar() {
               </span>
             )}
           </button>
-
-          {/* Dark mode toggle */}
-          <DarkModeToggle />
 
           {/* Language toggle */}
           <button
@@ -295,9 +277,9 @@ export function Navbar() {
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
-            <span className={`block h-[1.5px] w-6 bg-charcoal transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-            <span className={`block h-[1.5px] w-6 bg-charcoal transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
-            <span className={`block h-[1.5px] w-6 bg-charcoal transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
+            <span className={`block h-[1.5px] w-6 bg-charcoal transition-all duration-300 origin-center ${mobileOpen ?"rotate-45 translate-y-[7px]":""}`} />
+            <span className={`block h-[1.5px] w-6 bg-charcoal transition-all duration-300 ${mobileOpen ?"opacity-0":""}`} />
+            <span className={`block h-[1.5px] w-6 bg-charcoal transition-all duration-300 origin-center ${mobileOpen ?"-rotate-45 -translate-y-[7px]":""}`} />
           </button>
         </div>
       </nav>
@@ -306,8 +288,8 @@ export function Navbar() {
       {/* Mobile menu — backdrop overlay */}
       <div
         className={`lg:hidden fixed inset-x-0 bottom-0 z-30 bg-charcoal/50 transition-opacity duration-300 ${
-          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+ mobileOpen ?"opacity-100 pointer-events-auto":"opacity-0 pointer-events-none"
+ }`}
         style={{ top: menuTop }}
         onClick={() => setMobileOpen(false)}
         aria-hidden="true"
@@ -316,8 +298,8 @@ export function Navbar() {
       {/* Mobile menu — bottom sheet */}
       <div
         className={`lg:hidden fixed inset-x-0 bottom-0 z-40 flex flex-col justify-end transition-transform duration-300 ease-out pointer-events-none ${
-          mobileOpen ? "translate-y-0" : "translate-y-full"
-        }`}
+ mobileOpen ?"translate-y-0":"translate-y-full"
+ }`}
         style={{ top: menuTop }}
       >
         <div className="pointer-events-auto bg-soft-white overflow-y-auto max-h-full safe-bottom rounded-t-2xl shadow-2xl">
@@ -366,8 +348,8 @@ export function Navbar() {
                       href={href}
                       onClick={() => setMobileOpen(false)}
                       className={`block py-3 text-base tracking-wide border-b border-gold/8 touch-target ${
-                        pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
-                      }`}
+ pathname === href ?"text-vermillion font-medium":"text-charcoal-light"
+ }`}
                     >
                       {t(key)}
                     </Link>
@@ -386,8 +368,8 @@ export function Navbar() {
                       href={href}
                       onClick={() => setMobileOpen(false)}
                       className={`block py-3 text-base tracking-wide border-b border-gold/8 touch-target ${
-                        pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
-                      }`}
+ pathname === href ?"text-vermillion font-medium":"text-charcoal-light"
+ }`}
                     >
                       {t(key)}
                     </Link>
@@ -410,8 +392,8 @@ export function Navbar() {
                       href={href}
                       onClick={() => setMobileOpen(false)}
                       className={`block py-3 text-base tracking-wide border-b border-gold/8 touch-target ${
-                        pathname === href ? "text-vermillion font-medium" : "text-charcoal-light"
-                      }`}
+ pathname === href ?"text-vermillion font-medium":"text-charcoal-light"
+ }`}
                     >
                       {t(key)}
                     </Link>

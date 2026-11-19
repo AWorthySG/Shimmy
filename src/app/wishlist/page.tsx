@@ -32,7 +32,7 @@ function WishlistCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/nails/shop/${product.collectionHandle}/${product.handle}`}
-      className="group card-lift shine-on-hover border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40"
+      className="group card-lift border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40"
     >
       {/* Product image */}
       <div className="relative w-full aspect-square bg-gradient-to-br from-cream-dark/50 via-cream to-vermillion/5 overflow-hidden">
@@ -97,7 +97,7 @@ function WishlistCard({ product }: { product: Product }) {
 
         <button
           onClick={handleAdd}
-          className={`btn btn-sm mt-3 w-full ${added ? "border-jade/30 bg-jade/20 text-jade" : "btn-secondary"}`}
+          className={`btn btn-sm mt-3 w-full ${added ?"border-jade/30 bg-jade/20 text-jade":"btn-secondary"}`}
         >
           {added ? t("shop.added") : t("shop.add")}
         </button>

@@ -32,7 +32,7 @@ export default function BlogPage() {
           <p className="eyebrow">
             {t('blog.tag')}
           </p>
-          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
+          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl">
             {t('blog.title')}
           </h1>
           <p className="mt-3 sm:mt-4 text-sm sm:text-base text-charcoal-light">
@@ -79,7 +79,7 @@ export default function BlogPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`chip ${selectedCategory === cat ? "chip-active" : ""}`}
+                  className={`chip ${selectedCategory === cat ?"chip-active":""}`}
                 >
                   {t(labelKey)}
                 </button>
@@ -99,7 +99,7 @@ export default function BlogPage() {
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="group card-lift shine-on-hover border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40"
+                    className="group card-lift border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40"
                   >
                     {/* Hero image */}
                     <div className="relative aspect-[3/2] w-full overflow-hidden">

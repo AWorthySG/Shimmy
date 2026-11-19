@@ -166,10 +166,10 @@ export default function GiftCardsPage() {
                       type="button"
                       onClick={() => { setSelectedValue(v); setIsCustom(false) }}
                       className={`py-2.5 text-xs uppercase tracking-button border transition-colors ${
-                        !isCustom && selectedValue === v
-                          ? 'border-vermillion bg-vermillion/5 text-vermillion'
-                          : 'border-vermillion/20 text-charcoal hover:border-vermillion/40'
-                      }`}
+ !isCustom && selectedValue === v
+ ? 'border-vermillion bg-vermillion/5 text-vermillion'
+ : 'border-vermillion/20 text-charcoal hover:border-vermillion/40'
+ }`}
                     >
                       S${v}
                     </button>
@@ -178,10 +178,10 @@ export default function GiftCardsPage() {
                     type="button"
                     onClick={() => setIsCustom(true)}
                     className={`py-2.5 text-xs uppercase tracking-button border transition-colors ${
-                      isCustom
-                        ? 'border-vermillion bg-vermillion/5 text-vermillion'
-                        : 'border-vermillion/20 text-charcoal hover:border-vermillion/40'
-                    }`}
+ isCustom
+ ? 'border-vermillion bg-vermillion/5 text-vermillion'
+ : 'border-vermillion/20 text-charcoal hover:border-vermillion/40'
+ }`}
                   >
                     {t('gift.value.custom')}
                   </button>
@@ -348,10 +348,10 @@ export default function GiftCardsPage() {
                 </p>
                 <span
                   className={`inline-block mt-2 text-[10px] uppercase tracking-button px-2 py-0.5 border ${
-                    checkResult.is_active
-                      ? 'text-jade border-jade/20 bg-jade/5'
-                      : 'text-error border-error/30 bg-error/5'
-                  }`}
+ checkResult.is_active
+ ? 'text-jade border-jade/20 bg-jade/5'
+ : 'text-error border-error/30 bg-error/5'
+ }`}
                 >
                   {checkResult.is_active ? t('gift.check.active') : t('gift.check.redeemed')}
                 </span>

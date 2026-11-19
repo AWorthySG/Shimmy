@@ -129,7 +129,7 @@ export default function BlogArticlePage() {
             href="https://wa.me/6589308973"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary btn-lg btn-magnetic glow-pulse w-full sm:w-auto touch-target"
+            className="btn btn-primary btn-lg w-full sm:w-auto touch-target"
           >
             {t('cta.whatsapp')}
           </a>
@@ -157,13 +157,13 @@ export default function BlogArticlePage() {
                 <Link
                   key={rel.slug}
                   href={`/blog/${rel.slug}`}
-                  className="group border border-vermillion/15 bg-cream/50 p-5 hover:border-vermillion/40 transition-all duration-300 shine-on-hover"
+                  className="group border border-vermillion/15 bg-cream/50 p-5 hover:border-vermillion/40 transition-all duration-300"
                 >
                   <span className={`text-[9px] uppercase tracking-label px-2 py-0.5 border ${
-                    rel.category === 'brows'
-                      ? 'text-vermillion-dark border-vermillion/20'
-                      : 'text-jade border-jade/20'
-                  }`}>
+ rel.category === 'brows'
+ ? 'text-vermillion-dark border-vermillion/20'
+ : 'text-jade border-jade/20'
+ }`}>
                     {t(rel.categoryKey)}
                   </span>
                   <h4 className="mt-3 font-serif text-base text-charcoal group-hover:text-vermillion transition-colors">

@@ -9,6 +9,9 @@ import StickyBookBar from "@/components/StickyBookBar";
 import ServiceComparison from "@/components/ServiceComparison";
 import ServiceFAQ from "@/components/ServiceFAQ";
 import Glossary from "@/components/Glossary";
+import { BROW_SERVICES } from "@/lib/brow-services";
+
+const serviceSlug = (id: string) => BROW_SERVICES.find((b) => b.id === id)?.slug;
 
 /* Service text lives in i18n (svc.*). Prices were confirmed by the owner
    in Nov 2026; durations and inclusions have not been reviewed yet. */
@@ -218,6 +221,15 @@ export default function ServicesPage() {
 
               {/* Service-specific FAQ */}
               <ServiceFAQ serviceId={service.id} />
+
+              {serviceSlug(service.id) && (
+                <Link
+                  href={`/brows/services/${serviceSlug(service.id)}`}
+                  className="mt-4 inline-block text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion touch-target py-2"
+                >
+                  {t("svcpage.detail.more")}
+                </Link>
+              )}
               </div>{/* end padding wrapper */}
             </div>
             </AnimateOnScroll>

@@ -131,6 +131,11 @@ export const en: Record<string, string> = {
   "svcpage.desc":
     "Every session starts with a conversation. Before we do anything else, we take the time to work out what suits you.",
   "svcpage.includes": "What's included",
+  "svcpage.detail.book": "Book online",
+  "svcpage.detail.more": "More about this service →",
+  "svcpage.detail.back": "← All brow services",
+  "svcpage.detail.other": "Other services",
+  "svcpage.detail.tryon": "Try the look on your own photo first →",
   "svcpage.unsure.title": "Not sure where to start?",
   "svcpage.unsure.desc":
     "That's fine. It's what the consultation is for. Send us a message about what you'd like to change, and we'll work it out together.",

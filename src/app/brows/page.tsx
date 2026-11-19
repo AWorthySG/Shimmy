@@ -384,7 +384,7 @@ export default function Home() {
       <GoogleReviews />
 
       {/* ─── Booking Widget (Task 1) ─── */}
-      <section className="bg-soft-white py-16 sm:py-20 px-4 sm:px-6">
+      <section id="book" className="scroll-mt-20 bg-soft-white py-16 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-3xl">
           <AnimateOnScroll animation="fade-up" className="text-center mb-8">
             <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />

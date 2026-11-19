@@ -52,7 +52,7 @@ export default function EmailCapture() {
           {t('email.cta')}
         </button>
       </div>
-      {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
+      {error && <p className="text-xs text-error mt-2">{error}</p>}
     </div>
   )
 }

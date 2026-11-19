@@ -37,7 +37,7 @@ export default function Glossary({ term, definition }: TooltipProps) {
       {visible && (
         <span
           role="tooltip"
-          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-max max-w-xs px-3 py-2 rounded bg-charcoal text-soft-white text-xs leading-relaxed shadow-lg pointer-events-none"
+          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-max max-w-xs px-3 py-2 bg-charcoal text-soft-white text-xs leading-relaxed shadow-lg pointer-events-none"
         >
           {definition}
           {/* Arrow */}

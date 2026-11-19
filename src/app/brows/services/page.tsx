@@ -250,7 +250,7 @@ export default function ServicesPage() {
             {t("svcpage.unsure.desc")}
           </p>
           {/* Urgency messaging (Task 6) */}
-          <p className="text-sm text-red-600 font-medium mt-2">
+          <p className="text-sm text-vermillion-dark font-medium mt-2">
             {t("urgency.brows")}
           </p>
           <div className="mt-6 sm:mt-8 flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center">

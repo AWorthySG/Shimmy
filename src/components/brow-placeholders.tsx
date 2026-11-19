@@ -9,7 +9,7 @@
  */
 
 const baseClass =
-  "w-full rounded-sm overflow-hidden aspect-[2/1] flex items-center justify-center";
+  "w-full overflow-hidden aspect-[2/1] flex items-center justify-center";
 
 /* ─── Eyebrow Embroidery: fine individual blade strokes ─── */
 export function EmbroideryPlaceholder() {

@@ -224,7 +224,7 @@ export default function AdminPage() {
             onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
             className="field w-full"
           />
-          {passError && <p className="text-xs text-red-500 mt-2">{passError}</p>}
+          {passError && <p className="text-xs text-error mt-2">{passError}</p>}
           <button
             onClick={handleLogin}
             disabled={loggingIn}
@@ -317,7 +317,7 @@ export default function AdminPage() {
                     </span>
                     <span className={`text-[10px] uppercase tracking-button px-2 py-0.5 border ${
                       b.status === 'confirmed' ? 'text-jade border-jade/20 bg-jade/5' :
-                      b.status === 'cancelled' ? 'text-red-500 border-red-200 bg-red-50' :
+                      b.status === 'cancelled' ? 'text-error border-error/30 bg-error/5' :
                       'text-gold border-gold/20 bg-gold/5'
                     }`}>
                       {b.status}
@@ -329,14 +329,14 @@ export default function AdminPage() {
                       <button
                         onClick={() => handleStatusChange(b.id, 'confirmed')}
                         disabled={updatingId === b.id}
-                        className="text-[11px] uppercase tracking-button px-3 py-1.5 bg-jade text-soft-white hover:bg-jade/80 transition-colors disabled:opacity-50"
+                        className="btn btn-primary btn-sm"
                       >
                         {updatingId === b.id ? '...' : 'Confirm'}
                       </button>
                       <button
                         onClick={() => handleStatusChange(b.id, 'cancelled')}
                         disabled={updatingId === b.id}
-                        className="text-[11px] uppercase tracking-button px-3 py-1.5 bg-red-500 text-soft-white hover:bg-red-600 transition-colors disabled:opacity-50"
+                        className="btn btn-danger btn-sm"
                       >
                         {updatingId === b.id ? '...' : 'Cancel'}
                       </button>
@@ -587,7 +587,7 @@ export default function AdminPage() {
                             href={`https://wa.me/${lead.phone.replace(/[^+\d]/g, '')}?text=${encodeURIComponent(`Hi ${lead.name}! You recently tried the ${lead.style_name} look on our brow visualizer — shall we book a consultation?`)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block text-[11px] uppercase tracking-button px-3 py-1.5 bg-jade text-soft-white hover:bg-jade/80 transition-colors"
+                            className="btn btn-primary btn-sm"
                           >
                             Follow up
                           </a>
@@ -608,14 +608,14 @@ export default function AdminPage() {
                     <button
                       onClick={() => setLeadsPage((p) => Math.max(0, p - 1))}
                       disabled={leadsPage === 0}
-                      className="text-xs uppercase tracking-button px-3 py-1.5 border border-vermillion/20 text-charcoal hover:border-vermillion/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="btn btn-outline btn-sm"
                     >
                       Previous
                     </button>
                     <button
                       onClick={() => setLeadsPage((p) => p + 1)}
                       disabled={(leadsPage + 1) * LEADS_PER_PAGE >= leadsTotal}
-                      className="text-xs uppercase tracking-button px-3 py-1.5 border border-vermillion/20 text-charcoal hover:border-vermillion/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="btn btn-outline btn-sm"
                     >
                       Next
                     </button>

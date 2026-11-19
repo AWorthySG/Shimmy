@@ -7,7 +7,7 @@ export function SkeletonLine({
 }) {
   return (
     <div
-      className="animate-pulse rounded bg-cream-dark/50"
+      className="animate-pulse bg-cream-dark/50"
       style={{ width, height }}
     />
   );

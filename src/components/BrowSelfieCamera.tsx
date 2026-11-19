@@ -667,7 +667,7 @@ export default function BrowSelfieCamera() {
     return (
       <div className="fixed inset-0 z-[10000] overflow-y-auto bg-neutral-950 text-white">
         <div className="mx-auto max-w-md px-5 py-8">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-green-400">Shimmyhands brows</p>
+          <p className="text-[11px] uppercase tracking-eyebrow text-green-400">Shimmyhands brows</p>
           <h1 className="mt-3 font-serif text-3xl">Brow mapping selfie</h1>
           <p className="mt-3 text-sm text-white/70">
             We use this photo to measure your face before your appointment. It must be taken straight on.
@@ -683,7 +683,7 @@ export default function BrowSelfieCamera() {
               </li>
             ))}
           </ol>
-          <div className="mt-6 rounded-lg border border-white/10 p-4 text-xs text-white/70 space-y-1.5">
+          <div className="mt-6 border border-white/10 p-4 text-xs text-white/70 space-y-1.5">
             <p><span className="text-green-400 font-semibold">Green</span>: the centre of your face. It does not move.</p>
             <p><span className="text-yellow-300 font-semibold">Yellow</span>: move the yellow lines until they are just touching the inner corners of your eyes. Both lines move together.</p>
             <p><span className="text-red-500 font-semibold">Top red</span>: move it until it runs horizontally through your natural brows.</p>
@@ -766,7 +766,7 @@ export default function BrowSelfieCamera() {
     return (
       <div className="fixed inset-0 z-[10000] overflow-y-auto bg-neutral-950 text-white">
         <div className="mx-auto flex max-w-md flex-col items-center px-4 py-4">
-          <div className="relative overflow-hidden rounded-lg bg-black" style={frameStyle}>
+          <div className="relative overflow-hidden bg-black" style={frameStyle}>
             {/* Shown mirrored to match the preview the customer just saw; the file itself is unmirrored. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -776,7 +776,7 @@ export default function BrowSelfieCamera() {
             />
             <GuideGrid guides={guides} setGuides={setGuides} />
           </div>
-          <div className="mt-3 w-full rounded-lg border border-white/10 p-3 text-xs text-white/80 space-y-1">
+          <div className="mt-3 w-full border border-white/10 p-3 text-xs text-white/80 space-y-1">
             <p className="font-semibold text-white">Check the lines before sending. Drag to adjust:</p>
             <p><span className="text-yellow-300 font-semibold">Yellow</span>: just touching the inner corners of your eyes.</p>
             <p><span className="text-red-500 font-semibold">Top red</span>: running horizontally through your natural brows.</p>
@@ -804,7 +804,7 @@ export default function BrowSelfieCamera() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Your name"
               maxLength={100}
-              className="w-full rounded-lg bg-white/10 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full bg-white/10 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-500"
             />
             {DELIVERY === "telegram" && (
             <input
@@ -814,7 +814,7 @@ export default function BrowSelfieCamera() {
               placeholder="WhatsApp number"
               inputMode="tel"
               pattern="[+\d\s\-\(\)]{6,20}"
-              className="w-full rounded-lg bg-white/10 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full bg-white/10 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-green-500"
             />
             )}
             {DELIVERY === "whatsapp" && (
@@ -876,7 +876,7 @@ export default function BrowSelfieCamera() {
               : (failing?.fix ?? "Position your face in the frame.")}
       </div>
 
-      <div className="relative mt-2 overflow-hidden rounded-lg bg-neutral-900" style={frameStyle}>
+      <div className="relative mt-2 overflow-hidden bg-neutral-900" style={frameStyle}>
         <video
           ref={videoRef}
           playsInline

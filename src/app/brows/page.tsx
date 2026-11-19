@@ -326,7 +326,7 @@ export default function Home() {
                   className="card-lift shine-on-hover border border-vermillion/15 overflow-hidden hover:border-vermillion/30"
                 >
                   {/* Brow result placeholder — TODO: replace with your actual client brow photos */}
-                  <div className="relative w-full aspect-[16/9] bg-gradient-to-br from-[#3A3530] to-[#2A2520] flex items-center justify-center">
+                  <div className="relative w-full aspect-[16/9] bg-gradient-to-br from-cream-dark to-cream flex items-center justify-center">
                     <div className="text-center px-6">
                       <div className="mx-auto w-12 h-[1px] bg-vermillion/20 mb-3" />
                       <p className="text-[10px] uppercase tracking-label text-vermillion/30">

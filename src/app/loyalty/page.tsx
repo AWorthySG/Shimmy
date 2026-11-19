@@ -140,7 +140,7 @@ export default function LoyaltyPage() {
                   className="field flex-1"
                 />
               </div>
-              {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
+              {error && <p className="text-xs text-error mt-2">{error}</p>}
               <button
                 type="submit"
                 disabled={loading || !phone.trim()}

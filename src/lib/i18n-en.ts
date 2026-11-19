@@ -265,9 +265,9 @@ export const en: Record<string, string> = {
   "contact.hours.sun.time": "By Appointment Only",
   "contact.visit.title": "Visit Us",
   "contact.visit.desc":
-    "We're by appointment only — walk-ins are welcome but availability isn't guaranteed, so booking ahead is best.",
-  "contact.visit.address.1": "123 Orchard Road, #04-56",
-  "contact.visit.address.2": "Singapore 238888",
+    "We're by appointment only and can't take walk-ins. Book online or message us on WhatsApp to reserve a slot.",
+  "contact.visit.address.1": "37 Grace Walk, Verdana Villas",
+  "contact.visit.address.2": "Singapore",
   "contact.prep.tag": "A Few Things Before You Visit",
   "contact.prep.1": "Try to avoid caffeine and alcohol for 24 hours beforehand",
   "contact.prep.2": "Come with clean, bare brows — no brow makeup please",
@@ -350,7 +350,7 @@ export const en: Record<string, string> = {
   "urgency.nails": "Limited sets remaining",
 
   // ─── Referral ───
-  "referral.text": "Love your results? Share your referral link — you both receive S$20 off your next visit.",
+  "referral.text": "Love your results? Share your referral link — you both receive S$10 off your next visit.",
   "referral.wa.prefix": "Prefer WhatsApp? Message us at",
 
   // ─── Bundle Offer ───

@@ -321,9 +321,9 @@ const zh: Record<string, string> = {
   "contact.hours.sun": "周日",
   "contact.hours.sun.time": "仅限预约",
   "contact.visit.title": "来找我们",
-  "contact.visit.desc": "我们采用预约制——也欢迎直接到访，但无法保证有空位，建议提前预约哦。",
-  "contact.visit.address.1": "123 Orchard Road, #04-56",
-  "contact.visit.address.2": "Singapore 238888",
+  "contact.visit.desc": "我们仅接受预约，不接待直接到访。请在线预约或通过 WhatsApp 联系我们预留时段。",
+  "contact.visit.address.1": "37 Grace Walk, Verdana Villas",
+  "contact.visit.address.2": "Singapore",
   "contact.prep.tag": "到店前的小提醒",
   "contact.prep.1": "预约前24小时尽量避免咖啡和酒精",
   "contact.prep.2": "请勿涂抹眉部彩妆，眉毛保持干净裸妆即可",
@@ -405,7 +405,7 @@ const zh: Record<string, string> = {
   "urgency.nails": "库存有限",
 
   // ─── Referral ───
-  "referral.text": "喜欢你的效果？分享你的推荐链接——双方各享 S$20 优惠。",
+  "referral.text": "喜欢你的效果？分享你的推荐链接——双方各享 S$10 优惠。",
   "referral.wa.prefix": "更喜欢 WhatsApp？联系我们",
 
   // ─── Bundle Offer ───

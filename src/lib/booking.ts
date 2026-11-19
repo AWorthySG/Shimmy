@@ -6,13 +6,15 @@ export interface BookingService {
 }
 
 export const BOOKING_SERVICES: BookingService[] = [
-  // TODO: Update prices with actual values
-  { id: 'embroidery', name: 'Eyebrow Embroidery', duration: 120, price: 'From $XXX' },
-  { id: 'microblading', name: 'Microblading', duration: 120, price: 'From $XXX' },
-  { id: 'nano', name: 'Nano Brows', duration: 120, price: 'From $XXX' },
-  { id: 'ombre', name: 'Ombre Powder Brows', duration: 120, price: 'From $XXX' },
-  { id: 'shaping', name: 'Brow Shaping', duration: 45, price: 'From $XXX' },
-  { id: 'lip', name: 'Lip Blush', duration: 120, price: 'From $XXX' },
+  // Prices and durations must match svc.*.price / svc.*.duration in i18n-en.ts
+  // (booking.test.ts checks this). Duration is the upper end of the stated range,
+  // so a slot never runs into the next booking.
+  { id: 'embroidery', name: 'Eyebrow Embroidery', duration: 150, price: 'From S$388' },
+  { id: 'microblading', name: 'Microblading', duration: 150, price: 'From S$488' },
+  { id: 'nano', name: 'Nano Brows', duration: 180, price: 'From S$588' },
+  { id: 'ombre', name: 'Ombre Powder Brows', duration: 150, price: 'From S$488' },
+  { id: 'shaping', name: 'Brow Shaping', duration: 45, price: 'From S$48' },
+  { id: 'lip', name: 'Lip Blush', duration: 150, price: 'From S$488' },
 ]
 
 // Operating hours per day-of-week (0 = Sunday, 6 = Saturday)

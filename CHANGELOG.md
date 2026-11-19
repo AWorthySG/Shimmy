@@ -28,3 +28,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Videos load only when scrolled near, pause when off screen, and show a still image for visitors who ask for reduced motion or data saving. Video files are 40% smaller (7.5 MB to 4.5 MB) with no visible quality change.
 - Rewrote the English copy across the site in plainer, more direct language: sentence-case headings and buttons, British spelling, and no stock marketing phrases. Prices, durations, aftercare instructions and client reviews are unchanged.
 - Nail collection prices now read "From S$45.00" instead of "From $45", matching the rest of the site.
+- Facts that disagreed across pages now match: brow longevity (microblading and embroidery 12 to 18 months, nano 18 to 24 months, ombre 2 to 3 years), lip blush true colour at week 3 to 4, avoiding caffeine and alcohol for 48 hours before, a 2 to 2.5 hour first session and a 60 to 90 minute touch-up. The booking page no longer promises an automatic deposit link.
+- The booking form shows real prices instead of "From $XXX", and try-on prices match the services page (embroidery from S$388, microblading from S$488).
+- Booking slots now match the stated session lengths (2.5 hours for most brow services, 3 hours for nano), so appointments can't overlap.

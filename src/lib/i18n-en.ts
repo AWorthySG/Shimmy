@@ -36,7 +36,7 @@ export const en: Record<string, string> = {
     "We use a digital nano-needle to place very fine strokes. People will assume they're your natural brows.",
   "services.ombre.title": "Ombre Powder Brows",
   "services.ombre.desc":
-    "The soft, powdered look that usually takes 15 minutes to draw on each morning. Ours lasts up to two years.",
+    "The soft, powdered look that usually takes 15 minutes to draw on each morning. Ours lasts 2 to 3 years.",
   "services.viewall": "View all services →",
 
   // ─── About Snippet (Home) ───
@@ -170,7 +170,7 @@ export const en: Record<string, string> = {
   "svc.ombre.price": "From S$488",
   "svc.ombre.duration": "2 to 2.5 hours",
   "svc.ombre.desc":
-    "Lighter at the front and gradually deeper at the tail. It's the soft, powdered look you might draw on each morning, and it lasts up to two years.",
+    "Lighter at the front and gradually deeper at the tail. It's the soft, powdered look you might draw on each morning, and it lasts 2 to 3 years.",
   "svc.ombre.inc.1": "Custom gradient density",
   "svc.ombre.inc.2": "Soft machine shading technique",
   "svc.ombre.inc.3": "Good if you fill in your brows every day",
@@ -270,7 +270,7 @@ export const en: Record<string, string> = {
   "contact.visit.address.1": "37 Grace Walk, Verdana Villas",
   "contact.visit.address.2": "Singapore",
   "contact.prep.tag": "A few things before you visit",
-  "contact.prep.1": "Try to avoid caffeine and alcohol for 24 hours beforehand",
+  "contact.prep.1": "Try to avoid caffeine and alcohol for 48 hours beforehand",
   "contact.prep.2": "Come with clean, bare brows (no brow makeup, please)",
   "contact.prep.3": "Arriving 10 minutes early gives us time for a proper chat",
   "contact.prep.4": "Do let us know about any skin conditions or allergies",
@@ -425,7 +425,7 @@ export const en: Record<string, string> = {
   "process.step.1.time": "15 min",
   "process.step.1.desc": "We start with face mapping. We measure your bone structure, brow bone and facial proportions to find a shape that suits your face. Then we talk honestly about what you want: thicker, more defined or softer brows. We also look at your skin type and lifestyle so we can recommend the right technique. Everything else depends on this step, so we never skip or rush it.",
   "process.step.2.title": "Design",
-  "process.step.2.time": "15 min",
+  "process.step.2.time": "20 to 30 min",
   "process.step.2.desc": "We draw the brow shape onto your skin with a soft pencil, so you can see exactly how the finished brows will look. We adjust the height, thickness, arch position and tail length one change at a time, and we keep redrawing until you're completely happy. You'll have a mirror the whole time. We don't start until you say yes.",
   "process.step.3.title": "Numbing",
   "process.step.3.time": "15 min",
@@ -458,7 +458,7 @@ export const en: Record<string, string> = {
 
   "process.book.title": "Confirm your slot",
   "process.book.time": "Within 24 hours",
-  "process.book.desc": "Once you've picked a date, we'll send you a confirmation with your appointment details and a link to pay a small deposit that secures the slot. The deposit goes towards your final payment. We'll also email you a pre-appointment guide that explains what to do, and what to avoid, in the days before. If you need to reschedule, give us 24 hours' notice and we'll move your appointment without any fuss.",
+  "process.book.desc": "Once you've picked a date, we'll confirm your appointment on WhatsApp, and by email if you gave us one. If your appointment needs a deposit, we'll tell you how to pay it then. The deposit goes towards your final payment. If you need to reschedule, give us 24 hours' notice and we'll move your appointment without any fuss.",
 
   "process.prep.title": "Get ready",
   "process.prep.time": "48 hours before",
@@ -480,11 +480,11 @@ export const en: Record<string, string> = {
   // Phase 4: Touch-Up
   "process.touchup.title": "The touch-up appointment",
   "process.touchup.time": "Week 6 to 8",
-  "process.touchup.desc": "The touch-up is included with your first session. We invite you back about 6 to 8 weeks after the first procedure. We check how the colour has settled, fill in any spots that faded unevenly, sharpen lines if needed and set the final shape. The touch-up takes about an hour and uses the same numbing process. Aftercare is the same as the first time, and it usually heals faster.",
+  "process.touchup.desc": "The touch-up is included with your first session. We invite you back about 6 to 8 weeks after the first procedure. We check how the colour has settled, fill in any spots that faded unevenly, sharpen lines if needed and set the final shape. The touch-up takes 60 to 90 minutes and uses the same numbing process. Aftercare is the same as the first time, and it usually heals faster.",
 
   // Phase 5: Long-Term
   "process.longterm.title": "12 to 24 months later",
-  "process.longterm.desc": "Brow embroidery is semi-permanent. The colour fades gradually over 12 to 24 months as your skin naturally exfoliates. It fades evenly, so you won't be left with a harsh line or odd patch as it ages. Most clients book a colour refresh about every 12 to 18 months to keep their brows looking fresh. A refresh is shorter and costs less than starting over. We'll send you a reminder when it's due.",
+  "process.longterm.desc": "Brow embroidery is semi-permanent. The colour fades gradually over 12 to 18 months as your skin naturally exfoliates. It fades evenly, so you won't be left with a harsh line or odd patch as it ages. Most clients book a colour refresh about every 12 to 18 months to keep their brows looking fresh. A refresh is shorter and costs less than starting over. We'll send you a reminder when it's due.",
 
   "process.longterm.maintain.title": "Daily maintenance",
   "process.longterm.maintain.desc": "Once your brows have fully healed, they need very little special care, but a few habits help them last. Apply SPF near (not directly on) the brows when you're in the sun. UV is the biggest cause of early fading. Keep harsh exfoliants and retinoids off the brow area. If your brows need a lift between sessions, a brow shaping appointment can keep your embroidery looking good for months longer.",
@@ -597,7 +597,7 @@ export const en: Record<string, string> = {
   "blog.7.p1": "Lip blush is a semi-permanent treatment that puts soft pigment into the lips to even out tone, define the shape and add a subtle wash of colour. It works like a tinted lip stain that stays in your lips for 2 to 3 years. The finish is soft and matte, nothing like the dark, lined look of older lip tattoos. Most clients leave looking as if they're wearing a sheer lipstick they never have to reapply.",
   "blog.7.p2": "Your appointment starts with colour mapping. We show you 4 to 6 shade options based on your natural lip tone, your undertone and the look you want, whether that's a 'my lips but better' nude, a soft rose or a deeper berry. The pigment always heals about 40% lighter than it looks on day one, so we choose with the healed colour in mind. We take our time here, and you'll see swatches against your skin before anything else happens.",
   "blog.7.p3": "Numbing happens in two stages: a pre-numb before we draw the outline, then a stronger numb once the lips are open. Sensitivity varies. Lips have more nerve endings than brows, so some clients describe it as a vibration with mild pinching. It's manageable, and we pause whenever you need to. The full session takes about 2 to 2.5 hours, including consultation, numbing and the work itself.",
-  "blog.7.p4": "The first week looks the most dramatic. On days 1 to 3, your lips look bold and slightly swollen, as if you've been eating beetroot. On days 4 to 7, they peel in soft flakes (don't pick) and seem to lose all their colour. This is normal, even though the 'ghosting' phase worries everyone. Around day 10 to 14, the true colour comes back through. Your touch-up at 6 to 8 weeks sets the final shade.",
+  "blog.7.p4": "The first week looks the most dramatic. On days 1 to 3, your lips look bold and slightly swollen, as if you've been eating beetroot. On days 4 to 7, they peel in soft flakes (don't pick) and seem to lose all their colour. This is normal, even though the 'ghosting' phase worries everyone. Colour starts to come back in the second week, and the true colour shows around week 3 to 4. Your touch-up at 6 to 8 weeks sets the final shade.",
   "blog.7.p5": "Lip blush usually lasts 2 to 3 years in Singapore's climate, though heavy sun exposure and frequent exfoliating treatments can shorten that. Smokers and clients who use strong actives like retinol or AHAs near the mouth tend to fade faster. A yearly colour boost keeps the shade fresh, and it's much shorter and cheaper than a full first session.",
   "blog.7.p6": "Aftercare is simple but strict. Keep your lips dry for the first 24 hours, then apply lip balm constantly for the next 10 days. Dryness is the biggest cause of patchy healing. For the first week, avoid spicy food, hot drinks and direct lip contact, including kissing and oily food. After that, put sunscreen on your lips every day. If you're thinking about lip blush, message us on WhatsApp at +65 8930 8973 and we'll talk you through colour options before you book.",
 
@@ -609,7 +609,7 @@ export const en: Record<string, string> = {
   "blog.8.p3": "Next, we draw the proposed shape onto your skin with a removable brow pencil and hand you a mirror. This is the time to speak up. Want it slightly thicker at the front? A softer arch? A more defined tail? We redraw until you're 100% happy. Nothing permanent happens until you've approved the shape. This step alone can take 20 to 30 minutes.",
   "blog.8.p4": "Once you've approved the design, we apply numbing cream and leave it for about 15 minutes. You can scroll your phone, sip water or rest your eyes. Then we start the embroidery: strokes for microblading, or fine pigment passes for nano brows. Most clients describe the feeling as light scratching. We check in with you throughout and pause whenever you want a break.",
   "blog.8.p5": "After the first pass, we apply a second layer of pigment, wipe everything clean and hand you the mirror. Expect the colour to look bold, 30 to 40% darker than the final healed result. This is normal. We'll explain what you're seeing and walk you through the next 6 weeks as the brows heal and settle.",
-  "blog.8.p6": "You'll leave with an aftercare kit, a printed guide and a follow-up appointment booked for 6 to 8 weeks later. That's the touch-up, where we fix anything that healed unevenly. Allow 2.5 to 3 hours in total for the first session. Keep the day after quiet: no gym, no swimming and no heavy sweating. If you have questions before booking, WhatsApp us at +65 8930 8973.",
+  "blog.8.p6": "You'll leave with an aftercare kit, a printed guide and a follow-up appointment booked for 6 to 8 weeks later. That's the touch-up, where we fix anything that healed unevenly. Allow 2 to 2.5 hours in total for the first session. Keep the day after quiet: no gym, no swimming and no heavy sweating. If you have questions before booking, WhatsApp us at +65 8930 8973.",
 
   // Article 9: Brow Embroidery During Pregnancy
   "blog.9.title": "Brow Embroidery During Pregnancy: What You Need to Know",
@@ -654,7 +654,7 @@ export const en: Record<string, string> = {
   "blog.13.p1": "If you've researched semi-permanent brows, you've probably seen both ombre powder brows and microblading recommended. They look quite different when freshly done: microblading imitates individual hair strokes, while ombre gives a soft, powdery gradient. The bigger difference shows up months later, when they start to fade. Knowing how each technique ages is the best way to avoid regret, especially in Singapore's humid climate, where skin behaves differently from skin in cooler countries.",
   "blog.13.p2": "Microblading fades stroke by stroke. Each incision holds pigment in a fine line, and as your skin regenerates, those lines slowly blur and spread. On dry skin this can look soft and pleasant for 8 to 12 months. On oily skin (and Singapore's humidity makes most skin oilier) the strokes can blur into a smudgy grey patch within six months. That isn't a flaw in the technique. Oily skin produces more sebum, which pushes pigment out of those shallow cuts faster.",
   "blog.13.p3": "Ombre powder brows fade more evenly because the pigment goes in as thousands of tiny dots rather than cut lines. As the colour lightens, it fades like a watercolour wash, getting softer and lighter overall while keeping its shape. After 12 months, most ombre clients still see a gentle tint where the brow shape was, rather than patchy remnants. That's why ombre has become the first choice for clients in tropical climates who want brows that age well.",
-  "blog.13.p4": "They also last different lengths of time. Microblading usually lasts 6 to 12 months before it needs a refresh, partly because the cuts are shallow and the pigment sits closer to the surface. Ombre powder brows are done with a machine that places pigment slightly deeper and more evenly, so they tend to last 12 to 18 months. Some clients with dry skin report their ombre brows still showing colour at two years, but that's the exception rather than the rule.",
+  "blog.13.p4": "They also last different lengths of time. Microblading usually lasts 12 to 18 months before it needs a refresh, partly because the cuts are shallow and the pigment sits closer to the surface. Ombre powder brows are done with a machine that places pigment slightly deeper and more evenly, so they tend to last 2 to 3 years. Oily skin and strong sun can shorten both.",
   "blog.13.p5": "Colour shift is the other factor people rarely mention upfront. Microblading pigments, especially cheaper formulas, can turn orange or blue-grey as they break down in the skin. Ombre pigments can shift too, but because the deposit is denser and more even, the shift tends to be subtler and more predictable. A good practitioner will choose a pigment made to fade warm or neutral, but technique affects how evenly it breaks down.",
   "blog.13.p6": "So which fades better? For most people in Singapore, especially with oily or combination skin, ombre powder brows last longer, fade more evenly and keep their colour more consistently. If you have truly dry skin and light hair, and want the most hair-like effect possible, microblading can still be a good choice. Neither is better for everyone. It depends on your skin. Send us a WhatsApp message at +65 8930 8973 and we can talk through what suits you.",
 
@@ -664,7 +664,7 @@ export const en: Record<string, string> = {
   "blog.14.p1": "Visit any brow studio in Singapore and you'll hear three terms: eyebrow embroidery, nano brows and ombre powder brows. All are semi-permanent, all involve depositing pigment into the skin, and all mean you no longer have to draw your brows on every morning. They are different techniques, though, and choosing the wrong one for your skin type or lifestyle can lead to disappointing results. Here's a plain breakdown to help you decide.",
   "blog.14.p2": "Eyebrow embroidery, sometimes called microblading, uses a handheld blade to create fine, hair-like strokes. It suits dry to normal skin and gives the most realistic individual-hair effect. The strokes sit in shallow cuts, so when done well the look is delicate and feathery. The trade-off is durability. Embroidery tends to fade faster than machine methods, usually lasting 12 to 18 months, and it doesn't hold up as well on oily skin, where sebum pushes pigment out more quickly.",
   "blog.14.p3": "Nano brows use a digital machine with a single ultra-fine needle to create strokes that look like embroidery but are more precise and consistent. The machine controls depth and speed, so the pigment sits more evenly in the skin. That makes nano brows a good choice for oily or combination skin, which doesn't hold manual blade strokes well. They also cause less trauma to the skin, so there's less scabbing and healing is smoother. Expect them to last 18 to 24 months.",
-  "blog.14.p4": "Ombre powder brows don't use hair strokes at all. They give you a soft, filled-in gradient: darker at the tail, lighter at the front. It's a semi-permanent version of the powder-brow makeup look. The technique suits almost all skin types, including oily and sensitive, because the pixelated dot pattern holds pigment well and fades evenly. If you fill in your brows with powder or pencil every morning, ombre gives you that look without the daily work. It lasts 12 to 18 months on average.",
+  "blog.14.p4": "Ombre powder brows don't use hair strokes at all. They give you a soft, filled-in gradient: darker at the tail, lighter at the front. It's a semi-permanent version of the powder-brow makeup look. The technique suits almost all skin types, including oily and sensitive, because the pixelated dot pattern holds pigment well and fades evenly. If you fill in your brows with powder or pencil every morning, ombre gives you that look without the daily work. It lasts 2 to 3 years on average.",
   "blog.14.p5": "Your lifestyle matters too. If you swim often, sweat heavily at the gym or move in and out of aircon all day, you need a technique that handles moisture well: ombre or nano. If you wear minimal makeup and want the most subtle effect, embroidery or nano strokes will look more natural. And if you're tired of spending 15 minutes on your brows every morning before work, ombre powder brows are the quickest way to wake up ready.",
   "blog.14.p6": "Still not sure? That's what consultations are for. We'll look at your skin in good light, talk about your daily routine and recommend a technique that will last and suit your face. There's no sales pitch. Message us on WhatsApp at +65 8930 8973 to set up a time.",
 
@@ -738,9 +738,9 @@ export const en: Record<string, string> = {
   "compare.skintype": "Skin type",
   "compare.price": "Price",
   "compare.longevity.embroidery": "12 to 18 months",
-  "compare.longevity.microblading": "6 to 12 months",
+  "compare.longevity.microblading": "12 to 18 months",
   "compare.longevity.nano": "18 to 24 months",
-  "compare.longevity.ombre": "12 to 18 months",
+  "compare.longevity.ombre": "2 to 3 years",
   "compare.longevity.shaping": "4 to 6 weeks",
   "compare.longevity.lip": "24 to 36 months",
   "compare.skin.normaldry": "Normal to dry",
@@ -800,7 +800,7 @@ export const en: Record<string, string> = {
   "tryon.style.ombre-bold.desc":
     "Defined ombre, so your brows always look done.",
   "tryon.style.embroidery-classic.desc":
-    "Our signature technique, halfway between strokes and powder.",
+    "Our signature technique: fine hair strokes made with a hand blade.",
   "tryon.share.message":
     "Hi Shimmy! I tried the brow visualiser and I love the {style} look. Can we book a consultation?",
   "tryon.compare.toggle": "Compare",
@@ -820,10 +820,10 @@ export const en: Record<string, string> = {
   // ─── Pricing & longevity ───
   "tryon.price.from": "From",
   "tryon.longevity.label": "Lasts",
-  "tryon.longevity.nano": "12 to 18 months",
+  "tryon.longevity.nano": "18 to 24 months",
   "tryon.longevity.microblading": "12 to 18 months",
   "tryon.longevity.ombre": "2 to 3 years",
-  "tryon.longevity.embroidery": "1 to 2 years",
+  "tryon.longevity.embroidery": "12 to 18 months",
   "tryon.popular.badge": "Most booked",
   "tryon.tried.this.month": "tried this month",
 
@@ -1075,7 +1075,7 @@ export const en: Record<string, string> = {
   "faq.brows.2.q": "How do I know which brow technique is right for me?",
   "faq.brows.2.a": "It depends on your skin type, your lifestyle and the look you want. Oily skin does best with nano or ombre. Dry skin holds all techniques well. Book a consultation and we'll assess your skin and suggest the best fit.",
   "faq.brows.3.q": "How long do semi-permanent brows last?",
-  "faq.brows.3.a": "It depends on the technique: results last 6 to 24 months. Microblading usually fades in 6 to 12 months, while nano brows can last 18 to 24 months. A touch-up at 6 to 8 weeks sets the final result.",
+  "faq.brows.3.a": "It depends on the technique. Microblading and embroidery usually last 12 to 18 months, nano brows 18 to 24 months and ombre powder brows 2 to 3 years. Oily skin and sun exposure can shorten this. A touch-up at 6 to 8 weeks sets the final result.",
   "faq.brows.4.q": "Is the brow procedure painful?",
   "faq.brows.4.a": "We apply numbing cream before we start, and most clients describe the feeling as light scratching at most. We reapply numbing between passes to keep you comfortable throughout the session.",
 };

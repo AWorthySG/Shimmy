@@ -21,3 +21,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `npm test` script for unit tests (`node --test`).
 - The referral reward reads S$10 on every page (one banner said S$20), and the contact page now states the studio is appointment-only with no walk-ins.
 - The contact page and Google search data now show the studio address: 37 Grace Walk, Verdana Villas, Singapore.
+- Admin sign-in is checked on the server. The password now comes only from the `ADMIN_SECRET` setting in Vercel and is no longer in the page code; a successful sign-in sets a 12-hour httpOnly session cookie. Five wrong attempts lock that address out for 15 minutes. If `ADMIN_SECRET` is not set, admin access is refused.
+- Removed the "someone just booked" pop-ups, which showed invented bookings.
+- The "Notify me when restocked" form now saves the email (one sign-up per email and product) and shows an error if saving fails. It needs the `restock_notifications` table from `supabase-schema.sql`.

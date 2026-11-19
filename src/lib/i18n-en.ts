@@ -123,6 +123,7 @@ export const en: Record<string, string> = {
   "shop.restock.title": "Notify me when restocked",
   "shop.restock.btn": "Notify Me",
   "shop.restock.success": "We'll let you know!",
+  "shop.restock.error": "Couldn't save your email. Please try again or WhatsApp us.",
 
   // ─── Services Page ───
   "svcpage.tag": "Our Services",

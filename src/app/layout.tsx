@@ -8,7 +8,6 @@ import { Providers } from "@/components/providers";
 import { PageTransition } from "@/components/PageTransition";
 import WelcomeBanner from "@/components/WelcomeBanner";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
-import SocialProofToast from "@/components/SocialProofToast";
 import SpinWheel from "@/components/SpinWheel";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
@@ -121,7 +120,6 @@ export default function RootLayout({
           <WhatsAppFloat />
           <ScrollToTop />
           <ExitIntentPopup />
-          <SocialProofToast />
           <SpinWheel />
           <PageViewTracker />
           <ServiceWorkerRegister />

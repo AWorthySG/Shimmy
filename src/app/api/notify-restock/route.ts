@@ -1,35 +1,51 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const HANDLE_RE = /^[a-z0-9-]{1,100}$/
+
 /**
- * POST /api/notify-restock
- * Saves an email for restock notification.
+ * POST /api/notify-restock — { email, product_handle }
+ * Saves an email to be told when a product is back in stock.
+ * Requires the restock_notifications table (see supabase-schema.sql).
+ * A repeat sign-up for the same email and product is accepted and stored once.
  */
 export async function POST(request: NextRequest) {
-  const { email, product_handle } = await request.json()
+  let body: { email?: unknown; product_handle?: unknown }
+  try {
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+  }
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : ''
+  const productHandle = typeof body.product_handle === 'string' ? body.product_handle : ''
+
+  if (!email || email.length > 254 || !EMAIL_RE.test(email)) {
     return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
+  }
+  if (!HANDLE_RE.test(productHandle)) {
+    return NextResponse.json({ error: 'Invalid product' }, { status: 400 })
   }
 
   let supabase
   try {
     supabase = getSupabase()
   } catch {
-    // Supabase not configured — just log
-    console.log('Restock notification:', email, product_handle)
-    return NextResponse.json({ success: true })
+    console.error('notify-restock: Supabase is not configured')
+    return NextResponse.json({ error: 'Service unavailable' }, { status: 503 })
   }
 
-  // Create restock_notifications table if using Supabase
-  // For now, store in a simple way
   const { error } = await supabase
     .from('restock_notifications')
-    .insert({ email, product_handle })
+    .upsert(
+      { email, product_handle: productHandle },
+      { onConflict: 'email,product_handle', ignoreDuplicates: true },
+    )
 
   if (error) {
-    // Table might not exist yet — that's ok, log it
-    console.log('Restock notification (table missing?):', email, product_handle, error.message)
+    console.error('notify-restock: insert failed:', error.message)
+    return NextResponse.json({ error: 'Could not save' }, { status: 500 })
   }
 
   return NextResponse.json({ success: true })

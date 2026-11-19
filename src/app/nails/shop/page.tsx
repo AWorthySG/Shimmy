@@ -105,7 +105,7 @@ function ProductCard({ product }: { product: Product }) {
             <span className="inline-block text-[10px] text-red-500 font-medium mt-1">
               {t("urgency.nails")}
             </span>
-            <RestockNotify />
+            <RestockNotify productHandle={product.handle} />
           </>
         )}
 

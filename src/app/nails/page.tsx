@@ -11,7 +11,6 @@ import { NailsWithIntro } from "@/components/nails-with-intro";
 import SeasonalBanner from "@/components/SeasonalBanner";
 import GoogleReviews from "@/components/GoogleReviews";
 import ClientCounter from "@/components/ClientCounter";
-import InstagramFeed from "@/components/InstagramFeed";
 
 export default function NailsPage() {
   const { t } = useI18n();
@@ -31,6 +30,17 @@ export default function NailsPage() {
       <section className="relative flex min-h-[65vh] sm:min-h-[75vh] md:min-h-[85vh] flex-col items-center justify-center overflow-hidden text-center">
         {/* Background video with cinematic slow zoom */}
         <div className="absolute inset-0 overflow-hidden video-vignette">
+          {/* Still frame first: it paints straight away (and is what search engines time as the main
+              content); the video fades in over it once the page has loaded. */}
+          <Image
+            src="/videos/nail-5.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover video-cinematic"
+            style={{ filter: "brightness(0.8) saturate(1.1) contrast(1.05)" }}
+          />
           <LazyVideo
             eager
             src="/videos/nail-5.mp4"
@@ -276,9 +286,6 @@ export default function NailsPage() {
 
       {/* ─── Google Reviews ─── */}
       <GoogleReviews />
-
-      {/* ─── Instagram Feed ─── */}
-      <InstagramFeed />
 
       {/* ─── FAQ Section ─── */}
       <section className="bg-cream py-10 sm:py-14 px-4 sm:px-6">

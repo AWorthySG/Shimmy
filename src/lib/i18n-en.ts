@@ -136,6 +136,11 @@ export const en: Record<string, string> = {
   "svcpage.detail.back": "← All brow services",
   "svcpage.detail.other": "Other services",
   "svcpage.detail.tryon": "Try the look on your own photo first →",
+  "svcpage.detail.suits": "Is it right for you?",
+  "svcpage.detail.steps": "How your appointment runs",
+  "svcpage.detail.aftercare": "Aftercare",
+  "svcpage.detail.aftercare.more": "Read the full aftercare guide →",
+  "svcpage.detail.reading": "Further reading",
   "svcpage.unsure.title": "Not sure where to start?",
   "svcpage.unsure.desc":
     "That's fine. It's what the consultation is for. Send us a message about what you'd like to change, and we'll work it out together.",
@@ -542,6 +547,9 @@ export const en: Record<string, string> = {
   "blog.cat.brows": "Brow care",
   "blog.cat.nails": "Nail tips",
   "blog.cta": "Still have questions? Send us a message and we'll help.",
+  "blog.cta.service.tag": "The service in this article",
+  "blog.cta.service.more": "Prices and details →",
+  "blog.cta.shop": "Shop press-on nails",
 
   // Article 1: Eyebrow Embroidery Aftercare
   "blog.1.title": "The complete eyebrow embroidery aftercare guide",

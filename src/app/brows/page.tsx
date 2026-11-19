@@ -115,7 +115,7 @@ export default function Home() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 animate-fade-in-up animate-delay-600">
+        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 animate-fade-in-up animate-delay-600 hidden sm:block">
           <div className="flex flex-col items-center gap-2 text-warm-gray">
             <span className="text-[9px] uppercase tracking-eyebrow">{t("hero.scroll")}</span>
             <div className="h-8 w-[1px] bg-vermillion/40 animate-pulse-gold" />

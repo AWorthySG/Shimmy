@@ -195,6 +195,9 @@ export function Navbar() {
         </ul>
 
         <div className="hidden lg:flex items-center gap-4">
+          <Link href="/brows#book" className="btn btn-primary btn-sm">
+            {t("nav.book")}
+          </Link>
           {/* Search icon */}
           <button
             onClick={() => setSearchOpen(true)}
@@ -429,7 +432,7 @@ export function Navbar() {
                 {t("cta.whatsapp")}
               </a>
               <Link
-                href="/contact"
+                href="/brows#book"
                 onClick={() => setMobileOpen(false)}
                 className="btn btn-primary btn-lg flex touch-target"
               >

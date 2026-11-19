@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation'
 import { AnimateOnScroll } from '@/components/animate-on-scroll'
 import { useI18n } from '@/lib/i18n'
 import { getPostBySlug, getRelatedPosts } from '@/lib/blog'
+import { serviceForTags } from '@/lib/brow-services'
 
 export default function BlogArticlePage() {
   const { t } = useI18n()
@@ -22,6 +23,8 @@ export default function BlogArticlePage() {
       </section>
     )
   }
+
+  const service = post.category === 'brows' ? serviceForTags(post.tags) : undefined
 
   const related = getRelatedPosts(post)
 
@@ -86,6 +89,35 @@ export default function BlogArticlePage() {
           ))}
         </div>
       </section>
+
+      {/* Next step: the service this article is about, then booking */}
+      {service ? (
+        <section className="bg-soft-white px-4 sm:px-6 pb-10 sm:pb-14">
+          <div className="mx-auto max-w-2xl border border-vermillion/20 bg-cream/40 p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="eyebrow">{t('blog.cta.service.tag')}</p>
+              <p className="mt-2 font-serif text-xl text-charcoal">{t(`svc.${service.id}.title`)}</p>
+              <p className="mt-1 text-sm text-charcoal-light">
+                {t(`svc.${service.id}.price`)} · {t(`svc.${service.id}.duration`)}
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 sm:items-end">
+              <Link href={`/brows/services/${service.slug}`} className="btn btn-outline btn-sm">
+                {t('blog.cta.service.more')}
+              </Link>
+              <Link href="/brows#book" className="btn btn-primary btn-sm">
+                {t('svcpage.detail.book')}
+              </Link>
+            </div>
+          </div>
+        </section>
+      ) : post.category === 'nails' ? (
+        <section className="bg-soft-white px-4 sm:px-6 pb-10 sm:pb-14 text-center">
+          <Link href="/nails/shop" className="btn btn-primary btn-lg w-full sm:w-auto">
+            {t('blog.cta.shop')}
+          </Link>
+        </section>
+      ) : null}
 
       {/* CTA */}
       <section className="bg-cream py-10 sm:py-14 px-4 sm:px-6 text-center">

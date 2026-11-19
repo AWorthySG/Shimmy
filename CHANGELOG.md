@@ -38,3 +38,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Every page now follows the design system. Error messages use one brick-red error colour that meets contrast in light and dark mode; corners are square; letter-spacing is on the three-step scale; the try-on, admin and language-toggle buttons and the try-on contact form use the standard button and field styles. `npm run audit:design` checks this, and `npm test` fails if a page breaks it.
 - The launch page no longer shows a countdown that restarts at 30 days on every visit, and no longer throws a page error on load. Set `NEXT_PUBLIC_LAUNCH_DATE` (for example `2026-12-20T10:00:00+08:00`) in Vercel to show a real countdown; without it, the page shows only the email sign-up.
 - `npm run qa:devices` loads every page on seven device sizes (iPhone SE to a 1920 px desktop) and reports page errors, horizontal scrolling, broken images and a menu that won't open.
+- Each brow tattoo service page now covers who it suits, the six appointment steps, aftercare and further reading (about 720 words, up from 130). Brow shaping and lip blush pages gained the parts that apply to them.
+- Brow articles end with a box for the service they cover (price, session length, details and booking); nail articles link to the shop.
+- The brows and nails intro animations play once per browser session and never with reduced motion, and the page now loads underneath them. The nails page shows its main content in about 1.2 s on a mid-range phone, down from about 4.5 s.
+- The desktop header has a Book now button; both header Book buttons open the online booking form.
+- Removed the placeholder Instagram grid and the empty "As seen in" press row.
+- Phones: the scroll hint no longer overlaps the second hero button, and the back-to-top button no longer stacks over text above the WhatsApp button.
+- The brow try-on page no longer jumps when the first-visit tips appear; the tips now sit below the upload box.

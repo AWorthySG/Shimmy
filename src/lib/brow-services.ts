@@ -14,6 +14,12 @@ export interface BrowService {
   image?: string;
   seoTitle: string;
   seoDescription: string;
+  /** compare.skin.* key: which skin types the technique suits. */
+  skinKey: string;
+  /** Show the six-step appointment from the process page (brow tattoo services). */
+  hasProcess: boolean;
+  /** Aftercare paragraph and the article it comes from. */
+  aftercare?: { key: string; slug: string };
 }
 
 export const BROW_SERVICES: BrowService[] = [
@@ -25,6 +31,9 @@ export const BROW_SERVICES: BrowService[] = [
     seoTitle: "Eyebrow embroidery in Singapore: price, process and aftercare",
     seoDescription:
       "Eyebrow embroidery at Shimmy Beauty Studio, Singapore. Fine hair strokes made with a hand blade, from S$388. Takes 2 to 2.5 hours and lasts 12 to 18 months.",
+    skinKey: "compare.skin.normaldry",
+    hasProcess: true,
+    aftercare: { key: "blog.1.p2", slug: "eyebrow-embroidery-aftercare-guide" },
   },
   {
     id: "microblading",
@@ -34,6 +43,9 @@ export const BROW_SERVICES: BrowService[] = [
     seoTitle: "Microblading in Singapore: price, process and aftercare",
     seoDescription:
       "Microblading at Shimmy Beauty Studio, Singapore, from S$488. Crisp hair strokes for normal to dry skin. Takes 2 to 2.5 hours and lasts 12 to 18 months.",
+    skinKey: "compare.skin.normaldry",
+    hasProcess: true,
+    aftercare: { key: "blog.1.p2", slug: "eyebrow-embroidery-aftercare-guide" },
   },
   {
     id: "nano",
@@ -43,6 +55,9 @@ export const BROW_SERVICES: BrowService[] = [
     seoTitle: "Nano brows in Singapore: price, process and aftercare",
     seoDescription:
       "Nano brows at Shimmy Beauty Studio, Singapore, from S$588. Ultra-fine machine hair strokes that last 18 to 24 months. Takes 2 to 3 hours.",
+    skinKey: "compare.skin.all",
+    hasProcess: true,
+    aftercare: { key: "blog.1.p2", slug: "eyebrow-embroidery-aftercare-guide" },
   },
   {
     id: "ombre",
@@ -52,6 +67,9 @@ export const BROW_SERVICES: BrowService[] = [
     seoTitle: "Ombre powder brows in Singapore: price, process and aftercare",
     seoDescription:
       "Ombre powder brows at Shimmy Beauty Studio, Singapore, from S$488. A soft powdered finish that suits oily skin and lasts 2 to 3 years.",
+    skinKey: "compare.skin.all",
+    hasProcess: true,
+    aftercare: { key: "blog.1.p2", slug: "eyebrow-embroidery-aftercare-guide" },
   },
   {
     id: "shaping",
@@ -61,6 +79,8 @@ export const BROW_SERVICES: BrowService[] = [
     seoTitle: "Brow shaping in Singapore: mapping, threading and waxing",
     seoDescription:
       "Brow shaping and mapping at Shimmy Beauty Studio, Singapore, from S$48. Threading, waxing or both, shaped to your face. Takes 30 to 45 minutes.",
+    skinKey: "compare.skin.all",
+    hasProcess: false,
   },
   {
     id: "lip",
@@ -69,6 +89,9 @@ export const BROW_SERVICES: BrowService[] = [
     seoTitle: "Lip blush in Singapore: price, healing and aftercare",
     seoDescription:
       "Lip blush at Shimmy Beauty Studio, Singapore, from S$488. Semi-permanent lip colour. Healing takes 4 to 6 weeks and the true colour shows around week 3 to 4.",
+    skinKey: "compare.skin.all",
+    hasProcess: false,
+    aftercare: { key: "blog.7.p6", slug: "lip-blush-what-to-expect" },
   },
 ];
 
@@ -86,5 +109,36 @@ export function serviceKeys(s: BrowService) {
     includes: [1, 2, 3, 4].map((n) => `svc.${s.id}.inc.${n}`),
     longevity: `compare.longevity.${s.id}`,
     faqs: [1, 2].map((n) => ({ q: `faq.svc.${s.faq}.${n}.q`, a: `faq.svc.${s.faq}.${n}.a` })),
+    steps: s.hasProcess
+      ? [1, 2, 3, 4, 5, 6].map((n) => ({
+          title: `process.step.${n}.title`,
+          time: `process.step.${n}.time`,
+          desc: `process.step.${n}.desc`,
+        }))
+      : [],
   };
+}
+
+/** Blog tags that point to a service page, most specific first. */
+const TAG_TO_SERVICE: [string, BrowService["slug"]][] = [
+  ["lip-blush", "lip-blush"],
+  ["nano-brows", "nano-brows"],
+  ["ombre", "ombre-powder-brows"],
+  ["microblading", "microblading"],
+  ["embroidery", "eyebrow-embroidery"],
+  // Shape articles are mostly about embroidery, so embroidery wins when both tags are present.
+  ["brow-shapes", "brow-shaping"],
+];
+
+/** The service page a blog post should send readers to, if any. */
+export function serviceForTags(tags: string[]): BrowService | undefined {
+  for (const [tag, slug] of TAG_TO_SERVICE) {
+    if (tags.includes(tag)) return getBrowService(slug);
+  }
+  return undefined;
+}
+
+/** Blog tag that marks an article as being about this service. */
+export function tagForService(s: BrowService): string | undefined {
+  return TAG_TO_SERVICE.find(([, slug]) => slug === s.slug)?.[0];
 }

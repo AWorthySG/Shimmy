@@ -1,5 +1,6 @@
 'use client'
 
+import { trackEvent } from '@/lib/analytics'
 import { useState } from 'react'
 import { useI18n } from '@/lib/i18n'
 
@@ -22,8 +23,9 @@ export default function EmailCapture() {
         body: JSON.stringify({ email }),
       })
     } catch {
-      // Non-critical — show success anyway
+      // Non-critical: show success anyway
     }
+    trackEvent('email_signup')
     setSubmitted(true)
   }
 

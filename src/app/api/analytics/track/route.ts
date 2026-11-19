@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
+import { toEventRow } from '@/lib/analytics-events'
 
 /**
  * POST /api/analytics/track
@@ -16,18 +17,13 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body = await request.json()
-    const { event, page, metadata, session_id } = body
-
-    if (!event) {
-      return NextResponse.json({ error: 'event is required' }, { status: 400 })
+    const row = toEventRow(await request.json())
+    if (!row) {
+      return NextResponse.json({ error: 'Unknown event' }, { status: 400 })
     }
 
     await supabase.from('analytics_events').insert({
-      event,
-      page: page ?? null,
-      metadata: metadata ?? null,
-      session_id: session_id ?? null,
+      ...row,
       created_at: new Date().toISOString(),
     })
 

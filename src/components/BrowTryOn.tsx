@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
 import {
   useCallback,
   useEffect,
@@ -747,6 +748,7 @@ export default function BrowTryOn() {
         setLandmarks(faces[0]);
         setComparePos(50);
         setStep("editor");
+        trackEvent("tryon_complete");
       } catch (err) {
         console.error("Detection failed", err);
         setErrorMsg(t("tryon.error.model"));
@@ -1826,6 +1828,7 @@ function SaveLookModal({
         setStatus("error");
       } else {
         setStatus("success");
+        trackEvent("lead_saved", { style: styleId });
         setTimeout(() => onClose(), 2000);
       }
     } catch {

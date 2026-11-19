@@ -1,8 +1,9 @@
 'use client'
 
-import { usePageView } from '@/lib/analytics'
+import { usePageView, useWhatsAppClicks } from '@/lib/analytics'
 
 export default function PageViewTracker() {
   usePageView()
+  useWhatsAppClicks()
   return null
 }

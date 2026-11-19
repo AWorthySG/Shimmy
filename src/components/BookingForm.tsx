@@ -1,5 +1,6 @@
 'use client'
 
+import { trackEvent } from '@/lib/analytics'
 import { useState, useEffect, useCallback } from 'react'
 import { BOOKING_SERVICES, type BookingService } from '@/lib/booking'
 import { useI18n } from '@/lib/i18n'
@@ -93,6 +94,7 @@ export default function BookingForm() {
         setError(data.error || t('book.error.generic'))
       } else {
         setBookingResult({ id: data.booking.id, message: data.message })
+        trackEvent('booking_submitted', { service: selectedService.id })
         setStep('done')
       }
     } catch {

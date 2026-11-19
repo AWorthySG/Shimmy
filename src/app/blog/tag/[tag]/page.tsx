@@ -52,7 +52,7 @@ export default function TagPage() {
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="group card-lift shine-on-hover border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40"
+                    className="group card-lift border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40"
                   >
                     {/* Hero image */}
                     <div className="relative aspect-[3/2] w-full overflow-hidden">

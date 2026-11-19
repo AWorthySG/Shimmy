@@ -19,7 +19,7 @@ export default function BrowTryOnPage() {
             <p className="eyebrow">
               {t("tryon.tag")}
             </p>
-            <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
+            <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl">
               {t("tryon.title")}
             </h1>
             <p className="mt-3 sm:mt-4 text-sm sm:text-base text-charcoal-light">

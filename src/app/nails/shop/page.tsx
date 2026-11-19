@@ -36,7 +36,7 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/nails/shop/${product.collectionHandle}/${product.handle}`}
-      className="group card-lift shine-on-hover border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40"
+      className="group card-lift border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40"
     >
       {/* Product image */}
       <div className="relative w-full aspect-square bg-gradient-to-br from-cream-dark/50 via-cream to-vermillion/5 overflow-hidden">
@@ -111,7 +111,7 @@ function ProductCard({ product }: { product: Product }) {
 
         <button
           onClick={handleAdd}
-          className={`btn btn-sm mt-3 w-full ${added ? "border-jade/30 bg-jade/20 text-jade" : "btn-secondary"}`}
+          className={`btn btn-sm mt-3 w-full ${added ?"border-jade/30 bg-jade/20 text-jade":"btn-secondary"}`}
         >
           {added ? t("shop.added") : t("shop.add")}
         </button>
@@ -214,7 +214,7 @@ export default function ShopPage() {
             <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 -mx-1 px-1 flex-1">
               <button
                 onClick={() => setActiveFilter("all")}
-                className={`chip shrink-0 touch-target ${activeFilter === "all" ? "chip-active" : ""}`}
+                className={`chip shrink-0 touch-target ${activeFilter ==="all"?"chip-active":""}`}
               >
                 {t("shop.all")}
               </button>
@@ -222,7 +222,7 @@ export default function ShopPage() {
                 <button
                   key={c.handle}
                   onClick={() => setActiveFilter(c.handle)}
-                  className={`chip shrink-0 whitespace-nowrap touch-target ${activeFilter === c.handle ? "chip-active" : ""}`}
+                  className={`chip shrink-0 whitespace-nowrap touch-target ${activeFilter === c.handle ?"chip-active":""}`}
                 >
                   {c.title}
                   {collectionMinPrices[c.handle] && (
@@ -259,7 +259,7 @@ export default function ShopPage() {
               <button
                 key={colour}
                 onClick={() => toggleColour(colour)}
-                className={`chip shrink-0 whitespace-nowrap touch-target ${selectedColours.includes(colour) ? "chip-active" : ""}`}
+                className={`chip shrink-0 whitespace-nowrap touch-target ${selectedColours.includes(colour) ?"chip-active":""}`}
               >
                 {colour}
               </button>

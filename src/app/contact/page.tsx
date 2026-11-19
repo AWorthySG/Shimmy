@@ -97,7 +97,7 @@ export default function ContactPage() {
           <p className="eyebrow">
             {t("contact.tag")}
           </p>
-          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
+          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl">
             {t("contact.title")}
           </h1>
           <p className="mt-3 sm:mt-4 text-sm sm:text-base text-charcoal-light">
@@ -128,7 +128,7 @@ export default function ContactPage() {
                 href="https://wa.me/6589308973"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 sm:gap-4 border border-vermillion/20 bg-cream/50 p-4 sm:p-5 transition-all duration-300 hover:border-vermillion/50 hover:shadow-lg hover:shadow-vermillion/5 touch-target shine-on-hover border-glow"
+                className="group flex items-center gap-3 sm:gap-4 border border-vermillion/20 bg-cream/50 p-4 sm:p-5 transition-all duration-300 hover:border-vermillion/50 hover:shadow-lg hover:shadow-vermillion/5 touch-target border-glow"
               >
                 <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center bg-vermillion/5 text-vermillion">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -152,7 +152,7 @@ export default function ContactPage() {
                 href="https://instagram.com/shimmyhands.shop"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 sm:gap-4 border border-vermillion/20 bg-cream/50 p-4 sm:p-5 transition-all duration-300 hover:border-vermillion/50 hover:shadow-lg hover:shadow-vermillion/5 touch-target shine-on-hover border-glow"
+                className="group flex items-center gap-3 sm:gap-4 border border-vermillion/20 bg-cream/50 p-4 sm:p-5 transition-all duration-300 hover:border-vermillion/50 hover:shadow-lg hover:shadow-vermillion/5 touch-target border-glow"
               >
                 <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center bg-vermillion/5 text-vermillion">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -176,7 +176,7 @@ export default function ContactPage() {
                 href="https://g.page/shimmyhands/review"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 sm:gap-4 border border-vermillion/20 bg-cream/50 p-4 sm:p-5 transition-all duration-300 hover:border-vermillion/50 hover:shadow-lg hover:shadow-vermillion/5 touch-target shine-on-hover border-glow"
+                className="group flex items-center gap-3 sm:gap-4 border border-vermillion/20 bg-cream/50 p-4 sm:p-5 transition-all duration-300 hover:border-vermillion/50 hover:shadow-lg hover:shadow-vermillion/5 touch-target border-glow"
               >
                 <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center bg-vermillion/5 text-vermillion">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">

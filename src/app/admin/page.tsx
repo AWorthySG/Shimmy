@@ -257,10 +257,10 @@ export default function AdminPage() {
               key={key}
               onClick={() => setActiveTab(key)}
               className={`px-5 py-2.5 text-xs uppercase tracking-label transition-colors border-b-2 -mb-px ${
-                activeTab === key
-                  ? 'border-vermillion text-vermillion'
-                  : 'border-transparent text-warm-gray hover:text-charcoal'
-              }`}
+ activeTab === key
+ ? 'border-vermillion text-vermillion'
+ : 'border-transparent text-warm-gray hover:text-charcoal'
+ }`}
             >
               {label}
               {key === 'leads' && leadsTotal > 0 && (
@@ -316,10 +316,10 @@ export default function AdminPage() {
                       {b.service_name}
                     </span>
                     <span className={`text-[10px] uppercase tracking-button px-2 py-0.5 border ${
-                      b.status === 'confirmed' ? 'text-jade border-jade/20 bg-jade/5' :
-                      b.status === 'cancelled' ? 'text-error border-error/30 bg-error/5' :
-                      'text-gold border-gold/20 bg-gold/5'
-                    }`}>
+ b.status === 'confirmed' ? 'text-jade border-jade/20 bg-jade/5' :
+ b.status === 'cancelled' ? 'text-error border-error/30 bg-error/5' :
+ 'text-gold border-gold/20 bg-gold/5'
+ }`}>
                       {b.status}
                     </span>
                   </div>
@@ -406,10 +406,10 @@ export default function AdminPage() {
                   key={p}
                   onClick={() => setAnalyticsPeriod(p)}
                   className={`px-3 py-1.5 text-xs uppercase tracking-button border transition-colors ${
-                    analyticsPeriod === p
-                      ? 'border-vermillion bg-vermillion text-soft-white'
-                      : 'border-vermillion/20 text-charcoal hover:border-vermillion/50'
-                  }`}
+ analyticsPeriod === p
+ ? 'border-vermillion bg-vermillion text-soft-white'
+ : 'border-vermillion/20 text-charcoal hover:border-vermillion/50'
+ }`}
                 >
                   {p === '7d' ? '7 Days' : p === '30d' ? '30 Days' : '90 Days'}
                 </button>

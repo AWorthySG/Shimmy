@@ -146,8 +146,8 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
   return (
     <div
       className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-opacity duration-300 ${
-        phase === "fading" ? "opacity-0 pointer-events-none" : "opacity-100"
-      }`}
+ phase ==="fading"?"opacity-0 pointer-events-none":"opacity-100"
+ }`}
       style={{
         background: "radial-gradient(ellipse at 50% 40%, var(--soft-white) 0%, var(--cream) 55%, var(--cream-dark) 100%)",
       }}
@@ -331,24 +331,24 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
       {/* Brand reveal */}
       <div
         className={`mt-6 sm:mt-8 text-center transition-all duration-800 ease-out ${
-          phase === "branding" || phase === "fading"
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-5"
-        }`}
+ phase ==="branding"|| phase ==="fading"
+ ?"opacity-100 translate-y-0"
+ :"opacity-0 translate-y-5"
+ }`}
       >
         {/* Floral ornament divider */}
         <div className="flex items-center justify-center gap-2 mb-3">
-          <div className={`h-[0.5px] bg-gradient-to-r from-transparent to-vermillion/30 transition-all duration-800 ease-out ${phase === "branding" || phase === "fading" ? "w-12" : "w-0"}`} />
-          <span className={`text-vermillion/40 text-[10px] transition-opacity duration-600 ${phase === "branding" || phase === "fading" ? "opacity-100" : "opacity-0"}`}>
+          <div className={`h-[0.5px] bg-gradient-to-r from-transparent to-vermillion/30 transition-all duration-800 ease-out ${phase ==="branding"|| phase ==="fading"?"w-12":"w-0"}`} />
+          <span className={`text-vermillion/40 text-[10px] transition-opacity duration-600 ${phase ==="branding"|| phase ==="fading"?"opacity-100":"opacity-0"}`}>
             ❀
           </span>
-          <span className={`text-gold/30 text-[7px] transition-opacity duration-600 delay-100 ${phase === "branding" || phase === "fading" ? "opacity-100" : "opacity-0"}`}>
+          <span className={`text-gold/30 text-[7px] transition-opacity duration-600 delay-100 ${phase ==="branding"|| phase ==="fading"?"opacity-100":"opacity-0"}`}>
             ✿
           </span>
-          <span className={`text-vermillion/40 text-[10px] transition-opacity duration-600 ${phase === "branding" || phase === "fading" ? "opacity-100" : "opacity-0"}`}>
+          <span className={`text-vermillion/40 text-[10px] transition-opacity duration-600 ${phase ==="branding"|| phase ==="fading"?"opacity-100":"opacity-0"}`}>
             ❀
           </span>
-          <div className={`h-[0.5px] bg-gradient-to-l from-transparent to-vermillion/30 transition-all duration-800 ease-out ${phase === "branding" || phase === "fading" ? "w-12" : "w-0"}`} />
+          <div className={`h-[0.5px] bg-gradient-to-l from-transparent to-vermillion/30 transition-all duration-800 ease-out ${phase ==="branding"|| phase ==="fading"?"w-12":"w-0"}`} />
         </div>
 
         <p className="font-serif text-2xl sm:text-3xl md:text-4xl tracking-wide text-charcoal">
@@ -360,8 +360,8 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
 
         {/* Seal mark 眉 */}
         <div className={`mx-auto mt-3 flex h-6 w-6 items-center justify-center border border-vermillion/30 transition-all duration-600 delay-200 ${
-          phase === "branding" || phase === "fading" ? "opacity-50 scale-100" : "opacity-0 scale-75"
-        }`}>
+ phase ==="branding"|| phase ==="fading"?"opacity-50 scale-100":"opacity-0 scale-75"
+ }`}>
           <span className="font-serif text-[8px] text-vermillion/50">眉</span>
         </div>
       </div>

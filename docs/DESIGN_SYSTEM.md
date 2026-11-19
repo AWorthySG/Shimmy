@@ -78,6 +78,8 @@ Every uppercase label uses one of three values. Arbitrary values such as
 | `btn-sm` | 36 px tall | Inside cards and dense lists |
 | `btn-lg` | 44 px+, wider padding | Hero and page-level calls to action |
 
+Decorative effects (`glow-pulse`, `btn-magnetic`, `shine-on-hover`, `shine-sweep`, `shimmer-text`, `sparkle`, `star-spin`) are retired: the audit fails if they come back.
+
 All buttons are square-cornered, uppercase, 12 px text, at least 44 px tall
 (except `btn-sm`), show a sage focus ring for keyboard users, and dim to 50%
 when disabled. Effect classes (`btn-magnetic`, `shine-on-hover`, `glow-pulse`)

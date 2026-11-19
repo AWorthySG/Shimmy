@@ -40,7 +40,7 @@ export default function AboutPage() {
           <p className="eyebrow">
             {t("aboutpage.tag")}
           </p>
-          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
+          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl">
             {t("aboutpage.title")}
           </h1>
         </div>
@@ -112,7 +112,7 @@ export default function AboutPage() {
             {values.map((value, i) => (
               <AnimateOnScroll key={value.title} animation="fade-up" delay={i * 100}>
               <div
-                className="border-l-2 border-jade/30 pl-5 sm:pl-6 py-2 transition-all duration-300 hover:border-jade shine-on-hover"
+                className="border-l-2 border-jade/30 pl-5 sm:pl-6 py-2 transition-all duration-300 hover:border-jade"
               >
                 <h3 className="font-serif text-lg sm:text-xl text-charcoal">
                   {value.title}
@@ -172,7 +172,7 @@ export default function AboutPage() {
         </p>
         <Link
           href="/contact"
-          className="btn btn-primary btn-lg mt-6 sm:mt-8 touch-target glow-pulse shine-on-hover"
+          className="btn btn-primary btn-lg mt-6 sm:mt-8 touch-target"
         >
           {t("aboutpage.cta.btn")}
         </Link>

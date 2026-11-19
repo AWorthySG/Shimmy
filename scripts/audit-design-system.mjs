@@ -35,6 +35,11 @@ const RULES = [
     re: /(?:className=|style=\{\{)[^>\n]*#[0-9a-fA-F]{3,8}\b/g,
     colour: true,
   },
+  {
+    id: "retired-effect",
+    why: "decorative effect retired for a calmer look (see DESIGN_SYSTEM.md)",
+    re: /(?<![\w-])(?:glow-pulse|btn-magnetic|shine-on-hover|shine-sweep|shimmer-text|animate-shimmer|sparkle|star-spin)(?![\w-])/g,
+  },
   { id: "arbitrary-tracking", why: "arbitrary letter-spacing; use tracking-button/label/eyebrow", re: /\btracking-\[[^\]]+\]/g },
   { id: "off-scale-tracking", why: "letter-spacing outside the scale", re: /(?<!normal-case )\btracking-(?:widest|tighter|tight|normal)\b/g },
   { id: "rounded-corners", why: "rounded corner on a square component; only rounded-full is allowed", re: /\brounded(?:-(?:sm|md|lg|xl|2xl|3xl))?(?=["'\s`])/g },

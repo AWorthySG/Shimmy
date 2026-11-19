@@ -141,10 +141,10 @@ export default function ProductDetailPage() {
                       key={img}
                       onClick={() => setActiveImage(i)}
                       className={`relative aspect-square overflow-hidden border transition-all duration-200 ${
-                        i === activeImage
-                          ? "border-vermillion ring-1 ring-vermillion/30"
-                          : "border-vermillion/10 hover:border-vermillion/30"
-                      }`}
+ i === activeImage
+ ?"border-vermillion ring-1 ring-vermillion/30"
+ :"border-vermillion/10 hover:border-vermillion/30"
+ }`}
                     >
                       <Image
                         src={img}
@@ -189,10 +189,10 @@ export default function ProductDetailPage() {
               <button
                 onClick={handleAdd}
                 className={`mt-8 w-full sm:w-auto px-10 py-4 text-xs uppercase tracking-label transition-all duration-300 touch-target ${
-                  added
-                    ? "bg-jade/20 text-jade border border-jade/30"
-                    : "bg-vermillion text-soft-white hover:bg-vermillion-dark btn-magnetic shine-on-hover glow-pulse"
-                }`}
+ added
+ ?"bg-jade/20 text-jade border border-jade/30"
+ :"bg-vermillion text-soft-white hover:bg-vermillion-dark"
+ }`}
               >
                 {added ? t("shop.added") : t("shop.add")}
               </button>
@@ -286,7 +286,7 @@ export default function ProductDetailPage() {
                     <Link
                       key={relProduct.id}
                       href={`/nails/shop/${relProduct.collectionHandle}/${relProduct.handle}`}
-                      className="group card-lift shine-on-hover border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40"
+                      className="group card-lift border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40"
                     >
                       <div className="relative w-full aspect-square bg-gradient-to-br from-cream-dark/50 via-cream to-vermillion/5 overflow-hidden">
                         {relProduct.images.length > 0 ? (

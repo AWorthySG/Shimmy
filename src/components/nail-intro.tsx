@@ -27,8 +27,8 @@ export function NailIntro({ onComplete }: { onComplete: () => void }) {
   return (
     <div
       className={`fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-250 ${
-        phase === "fading" ? "opacity-0 pointer-events-none" : "opacity-100"
-      }`}
+ phase ==="fading"?"opacity-0 pointer-events-none":"opacity-100"
+ }`}
       style={{ background: "radial-gradient(ellipse at 50% 40%, var(--soft-white) 0%, var(--background) 35%, var(--cream) 70%, var(--cream-dark) 100%)" }}
     >
       {/* ── Background floating petals ── */}

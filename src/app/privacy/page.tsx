@@ -8,7 +8,7 @@ export default function PrivacyPage() {
           <p className="eyebrow">
             Legal
           </p>
-          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl shimmer-text">
+          <h1 className="mt-4 font-serif text-3xl sm:text-4xl text-charcoal md:text-5xl">
             Privacy Policy
           </h1>
         </div>

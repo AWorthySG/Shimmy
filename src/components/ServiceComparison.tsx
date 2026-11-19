@@ -92,10 +92,10 @@ export default function ServiceComparison() {
                 <tr
                   key={svc.titleKey}
                   className={`border-b border-vermillion/10 transition-colors ${
-                    svc.popular
-                      ? 'bg-vermillion/10'
-                      : 'hover:bg-cream-dark/30'
-                  }`}
+ svc.popular
+ ? 'bg-vermillion/10'
+ : 'hover:bg-cream-dark/30'
+ }`}
                 >
                   <td className="py-4 px-3">
                     <span className="font-serif text-sm text-charcoal">

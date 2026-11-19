@@ -99,7 +99,7 @@ export function AnimateOnScroll({
   return (
     <div
       ref={ref}
-      className={`${reducedMotion ? "" : "transition-all ease-out "}${isVisible ? to : from} ${className}`}
+      className={`${reducedMotion ?"":"transition-all ease-out"}${isVisible ? to : from} ${className}`}
       style={reducedMotion ? undefined : { transitionDuration: `${duration}ms`, transitionDelay: `${delay}ms` }}
     >
       {children}

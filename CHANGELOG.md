@@ -20,3 +20,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - All prices and offers use the S$ prefix.
 - `npm test` script for unit tests (`node --test`).
 - The referral reward reads S$10 on every page (one banner said S$20), and the contact page now states the studio is appointment-only with no walk-ins.
+- The contact page and Google search data now show the studio address: 37 Grace Walk, Verdana Villas, Singapore.

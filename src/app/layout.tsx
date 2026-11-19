@@ -82,6 +82,12 @@ const businessJsonLd = {
   image: `${SITE_URL}/opengraph-image`,
   telephone: "+65 8930 8973",
   priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "37 Grace Walk, Verdana Villas",
+    addressLocality: "Singapore",
+    addressCountry: "SG",
+  },
   areaServed: { "@type": "City", name: "Singapore" },
   sameAs: ["https://instagram.com/shimmyhands.shop"],
   openingHoursSpecification: [

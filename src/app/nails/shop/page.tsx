@@ -227,7 +227,7 @@ export default function ShopPage() {
                   {c.title}
                   {collectionMinPrices[c.handle] && (
                     <span className="ml-1.5 text-[9px] opacity-70">
-                      From ${collectionMinPrices[c.handle]}
+                      From {formatPrice(collectionMinPrices[c.handle])}
                     </span>
                   )}
                 </button>

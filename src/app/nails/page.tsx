@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { formatPrice } from "@/lib/format";
 import LazyVideo from "@/components/LazyVideo";
 import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
@@ -157,7 +158,7 @@ export default function NailsPage() {
                     {/* Collection price range (Task 2) */}
                     {collectionMinPrices[collection.handle] && (
                       <p className="text-sm font-medium text-gold mt-1">
-                        From ${collectionMinPrices[collection.handle]}
+                        From {formatPrice(collectionMinPrices[collection.handle])}
                       </p>
                     )}
                     <p className="mt-2 text-sm leading-relaxed text-charcoal-light">

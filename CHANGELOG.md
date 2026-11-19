@@ -27,3 +27,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Removed the spin-the-wheel and exit pop-ups. The S$10 welcome banner and the cookie notice remain.
 - Videos load only when scrolled near, pause when off screen, and show a still image for visitors who ask for reduced motion or data saving. Video files are 40% smaller (7.5 MB to 4.5 MB) with no visible quality change.
 - Rewrote the English copy across the site in plainer, more direct language: sentence-case headings and buttons, British spelling, and no stock marketing phrases. Prices, durations, aftercare instructions and client reviews are unchanged.
+- Nail collection prices now read "From S$45.00" instead of "From $45", matching the rest of the site.

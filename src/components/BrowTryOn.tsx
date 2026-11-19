@@ -1164,9 +1164,6 @@ export default function BrowTryOn() {
      ────────────────────────────────────────────── */
   return (
     <div className="mx-auto max-w-6xl">
-      {/* ─── First-time help overlay ─── */}
-      {showHelp && <HelpOverlay onDismiss={dismissHelp} t={t} />}
-
       {/* ─── Upload Step ─── */}
       {step === "upload" && (
         <div className="mx-auto max-w-2xl">
@@ -1251,6 +1248,14 @@ export default function BrowTryOn() {
       )}
 
       {/* ─── Detecting Step ─── */}
+      {/* First-time tips. Shown below the upload box: it only appears after
+          localStorage is read, and inserting it above pushed the page down (layout shift). */}
+      {showHelp && step === "upload" && (
+        <div className="mt-8">
+          <HelpOverlay onDismiss={dismissHelp} t={t} />
+        </div>
+      )}
+
       {step === "detecting" && (
         <div className="mx-auto max-w-md text-center py-16 sm:py-20">
           <div className="mx-auto w-12 h-12 border-2 border-vermillion/20 border-t-vermillion rounded-full animate-spin" />

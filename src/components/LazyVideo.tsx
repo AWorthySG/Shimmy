@@ -7,7 +7,7 @@ type Props = {
   poster?: string;
   className?: string;
   style?: CSSProperties;
-  /** Load straight away (above-the-fold hero). Default: load when scrolled near. */
+  /** Above-the-fold hero: start once the page has finished loading. Default: load when scrolled near. */
   eager?: boolean;
 };
 
@@ -16,11 +16,17 @@ type Props = {
  * seen, pauses when scrolled away, and stays on its poster for visitors who
  * ask for reduced motion or data saving.
  */
+function afterPageLoad(fn: () => void) {
+  const run = () => setTimeout(fn, 300);
+  if (document.readyState === "complete") run();
+  else window.addEventListener("load", run, { once: true });
+}
+
 export default function LazyVideo({ src, poster, className, style, eager = false }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const visibleRef = useRef(false);
   const stillOnlyRef = useRef(false);
-  const [active, setActive] = useState(eager);
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     const video = ref.current;
@@ -35,7 +41,10 @@ export default function LazyVideo({ src, poster, className, style, eager = false
       ([entry]) => {
         visibleRef.current = entry.isIntersecting;
         if (entry.isIntersecting) {
-          setActive(true);
+          // A hero clip waits for the page load so the poster, not the video
+          // download, is what the visitor sees first.
+          if (eager) afterPageLoad(() => setActive(true));
+          else setActive(true);
           if (!stillOnlyRef.current && video.currentSrc) video.play().catch(() => {});
         } else {
           video.pause();
@@ -45,7 +54,7 @@ export default function LazyVideo({ src, poster, className, style, eager = false
     );
     observer.observe(video);
     return () => observer.disconnect();
-  }, []);
+  }, [eager]);
 
   // Start playback once the source has been attached, if the clip is on screen.
   useEffect(() => {

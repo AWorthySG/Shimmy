@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useI18n } from "@/lib/i18n";
-import { BROW_SERVICES, getBrowService, serviceKeys } from "@/lib/brow-services";
+import { BROW_SERVICES, getBrowService, serviceKeys, tagForService } from "@/lib/brow-services";
+import { blogPosts } from "@/lib/blog";
 
 const WHATSAPP = "6589308973";
 
@@ -18,6 +19,8 @@ export default function ServicePage({ params }: { params: Promise<{ service: str
   const title = t(k.title);
   const waText = encodeURIComponent(`Hi, I'd like to ask about ${t(k.title)}.`);
   const others = BROW_SERVICES.filter((o) => o.slug !== s.slug);
+  const tag = tagForService(s);
+  const reading = blogPosts.filter((p) => tag && p.tags.includes(tag)).slice(0, 4);
 
   return (
     <>
@@ -79,6 +82,44 @@ export default function ServicePage({ params }: { params: Promise<{ service: str
           </div>
 
           <div>
+            <h2 className="font-serif text-2xl text-charcoal">{t("svcpage.detail.suits")}</h2>
+            <p className="mt-4 text-sm sm:text-base text-charcoal-light leading-relaxed">
+              {t("compare.skintype")}: {t(s.skinKey)}. {t(k.price)}, {t(k.duration)}. {t("compare.longevity")}: {t(k.longevity)}.
+            </p>
+          </div>
+
+          {k.steps.length > 0 && (
+            <div>
+              <h2 className="font-serif text-2xl text-charcoal">{t("svcpage.detail.steps")}</h2>
+              <ol className="mt-4 space-y-4">
+                {k.steps.map((st, i) => (
+                  <li key={st.title} className="flex gap-4">
+                    <span className="shrink-0 flex h-8 w-8 items-center justify-center rounded-full border border-vermillion/30 text-sm text-vermillion-dark" aria-hidden="true">
+                      {i + 1}
+                    </span>
+                    <div>
+                      <p className="font-medium text-charcoal">
+                        {t(st.title)} <span className="text-xs text-warm-gray">· {t(st.time)}</span>
+                      </p>
+                      <p className="mt-1 text-sm sm:text-base text-charcoal-light leading-relaxed">{t(st.desc)}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+
+          {s.aftercare && (
+            <div>
+              <h2 className="font-serif text-2xl text-charcoal">{t("svcpage.detail.aftercare")}</h2>
+              <p className="mt-4 text-sm sm:text-base text-charcoal-light leading-relaxed">{t(s.aftercare.key)}</p>
+              <Link href={`/blog/${s.aftercare.slug}`} className="mt-3 inline-block text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion touch-target py-2">
+                {t("svcpage.detail.aftercare.more")}
+              </Link>
+            </div>
+          )}
+
+          <div>
             <h2 className="font-serif text-2xl text-charcoal">{t("faq.title")}</h2>
             <div className="mt-4 divide-y divide-vermillion/10 border-y border-vermillion/10">
               {k.faqs.map((f) => (
@@ -97,6 +138,22 @@ export default function ServicePage({ params }: { params: Promise<{ service: str
             <Link href="/brows/try-on" className="inline-block text-sm uppercase tracking-button text-vermillion-dark hover:text-vermillion">
               {t("svcpage.detail.tryon")}
             </Link>
+          )}
+
+          {reading.length > 0 && (
+            <div>
+              <h2 className="font-serif text-2xl text-charcoal">{t("svcpage.detail.reading")}</h2>
+              <ul className="mt-4 divide-y divide-vermillion/10 border-y border-vermillion/10">
+                {reading.map((p) => (
+                  <li key={p.slug}>
+                    <Link href={`/blog/${p.slug}`} className="block py-4 group">
+                      <span className="font-medium text-charcoal group-hover:text-vermillion-dark">{t(p.titleKey)}</span>
+                      <span className="mt-1 block text-sm text-charcoal-light">{t(p.descKey)}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
 
           <div>

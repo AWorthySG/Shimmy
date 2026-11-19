@@ -195,6 +195,11 @@ const zh: Record<string, string> = {
   "svcpage.detail.back": "← 全部眉毛服务",
   "svcpage.detail.other": "其他服务",
   "svcpage.detail.tryon": "先用你的照片试戴效果 →",
+  "svcpage.detail.suits": "适合你吗？",
+  "svcpage.detail.steps": "预约流程",
+  "svcpage.detail.aftercare": "术后护理",
+  "svcpage.detail.aftercare.more": "阅读完整护理指南 →",
+  "svcpage.detail.reading": "延伸阅读",
   "svcpage.unsure.title": "不确定从哪里开始？",
   "svcpage.unsure.desc":
     "完全没关系——这正是咨询的意义所在。告诉我们你想改变什么，我们一起找到最适合你的方案。",
@@ -595,6 +600,9 @@ const zh: Record<string, string> = {
   "blog.cat.brows": "眉毛护理",
   "blog.cat.nails": "美甲技巧",
   "blog.cta": "还有更多问题？我们随时乐意帮忙。",
+  "blog.cta.service.tag": "本文介绍的服务",
+  "blog.cta.service.more": "价格与详情 →",
+  "blog.cta.shop": "选购穿戴甲",
 
   // 文章 1：绣眉术后护理
   "blog.1.title": "绣眉术后完全护理指南",

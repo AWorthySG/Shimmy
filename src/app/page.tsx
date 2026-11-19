@@ -6,9 +6,7 @@ import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 import StatsBar from "@/components/StatsBar";
 import EmailCapture from "@/components/EmailCapture";
-import InstagramFeed from "@/components/InstagramFeed";
 import Stories from "@/components/Stories";
-import PressBanner from "@/components/PressBanner";
 
 export default function Home() {
   const { t } = useI18n();
@@ -65,7 +63,7 @@ export default function Home() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 animate-fade-in-up animate-delay-600">
+        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 animate-fade-in-up animate-delay-600 hidden sm:block">
           <div className="flex flex-col items-center gap-2 text-warm-gray">
             <span className="text-[9px] uppercase tracking-eyebrow">{t("hero.scroll")}</span>
             <div className="h-8 w-[1px] bg-vermillion/40 animate-pulse-gold" />
@@ -236,12 +234,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ─── Instagram Feed ─── */}
-      <InstagramFeed />
-
-      {/* ─── Press / As Seen In ─── */}
-      <PressBanner />
 
       {/* ─── CTA Banner ─── */}
       <section className="relative overflow-hidden shine-sweep bg-gradient-to-r from-cream-dark via-cream to-cream-dark py-16 sm:py-20 px-4 sm:px-6 text-center">

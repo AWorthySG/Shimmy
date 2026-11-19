@@ -1,29 +1,14 @@
 "use client";
 
-import { useState, useCallback, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { NailIntro } from "./nail-intro";
+import { IntroGate } from "./intro-gate";
 
-/**
- * Wraps the nails page content with the nail painting intro animation.
- * Shows the intro on first visit, then reveals the page beneath.
- */
+/** Nails page: the nail painting intro, once per session. */
 export function NailsWithIntro({ children }: { children: ReactNode }) {
-  const [showIntro, setShowIntro] = useState(true);
-
-  const handleComplete = useCallback(() => {
-    setShowIntro(false);
-  }, []);
-
   return (
-    <>
-      {showIntro && <NailIntro onComplete={handleComplete} />}
-      <div
-        className={`transition-opacity duration-300 ${
-          showIntro ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        {children}
-      </div>
-    </>
+    <IntroGate storageKey="shimmy-intro-nails" intro={(done) => <NailIntro onComplete={done} />}>
+      {children}
+    </IntroGate>
   );
 }

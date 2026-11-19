@@ -14,6 +14,7 @@ import {
 } from "@/lib/products";
 
 import { formatPrice } from "@/lib/format";
+import { LeadingArrow } from "@/components/icons";
 function ProductCard({ product }: { product: Product }) {
   const { t } = useI18n();
   const { addItem } = useCart();
@@ -56,7 +57,7 @@ function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className="p-4 sm:p-5">
-        <h3 className="font-serif text-base sm:text-lg text-charcoal">
+        <h3 className="font-sans font-medium text-base sm:text-lg text-charcoal">
           {product.title}
         </h3>
         <div className="mt-2 flex items-center gap-2">
@@ -97,7 +98,7 @@ export default function CollectionPage() {
           href="/nails/shop"
           className="mt-4 inline-block text-sm text-vermillion-dark underline-grow"
         >
-          {t("shop.back.shop")}
+          <LeadingArrow />{t("shop.back.shop")}
         </Link>
       </section>
     );
@@ -112,7 +113,7 @@ export default function CollectionPage() {
             href="/nails/shop"
             className="inline-block text-xs uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors mb-6"
           >
-            {t("shop.back.shop")}
+            <LeadingArrow />{t("shop.back.shop")}
           </Link>
 
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />

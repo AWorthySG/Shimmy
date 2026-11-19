@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { AnimateOnScroll, Stagger } from '@/components/animate-on-scroll'
 import { useI18n } from '@/lib/i18n'
 import { blogPosts } from '@/lib/blog'
+import { TrailingArrow } from "@/components/icons";
 
 export default function BlogPage() {
   const { t } = useI18n()
@@ -42,11 +43,7 @@ export default function BlogPage() {
       </section>
 
       {/* Divider */}
-      <div className="flex items-center justify-center gap-3 my-8">
-        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-xs">✦</span>
-        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
+      <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
       {/* Article Grid */}
       <section className="bg-soft-white py-10 sm:py-16 px-4 sm:px-6">
@@ -124,7 +121,7 @@ export default function BlogPage() {
 
                     {/* Title + description */}
                     <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-4">
-                      <h2 className="font-serif text-lg sm:text-xl text-charcoal group-hover:text-vermillion transition-colors duration-300">
+                      <h2 className="font-sans font-medium text-lg sm:text-xl text-charcoal group-hover:text-vermillion transition-colors duration-300">
                         {t(post.titleKey)}
                       </h2>
                       <p className="mt-3 text-sm leading-relaxed text-charcoal-light line-clamp-3">
@@ -144,7 +141,7 @@ export default function BlogPage() {
                       </div>
 
                       <p className="mt-4 text-xs uppercase tracking-button text-vermillion-dark group-hover:text-vermillion transition-colors">
-                        {t('blog.readmore')}
+                        {t('blog.readmore')}<TrailingArrow />
                       </p>
                       <div className="mt-3 h-[1px] w-6 bg-vermillion/30 transition-all duration-500 group-hover:w-10 group-hover:bg-vermillion" />
                     </div>

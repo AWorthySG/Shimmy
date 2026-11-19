@@ -1,6 +1,7 @@
 'use client'
 
 import { useI18n } from '@/lib/i18n'
+import { Sparkle } from "@/components/icons";
 
 export default function PressBanner() {
   const { t } = useI18n()
@@ -15,9 +16,9 @@ export default function PressBanner() {
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
-              className="flex items-center justify-center w-24 h-12 sm:w-32 sm:h-14 bg-warm-gray/10 text-warm-gray/30 text-lg select-none"
+              className="flex items-center justify-center w-24 h-12 sm:w-32 sm:h-14 bg-warm-gray/10 text-warm-gray/30 select-none"
             >
-              ✦
+              <Sparkle className="h-5 w-5" />
             </div>
           ))}
         </div>

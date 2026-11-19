@@ -25,6 +25,7 @@ import {
   type FaceShape,
 } from "@/lib/brow-styles";
 import { useI18n } from "@/lib/i18n";
+import { Download, Sparkle, TrailingArrow, Upload } from "@/components/icons";
 
 /* ──────────────────────────────────────────────
    MediaPipe FaceLandmarker — index ranges
@@ -513,16 +514,16 @@ function HelpOverlay({
       <div className="flex items-start justify-between gap-4 flex-col sm:flex-row">
         <div className="flex-1 w-full">
           <div className="h-[2px] w-[40px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-3" />
-          <h3 className="font-serif text-lg sm:text-xl text-vermillion-dark">
+          <h3 className="font-sans font-medium text-lg sm:text-xl text-vermillion-dark">
             {t("tryon.help.title")}
           </h3>
           <ol className="mt-4 grid gap-3 sm:grid-cols-3">
             <li className="flex items-start gap-3">
               <span
                 aria-hidden="true"
-                className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full bg-vermillion/10 text-vermillion-dark text-base"
+                className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full bg-vermillion/10 text-vermillion-dark"
               >
-                ↑
+                <Upload className="h-4 w-4" />
               </span>
               <span className="text-sm leading-snug text-vermillion-dark">
                 {t("tryon.help.step1")}
@@ -531,9 +532,9 @@ function HelpOverlay({
             <li className="flex items-start gap-3">
               <span
                 aria-hidden="true"
-                className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full bg-vermillion/10 text-vermillion-dark text-base"
+                className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full bg-vermillion/10 text-vermillion-dark"
               >
-                ✦
+                <Sparkle className="h-4 w-4" />
               </span>
               <span className="text-sm leading-snug text-vermillion-dark">
                 {t("tryon.help.step2")}
@@ -542,9 +543,9 @@ function HelpOverlay({
             <li className="flex items-start gap-3">
               <span
                 aria-hidden="true"
-                className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full bg-vermillion/10 text-vermillion-dark text-base"
+                className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full bg-vermillion/10 text-vermillion-dark"
               >
-                ⤓
+                <Download className="h-4 w-4" />
               </span>
               <span className="text-sm leading-snug text-vermillion-dark">
                 {t("tryon.help.step3")}
@@ -1216,9 +1217,7 @@ export default function BrowTryOn() {
 
             <div className="mt-8 mx-auto max-w-md border-t border-vermillion/15 pt-5">
               <p className="text-[11px] uppercase tracking-label text-vermillion-dark">
-                <span aria-hidden="true" className="mr-2">
-                  ✦
-                </span>
+                <Sparkle className="mr-2 inline-block h-3 w-3 align-[-0.1em]" />
                 {t("tryon.upload.privacy")}
               </p>
             </div>
@@ -1241,7 +1240,7 @@ export default function BrowTryOn() {
               onClick={() => setShowQuizModal(true)}
               className="text-sm text-vermillion hover:text-vermillion-dark underline-offset-4 hover:underline transition-colors"
             >
-              {t("tryon.quiz.open")}
+              {t("tryon.quiz.open")}<TrailingArrow />
             </button>
           </p>
         </div>
@@ -1298,7 +1297,7 @@ export default function BrowTryOn() {
               onClick={() => setShowQuizModal(true)}
               className="text-sm text-vermillion hover:text-vermillion-dark underline-offset-4 hover:underline transition-colors"
             >
-              {t("tryon.quiz.open")}
+              {t("tryon.quiz.open")}<TrailingArrow />
             </button>
           </p>
 
@@ -1427,9 +1426,7 @@ export default function BrowTryOn() {
                 </p>
               )}
               <p className="mt-3 text-[11px] uppercase tracking-label text-vermillion-dark text-center">
-                <span aria-hidden="true" className="mr-2">
-                  ✦
-                </span>
+                <Sparkle className="mr-2 inline-block h-3 w-3 align-[-0.1em]" />
                 {t("tryon.upload.privacy")}
               </p>
             </div>
@@ -1851,7 +1848,7 @@ function SaveLookModal({
     >
       <form onSubmit={handleSubmit} className="p-6 sm:p-8">
         <div className="h-[2px] w-[40px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-3" />
-        <h2 className="font-serif text-xl text-charcoal">
+        <h2 className="font-sans font-medium text-xl text-charcoal">
           {t("tryon.save.title")}
         </h2>
         <p className="mt-2 text-sm text-charcoal-light">
@@ -2057,7 +2054,7 @@ function CameraModal({
     >
       <div className="p-5 sm:p-6">
         <div className="h-[2px] w-[40px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-3" />
-        <h2 className="font-serif text-xl text-charcoal">
+        <h2 className="font-sans font-medium text-xl text-charcoal">
           {t("tryon.camera.title")}
         </h2>
         <p className="mt-2 text-xs text-charcoal-light">
@@ -2258,7 +2255,7 @@ function QuizModal({
             <p className="text-xs text-charcoal-light">
               {step + 1} / {total}
             </p>
-            <h2 className="mt-2 font-serif text-xl text-charcoal">
+            <h2 className="mt-2 font-sans font-medium text-xl text-charcoal">
               {t(current.promptKey)}
             </h2>
             <p className="mt-1 text-xs text-charcoal-light">
@@ -2309,7 +2306,7 @@ function QuizModal({
 
         {isResult && shape && (
           <>
-            <h2 className="font-serif text-xl text-charcoal">
+            <h2 className="font-sans font-medium text-xl text-charcoal">
               {t("tryon.quiz.result.title").replace(
                 "{shape}",
                 t(`tryon.quiz.shape.${shape}`),

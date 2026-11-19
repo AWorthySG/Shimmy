@@ -11,6 +11,7 @@ import { NailsWithIntro } from "@/components/nails-with-intro";
 import SeasonalBanner from "@/components/SeasonalBanner";
 import GoogleReviews from "@/components/GoogleReviews";
 import ClientCounter from "@/components/ClientCounter";
+import { TrailingArrow } from "@/components/icons";
 
 export default function NailsPage() {
   const { t } = useI18n();
@@ -96,11 +97,7 @@ export default function NailsPage() {
       <SeasonalBanner />
 
       {/* ─── Divider ─── */}
-      <div className="flex items-center justify-center gap-3 my-4 sm:my-5">
-        <div className="h-[1px] w-10 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-[10px]">✦</span>
-        <div className="h-[1px] w-10 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
+      <div className="mx-auto my-4 sm:my-5 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
       {/* ─── Collections Grid — with cinematic video cards ─── */}
       <section className="bg-soft-white py-10 sm:py-12 md:py-14 px-4 sm:px-6">
@@ -157,12 +154,12 @@ export default function NailsPage() {
                     {/* Hover overlay with collection name */}
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-end justify-center pb-4 z-10">
                       <span className="text-[10px] uppercase tracking-label text-soft-white/90">
-                        {t("nails.collection.view")}
+                        {t("nails.collection.view")}<TrailingArrow />
                       </span>
                     </div>
                   </div>
                   <div className="p-4 sm:p-5">
-                    <h3 className="font-serif text-base sm:text-lg text-charcoal">
+                    <h3 className="font-sans font-medium text-base sm:text-lg text-charcoal">
                       {collection.title}
                     </h3>
                     {/* Collection price range (Task 2) */}
@@ -187,7 +184,7 @@ export default function NailsPage() {
               href="/nails/shop"
               className="btn btn-primary btn-lg touch-target"
             >
-              {t("shop.all")} →
+              {t("shop.all")}<TrailingArrow />
             </Link>
           </AnimateOnScroll>
         </div>
@@ -337,27 +334,11 @@ export default function NailsPage() {
       </section>
 
       {/* ─── Divider ─── */}
-      <div className="flex items-center justify-center gap-3 my-4 sm:my-5">
-        <div className="h-[1px] w-10 bg-gradient-to-r from-transparent to-vermillion/30" />
-        <span className="text-vermillion/40 text-[10px]">✦</span>
-        <div className="h-[1px] w-10 bg-gradient-to-l from-transparent to-vermillion/30" />
-      </div>
+      <div className="mx-auto my-4 sm:my-5 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
       {/* ─── CTA Banner ─── */}
       <section className="relative overflow-hidden bg-gradient-to-r from-cream-dark via-cream to-cream-dark gradient-animate py-10 sm:py-12 px-4 sm:px-6 text-center">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--vermillion)_0%,_transparent_70%)] opacity-5" />
-        <div className="pointer-events-none absolute top-6 left-[15%] text-vermillion/8 text-2xl animate-drift">
-          ✦
-        </div>
-        <div
-          className="pointer-events-none absolute bottom-8 right-[20%] text-vermillion/8 text-3xl animate-drift"
-          style={{ animationDelay: "-4s", animationDirection: "reverse" }}
-        >
-          ✦
-        </div>
-        <div className="pointer-events-none absolute top-[40%] right-[10%] text-vermillion/5 text-xl animate-drift" style={{ animationDelay: "-8s" }}>
-          ✦
-        </div>
 
         <AnimateOnScroll animation="zoom-in" className="relative z-10 mx-auto max-w-2xl">
           <h2 className="font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">

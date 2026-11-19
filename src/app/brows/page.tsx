@@ -12,6 +12,7 @@ import { ParallaxLayer } from "@/components/ParallaxLayer";
 import StickyBookBar from "@/components/StickyBookBar";
 import GoogleReviews from "@/components/GoogleReviews";
 import ClientCounter from "@/components/ClientCounter";
+import { Sparkle, Star, TrailingArrow } from "@/components/icons";
 
 export default function Home() {
   const { t } = useI18n();
@@ -71,14 +72,6 @@ export default function Home() {
           <div className="pointer-events-none absolute -bottom-48 -left-48 h-80 w-80 sm:h-[500px] sm:w-[500px] rounded-full bg-jade/5 animate-float-reverse" />
         </ParallaxLayer>
 
-        {/* Spinning decorative star — top right */}
-        <div className="pointer-events-none absolute top-20 right-8 sm:right-20 text-vermillion/10 text-4xl sm:text-5xl animate-spin-slow animate-petal">
-          ✦
-        </div>
-        {/* Breathing decorative star — bottom left */}
-        <div className="pointer-events-none absolute bottom-24 left-6 sm:left-16 text-vermillion/10 text-3xl animate-breathe animate-petal-slow">
-          ✦
-        </div>
 
         <div className="relative z-10 max-w-3xl">
           {/* Animated ink-stroke divider */}
@@ -131,8 +124,8 @@ export default function Home() {
       {/* ─── Client Counter ─── */}
       <ClientCounter />
 
-      {/* ─── Oriental divider ─── */}
-      <div className="flex items-center justify-center gap-3 my-8"><div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" /><span className="text-vermillion/40 text-xs">✦</span><div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" /></div>
+      {/* Divider */}
+      <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
       {/* ─── Featured Services ─── */}
       <section className="bg-soft-white py-16 sm:py-20 md:py-24 px-4 sm:px-6">
@@ -165,7 +158,7 @@ export default function Home() {
                     />
                   </div>
                   <div className="p-6 sm:p-8">
-                    <h3 className="font-serif text-lg sm:text-xl text-charcoal">
+                    <h3 className="font-sans font-medium text-lg sm:text-xl text-charcoal">
                       {service.title}
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-charcoal-light">
@@ -183,7 +176,7 @@ export default function Home() {
               href="/brows/services"
               className="underline-grow text-sm uppercase tracking-button text-vermillion-dark transition-colors hover:text-vermillion touch-target inline-flex items-center py-2"
             >
-              {t("services.viewall")}
+              {t("services.viewall")}<TrailingArrow />
             </Link>
           </AnimateOnScroll>
         </div>
@@ -208,12 +201,10 @@ export default function Home() {
                 href="/brows/try-on"
                 className="btn btn-primary btn-lg mt-6 sm:mt-8 touch-target"
               >
-                {t("tryon.discover.cta")}
+                {t("tryon.discover.cta")}<TrailingArrow />
               </Link>
               <p className="mt-4 text-[10px] uppercase tracking-label text-vermillion-dark">
-                <span aria-hidden="true" className="mr-2">
-                  ✦
-                </span>
+                <Sparkle className="mr-2 inline-block h-3 w-3 align-[-0.1em]" />
                 {t("tryon.upload.privacy")}
               </p>
             </div>
@@ -255,7 +246,7 @@ export default function Home() {
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-charcoal/0 opacity-0 transition-all duration-500 group-hover:bg-charcoal/40 group-hover:opacity-100 px-4">
-                    <p className="font-serif text-base sm:text-lg text-soft-white text-center drop-shadow">
+                    <p className="font-sans font-medium text-base sm:text-lg text-soft-white text-center drop-shadow">
                       {item.label}
                     </p>
                   </div>
@@ -296,14 +287,14 @@ export default function Home() {
               href="/brows/gallery"
               className="underline-grow text-sm uppercase tracking-button text-vermillion-dark transition-colors hover:text-vermillion touch-target inline-flex items-center py-2"
             >
-              See the full gallery →
+              See the full gallery<TrailingArrow />
             </Link>
           </AnimateOnScroll>
         </div>
       </section>
 
-      {/* ─── Oriental divider ─── */}
-      <div className="flex items-center justify-center gap-3 my-8"><div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-vermillion/30" /><span className="text-vermillion/40 text-xs">✦</span><div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-vermillion/30" /></div>
+      {/* Divider */}
+      <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
       {/* ─── Testimonials ─── */}
       <section className="bg-cream py-16 sm:py-20 md:py-24 px-4 sm:px-6">
@@ -340,9 +331,7 @@ export default function Home() {
                     {/* Stars — keep gold for stars */}
                     <div className="flex gap-1 text-gold">
                       {Array.from({ length: item.rating }).map((_, i) => (
-                        <span key={i} className="text-sm transition-transform duration-300 hover:scale-125">
-                          ★
-                        </span>
+                        <Star key={i} className="h-3.5 w-3.5" />
                       ))}
                     </div>
 
@@ -459,8 +448,6 @@ export default function Home() {
       {/* ─── CTA Banner ─── */}
       <section className="relative overflow-hidden bg-gradient-to-r from-cream-dark via-cream to-cream-dark py-16 sm:py-20 px-4 sm:px-6 text-center">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--vermillion)_0%,_transparent_70%)] opacity-5" />
-        <div className="pointer-events-none absolute top-8 left-[15%] text-vermillion/8 text-2xl animate-spin-slow animate-petal">✦</div>
-        <div className="pointer-events-none absolute bottom-12 right-[20%] text-vermillion/8 text-3xl animate-spin-slow animate-petal-slow" style={{ animationDirection: "reverse" }}>✦</div>
 
         <AnimateOnScroll animation="zoom-in" className="relative z-10 mx-auto max-w-2xl">
           <h2 className="font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">

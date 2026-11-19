@@ -97,7 +97,7 @@ const zh: Record<string, string> = {
   "services.ombre.title": "渐变粉黛眉",
   "services.ombre.desc":
     "你喜欢的那种柔和粉雾感——平时可能要花15分钟来画，而这个可以维持两年。",
-  "services.viewall": "查看全部服务 →",
+  "services.viewall": "查看全部服务",
 
   // ─── About Snippet (Home) ───
   "about.tag": "为什么选择我们",
@@ -107,7 +107,7 @@ const zh: Record<string, string> = {
     "我们喜欢慢慢来。别的地方咨询可能几分钟就结束了，而我们会花更多时间——因为我们相信，把眉形定好是整个过程中最重要的一步。",
   "about.p2":
     "我们想帮你找到一直属于你的那对眉毛。不是别人的形状，是你自己的。",
-  "about.link": "我们的故事 →",
+  "about.link": "我们的故事",
 
   // ─── Testimonials ───
   "testimonials.tag": "温暖好评",
@@ -139,10 +139,10 @@ const zh: Record<string, string> = {
   "home.desc": "两种艺术，一个理念——每个细节都围绕你而设计。从修饰脸庞的眉毛，到诉说故事的指甲。",
   "home.brows.title": "Brows by Shimmyhands",
   "home.brows.desc": "为你的脸量身设计的绣眉。不是模板——是属于你的。精细线条，用心精准，自然效果。",
-  "home.brows.cta": "了解眉毛服务 →",
+  "home.brows.cta": "了解眉毛服务",
   "home.nails.title": "Nails by Shimmyhands",
   "home.nails.desc": "手工打造的穿戴甲，如同指尖上的珠宝。每一套都用心设计，每一个细节都手工绘制。",
-  "home.nails.cta": "选购美甲 →",
+  "home.nails.cta": "选购美甲",
   "home.cta.title.1": "准备好",
   "home.cta.title.2": "Shimmy",
   "home.cta.desc": "无论是眉毛还是美甲——我们都期待你的消息。",
@@ -191,14 +191,14 @@ const zh: Record<string, string> = {
     "每次服务都从一场用心的对话开始。我们会先花时间了解什么适合你，然后才进行下一步。",
   "svcpage.includes": "服务包含",
   "svcpage.detail.book": "在线预约",
-  "svcpage.detail.more": "了解此服务 →",
-  "svcpage.detail.back": "← 全部眉毛服务",
+  "svcpage.detail.more": "了解此服务",
+  "svcpage.detail.back": "全部眉毛服务",
   "svcpage.detail.other": "其他服务",
-  "svcpage.detail.tryon": "先用你的照片试戴效果 →",
+  "svcpage.detail.tryon": "先用你的照片试戴效果",
   "svcpage.detail.suits": "适合你吗？",
   "svcpage.detail.steps": "预约流程",
   "svcpage.detail.aftercare": "术后护理",
-  "svcpage.detail.aftercare.more": "阅读完整护理指南 →",
+  "svcpage.detail.aftercare.more": "阅读完整护理指南",
   "svcpage.detail.reading": "延伸阅读",
   "svcpage.unsure.title": "不确定从哪里开始？",
   "svcpage.unsure.desc":
@@ -306,7 +306,7 @@ const zh: Record<string, string> = {
   "gallery.title": "作品展示",
   "gallery.desc":
     "真实客人，真实眉毛，没有滤镜。每一对都从零开始设计——每一对都独一无二。",
-  "gallery.ig": "更多作品在 Instagram →",
+  "gallery.ig": "更多作品在 Instagram",
   "gallery.ig.desc": "我们在 Instagram 上分享最新作品和幕后日常。",
 
   // ─── Contact Page ───
@@ -347,6 +347,12 @@ const zh: Record<string, string> = {
   "footer.contact": "联系方式",
   "footer.rights": "版权所有。",
   "footer.location": "新加坡",
+  "footer.visit": "到访工作室",
+  "footer.directions": "查看路线",
+  "footer.appointment": "仅限预约，不接待直接到访。",
+  "footer.hours": "营业时间",
+  "footer.explore": "浏览",
+  "footer.more": "更多",
 
   // ─── Cookie Consent ───
   "cookie.text": "我们使用 Cookie 来提升你的体验。继续浏览即表示你同意我们的 Cookie 政策。",
@@ -587,21 +593,21 @@ const zh: Record<string, string> = {
   // ─── Nails Page Hardcoded ───
   "nails.bts.tag": "幕后花絮",
   "nails.bts.title": "感受手工艺术",
-  "nails.collection.view": "查看系列 →",
+  "nails.collection.view": "查看系列",
 
   // ─── Blog ───
   "blog.tag": "护理技巧与指南",
   "blog.title": "美丽日志",
   "blog.desc": "关于眉毛术后护理、穿戴甲使用技巧，以及那些别人不太讲的问题。",
-  "blog.readmore": "阅读全文 →",
+  "blog.readmore": "阅读全文",
   "blog.readtime": "分钟阅读",
   "blog.related": "你可能也想看",
-  "blog.back": "← 返回日志",
+  "blog.back": "返回日志",
   "blog.cat.brows": "眉毛护理",
   "blog.cat.nails": "美甲技巧",
   "blog.cta": "还有更多问题？我们随时乐意帮忙。",
   "blog.cta.service.tag": "本文介绍的服务",
-  "blog.cta.service.more": "价格与详情 →",
+  "blog.cta.service.more": "价格与详情",
   "blog.cta.shop": "选购穿戴甲",
 
   // 文章 1：绣眉术后护理
@@ -844,7 +850,7 @@ const zh: Record<string, string> = {
   "tryon.discover.title": "先试戴，再预约",
   "tryon.discover.desc":
     "上传一张照片，看看每种眉形戴在你脸上的样子——快速、私密、免费。",
-  "tryon.discover.cta": "试戴眉形 →",
+  "tryon.discover.cta": "试戴眉形",
   "tryon.style.nano-soft": "纳米眉 — 自然柔和",
   "tryon.style.nano-defined": "纳米眉 — 立体清晰",
   "tryon.style.microblading-feathered": "微刀雕 — 羽毛感",
@@ -935,7 +941,7 @@ const zh: Record<string, string> = {
   "tryon.book.note.prefix": "试戴中选定：",
 
   // ─── 面型小测试 ───
-  "tryon.quiz.open": "不确定哪个风格？做个 30 秒测试 →",
+  "tryon.quiz.open": "不确定哪个风格？做个 30 秒测试",
   "tryon.quiz.title": "找到最适合你的眉形",
   "tryon.quiz.subtitle": "三个快速问题——我们会推荐最显瘦你的风格。",
   "tryon.quiz.next": "下一题",
@@ -1112,7 +1118,7 @@ const zh: Record<string, string> = {
   "blog.filter.brows": "眉毛",
   "blog.filter.nails": "美甲",
   "blog.tag.page.title": "标签文章：{tag}",
-  "blog.tag.page.back": "← 所有文章",
+  "blog.tag.page.back": "所有文章",
   "blog.no.results": "未找到文章",
 
   // ─── FAQ Schema — 美甲 ───

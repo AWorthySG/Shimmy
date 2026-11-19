@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { ArrowUp } from "@/components/icons";
 
 export default function ScrollToTop() {
   const [visible, setVisible] = useState(false);
@@ -19,7 +20,7 @@ export default function ScrollToTop() {
  visible ?"opacity-100":"opacity-0 pointer-events-none"
  }`}
     >
-      <span className="text-lg leading-none">↑</span>
+      <ArrowUp className="h-4 w-4" />
     </button>
   );
 }

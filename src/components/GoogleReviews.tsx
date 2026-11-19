@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useI18n } from '@/lib/i18n'
+import { ArrowRight, Star } from "@/components/icons";
 
 interface Review {
   id?: string
@@ -37,12 +38,7 @@ function StarRating({ rating }: { rating: number }) {
   return (
     <div className="flex gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
-        <span
-          key={i}
-          className={`text-sm ${i < rating ? 'text-gold' : 'text-warm-gray/30'}`}
-        >
-          ★
-        </span>
+        <Star key={i} className={`h-3.5 w-3.5 ${i < rating ? 'text-gold' : 'text-warm-gray/30'}`} />
       ))}
     </div>
   )
@@ -85,7 +81,7 @@ export default function GoogleReviews() {
           <div className="mt-3 flex items-center justify-center gap-2">
             <div className="flex gap-0.5">
               {Array.from({ length: 5 }).map((_, i) => (
-                <span key={i} className="text-gold text-lg">★</span>
+                <Star key={i} className="h-4 w-4 text-gold" />
               ))}
             </div>
             <span className="text-sm text-charcoal-light">5.0</span>
@@ -126,7 +122,8 @@ export default function GoogleReviews() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm uppercase tracking-button text-vermillion-dark hover:text-vermillion transition-colors touch-target py-2"
           >
-            {t('reviews.leave')} →
+            {t('reviews.leave')}
+            <ArrowRight className="h-3.5 w-3.5" />
           </a>
         </div>
       </div>

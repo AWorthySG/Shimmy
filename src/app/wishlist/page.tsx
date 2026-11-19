@@ -81,7 +81,7 @@ function WishlistCard({ product }: { product: Product }) {
         <p className="text-[9px] uppercase tracking-label text-warm-gray">
           {product.collection}
         </p>
-        <h3 className="mt-1 font-serif text-base sm:text-lg text-charcoal">
+        <h3 className="mt-1 font-sans font-medium text-base sm:text-lg text-charcoal">
           {product.title}
         </h3>
         <div className="mt-2 flex items-center gap-2">

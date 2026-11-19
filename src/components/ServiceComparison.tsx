@@ -98,7 +98,7 @@ export default function ServiceComparison() {
  }`}
                 >
                   <td className="py-4 px-3">
-                    <span className="font-serif text-sm text-charcoal">
+                    <span className="font-sans font-medium text-sm text-charcoal">
                       {t(svc.titleKey)}
                     </span>
                     {svc.popular && (
@@ -116,7 +116,7 @@ export default function ServiceComparison() {
                   <td className="py-4 px-3 text-sm text-charcoal-light">
                     {t(svc.skinKey)}
                   </td>
-                  <td className="py-4 px-3 text-sm text-charcoal text-right font-serif">
+                  <td className="py-4 px-3 text-sm text-charcoal text-right font-sans font-medium">
                     {t(svc.priceKey)}
                   </td>
                 </tr>

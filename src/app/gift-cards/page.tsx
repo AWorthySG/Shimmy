@@ -151,7 +151,7 @@ export default function GiftCardsPage() {
         <div className="mx-auto max-w-md">
           {!purchasedCode ? (
             <div className="border border-vermillion/15 bg-soft-white p-6 sm:p-8">
-              <h2 className="font-serif text-xl text-charcoal text-center mb-6">
+              <h2 className="font-sans font-medium text-xl text-charcoal text-center mb-6">
                 {t('gift.purchase.title')}
               </h2>
               <form onSubmit={handlePurchase}>
@@ -275,7 +275,7 @@ export default function GiftCardsPage() {
             </div>
           ) : (
             <div className="border border-vermillion/15 bg-soft-white p-6 sm:p-8 text-center">
-              <h2 className="font-serif text-xl text-charcoal mb-2">
+              <h2 className="font-sans font-medium text-xl text-charcoal mb-2">
                 {t('gift.purchase.success.title')}
               </h2>
               <p className="text-sm text-warm-gray mb-6">{t('gift.purchase.success.desc')}</p>
@@ -309,7 +309,7 @@ export default function GiftCardsPage() {
       <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-md">
           <div className="border border-vermillion/15 bg-cream/30 p-6 sm:p-8">
-            <h2 className="font-serif text-xl text-charcoal text-center mb-6">
+            <h2 className="font-sans font-medium text-xl text-charcoal text-center mb-6">
               {t('gift.check.title')}
             </h2>
             <form onSubmit={handleCheckBalance}>

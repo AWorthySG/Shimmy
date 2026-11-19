@@ -190,6 +190,11 @@ const zh: Record<string, string> = {
   "svcpage.desc":
     "每次服务都从一场用心的对话开始。我们会先花时间了解什么适合你，然后才进行下一步。",
   "svcpage.includes": "服务包含",
+  "svcpage.detail.book": "在线预约",
+  "svcpage.detail.more": "了解此服务 →",
+  "svcpage.detail.back": "← 全部眉毛服务",
+  "svcpage.detail.other": "其他服务",
+  "svcpage.detail.tryon": "先用你的照片试戴效果 →",
   "svcpage.unsure.title": "不确定从哪里开始？",
   "svcpage.unsure.desc":
     "完全没关系——这正是咨询的意义所在。告诉我们你想改变什么，我们一起找到最适合你的方案。",

@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
 import {
   createContext,
   useContext,
@@ -171,6 +172,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [items, hydrated]);
 
   const addItem = useCallback((product: Product) => {
+    trackEvent("cart_add", { product: product.handle });
     setItems((prev) => {
       const existing = prev.find((i) => i.product.id === product.id);
       if (existing) {

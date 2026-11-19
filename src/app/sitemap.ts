@@ -3,6 +3,7 @@ import { blogPosts } from "@/lib/blog";
 import { products, collections } from "@/lib/products";
 
 import { SITE_URL as BASE_URL } from "@/lib/seo";
+import { BROW_SERVICES } from "@/lib/brow-services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
@@ -12,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/availability`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${BASE_URL}/brows`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/brows/services`, changeFrequency: "monthly", priority: 0.7 },
+    ...BROW_SERVICES.map((svc) => ({ url: `${BASE_URL}/brows/services/${svc.slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
     { url: `${BASE_URL}/brows/gallery`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE_URL}/nails`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/nails/shop`, changeFrequency: "weekly", priority: 0.8 },

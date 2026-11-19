@@ -26,35 +26,35 @@ export const collections: Collection[] = [
     handle: "christmas-wishes",
     title: "Christmas Wishes",
     description:
-      "Festive sparkle meets handpainted artistry. Ultra-reflective glitter and seasonal designs in Mulled Wine or Evergreen.",
+      "Hand-painted festive designs with ultra-reflective glitter, in Mulled Wine or Evergreen.",
     image: "/images/nails/christmas-1-mulled-wine.jpg",
   },
   {
     handle: "yule-dreams",
     title: "Yule Dreams",
     description:
-      "Dark, elegant, and crystalline. 3D nail art with crystals, mini caviar, and a luxurious matte finish.",
+      "Dark winter shades with 3D nail art, crystals, mini caviar and a matte finish.",
     image: "/images/nails/yule-1-burgundy.jpg",
   },
   {
     handle: "sweater-weather",
     title: "Sweater Weather",
     description:
-      "Cosy 3D nail art in pastel tones — Baby Blue, Sweet Mint, and Milky Lavender. The collection that started it all.",
+      "Cosy 3D nail art in pastel tones: Baby Blue, Sweet Mint and Milky Lavender. This is the collection we started with.",
     image: "/images/nails/sweater-1-hero.jpg",
   },
   {
     handle: "lovers-heartbeat",
     title: "Lovers' Heartbeat",
     description:
-      "Dancing illusions and magnetic cat-eye effects that shift and shimmer with every movement. Bold and mesmerizing.",
+      "Dancing illusions and magnetic cat-eye effects that shift and shimmer as your hands move. A bold look.",
     image: "/images/nails/lovers-1-hero.jpg",
   },
   {
     handle: "ingenue",
     title: "Ingénue",
     description:
-      "Delicate, feminine, and effortlessly chic. Handpainted nail art with 3D details in Blush, Nude, and Peach.",
+      "Delicate, feminine sets with hand-painted nail art and 3D details, in Blush, Nude and Peach.",
     image: "/images/nails/ingenue-1-hero.jpg",
   },
 ];
@@ -68,7 +68,7 @@ export const products: Product[] = [
     price: 45,
     compareAtPrice: 49.90,
     description:
-      "Festive emerald green with ultra-reflective glitter and hand-painted candy cane accents. Three unique designs per set.",
+      "Emerald green with ultra-reflective glitter and hand-painted candy cane accents. Three unique designs per set.",
     collection: "Christmas Wishes",
     collectionHandle: "christmas-wishes",
     tags: ["festive", "green", "glitter", "handpainted"],
@@ -83,7 +83,7 @@ export const products: Product[] = [
     price: 45,
     compareAtPrice: 49.90,
     description:
-      "Deep mulled wine red with sparkle snowflake patterns and festive accents. Rich, warm, and undeniably festive.",
+      "Deep mulled wine red with sparkly snowflake patterns and festive accents.",
     collection: "Christmas Wishes",
     collectionHandle: "christmas-wishes",
     tags: ["festive", "red", "glitter", "snowflake"],
@@ -100,7 +100,7 @@ export const products: Product[] = [
     price: 53.90,
     compareAtPrice: 59.90,
     description:
-      "Deep midnight blue matte finish with silver crystal snowflake accents and mini caviar details. Five unique designs per set.",
+      "Deep midnight blue with a matte finish, silver crystal snowflakes and mini caviar details. Five unique designs per set.",
     collection: "Yule Dreams",
     collectionHandle: "yule-dreams",
     tags: ["winter", "blue", "matte", "crystals", "3d"],
@@ -152,7 +152,7 @@ export const products: Product[] = [
     price: 62,
     compareAtPrice: 69.90,
     description:
-      "Icy baby blue with silver pearl details and 3D texture art. Delicate, wintry, and stunningly detailed.",
+      "Icy baby blue with silver pearl details and 3D texture art. A delicate, wintry set with fine detail.",
     collection: "Sweater Weather",
     collectionHandle: "sweater-weather",
     tags: ["pastel", "blue", "3d", "silver"],
@@ -168,7 +168,7 @@ export const products: Product[] = [
     price: 62,
     compareAtPrice: 69.90,
     description:
-      "Fresh sweet mint with gold foil accents and 3D texture details. Elegant and effortlessly stylish.",
+      "Fresh sweet mint with gold foil accents and 3D texture details.",
     collection: "Sweater Weather",
     collectionHandle: "sweater-weather",
     tags: ["pastel", "mint", "3d", "gold"],
@@ -186,7 +186,7 @@ export const products: Product[] = [
     price: 57,
     compareAtPrice: 62.90,
     description:
-      "Mesmerizing cool-toned cat-eye effect with dancing illusions that shift from deep emerald to midnight blue. Seven unique designs.",
+      "A cool-toned cat-eye effect with dancing illusions that shift from deep emerald to midnight blue. Seven unique designs.",
     collection: "Lovers' Heartbeat",
     collectionHandle: "lovers-heartbeat",
     tags: ["cat-eye", "dramatic", "shimmer", "illusion"],
@@ -201,7 +201,7 @@ export const products: Product[] = [
     price: 57,
     compareAtPrice: 62.90,
     description:
-      "Warm-toned cat-eye with golden, magenta, and violet illusions. Each nail catches light differently — truly magnetic.",
+      "Warm-toned cat-eye with golden, magenta and violet illusions. Each nail catches the light differently.",
     collection: "Lovers' Heartbeat",
     collectionHandle: "lovers-heartbeat",
     tags: ["cat-eye", "dramatic", "shimmer", "illusion", "warm"],
@@ -234,7 +234,7 @@ export const products: Product[] = [
     price: 49.90,
     compareAtPrice: 54.90,
     description:
-      "Soft nude tones with white marbling and rosé glitter accents. Feminine, refined, and effortlessly elegant.",
+      "Soft nude tones with white marbling and rosé glitter accents, for a quiet, feminine look.",
     collection: "Ingénue",
     collectionHandle: "ingenue",
     tags: ["feminine", "nude", "handpainted", "3d", "rose"],
@@ -250,7 +250,7 @@ export const products: Product[] = [
     price: 49.90,
     compareAtPrice: 54.90,
     description:
-      "Blush pink meets black accent art with silver glitter details. The bold sibling in the Ingénue family — dramatic yet refined.",
+      "Blush pink with black accent art and silver glitter details. The boldest set in the Ingénue collection.",
     collection: "Ingénue",
     collectionHandle: "ingenue",
     tags: ["feminine", "blush", "black", "handpainted", "3d", "silver"],

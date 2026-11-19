@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/brows' },
-  title: { absolute: 'Eyebrow Embroidery Singapore | Brows by Shimmyhands' },
+  title: { absolute: 'Eyebrow embroidery Singapore | Brows by Shimmyhands' },
   description:
-    'Expert eyebrow embroidery in Singapore — nano brows, ombre powder brows, microblading, and brow shaping. Book your consultation with Shimmy today.',
+    'Eyebrow embroidery in Singapore: nano brows, ombre powder brows, microblading and brow shaping. Book a consultation with Shimmy.',
   keywords: ['eyebrow embroidery Singapore', 'nano brows Singapore', 'ombre powder brows Singapore', 'brow shaping Singapore'],
   openGraph: {
-    title: 'Eyebrow Embroidery Singapore | Brows by Shimmyhands',
-    description: 'Expert brow artistry in Singapore. Nano brows, ombre powder brows, and more.',
+    title: 'Eyebrow embroidery Singapore | Brows by Shimmyhands',
+    description: 'Brow embroidery in Singapore: nano brows, ombre powder brows and more.',
     url: 'https://www.shimmyhands.com/brows',
     siteName: 'Shimmy',
     locale: 'en_SG',

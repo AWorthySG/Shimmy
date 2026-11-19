@@ -13,15 +13,15 @@ import { useI18n } from "@/lib/i18n";
 type GalleryItem = { id: number; label: string; gradient: string; src?: string };
 
 const galleryItems: GalleryItem[] = [
-  { id: 1, label: "Before & After", gradient: "from-vermillion/10 to-cream-dark", src: "/images/brows/brow-before-after-split.jpg" },
-  { id: 2, label: "Brow Transformation", gradient: "from-cream-dark to-jade/10", src: "/images/brows/brow-before-after-1.jpg" },
-  { id: 3, label: "Before & After", gradient: "from-jade/10 to-cream-dark", src: "/images/brows/brow-before-after-closeup.jpg" },
-  { id: 4, label: "Natural Brows", gradient: "from-cream-dark to-vermillion/10", src: "/images/brows/brow-before-after-2.jpg" },
-  { id: 5, label: "Men's Brows", gradient: "from-vermillion/10 to-cream-dark", src: "/images/brows/brow-before-after-mens.jpg" },
+  { id: 1, label: "Before and after", gradient: "from-vermillion/10 to-cream-dark", src: "/images/brows/brow-before-after-split.jpg" },
+  { id: 2, label: "New brows", gradient: "from-cream-dark to-jade/10", src: "/images/brows/brow-before-after-1.jpg" },
+  { id: 3, label: "Before and after", gradient: "from-jade/10 to-cream-dark", src: "/images/brows/brow-before-after-closeup.jpg" },
+  { id: 4, label: "Natural brows", gradient: "from-cream-dark to-vermillion/10", src: "/images/brows/brow-before-after-2.jpg" },
+  { id: 5, label: "Men's brows", gradient: "from-vermillion/10 to-cream-dark", src: "/images/brows/brow-before-after-mens.jpg" },
   { id: 6, label: "Microblading", gradient: "from-cream-dark to-jade/10", src: "/images/brows/brow-result-hairstroke-soft.jpg" },
   { id: 7, label: "Ombre Powder Brows", gradient: "from-jade/10 to-cream-dark", src: "/images/brows/brow-result-misty-1.jpg" },
   { id: 8, label: "Lip Blush", gradient: "from-cream-dark to-vermillion/10" },
-  { id: 9, label: "Healed Results", gradient: "from-vermillion/10 to-cream-dark", src: "/images/brows/brow-result-healed.jpg" },
+  { id: 9, label: "Healed results", gradient: "from-vermillion/10 to-cream-dark", src: "/images/brows/brow-result-healed.jpg" },
 ];
 
 /* ──────────────────────────────────────────────
@@ -33,10 +33,10 @@ const galleryItems: GalleryItem[] = [
 type ProcessClip = { label: string; src?: string };
 
 const processClips: ProcessClip[] = [
-  { label: "Brow Mapping", src: "/videos/brows/brow-mapping.mp4" },
-  { label: "Precision Work", src: "/videos/brows/precision-work.mp4" },
-  { label: "The Artistry", src: "/videos/brows/the-artistry.mp4" },
-  { label: "The Reveal", src: "/videos/brows/the-reveal.mp4" },
+  { label: "Brow mapping", src: "/videos/brows/brow-mapping.mp4" },
+  { label: "Precision work", src: "/videos/brows/precision-work.mp4" },
+  { label: "Fine detail", src: "/videos/brows/the-artistry.mp4" },
+  { label: "The reveal", src: "/videos/brows/the-reveal.mp4" },
 ];
 
 export default function GalleryPage() {
@@ -76,7 +76,7 @@ export default function GalleryPage() {
                   <>
                     <Image
                       src={item.src}
-                      alt={`${item.label} — eyebrow result by Shimmy`}
+                      alt={`${item.label}: eyebrow result by Shimmy`}
                       fill
                       sizes="(min-width: 1024px) 33vw, 50vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -137,10 +137,10 @@ export default function GalleryPage() {
           <AnimateOnScroll animation="fade-up" className="text-center mb-6 sm:mb-8">
             <div className="mx-auto h-[2px] w-[50px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-3" />
             <p className="eyebrow">
-              Behind the Scenes
+              Behind the scenes
             </p>
             <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal md:text-4xl">
-              See the Process
+              See the process
             </h2>
           </AnimateOnScroll>
 

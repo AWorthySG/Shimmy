@@ -247,8 +247,8 @@ export default function ShopPage() {
                 }}
               >
                 <option value="newest">Newest</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
               </select>
             </div>
           </div>

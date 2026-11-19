@@ -234,7 +234,7 @@ export default function NailsPage() {
               {/* On-hand lifestyle photos with Ken Burns */}
               <div className="group card-lift overflow-hidden border border-vermillion/10 bg-cream/30">
                 <div className="relative aspect-[3/4] overflow-hidden">
-                  <Image src="/images/nails/main-festive-mulled-wine.jpg" alt="Christmas Wishes — Mulled Wine festive set" fill className="object-cover ken-burns" sizes="(max-width: 768px) 50vw, 25vw" />
+                  <Image src="/images/nails/main-festive-mulled-wine.jpg" alt="Christmas Wishes festive set in Mulled Wine" fill className="object-cover ken-burns" sizes="(max-width: 768px) 50vw, 25vw" />
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
@@ -244,7 +244,7 @@ export default function NailsPage() {
               </div>
               <div className="group card-lift overflow-hidden border border-vermillion/10 bg-cream/30">
                 <div className="relative aspect-[3/4] overflow-hidden">
-                  <Image src="/images/nails/main-yule-hexagon.jpg" alt="Yule Dreams — burgundy crystal set on rose-gold compact" fill className="object-cover ken-burns" style={{ animationDirection: "reverse" }} sizes="(max-width: 768px) 50vw, 25vw" />
+                  <Image src="/images/nails/main-yule-hexagon.jpg" alt="Yule Dreams burgundy crystal set on a rose-gold compact" fill className="object-cover ken-burns" style={{ animationDirection: "reverse" }} sizes="(max-width: 768px) 50vw, 25vw" />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
                 <div className="p-3 text-center">
@@ -257,7 +257,7 @@ export default function NailsPage() {
                   <LazyVideo src="/videos/lifestyle-vid-1.mp4" poster="/videos/lifestyle-vid-1.jpg" className="w-full h-full object-cover video-cinematic" />
                 </div>
                 <div className="p-3 text-center">
-                  <p className="text-[10px] uppercase tracking-label text-warm-gray">The Process</p>
+                  <p className="text-[10px] uppercase tracking-label text-warm-gray">The process</p>
                 </div>
               </div>
               <div className="group card-lift overflow-hidden border border-vermillion/10 bg-cream/30">
@@ -265,7 +265,7 @@ export default function NailsPage() {
                   <LazyVideo src="/videos/lifestyle-vid-2.mp4" poster="/videos/lifestyle-vid-2.jpg" className="w-full h-full object-cover video-cinematic" style={{ animationDelay: "-5s" }} />
                 </div>
                 <div className="p-3 text-center">
-                  <p className="text-[10px] uppercase tracking-label text-warm-gray">Up Close</p>
+                  <p className="text-[10px] uppercase tracking-label text-warm-gray">Up close</p>
                 </div>
               </div>
             </Stagger>

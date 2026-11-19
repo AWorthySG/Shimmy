@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/launch' },
-  title: { absolute: 'Coming Soon | Shimmy' },
+  title: { absolute: 'Coming soon | Shimmy' },
   robots: { index: false, follow: false },
 }
 

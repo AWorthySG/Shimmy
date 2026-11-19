@@ -87,8 +87,8 @@ export default function TermsPage() {
           <div>
             <h2 className="font-serif text-xl text-charcoal mb-3">5. Intellectual Property</h2>
             <p>
-              All content on this website — including but not limited to text, images,
-              graphics, logos, nail designs, and photographs — is the property of Shimmy
+              All content on this website (including but not limited to text, images,
+              graphics, logos, nail designs, and photographs) is the property of Shimmy
               Beauty Studio and is protected by applicable intellectual property laws. You
               may not reproduce, distribute, or use any content without our prior written
               consent.

@@ -120,10 +120,10 @@ export default function WishlistPage() {
         <div className="mx-auto max-w-3xl">
           <div className="mx-auto h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
           <p className="eyebrow">
-            Saved Items
+            Saved items
           </p>
           <h1 className="mt-4 font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal tracking-wide">
-            Your Wishlist
+            Your wishlist
           </h1>
         </div>
       </section>
@@ -149,7 +149,7 @@ export default function WishlistPage() {
                 href="/nails/shop"
                 className="btn btn-secondary btn-sm"
               >
-                Continue Shopping
+                Continue shopping
               </Link>
             </div>
           )}

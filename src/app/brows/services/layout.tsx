@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/brows/services' },
-  title: { absolute: 'Brow Services & Pricing | Shimmy Singapore' },
+  title: { absolute: 'Brow services and pricing | Shimmy Singapore' },
   description:
     'Brow services at Shimmy Beauty Studio: eyebrow embroidery, nano brows, ombre powder brows, microblading and lip blush, with prices and durations.',
   keywords: ['brow services Singapore', 'eyebrow embroidery price Singapore', 'nano brows cost', 'ombre powder brows price'],
   openGraph: {
-    title: 'Brow Services & Pricing | Shimmy Singapore',
-    description: 'View our full menu of brow services with pricing.',
+    title: 'Brow services and pricing | Shimmy Singapore',
+    description: 'Our full menu of brow services, with prices.',
     url: 'https://www.shimmyhands.com/brows/services',
     siteName: 'Shimmy',
     locale: 'en_SG',

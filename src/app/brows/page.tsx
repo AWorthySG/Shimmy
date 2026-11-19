@@ -238,9 +238,9 @@ export default function Home() {
           <div className="mt-10 sm:mt-14 grid gap-3 sm:gap-4 grid-cols-3">
             <Stagger staggerMs={120} animation="zoom-in">
               {[
-                { src: "/images/brows/brow-before-after-split.jpg", label: "Before & After" },
-                { src: "/images/brows/brow-before-after-closeup.jpg", label: "Before & After" },
-                { src: "/images/brows/brow-before-after-mens.jpg", label: "Men's Brows" },
+                { src: "/images/brows/brow-before-after-split.jpg", label: "Before and after" },
+                { src: "/images/brows/brow-before-after-closeup.jpg", label: "Before and after" },
+                { src: "/images/brows/brow-before-after-mens.jpg", label: "Men's brows" },
               ].map((item) => (
                 <Link
                   key={item.src}
@@ -249,7 +249,7 @@ export default function Home() {
                 >
                   <Image
                     src={item.src}
-                    alt={`${item.label} — eyebrow result by Shimmy`}
+                    alt={`${item.label}: eyebrow result by Shimmy`}
                     fill
                     sizes="33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -267,8 +267,8 @@ export default function Home() {
           {/* Video row — 2 process clips */}
           <div className="mt-3 sm:mt-4 grid gap-3 sm:gap-4 grid-cols-2 max-w-3xl mx-auto">
             {[
-              { src: "/videos/brows/brow-mapping.mp4", label: "Brow Mapping" },
-              { src: "/videos/brows/the-reveal.mp4", label: "The Reveal" },
+              { src: "/videos/brows/brow-mapping.mp4", label: "Brow mapping" },
+              { src: "/videos/brows/the-reveal.mp4", label: "The reveal" },
             ].map((clip, i) => (
               <AnimateOnScroll key={clip.src} animation="fade-up" delay={i * 100}>
                 <Link

@@ -40,14 +40,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
   title: {
-    default: "Shimmy Beauty Studio Singapore | Brows & Press-On Nails",
+    default: "Shimmy Beauty Studio Singapore | Brows and press-on nails",
     template: "%s | Shimmy",
   },
   description:
     "Eyebrow embroidery, nano brows, and handcrafted press-on nails in Singapore. Book your consultation or shop nail collections online.",
   keywords: ['eyebrow embroidery Singapore', 'nano brows Singapore', 'press on nails Singapore', 'ombre powder brows Singapore'],
   openGraph: {
-    title: "Shimmy — Beauty Studio Singapore",
+    title: "Shimmy | Beauty Studio Singapore",
     description:
       "Brows shaped for your face. Nails made by hand.",
     url: "https://www.shimmyhands.com",

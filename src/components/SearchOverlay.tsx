@@ -183,7 +183,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
             type="text"
             value={query}
             onChange={handleInputChange}
-            placeholder="Search products, articles, pages..."
+            placeholder="Search products, articles and pages…"
             className="flex-1 bg-transparent text-sm text-charcoal placeholder:text-warm-gray/50 outline-none"
           />
           <button
@@ -225,7 +225,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
 
           {!query.trim() && (
             <p className="text-xs text-warm-gray text-center py-6">
-              Start typing to search...
+              Start typing to search…
             </p>
           )}
         </div>

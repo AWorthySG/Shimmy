@@ -65,7 +65,7 @@ export default function AvailabilityPage() {
                       ? "text-jade border-jade/30 bg-jade/5"
                       : "text-warm-gray border-warm-gray/20 bg-warm-gray/5"
                   }`}>
-                    {item.available ? "Open" : "By Appt"}
+                    {item.available ? "Open" : "By appt"}
                   </span>
                 </div>
               </AnimateOnScroll>
@@ -79,13 +79,13 @@ export default function AvailabilityPage() {
         <div className="mx-auto max-w-3xl">
           <AnimateOnScroll animation="fade-up">
             <p className="eyebrow text-center">
-              This Week
+              This week
             </p>
             <h2 className="mt-3 font-serif text-2xl sm:text-3xl text-charcoal text-center sparkle">
-              Available Slots
+              Available slots
             </h2>
             <p className="mx-auto mt-3 max-w-md text-sm text-center text-charcoal-light">
-              Select a time that works for you and send us a message to confirm your booking.
+              Pick a time that suits you, then message us to confirm your booking.
             </p>
           </AnimateOnScroll>
 

@@ -355,7 +355,7 @@ export function BrowIntro({ onComplete }: { onComplete: () => void }) {
           Brows by Shimmyhands
         </p>
         <p className="mt-2 text-[8px] sm:text-[9px] uppercase tracking-eyebrow text-warm-gray">
-          Brow Artistry
+          Brow studio
         </p>
 
         {/* Seal mark 眉 */}

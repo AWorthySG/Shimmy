@@ -148,7 +148,7 @@ export default function ServicesPage() {
                 {service.image ? (
                   <Image
                     src={service.image}
-                    alt={`${service.title} — Shimmy brow studio`}
+                    alt={`${service.title} at Shimmy brow studio`}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -206,7 +206,7 @@ export default function ServicesPage() {
                       {/* Wrap "Numbing" with glossary tooltip for embroidery inc.2 */}
                       {service.id === "embroidery" && idx === 1 ? (
                         <span>
-                          <Glossary term="Numbing" definition={t("glossary.numbing_cream")} /> for a comfortable experience
+                          <Glossary term="Numbing" definition={t("glossary.numbing_cream")} /> to keep you comfortable
                         </span>
                       ) : (
                         item

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import LazyVideo from "@/components/LazyVideo";
 import Link from "next/link";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { HomeWithIntro } from "@/components/home-with-intro";
@@ -9,6 +8,10 @@ import { useI18n } from "@/lib/i18n";
 import StatsBar from "@/components/StatsBar";
 import BookingForm from "@/components/BookingForm";
 import StickyBookBar from "@/components/StickyBookBar";
+import CinematicHero from "@/components/CinematicHero";
+import BeforeAfterSlider from "@/components/BeforeAfterSlider";
+import ShowcaseSection from "@/components/ShowcaseSection";
+import { BROW_SHOWCASE } from "@/lib/showcase";
 import { Plus, Sparkle, Star, TrailingArrow } from "@/components/icons";
 
 const FAQS = [1, 2, 3, 4].map((n) => ({ q: `faq.brows.${n}.q`, a: `faq.brows.${n}.a` }));
@@ -67,43 +70,34 @@ export default function Home() {
   return (
     <HomeWithIntro>
     <>
-      {/* 1. Hero: text beside a result photo */}
-      <section className="bg-gradient-to-b from-cream-dark via-cream to-soft-white rice-paper px-4 sm:px-6 pt-10 pb-8 sm:pt-16 md:pt-20">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-2 md:gap-12">
-          <div className="text-center md:text-left">
-            <p className="eyebrow animate-fade-in-up">{t("hero.tag")}</p>
-            <h1 className="animate-fade-in-up animate-delay-100 mt-4 font-serif text-4xl leading-tight text-charcoal sm:text-5xl lg:text-6xl">
-              {t("hero.title.1")}
-              <br />
-              {t("hero.title.2")}
-            </h1>
-            <p className="animate-fade-in-up animate-delay-200 mx-auto mt-4 max-w-lg text-sm sm:text-base leading-relaxed text-charcoal-light md:mx-0 md:text-lg">
-              {t("hero.desc")}
-            </p>
-            <div className="animate-fade-in-up animate-delay-300 mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center md:justify-start">
-              <Link href="#book" className="btn btn-primary btn-lg w-full sm:w-auto touch-target">
-                {t("nav.book")}
-              </Link>
-              <Link href="/brows/services" className="btn btn-outline btn-lg w-full sm:w-auto touch-target">
-                {t("hero.cta.services")}
-              </Link>
-            </div>
-          </div>
-          <div className="relative mx-auto aspect-[4/3] w-full max-w-md overflow-hidden bg-cream-dark md:aspect-[4/5] md:max-w-none">
-            <Image
-              src="/images/brows/brow-result-clean-front.jpg"
-              alt="Freshly shaped brows by Shimmy"
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 768px) 448px, 50vw"
-            />
-          </div>
-        </div>
-        <div className="mx-auto mt-10 max-w-6xl sm:mt-14">
-          <StatsBar />
-        </div>
-      </section>
+      {/* 1. Hero: three brow clips behind the headline */}
+      <CinematicHero
+        clips={[
+          { src: "/videos/brows/brow-mapping.mp4", poster: "/videos/brows/brow-mapping.jpg", alt: "Brow mapping before a session" },
+          { src: "/videos/brows/the-artistry.mp4", poster: "/videos/brows/the-artistry.jpg", alt: "Brow artistry at Shimmy" },
+          { src: "/videos/brows/the-reveal.mp4", poster: "/videos/brows/the-reveal.jpg", alt: "A client seeing her new brows" },
+        ]}
+        eyebrow={t("hero.tag")}
+        title={
+          <>
+            {t("hero.title.1")}
+            <br />
+            <em className="font-sans italic font-normal text-on-scrim/90">{t("hero.title.2")}</em>
+          </>
+        }
+        desc={t("hero.desc")}
+        actions={
+          <>
+            <Link href="#book" className="btn btn-scrim btn-lg w-full sm:w-auto touch-target">
+              {t("nav.book")}
+            </Link>
+            <Link href="/brows/services" className="btn btn-scrim-outline btn-lg w-full sm:w-auto touch-target">
+              {t("hero.cta.services")}
+            </Link>
+          </>
+        }
+        footer={<StatsBar tone="light" />}
+      />
 
       {/* 2. Services: one row each, photo beside text */}
       <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
@@ -125,7 +119,7 @@ export default function Home() {
             {featuredServices.map((service) => (
               <li key={service.href}>
                 <Link href={service.href} className="group grid grid-cols-[96px_1fr] items-center gap-4 py-5 sm:grid-cols-[160px_1fr_auto] sm:gap-8 sm:py-6">
-                  <div className="relative aspect-square overflow-hidden bg-cream-dark sm:aspect-[4/3]">
+                  <div className="reveal-mask relative aspect-square overflow-hidden bg-cream-dark sm:aspect-[4/3]">
                     <Image
                       src={service.image}
                       alt={`${service.title} result by Shimmy`}
@@ -152,12 +146,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. Results and try-on: text beside a photo and video mosaic */}
+      {/* 3. Results: drag-to-compare slider beside the try-on */}
       <section className="bg-cream py-14 sm:py-20 px-4 sm:px-6">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-14">
-          <AnimateOnScroll animation="fade-up" className="md:order-2">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-12 md:gap-14">
+          <div className="reveal md:order-2 md:col-span-5">
             <p className="eyebrow">{t("results.tag")}</p>
-            <h2 className="mt-3 font-serif text-3xl text-charcoal md:text-4xl">{t("results.title")}</h2>
+            <h2 className="mt-3 font-serif text-3xl text-charcoal md:text-4xl">{t("ba.title")}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-charcoal-light sm:text-base">{t("ba.desc")}</p>
             <Link
               href="/brows/gallery"
               className="mt-3 text-sm uppercase tracking-button text-vermillion-dark transition-colors hover:text-vermillion touch-target inline-flex items-center py-2"
@@ -176,39 +171,22 @@ export default function Home() {
                 {t("tryon.upload.privacy")}
               </p>
             </div>
-          </AnimateOnScroll>
+          </div>
 
-          <div className="grid grid-cols-2 gap-3 md:order-1">
-            <Link href="/brows/gallery" className="group relative row-span-2 aspect-[9/16] overflow-hidden bg-cream-dark">
-              <LazyVideo
-                src="/videos/brows/the-reveal.mp4"
-                poster="/videos/brows/the-reveal.jpg"
-                className="h-full w-full object-cover"
-              />
-              <span className="absolute bottom-0 left-0 bg-charcoal/60 px-2 py-1 text-[10px] uppercase tracking-label text-soft-white">
-                The reveal
-              </span>
-            </Link>
-            {[
-              { src: "/images/brows/brow-before-after-split.jpg", label: "Before and after" },
-              { src: "/images/brows/brow-before-after-mens.jpg", label: "Men's brows" },
-            ].map((item) => (
-              <Link key={item.src} href="/brows/gallery" className="group relative overflow-hidden bg-cream-dark">
-                <Image
-                  src={item.src}
-                  alt={`${item.label}: eyebrow result by Shimmy`}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <span className="absolute bottom-0 left-0 bg-charcoal/60 px-2 py-1 text-[10px] uppercase tracking-label text-soft-white">
-                  {item.label}
-                </span>
-              </Link>
-            ))}
+          <div className="reveal md:order-1 md:col-span-7">
+            <BeforeAfterSlider
+              src="/images/brows/brow-before-after-closeup-clean.jpg"
+              width={518}
+              height={690}
+              alt={t("ba.alt")}
+              beforeLabel={t("ba.before")}
+              afterLabel={t("ba.after")}
+            />
           </div>
         </div>
       </section>
+
+      <ShowcaseSection titleKey="showcase.title.brows" items={BROW_SHOWCASE} />
 
       {/* 4. Testimonials: swipe on phones, three columns on desktop */}
       <section className="bg-soft-white py-14 sm:py-20">

@@ -12,6 +12,9 @@ import SeasonalBanner from "@/components/SeasonalBanner";
 import GoogleReviews from "@/components/GoogleReviews";
 import ClientCounter from "@/components/ClientCounter";
 import { TrailingArrow } from "@/components/icons";
+import CinematicHero from "@/components/CinematicHero";
+import ShowcaseSection from "@/components/ShowcaseSection";
+import { NAIL_SHOWCASE } from "@/lib/showcase";
 
 export default function NailsPage() {
   const { t } = useI18n();
@@ -27,71 +30,24 @@ export default function NailsPage() {
   return (
     <NailsWithIntro>
     <>
-      {/* ─── Hero — Full-bleed cinematic video ─── */}
-      <section className="relative flex min-h-[65vh] sm:min-h-[75vh] md:min-h-[85vh] flex-col items-center justify-center overflow-hidden text-center">
-        {/* Background video with cinematic slow zoom */}
-        <div className="absolute inset-0 overflow-hidden video-vignette">
-          {/* Still frame first: it paints straight away (and is what search engines time as the main
-              content); the video fades in over it once the page has loaded. */}
-          <Image
-            src="/videos/nail-5.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover video-cinematic"
-            style={{ filter: "brightness(0.8) saturate(1.1) contrast(1.05)" }}
-          />
-          <LazyVideo
-            eager
-            src="/videos/nail-5.mp4"
-            poster="/videos/nail-5.jpg"
-            className="absolute inset-0 w-full h-full object-cover video-cinematic"
-            style={{ filter: "brightness(0.8) saturate(1.1) contrast(1.05)" }}
-          />
-        </div>
-        {/* Soft gradient overlay — lighter at center for text, darker at edges */}
-        {/* Stronger veil on phones, where the text sits over the busiest part of the video. */}
-        <div className="absolute inset-0 bg-gradient-to-b from-soft-white/70 via-soft-white/55 to-soft-white/80 sm:from-soft-white/50 sm:via-transparent sm:to-soft-white/70" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_30%,_var(--soft-white)_100%)] opacity-60" />
-
-        <div className="relative z-10 max-w-3xl px-4 sm:px-6">
-          <div className="mx-auto animate-expand-line h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-4" />
-
-          <p className="eyebrow text-reveal">
-            {t("nails.hero.tag")}
-          </p>
-
-          <h1 className="text-reveal mt-3 sm:mt-4 font-serif text-3xl leading-tight tracking-wide text-charcoal sm:text-5xl md:text-7xl md:leading-[1.15]" style={{ animationDelay: "0.15s" }}>
+      {/* ─── Hero — full-screen video ─── */}
+      <CinematicHero
+        clips={[{ src: "/videos/lifestyle-vid-1.mp4", poster: "/videos/lifestyle-vid-1.jpg", alt: "Dark press-on nails with gold rings against black lace" }]}
+        eyebrow={t("nails.hero.tag")}
+        title={
+          <>
             {t("nails.hero.title.1")}
             <br />
-            <span className="">
-              {t("nails.hero.title.2")}
-            </span>
-          </h1>
-
-          <p className="text-reveal mx-auto mt-3 sm:mt-4 max-w-lg text-sm sm:text-base leading-relaxed text-charcoal-light" style={{ animationDelay: "0.3s" }}>
-            {t("nails.hero.desc")}
-          </p>
-
-          <div className="text-reveal mt-6 sm:mt-8" style={{ animationDelay: "0.45s" }}>
-            <Link
-              href="/nails/shop"
-              className="btn btn-primary btn-lg w-full sm:w-auto touch-target"
-            >
-              {t("nails.hero.cta")}
-            </Link>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 text-reveal hidden sm:block" style={{ animationDelay: "0.8s" }}>
-          <div className="flex flex-col items-center gap-1.5 text-warm-gray">
-            <span className="text-[9px] uppercase tracking-eyebrow">{t("hero.scroll")}</span>
-            <div className="h-6 w-[1px] bg-vermillion/40 animate-pulse-gold" />
-          </div>
-        </div>
-      </section>
+            <em className="font-sans italic font-normal text-on-scrim/90">{t("nails.hero.title.2")}</em>
+          </>
+        }
+        desc={t("nails.hero.desc")}
+        actions={
+          <Link href="/nails/shop" className="btn btn-scrim btn-lg w-full sm:w-auto touch-target">
+            {t("nails.hero.cta")}
+          </Link>
+        }
+      />
 
       {/* ─── Seasonal Banner ─── */}
       <SeasonalBanner />
@@ -189,6 +145,8 @@ export default function NailsPage() {
           </AnimateOnScroll>
         </div>
       </section>
+
+      <ShowcaseSection titleKey="showcase.title.nails" items={NAIL_SHOWCASE} />
 
       {/* ─── Made by Hand — editorial lifestyle band ─── */}
       <section className="bg-cream py-10 sm:py-12 md:py-14 px-4 sm:px-6">

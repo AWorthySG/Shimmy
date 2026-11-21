@@ -3,6 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { AnimateOnScroll, Stagger } from "@/components/animate-on-scroll";
+import CinematicHero from "@/components/CinematicHero";
+import ShowcaseSection from "@/components/ShowcaseSection";
+import BeforeAfterFeature from "@/components/BeforeAfterFeature";
+import { HOME_SHOWCASE } from "@/lib/showcase";
 import { useI18n } from "@/lib/i18n";
 import StatsBar from "@/components/StatsBar";
 import EmailCapture from "@/components/EmailCapture";
@@ -15,139 +19,62 @@ export default function Home() {
   return (
     <>
       {/* ─── Hero ─── */}
-      <section className="relative flex min-h-[70vh] sm:min-h-[80vh] md:min-h-[85vh] flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-cream-dark via-cream to-soft-white rice-paper px-4 sm:px-6 text-center">
-        {/* Animated decorative circles */}
-        <div className="pointer-events-none absolute -top-32 -right-32 h-64 w-64 sm:h-96 sm:w-96 rounded-full bg-vermillion/5 animate-float" />
-        <div className="pointer-events-none absolute -bottom-48 -left-48 h-80 w-80 sm:h-[500px] sm:w-[500px] rounded-full bg-jade/5 animate-float-reverse" />
-
-
-        <div className="relative z-10 max-w-3xl">
-          {/* Animated ink-stroke divider */}
-          <div className="mx-auto animate-expand-line h-[2px] w-[60px] bg-gradient-to-r from-transparent via-vermillion/60 to-transparent mb-6" />
-
-          <p className="eyebrow animate-fade-in-up">
-            {t("home.tag")}
-          </p>
-
-          <h1 className="animate-fade-in-up animate-delay-100 mt-4 sm:mt-6 font-serif text-4xl leading-tight tracking-wide text-charcoal sm:text-5xl md:text-7xl md:leading-[1.15]">
+      <CinematicHero
+        clips={[
+          { src: "/videos/brows/the-artistry.mp4", poster: "/videos/brows/the-artistry.jpg", alt: "Brow artistry at Shimmy" },
+          { src: "/videos/nail-5.mp4", poster: "/videos/nail-5.jpg", alt: "Handmade press-on nails by Shimmyhands" },
+          { src: "/videos/brows/the-reveal.mp4", poster: "/videos/brows/the-reveal.jpg", alt: "A client seeing her new brows" },
+        ]}
+        eyebrow={t("home.tag")}
+        title={
+          <>
             {t("home.title.1")}
             <br />
-            <span className="">{t("home.title.2")}</span>
-          </h1>
-
-          <p className="animate-fade-in-up animate-delay-200 mx-auto mt-4 sm:mt-6 max-w-lg text-sm sm:text-base leading-relaxed text-charcoal-light md:text-lg">
-            {t("home.desc")}
-          </p>
-
-          <div className="animate-fade-in-up animate-delay-300 mt-8 sm:mt-10 flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center">
-            <Link
-              href="/brows"
-              className="btn btn-primary btn-lg w-full sm:w-auto touch-target"
-            >
+            <em className="font-sans italic font-normal text-on-scrim/90">{t("home.title.2")}</em>
+          </>
+        }
+        desc={t("home.desc")}
+        actions={
+          <>
+            <Link href="/brows" className="btn btn-scrim btn-lg w-full sm:w-auto touch-target">
               {t("home.explore.brows")}
             </Link>
-            <Link
-              href="/nails"
-              className="btn btn-outline btn-lg w-full sm:w-auto touch-target"
-            >
+            <Link href="/nails" className="btn btn-scrim-outline btn-lg w-full sm:w-auto touch-target">
               {t("home.explore.nails")}
             </Link>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 animate-fade-in-up animate-delay-600 hidden sm:block">
-          <div className="flex flex-col items-center gap-2 text-warm-gray">
-            <span className="text-[9px] uppercase tracking-eyebrow">{t("hero.scroll")}</span>
-            <div className="h-8 w-[1px] bg-vermillion/40 animate-pulse-gold" />
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Stats Bar (Task 4) ─── */}
-      <section className="bg-soft-white px-4 sm:px-6">
-        <StatsBar />
-      </section>
+          </>
+        }
+        footer={<StatsBar tone="light" />}
+      />
 
       {/* ─── Stories ─── */}
-      <section className="bg-soft-white py-6 px-4 sm:px-6">
+      <section className="bg-on-scrim py-6 px-4 sm:px-6">
         <Stories />
       </section>
 
-      {/* Divider */}
-      <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
-
-      {/* ─── Two Sub-Brands ─── */}
-      <section className="bg-soft-white py-16 sm:py-20 md:py-24 px-4 sm:px-6">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid gap-8 sm:gap-10 md:grid-cols-2">
-            <Stagger staggerMs={200} animation="fade-up">
-              {/* Brows */}
-              <div className="group oriental-corner card-lift border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40">
-                {/* Brow result photo */}
-                <div className="relative w-full aspect-[3/2] overflow-hidden bg-cream-dark">
-                  <Image
-                    src="/images/brows/brow-before-after-split.jpg"
-                    alt="Brows before and after a session at Shimmyhands"
-                    fill
-                    priority
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="p-6 sm:p-8 text-center">
-                  <h3 className="font-serif text-xl sm:text-2xl text-charcoal">
-                    {t("home.brows.title")}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-charcoal-light">
-                    {t("home.brows.desc")}
-                  </p>
-                  <Link
-                    href="/brows"
-                    className="underline-grow mt-6 inline-block text-sm uppercase tracking-button text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
-                  >
-                    {t("home.brows.cta")}<TrailingArrow />
-                  </Link>
-                  <div className="mx-auto mt-4 h-[1px] w-8 bg-vermillion/30 transition-all duration-500 group-hover:w-12 group-hover:bg-vermillion" />
-                </div>
-              </div>
-
-              {/* Nails */}
-              <div className="group oriental-corner card-lift border border-vermillion/15 bg-cream/50 overflow-hidden hover:border-vermillion/40">
-                {/* Product photo */}
-                <div className="relative w-full aspect-[3/2] overflow-hidden bg-cream-dark">
-                  <Image
-                    src="/images/nails/main-hero-cat-mirror.jpg"
-                    alt="Nails by Shimmyhands press-on nails: nude French tips styled with florals"
-                    fill
-                    priority
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="p-6 sm:p-8 text-center">
-                  <h3 className="font-serif text-xl sm:text-2xl text-charcoal">
-                    {t("home.nails.title")}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-charcoal-light">
-                    {t("home.nails.desc")}
-                  </p>
-                  <Link
-                    href="/nails"
-                    className="underline-grow mt-6 inline-block text-sm uppercase tracking-button text-vermillion-dark transition-colors hover:text-vermillion touch-target py-2"
-                  >
-                    {t("home.nails.cta")}<TrailingArrow />
-                  </Link>
-                  <div className="mx-auto mt-4 h-[1px] w-8 bg-vermillion/30 transition-all duration-500 group-hover:w-12 group-hover:bg-vermillion" />
-                </div>
-              </div>
-            </Stagger>
-          </div>
-        </div>
+      {/* ─── Two studios: full-bleed panels ─── */}
+      <section className="grid md:grid-cols-2">
+        {[
+          { href: "/brows", img: "/images/brows/brow-result-clean-front.jpg", alt: "Freshly shaped brows by Shimmy", title: t("home.brows.title"), desc: t("home.brows.desc"), cta: t("home.brows.cta") },
+          { href: "/nails", img: "/images/nails/main-hero-cat-mirror.jpg", alt: "Nude French-tip press-on nails styled with florals", title: t("home.nails.title"), desc: t("home.nails.desc"), cta: t("home.nails.cta") },
+        ].map((p) => (
+          <Link key={p.href} href={p.href} className="group parallax relative flex min-h-[70svh] items-end overflow-hidden bg-scrim text-on-scrim md:min-h-[85svh]">
+            <Image src={p.img} alt={p.alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover opacity-90 transition-opacity duration-700 group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-gradient-to-t from-scrim/85 via-scrim/20 to-transparent" aria-hidden="true" />
+            <div className="reveal relative p-6 sm:p-10 md:p-12">
+              <h2 className="font-serif text-4xl text-on-scrim md:text-5xl">{p.title}</h2>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-on-scrim/85 sm:text-base">{p.desc}</p>
+              <span className="mt-6 inline-flex items-center text-sm uppercase tracking-button text-on-scrim">
+                {p.cta}<TrailingArrow />
+              </span>
+            </div>
+          </Link>
+        ))}
       </section>
 
-      {/* Divider */}
-      <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
+      <ShowcaseSection titleKey="showcase.title.home" items={HOME_SHOWCASE} />
+
+      <BeforeAfterFeature />
 
       {/* ─── Testimonials ─── */}
       <section className="bg-cream py-16 sm:py-20 md:py-24 px-4 sm:px-6">

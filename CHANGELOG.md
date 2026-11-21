@@ -5,6 +5,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- Full-screen video heroes on the home, brows and nails pages. Home and brows show three clips side by side on larger screens and one on phones. The poster image paints first, so the page still shows its main image in about 1.1 seconds on a mid-range phone.
+- A drag-to-compare before and after slider on the home, brows and gallery pages. It works with a mouse, a finger or the arrow keys.
+- Swipeable strips of recent brow and nail work on the home, brows and nails pages.
+- Photos rise, unmask and drift gently as you scroll, and each new page fades in after you click a link. All of it is off for visitors who ask for reduced motion.
+- Full-height brow and nail panels on the home page in place of the two cards.
+
 ### Changed
 - The footer now shows the studio address with a directions link, opening hours, a booking button and six main links. Secondary links (gift cards, referral, loyalty, wishlist, terms, privacy) sit in the bottom bar.
 - Small headings and card titles use Lora instead of Italiana, which is kept for large headings only.

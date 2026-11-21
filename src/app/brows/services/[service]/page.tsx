@@ -63,7 +63,7 @@ export default function ServicePage({ params }: { params: Promise<{ service: str
       </section>
 
       {s.image && (
-        <div className="relative mx-auto w-full max-w-3xl aspect-[2/1] overflow-hidden bg-cream-dark">
+        <div className="parallax relative mx-auto w-full max-w-3xl aspect-[2/1] overflow-hidden bg-cream-dark">
           <Image src={s.image} alt={`${title} at Shimmy Beauty Studio`} fill priority className="object-cover" sizes="(max-width: 768px) 100vw, 768px" />
         </div>
       )}

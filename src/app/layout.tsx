@@ -5,7 +5,6 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Providers } from "@/components/providers";
-import { PageTransition } from "@/components/PageTransition";
 import WelcomeBanner from "@/components/WelcomeBanner";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
@@ -112,7 +111,7 @@ export default function RootLayout({
         <Providers>
           <WelcomeBanner />
           <Navbar />
-          <main className="flex-1 overflow-x-clip"><PageTransition>{children}</PageTransition></main>
+          <main className="flex-1 overflow-x-clip">{children}</main>
           <Footer />
           <CookieConsent />
           <WhatsAppFloat />

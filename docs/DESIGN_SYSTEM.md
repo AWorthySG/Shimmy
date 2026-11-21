@@ -79,6 +79,8 @@ Every uppercase label uses one of three values. Arbitrary values such as
 | `btn btn-outline` | Neutral outline, turns sage on hover | Alternative path next to a primary |
 | `btn btn-dark` | Charcoal fill | On light imagery where sage lacks contrast |
 | `btn btn-light` | White fill, sage text | On dark or sage sections |
+| `btn btn-scrim` | Off-white fill, dark text | Over photos and video (same in both themes) |
+| `btn btn-scrim-outline` | Off-white outline | Second button over photos and video |
 | `btn btn-danger` | Brick outline, fills on hover | Destructive actions such as cancelling a booking |
 | `btn-sm` | 36 px tall | Inside cards and dense lists |
 | `btn-lg` | 44 px+, wider padding | Hero and page-level calls to action |
@@ -117,6 +119,28 @@ Text inputs, emails, phone numbers and textareas: surface background, sage
 hairline border that darkens on focus, 44 px minimum height, square corners.
 Exceptions: the transparent search-overlay input and inputs on dark backgrounds
 (the launch page and the selfie camera).
+
+### Overlays on photos and video — `scrim`, `on-scrim`
+
+`charcoal` and `soft-white` swap in dark mode, so text over a photo or video uses the fixed
+tokens instead: `bg-scrim`, `from-scrim` for the dark veil and `text-on-scrim` for the text.
+
+### Motion
+
+Every effect below is off when the visitor asks for reduced motion, and content is never
+hidden in browsers that lack scroll-driven animations.
+
+| Class | Effect |
+|---|---|
+| `reveal` | Rises and fades in as it scrolls into view |
+| `reveal-mask` | Image frame opens out and the photo settles from a slight zoom |
+| `parallax` | The photo inside drifts slower than the page |
+| `hero-zoom` | Hero media settles from a 108% zoom over 14 seconds |
+
+Components: `CinematicHero` (full-screen video hero), `BeforeAfterSlider` (drag to compare;
+expects one photo with "before" on the top half and "after" on the bottom half),
+`ShowcaseStrip` / `ShowcaseSection` (swipeable photo strip). Pages fade in after a
+client-side navigation (`src/app/template.tsx`); the first page load does not.
 
 ## 4. Shape, spacing and touch
 

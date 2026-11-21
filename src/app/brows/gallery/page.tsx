@@ -5,6 +5,7 @@ import LazyVideo from "@/components/LazyVideo";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { useI18n } from "@/lib/i18n";
 import { ImageIcon, TrailingArrow } from "@/components/icons";
+import BeforeAfterFeature from "@/components/BeforeAfterFeature";
 
 /* ──────────────────────────────────────────────
    Gallery items. Tiles with a `src` render a real
@@ -65,7 +66,9 @@ export default function GalleryPage() {
       <div className="mx-auto my-8 h-px w-16 bg-vermillion/30" aria-hidden="true" />
 
       {/* Gallery grid — 1 col phone, 2 col tablet, 3 col desktop */}
-      <section className="bg-soft-white py-14 sm:py-20 px-4 sm:px-6">
+      <BeforeAfterFeature tone="white" />
+
+      <section className="bg-cream py-14 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-3">
             {galleryItems.map((item, i) => (

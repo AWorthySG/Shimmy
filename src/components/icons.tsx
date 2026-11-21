@@ -127,6 +127,13 @@ export const ImageIcon = (p: IconProps) => (
   </Svg>
 );
 
+/** Drag handle on the before/after slider. */
+export const DragHorizontal = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M9 7l-5 5 5 5M15 7l5 5-5 5" />
+  </Svg>
+);
+
 const INLINE = "inline-block h-[1em] w-[1em] align-[-0.15em]";
 
 /** Arrow that trails link text ("Read more", "View collection"). */
